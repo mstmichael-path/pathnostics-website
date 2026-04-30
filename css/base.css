@@ -1,0 +1,145 @@
+/* ═══════════════════════════════════════════════════════
+   BASE.CSS — Reset, Body, Typography | Stitch v2
+   "The Clinical Editorial" — No-Line Rule Active
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Reset ───────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-relaxed);
+  color: var(--on-surface);
+  background: var(--surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* 4px gradient accent line — fixed at top of viewport */
+body::before {
+  content: '';
+  display: block;
+  height: 4px;
+  background: var(--gradient-brand);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+img { height: auto; }
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol { list-style: none; }
+
+/* ── Typography ──────────────────────────────────────── */
+h1, h2 {
+  font-family: var(--font-display);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  font-weight: 400; /* Playfair Display regular for editorial feel */
+  color: var(--on-surface);
+}
+
+h1 { font-size: var(--text-hero); }
+h2 { font-size: var(--text-h2); }
+
+h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: var(--leading-snug);
+  color: var(--on-surface);
+}
+
+h3 { font-size: var(--text-h3); }
+
+p, li {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-relaxed);
+  color: var(--on-surface-variant);
+}
+
+/* Overline — Stitch style: pill badge or plain uppercase */
+.overline {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-coral-dark);
+  margin-bottom: var(--gap-md);
+  display: inline-block;
+}
+
+/* Overline as pill badge */
+.overline-badge {
+  font-family: var(--font-body);
+  font-size: var(--text-overline);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 4px 16px;
+  border-radius: var(--radius-md);
+  background: rgba(232, 32, 101, 0.08);
+  color: var(--color-coral-dark);
+}
+
+.text-lg { font-size: var(--text-body-lg); }
+.text-sm { font-size: var(--text-sm); }
+.text-xs { font-size: var(--text-xs); }
+
+/* Italic accent for editorial emphasis */
+em, .italic { font-style: italic; }
+
+.text-coral { color: var(--color-coral); }
+.text-green { color: var(--color-green); }
+.text-purple { color: var(--color-purple); }
+.text-white { color: #ffffff; }
+
+/* ── Reduced Motion ──────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .ticker-track { animation: none !important; }
+}
+
+/* ── Animation Initial States ────────────────────────── */
+.reveal { opacity: 0; transform: translateY(30px); }
+.reveal-child { opacity: 0; transform: translateY(24px); }
+
+/* ── Selection ───────────────────────────────────────── */
+::selection {
+  background: rgba(232, 32, 101, 0.15);
+  color: var(--on-surface);
+}

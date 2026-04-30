@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pathnostics — Right Treatment. First Time.</title>
+  <meta name="description" content="Pathnostics introduces Total Infection Response Testing (TIRT) — a fundamentally different diagnostic category for UTI management. Guidance UTI with P-AST gives clinicians the direction to get treatment right the first time.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 1 — NAVIGATION (Glassmorphic)
+     ════════════════════════════════════════════════════ -->
+<nav class="nav" role="navigation" aria-label="Primary">
+  <div class="nav__inner">
+    <a href="/" class="nav__logo" aria-label="Pathnostics Home">
+      <img class="nav__logo-color" src="assets/[PAT0001-05] Pathnostics_Corporate® + Tagline_RGB.png" alt="Pathnostics" height="32" width="auto">
+      <img class="nav__logo-white" src="assets/Path_Logo_White.png" alt="Pathnostics" height="32" width="auto">
+    </a>
+
+    <div class="nav__links">
+      <a href="/why-change.html">Why Change?</a>
+      <a href="/guidance-uti.html">Guidance UTI</a>
+      <a href="/guidance-at-home.html">Guidance @Home</a>
+      <a href="/evidence.html">Evidence</a>
+      <a href="/about.html">About</a>
+    </div>
+
+    <a href="#contact" class="btn-primary nav__cta" style="padding: 10px 32px; font-size: 16px;">Talk to a Rep</a>
+
+    <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile nav overlay -->
+<div class="nav-mobile" id="mobile-nav" aria-hidden="true">
+  <button class="nav-mobile__close" aria-label="Close menu">&times;</button>
+  <a href="/why-change.html">Why Change?</a>
+  <a href="/guidance-uti.html">Guidance UTI</a>
+  <a href="/guidance-at-home.html">Guidance @Home</a>
+  <a href="/evidence.html">Evidence</a>
+  <a href="/about.html">About</a>
+  <div class="nav-mobile__cta">
+    <a href="#contact" class="btn-primary" style="width:100%;justify-content:center;">Talk to a Rep</a>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 2 — HERO (Mesh Gradient + Video BG + Ticker)
+     ════════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <!-- Background video container (ready for MP4 drop-in) -->
+  <div class="video-bg" aria-hidden="true">
+    <!-- Uncomment when video is ready:
+    <video autoplay muted loop playsinline poster="assets/images/hero-poster.jpg">
+      <source src="assets/video/hero-bg.mp4" type="video/mp4">
+    </video>
+    -->
+    <!-- Fallback: mesh gradient is applied via .hero class -->
+    <div class="video-bg__overlay" style="background: linear-gradient(120deg, rgba(246,249,255,0.92) 0%, rgba(253,242,248,0.88) 50%, rgba(241,240,255,0.92) 100%);"></div>
+  </div>
+
+  <div class="container">
+    <div class="hero__grid">
+
+      <!-- Left: Copy -->
+      <div class="hero__copy">
+        <span class="overline-badge hero-overline">Introducing a New Diagnostic Category</span>
+        <h1 class="hero-h1">Right<br>Treatment<br><em>First Time.</em></h1>
+        <p class="hero-sub hero__subhead">Most UTI patients who don't get better aren't failing treatment. They're failing diagnostics.</p>
+        <p class="hero-body" style="color: var(--on-surface-variant); line-height: 1.6; max-width: 520px;">UTIs generate more unnecessary antibiotic use, repeat visits, and avoidable cost than almost any other condition in outpatient care — not because treatment options are lacking, but because current diagnostics don't give clinicians actionable direction. Detection isn't the same as direction.</p>
+        <div class="hero__actions hero-actions">
+          <a href="/guidance-uti.html" class="btn-primary">See How Guidance UTI Is Different</a>
+          <a href="#tirt" class="btn-secondary">What is TIRT?</a>
+        </div>
+      </div>
+
+      <!-- Right: Cinematic Image with Glass Quote -->
+      <div class="hero__visual">
+        <div class="bokeh-orb bokeh-orb--pink" style="width: 384px; height: 384px; top: -80px; right: -80px;"></div>
+        <div class="bokeh-orb bokeh-orb--purple" style="width: 256px; height: 256px; top: 160px; left: -40px;"></div>
+        <div class="hero__image-wrap hero-card">
+          <div class="image-placeholder" style="aspect-ratio: 4/5; min-height: 480px; background: var(--surface-container);">
+            <span style="color: var(--on-surface-variant); font-size: var(--text-sm);">Hero photography placeholder</span>
+          </div>
+          <div class="hero__glass-quote">
+            <p>"The shift from empirical to precision-based prescribing is no longer optional."</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Kinetic Stats Ticker -->
+  <!-- PLACEHOLDER: Hero stat values — Pending approval from Medical/Melyssa — citation needed -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <div class="ticker-set">
+        <div class="stat-card"><span class="stat-card__number stat-card__number--coral">1 in 3</span><span class="stat-card__label">UTI Patients require<br>retreatment</span></div>
+        <div class="stat-card"><span class="stat-card__number stat-card__number--purple">50%+</span><span class="stat-card__label">Polymicrobial<br>Infections</span></div>
+        <div class="stat-card"><span class="stat-card__number stat-card__number--green">TIRT</span><span class="stat-card__label">Total Infection<br>Response Testing</span></div>
+        <div class="stat-card"><span class="stat-card__number stat-card__number--hot">24-36hr</span><span class="stat-card__label">Actionable<br>Turnaround</span></div>
+      </div>
+      <!-- Duplicate for seamless loop -->
+      <div class="ticker-set">
+        <div class="stat-card"><span class="stat-card__number stat-card__number--coral">1 in 3</span><span class="stat-card__label">UTI Patients require<br>retreatment</span></div>
+        <div class="stat-card"><span class="stat-card__number stat-card__number--purple">50%+</span><span class="stat-card__label">Polymicrobial<br>Infections</span></div>
+        <div class="stat-card"><span class="stat-card__number stat-card__number--green">TIRT</span><span class="stat-card__label">Total Infection<br>Response Testing</span></div>
+        <div class="stat-card"><span class="stat-card__number stat-card__number--hot">24-36hr</span><span class="stat-card__label">Actionable<br>Turnaround</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 3 — THE COST OF GETTING IT WRONG
+     Asymmetric 2-col: headline+info-blocks | glass cards
+     ════════════════════════════════════════════════════ -->
+<section class="section--surface" id="cost">
+  <div class="container">
+
+    <!-- Stat Count-Ups (restored from v1) -->
+    <!-- PLACEHOLDER: Stat callouts — Pending approval from Medical/Melyssa — citation needed -->
+    <div class="reveal" style="text-align:center; margin-bottom: var(--gap-2xl);">
+      <span class="overline">The Cost of Diagnostic Inaccuracy</span>
+      <h2>When Diagnostics Fail,<br>Everyone Pays.</h2>
+    </div>
+
+    <div class="cost-stat-grid reveal-group">
+      <div class="cost-stat reveal-child">
+        <div class="cost-stat__accent cost-stat__accent--green"></div>
+        <div class="cost-stat__number count-up" data-target="50" data-suffix="%+">0</div>
+        <div class="cost-stat__label">of UTIs are polymicrobial</div>
+        <div class="cost-stat__sub">Standard culture collapses this into noise — or misses it entirely</div>
+      </div>
+      <div class="cost-stat reveal-child">
+        <div class="cost-stat__accent cost-stat__accent--coral"></div>
+        <div class="cost-stat__number">1 in 3</div>
+        <div class="cost-stat__label">UTI patients require retreatment</div>
+        <div class="cost-stat__sub">Each retreatment is a callback, repeat Rx, and avoidable antibiotic exposure</div>
+      </div>
+      <div class="cost-stat reveal-child">
+        <div class="cost-stat__accent cost-stat__accent--purple"></div>
+        <div class="cost-stat__number count-up" data-target="3.5" data-prefix="$" data-suffix="B+" data-decimals="1">0</div>
+        <div class="cost-stat__label">Annual UTI cost burden in the U.S.</div>
+        <div class="cost-stat__sub">Driven not by treatment failure — by diagnostic inaccuracy</div>
+      </div>
+    </div>
+
+    <div class="cost__grid">
+
+      <!-- Left: Headline + Info Blocks -->
+      <div class="cost__left reveal">
+        <div>
+          <h2>The Hidden<br>Cost<br>of <em>Diagnostic<br>Failure.</em></h2>
+        </div>
+        <div>
+          <div class="info-block info-block--coral">
+            <h4 class="info-block__title" style="color: var(--color-coral-dark);">Polymicrobial Complexity</h4>
+            <p class="info-block__text">Standard culture collapses polymicrobial infections into noise — or misses them entirely. Over 50% of UTIs involve multiple organisms.</p>
+          </div>
+          <div class="info-block info-block--purple" style="margin-top: var(--gap-xl);">
+            <h4 class="info-block__title" style="color: var(--color-purple-mid);">Systemic Impact</h4>
+            <p class="info-block__text">Every callback costs the practice time and capital. Every retreatment is a patient who stayed sick longer than needed.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Staggered Glass Cards -->
+      <!-- PLACEHOLDER: Stat callouts — Pending approval from Medical/Melyssa — citation needed -->
+      <div class="cost__cards">
+        <div class="glass-card glass-card--coral reveal" style="padding-top: 44px;">
+          <div style="display:flex; align-items:center; gap: var(--gap-lg); margin-bottom: var(--gap-lg);">
+            <div style="width:64px;height:64px;border-radius:var(--radius-md);background:rgba(232,32,101,0.08);display:flex;align-items:center;justify-content:center;">
+              <svg width="25" height="15" viewBox="0 0 24 14" fill="none" stroke="var(--color-coral)" stroke-width="2" stroke-linecap="round"><path d="M23 13L16.5 6.5L11.5 11.5L1 1"/><polyline points="17 1 23 1 23 7"/></svg>
+            </div>
+            <h3 style="font-size: 30px;">Retreatment Burden</h3>
+          </div>
+          <p style="font-size: var(--text-body-lg); color: var(--on-surface-variant); line-height: 1.55;">1 in 3 UTI patients require retreatment. Each retreatment is a callback, repeat Rx, and avoidable antibiotic exposure.</p>
+        </div>
+
+        <div class="glass-card glass-card--purple reveal cost__card-offset" style="padding-top: 44px; margin-top: var(--gap-xl);">
+          <div style="display:flex; align-items:center; gap: var(--gap-lg); margin-bottom: var(--gap-lg);">
+            <div style="width:64px;height:64px;border-radius:var(--radius-md);background:rgba(85,84,173,0.08);display:flex;align-items:center;justify-content:center;">
+              <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="var(--color-purple-mid)" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3 style="font-size: 30px;">Diagnostic Accuracy</h3>
+          </div>
+          <p style="font-size: var(--text-body-lg); color: var(--on-surface-variant); line-height: 1.55;">$3.5B+ annual UTI cost burden in the U.S. — driven not by treatment failure, but by diagnostic inaccuracy.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Consequence Box (dark navy — restored from v1) -->
+    <div class="consequence-box reveal">
+      <p>When diagnostics don't provide clear direction, clinicians are forced into trial-and-error. Every unnecessary antibiotic course increases resistance pressure. Every callback costs the practice time and capital. Every retreatment is a patient who stayed sick longer than needed.</p>
+      <p class="consequence-box__kicker">The question isn't what's detected. It's what actually works.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 4 — TIRT (Purple BG + Comparison Cards)
+     ════════════════════════════════════════════════════ -->
+<section class="section--purple tirt-section" id="tirt" style="padding: var(--section-padding-y) 0;">
+  <div class="tirt-section__gradient-overlay"></div>
+  <div class="container" style="position: relative; z-index: 1;">
+
+    <div class="tirt__header reveal">
+      <span class="overline" style="color: rgba(255,217,222,0.8);">A Fundamentally Different Diagnostic Category</span>
+      <h2 style="font-size: var(--text-h2); margin-bottom: var(--gap-lg);">Detection Isn't Direction.</h2>
+      <p>Total Infection Response Testing evaluates antibiotic effectiveness at the level of the complete infection — assessing therapeutic response in the conditions that actually exist in the patient. This isn't a better version of the same test. It's a different clinical question entirely.</p>
+    </div>
+
+    <div class="tirt__cards reveal-group">
+
+      <!-- Traditional (dark glass) -->
+      <div class="comparison-card comparison-card--dark reveal-child">
+        <span class="comparison-card__overline" style="color: rgba(255,217,222,0.7);">Standard Care</span>
+        <h3 class="comparison-card__title" style="color: #ffffff;">Traditional Culture + AST</h3>
+        <div class="comparison-list">
+          <div class="comparison-list__item" style="color: rgba(255,255,255,0.85);">
+            <span class="comparison-list__icon"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#e82065" stroke-width="1.5"/><path d="M7 7l6 6M13 7l-6 6" stroke="#e82065" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+            <span>Tests individual isolates — not the infection as a whole</span>
+          </div>
+          <div class="comparison-list__item" style="color: rgba(255,255,255,0.85);">
+            <span class="comparison-list__icon"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#e82065" stroke-width="1.5"/><path d="M7 7l6 6M13 7l-6 6" stroke="#e82065" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+            <span>Lab conditions may not reflect in vivo behavior</span>
+          </div>
+          <div class="comparison-list__item" style="color: rgba(255,255,255,0.85);">
+            <span class="comparison-list__icon"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#e82065" stroke-width="1.5"/><path d="M7 7l6 6M13 7l-6 6" stroke="#e82065" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+            <span>Requires interpretation across multiple isolates or targets</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guidance (white card) -->
+      <div class="comparison-card comparison-card--light reveal-child">
+        <span class="comparison-card__overline" style="color: var(--color-coral-dark);">The Evolution</span>
+        <h3 class="comparison-card__title">Guidance® TIRT Technology</h3>
+        <div class="comparison-list">
+          <div class="comparison-list__item">
+            <span class="comparison-list__icon"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="var(--color-green)" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="var(--color-green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span>Evaluates antibiotic effectiveness against the whole infection</span>
+          </div>
+          <div class="comparison-list__item">
+            <span class="comparison-list__icon"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="var(--color-green)" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="var(--color-green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span>Inherently accounts for combined organism behavior</span>
+          </div>
+          <div class="comparison-list__item">
+            <span class="comparison-list__icon"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="var(--color-green)" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="var(--color-green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span>Observed therapeutic response in patient-relevant conditions</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Full Comparison Table (restored from v1 — glass-styled) -->
+    <div class="comp-table-wrap reveal">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Culture + AST</th>
+            <th>PCR + AST</th>
+            <th class="tirt-col">Total Infection Response Testing</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Clinical Question</td>
+            <td>Which organisms grow and how do they respond in vitro?</td>
+            <td>Which organisms or resistance markers are detected?</td>
+            <td class="tirt-col">Which antibiotic demonstrates effectiveness against the infection as a whole?</td>
+          </tr>
+          <tr>
+            <td>Unit of Analysis</td>
+            <td>Individual cultured isolates</td>
+            <td>Detected organisms + associated markers</td>
+            <td class="tirt-col">Total infection response — combined organism behavior</td>
+          </tr>
+          <tr>
+            <td>Polymicrobial Handling</td>
+            <td>Requires interpretation across multiple isolates</td>
+            <td>Requires interpretation across multiple detected targets</td>
+            <td class="tirt-col">Inherently accounts for combined organism behavior</td>
+          </tr>
+          <tr>
+            <td>Basis for Insight</td>
+            <td>Inferred from lab growth conditions</td>
+            <td>Inferred from molecular detection + isolate susceptibility</td>
+            <td class="tirt-col">Observed therapeutic response in patient-relevant conditions</td>
+          </tr>
+          <tr>
+            <td>Primary Limitation</td>
+            <td>Lab conditions may not reflect in vivo behavior</td>
+            <td>Genetic detection doesn't predict clinical response</td>
+            <td class="tirt-col">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Soundbites (all 5 restored from v1) -->
+    <div style="margin-top: var(--gap-2xl); display: grid; gap: var(--gap-md);" class="reveal-group">
+      <div class="soundbite reveal-child" style="border-left-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.8);"><strong style="color: #ffffff;">Culture informs. PCR detects.</strong> <em>Guidance answers.</em></div>
+      <div class="soundbite reveal-child" style="border-left-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.8);"><strong style="color: #ffffff;">Organisms behave differently together than alone.</strong> That's why single-organism testing fails.</div>
+      <div class="soundbite reveal-child" style="border-left-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.8);"><strong style="color: #ffffff;">It's not about more data.</strong> It's about clinically actionable direction.</div>
+      <div class="soundbite reveal-child" style="border-left-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.8);"><strong style="color: #ffffff;">Genotype predicts possibilities.</strong> Phenotype predicts reality.</div>
+      <div class="soundbite reveal-child" style="border-left-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.8);"><strong style="color: #ffffff;">A similar-looking report doesn't mean similar science.</strong> Formatting can be copied. Biology can't.</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 5 — GUIDANCE UTI P-AST (PRODUCT)
+     ════════════════════════════════════════════════════ -->
+<section class="section--surface section--bokeh" id="product">
+  <div class="container">
+    <div class="product__grid">
+
+      <!-- Left: Copy + Benefits -->
+      <div class="reveal">
+        <span class="overline" style="color: var(--color-purple-mid);">Guidance UTI with P-AST</span>
+        <h2>Pathnostics' Flagship Test. Built to Answer the Right Question.</h2>
+        <p style="font-size: var(--text-body-lg); color: var(--on-surface-variant); line-height: 1.6; margin: var(--gap-lg) 0 var(--gap-xl);">Guidance UTI with Polymicrobial Antibiotic Susceptibility Testing (P-AST) evaluates antibiotic effectiveness against the infection as it actually behaves — including in polymicrobial cases where standard testing loses signal. Results in 24–36 hours. Actionable direction, not just organism identification.</p>
+
+        <div class="benefit-item">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><div class="benefit-item__title">Real-world antibiotic response</div><div class="benefit-item__desc">Measures how antibiotics perform against the complete infection, not isolated organisms under lab conditions.</div></div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+          <div><div class="benefit-item__title">Built for how UTIs actually behave</div><div class="benefit-item__desc">Over 50% of UTIs involve multiple organisms. P-AST inherently accounts for combined organism behavior.</div></div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+          <div><div class="benefit-item__title">24–36 hour turnaround</div><div class="benefit-item__desc">Actionable results before the empiric prescription window closes.</div></div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <div><div class="benefit-item__title">First-pass accuracy. Fewer repeat courses.</div><div class="benefit-item__desc">Targeted therapy the first time reduces unnecessary antibiotic exposure and resistance pressure.</div></div>
+        </div>
+      </div>
+
+      <!-- Right: Proof Bar + Testimonial + CTA -->
+      <div class="product__right">
+        <div class="proof-bar reveal">
+          <div><div class="proof-bar__number">30</div><div class="proof-bar__label">Peer-reviewed published studies</div></div>
+          <div><div class="proof-bar__number">7</div><div class="proof-bar__label">Studies cited in 2024 AUA Guidelines</div></div>
+          <div><div class="proof-bar__number">2,000+</div><div class="proof-bar__label">Providers ordering monthly</div></div>
+        </div>
+
+        <!-- PLACEHOLDER: Physician testimonial — Pending approval from Legal — signed release required -->
+        <div class="testimonial-card reveal">
+          <p class="testimonial-card__text">I got tired of treating the same UTI patient multiple times with unnecessary callbacks, repeat visits, and wasted antibiotics. Guidance gives me patient-specific therapy options, quickly, even in complicated and polymicrobial cases.</p>
+          <p class="testimonial-card__author">— Urologist | Pathnostics Provider</p>
+        </div>
+
+        <div class="reveal"><a href="/guidance-uti.html" class="btn-primary">Learn More About Guidance UTI</a></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 5.5 — CINEMATIC TESTIMONIALS (Stitch)
+     Physician Perspectives — Video Cards + Bokeh
+     ════════════════════════════════════════════════════ -->
+<section class="section--surface section--bokeh" id="perspectives" style="padding-top: 0;">
+  <div class="container" style="max-width: 1280px;">
+
+    <div class="testimonials__header reveal">
+      <h2>Physician<br><em>Perspectives.</em></h2>
+      <div class="testimonials__nav">
+        <button class="testimonials__nav-btn" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M10 2L4 8l6 6"/></svg></button>
+        <button class="testimonials__nav-btn" aria-label="Next"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 2l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+
+    <!-- PLACEHOLDER: Physician testimonials — Pending approval from Legal — signed release required -->
+    <div class="testimonials__grid reveal-group">
+
+      <div class="video-card reveal-child">
+        <div class="video-card__image" style="background: linear-gradient(135deg, var(--surface-container-high) 0%, var(--surface-container) 100%);"></div>
+        <div class="video-card__gradient video-card__gradient--purple"></div>
+        <div class="video-card__play"><button class="video-card__play-btn" aria-label="Play video"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button></div>
+        <div class="video-card__content">
+          <p class="video-card__quote">"We've normalized retreatment in UTIs, and we shouldn't. Guidance is designed to be actionable — moving from detection to decision."</p>
+          <p class="video-card__author">Academic KOL</p>
+          <p class="video-card__role">Infectious Disease</p>
+        </div>
+      </div>
+
+      <div class="video-card reveal-child">
+        <div class="video-card__image" style="background: linear-gradient(135deg, var(--surface-container) 0%, var(--surface-container-high) 100%);"></div>
+        <div class="video-card__gradient video-card__gradient--coral"></div>
+        <div class="video-card__play"><button class="video-card__play-btn" aria-label="Play video"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button></div>
+        <div class="video-card__content">
+          <p class="video-card__quote">"Every retreatment increases antibiotic exposure and resistance pressure. Guidance helps clinicians choose targeted therapy sooner."</p>
+          <p class="video-card__author">Dr. ID Specialist</p>
+          <p class="video-card__role">Pathnostics Provider</p>
+        </div>
+      </div>
+
+      <div class="video-card reveal-child">
+        <div class="video-card__image" style="background: linear-gradient(135deg, var(--surface-container-high) 0%, var(--surface-dim) 100%);"></div>
+        <div class="video-card__gradient video-card__gradient--teal"></div>
+        <div class="video-card__play"><button class="video-card__play-btn" aria-label="Play video"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></button></div>
+        <div class="video-card__content">
+          <p class="video-card__quote">"The Guidance @Home program has extended our reach, ensuring hospital-grade diagnostics in a home setting."</p>
+          <p class="video-card__author">Urologist</p>
+          <p class="video-card__role">Pathnostics Provider</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 6 — GUIDANCE @HOME (Full-bleed purple — v3)
+     ════════════════════════════════════════════════════ -->
+<section class="athome-section" id="athome">
+  <div class="container">
+      <div class="athome__grid">
+
+        <!-- Left: Copy -->
+        <div class="athome__copy">
+          <span class="overline reveal">Guidance @Home</span>
+          <h2 class="reveal">Precision Diagnostics. Wherever Your Patients Are.</h2>
+          <p class="athome__subhead reveal">Not every patient can make it to the office. That doesn't mean they should wait for the right diagnosis — or that you should lose that test.</p>
+          <p class="athome__body reveal">Guidance @Home extends the same Total Infection Response Testing available in your office directly to your patients — with a simple at-home collection kit, prepaid shipping, and a dedicated care team that calls every patient to guide them through the process.</p>
+
+          <div class="reveal-group">
+            <div class="athome-feature reveal-child">
+              <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="var(--color-coral)"/><polyline points="22 4 12 14.01 9 11.01" stroke="var(--color-coral)"/></svg></div>
+              <div><div class="athome-feature__title">Same Guidance results</div><div class="athome-feature__desc">Identical P-AST testing. No compromise on clinical direction.</div></div>
+            </div>
+            <div class="athome-feature reveal-child">
+              <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral)" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a4 4 0 00-8 0v2"/></svg></div>
+              <div><div class="athome-feature__title">Simple collection. Prepaid return.</div><div class="athome-feature__desc">Kit arrives ready. FedEx return pre-arranged.</div></div>
+            </div>
+            <div class="athome-feature reveal-child">
+              <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-coral)" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+              <div><div class="athome-feature__title">High-touch patient support</div><div class="athome-feature__desc">Our team calls every patient. A genuine differentiator.</div></div>
+            </div>
+          </div>
+
+          <div class="prompt-box reveal">
+            <div class="prompt-box__label">Lead with @Home when you hear:</div>
+            <div class="prompt-box__items">
+              <span class="prompt-box__item">"They couldn't give a sample in the office."</span>
+              <span class="prompt-box__item">"They live far away."</span>
+              <span class="prompt-box__item">"They're elderly or homebound."</span>
+              <span class="prompt-box__item">"They keep getting recurrent UTIs."</span>
+            </div>
+          </div>
+
+          <div class="athome__actions reveal">
+            <a href="/guidance-at-home.html" class="btn-primary">Learn About Guidance @Home</a>
+            <a href="#" class="btn-ghost-white">Order a Kit for Your Patient</a>
+          </div>
+        </div>
+
+        <!-- Right: Kit visual placeholder -->
+        <div class="athome__visual">
+          <div class="image-placeholder" style="position:absolute;inset:0;background:rgba(255,255,255,0.05);border-radius:0;min-height:unset;">
+            <span style="color: rgba(255,255,255,0.4); font-size: var(--text-sm);">Kit photography placeholder</span>
+          </div>
+        </div>
+
+      </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 7 — EVIDENCE & SOCIAL PROOF (Bokeh BG)
+     ════════════════════════════════════════════════════ -->
+<section class="section--surface section--bokeh" id="evidence">
+  <div class="container">
+
+    <div class="reveal" style="text-align:center; margin-bottom: var(--gap-2xl);">
+      <span class="overline" style="color: var(--color-green-dark);">Built on Evidence. Trusted by Clinicians.</span>
+      <h2>Our differentiation isn't our report.<br>It's our evidence.</h2>
+      <p class="text-lg" style="max-width: 680px; margin: var(--gap-md) auto 0;">30 peer-reviewed published studies. 7 cited in the 2024 AUA Guidelines. 2,000+ providers ordering monthly. We publish. Others promote.</p>
+    </div>
+
+    <div class="evidence__stats reveal-group">
+      <div class="evidence-stat reveal-child">
+        <div class="evidence-stat__number count-up" data-target="30">0</div>
+        <div class="evidence-stat__label">Peer-reviewed published studies</div>
+        <div class="evidence-stat__sub">Pathnostics publishes. Others promote.</div>
+      </div>
+      <div class="evidence-stat reveal-child">
+        <div class="evidence-stat__number count-up" data-target="7">0</div>
+        <div class="evidence-stat__label">Studies cited in 2024 AUA Guidelines</div>
+        <div class="evidence-stat__sub">The clinical standard-setters recognize the evidence</div>
+      </div>
+      <div class="evidence-stat reveal-child">
+        <div class="evidence-stat__number">2,000+</div>
+        <div class="evidence-stat__label">Providers ordering monthly</div>
+        <div class="evidence-stat__sub">Growing adoption across urology and primary care</div>
+      </div>
+    </div>
+
+    <!-- PLACEHOLDER: Physician testimonials — Pending approval from Legal — signed release required -->
+    <div class="evidence__testimonials reveal-group">
+      <div class="testimonial-card reveal-child">
+        <p class="testimonial-card__text">We've normalized retreatment in UTIs, and we shouldn't. When diagnostics don't provide clear direction, clinicians are forced into trial-and-error. Guidance is designed to be actionable — moving from detection to decision.</p>
+        <p class="testimonial-card__author">— Academic KOL | Infectious Disease</p>
+      </div>
+      <div class="testimonial-card reveal-child">
+        <p class="testimonial-card__text">Every retreatment increases antibiotic exposure and resistance pressure. Guidance helps clinicians choose targeted therapy sooner. First-pass matters.</p>
+        <p class="testimonial-card__author">— Infectious Disease Specialist | Pathnostics Provider</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="text-align:center; margin-top: var(--gap-xl);">
+      <a href="/evidence.html" class="btn-text btn-text--green">View the Published Evidence <span aria-hidden="true">&rarr;</span></a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 8 — CLOSING CTA BAND
+     ════════════════════════════════════════════════════ -->
+<section class="section--green closing-cta" id="cta">
+  <div class="container">
+    <span class="overline reveal" style="color: rgba(255,255,255,0.8);">Ready to Change How You Manage UTIs?</span>
+    <h2 class="reveal">The question isn't what's detected.<br>It's what actually works.</h2>
+    <p class="closing-cta__sub reveal">Guidance UTI P-AST gives clinicians the direction to get treatment right the first time — for patients where first-pass accuracy matters.</p>
+    <div class="closing-cta__actions reveal">
+      <a href="/guidance-uti.html" class="btn-white">Learn More About Guidance UTI</a>
+      <a href="#contact" class="btn-ghost-white">Talk to a Representative</a>
+    </div>
+    <p class="closing-cta__micro reveal">Used by 2,000+ providers monthly &middot; 30 peer-reviewed studies &middot; Built for UTI management</p>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════
+     SECTION 9 — FOOTER
+     ════════════════════════════════════════════════════ -->
+<footer class="section--navy footer" id="contact">
+  <div class="container" style="padding-top: var(--section-padding-y); padding-bottom: var(--gap-xl);">
+    <div class="footer__grid">
+      <div>
+        <img src="assets/Path_Logo_White.png" alt="Pathnostics" height="32" width="auto" loading="lazy">
+        <p class="footer__tagline">Moving Care Forward</p>
+        <p class="footer__brand-line">Better decisions. Better outcomes. Better lives.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg></a>
+          <a href="#" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Our Solutions</p>
+        <div class="footer__links">
+          <a href="/guidance-uti.html">Guidance UTI with P-AST</a>
+          <a href="/guidance-at-home.html">Guidance @Home</a>
+          <a href="#tirt">Why TIRT?</a>
+          <a href="#">For Providers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Resources</p>
+        <div class="footer__links">
+          <a href="/evidence.html">Published Evidence</a>
+          <a href="#">Clinical Resources</a>
+          <a href="#">Patient Resources</a>
+          <a href="#">News &amp; Events</a>
+          <a href="#">Careers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Get in Touch</p>
+        <p class="footer__contact-text">Ready to see how Guidance can support your practice?</p>
+        <a href="#contact" class="btn-primary" style="margin-bottom: var(--gap-lg); padding: 12px 32px; font-size: 16px;">Talk to a Rep</a>
+        <div class="footer__utility" style="display:flex; flex-wrap:wrap; gap: var(--gap-sm) var(--gap-md);">
+          <a href="#">Customer Care</a>
+          <a href="#">Provider Login</a>
+          <a href="#">Pay Your Bill</a>
+          <a href="#">Order Supplies</a>
+          <a href="#">For Veterans</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copyright">&copy; 2026 Pathnostics | All rights reserved</p>
+      <div class="footer__legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Patient Privacy</a>
+        <a href="#">Confidential Reporting</a>
+        <a href="#">About Ads</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

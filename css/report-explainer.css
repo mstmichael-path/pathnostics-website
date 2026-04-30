@@ -1,0 +1,332 @@
+/* ═══════════════════════════════════════════════════════
+   REPORT-EXPLAINER.CSS — Scoped styles for inline report
+   All classes prefixed .re- to avoid homepage conflicts
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Container ─────────────────────────────────────── */
+.re-wrap {
+  background: #f0f4f8;
+  border-radius: var(--radius-xl, 24px);
+  overflow: hidden;
+  box-shadow: 0 40px 100px -20px rgba(57,55,143,0.12);
+  position: relative;
+}
+
+.re-stage {
+  position: relative;
+  max-width: 920px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 20px 16px;
+  min-height: 500px;
+}
+
+/* ── Report Page ───────────────────────────────────── */
+.re-page {
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.08);
+  padding: 28px 24px;
+  position: relative;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #333;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.re-page + .re-page { margin-top: 20px; }
+
+/* ── Header ────────────────────────────────────────── */
+.re-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.re-logo {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #39378f;
+  letter-spacing: 0.5px;
+}
+
+.re-logo span { color: #e82065; }
+
+.re-contact { font-size: 10px; color: #888; text-align: right; }
+
+/* Patient Info */
+.re-patient {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3px 20px;
+  font-size: 9px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.re-patient dt { font-weight: 700; color: #666; display: inline; }
+.re-patient dd { display: inline; color: #333; margin-left: 3px; }
+
+/* Banner */
+.re-banner {
+  background: #e82065;
+  color: #fff;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  border-radius: 3px;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+/* Organisms */
+.re-organisms { margin-bottom: 16px; position: relative; }
+
+.re-organisms-title {
+  font-weight: 700;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.re-org-list { list-style: none; padding-left: 12px; }
+
+.re-org-list li {
+  padding: 2px 0;
+  font-size: 10px;
+  position: relative;
+}
+
+.re-org-list li::before {
+  content: '•';
+  position: absolute;
+  left: -12px;
+  color: #00ae81;
+  font-weight: 700;
+}
+
+.re-org-name { font-weight: 600; font-style: italic; }
+.re-org-count { color: #666; font-size: 9px; }
+
+/* Legend */
+.re-legend {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  display: inline-block;
+  font-size: 9px;
+  position: relative;
+}
+
+.re-legend-title { font-weight: 700; font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; color: #444; }
+.re-legend-item { padding: 1px 0; }
+.re-legend-key { font-weight: 700; display: inline-block; width: 28px; }
+.re-legend-key--s { color: #00ae81; }
+.re-legend-key--i { color: #C9A84C; }
+.re-legend-key--r { color: #e82065; }
+.re-legend-key--rgd { color: #C9A84C; }
+
+/* ── Table ─────────────────────────────────────────── */
+.re-table-wrap { overflow: visible; position: relative; }
+
+.re-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8px;
+  table-layout: fixed;
+  transform-origin: center center;
+}
+
+.re-table th, .re-table td {
+  text-align: center;
+  padding: 4px 1px;
+  vertical-align: middle;
+  border: 1px solid #e8e8e8;
+}
+
+.re-table .re-row-label {
+  text-align: left;
+  font-weight: 700;
+  font-size: 8px;
+  color: #444;
+  padding-left: 4px;
+  white-space: nowrap;
+  width: 70px;
+  min-width: 70px;
+  background: #fafafa;
+  border-right: 2px solid #ddd;
+}
+
+.re-table thead th {
+  background: #f4f4f8;
+  font-weight: 700;
+  font-size: 7px;
+  color: #444;
+  padding: 5px 1px;
+  letter-spacing: -0.2px;
+  line-height: 1.15;
+  border-bottom: 2px solid #ccc;
+}
+
+.re-cell-s   { color: #00ae81; font-weight: 700; font-size: 11px; }
+.re-cell-i   { color: #C9A84C; font-weight: 700; font-size: 11px; }
+.re-cell-r   { color: #e82065; font-weight: 700; font-size: 11px; }
+.re-cell-rgd { color: #C9A84C; font-size: 7px; font-weight: 700; }
+.re-cell-mic { font-size: 8px; color: #555; }
+.re-cell-form { font-size: 7px; color: #666; }
+.re-cell-check { color: #00ae81; font-size: 10px; }
+.re-cell-dash { color: #ccc; font-size: 8px; }
+
+.re-org-row td { font-size: 9px; }
+.re-org-row .re-row-label { font-style: italic; font-weight: 600; font-size: 7px; color: #555; }
+
+/* ── Highlight Layer ───────────────────────────────── */
+.re-hl-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.re-hl {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  opacity: 0;
+}
+
+.re-hl--teal  { border: 2.5px solid #00ae81; background: rgba(0,174,129,0.04); }
+.re-hl--coral { border: 2.5px solid #e82065; background: rgba(232,32,101,0.04); }
+.re-hl--amber { border: 2.5px solid #C9A84C; background: rgba(201,168,76,0.04); }
+
+/* ── Callout ───────────────────────────────────────── */
+.re-callout-bar {
+  background: #1B2A4A;
+  padding: 14px 24px;
+  text-align: center;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.re-callout {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  max-width: 760px;
+  line-height: 1.5;
+}
+
+/* ── Controls ──────────────────────────────────────── */
+.re-controls {
+  background: #111827;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border-radius: 0 0 var(--radius-xl, 24px) var(--radius-xl, 24px);
+}
+
+.re-controls button {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 7px 16px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 6px;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.re-controls button:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.4); }
+.re-controls .re-play-btn { background: #00ae81; border-color: #00ae81; }
+.re-controls .re-play-btn:hover { background: #009570; }
+
+.re-dots { display: flex; gap: 6px; align-items: center; }
+
+.re-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.3);
+  background: transparent; cursor: pointer;
+  transition: all 0.2s; padding: 0;
+}
+
+.re-dot.active { background: #00ae81; border-color: #00ae81; }
+
+/* ── Page 2 ────────────────────────────────────────── */
+.re-page-2 { display: none; }
+
+.re-p2-section { margin-bottom: 14px; }
+
+.re-p2-header {
+  font-weight: 700; font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.5px; padding: 7px 12px; border-radius: 3px;
+  margin-bottom: 6px; color: #fff;
+}
+
+.re-p2-header--s { background: #00ae81; }
+.re-p2-header--i { background: #C9A84C; }
+.re-p2-header--r { background: #e82065; }
+.re-p2-header--rgd { background: #C9A84C; }
+.re-p2-header--clear { background: #888; }
+
+.re-p2-drugs {
+  list-style: none;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px 14px; padding: 3px 0 3px 12px; font-size: 10px;
+}
+
+.re-p2-drugs li::before { content: '• '; }
+
+/* ── Color Panels (Beat 3) ─────────────────────────── */
+.re-panels {
+  position: absolute; inset: 0; z-index: 30;
+  display: flex; pointer-events: none; opacity: 0;
+}
+
+.re-panel {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  transform: translateX(100%);
+}
+
+.re-panel-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(11px, 1.5vw, 18px); font-weight: 700; color: #fff;
+  text-align: center; text-transform: uppercase; letter-spacing: 2px; padding: 0 16px;
+}
+
+/* ── Brand Close ───────────────────────────────────── */
+.re-brand-close {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  z-index: 40; pointer-events: none; opacity: 0;
+}
+
+.re-brand-line { font-family: 'DM Sans', sans-serif; font-size: clamp(16px, 2vw, 22px); font-weight: 500; color: #1B2A4A; text-align: center; margin-bottom: 10px; }
+.re-brand-tagline { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 48px); font-weight: 700; color: #39378f; text-align: center; }
+
+/* ── Insight Arrow ─────────────────────────────────── */
+.re-insight-arrow { position: absolute; pointer-events: none; z-index: 12; opacity: 0; }
+.re-insight-arrow svg { overflow: visible; }
+
+/* ── Two-up mode ───────────────────────────────────── */
+.re-stage.re-two-up { display: flex; gap: 16px; }
+.re-stage.re-two-up .re-page { flex: 1; min-width: 0; }

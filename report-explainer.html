@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guidance UTI Report — Animated Explainer</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <style>
+    /* ═══════════════════════════════════════════════════
+       TOKENS
+       ═══════════════════════════════════════════════════ */
+    :root {
+      --color-s:          #00ae81;
+      --color-s-light:    rgba(0, 174, 129, 0.08);
+      --color-r:          #e82065;
+      --color-r-light:    rgba(232, 32, 101, 0.08);
+      --color-i:          #C9A84C;
+      --color-i-light:    rgba(201, 168, 76, 0.08);
+      --color-rgd:        #C9A84C;
+      --color-purple:     #39378f;
+      --color-teal:       #00ae81;
+      --color-sky:        #8fcaeb;
+      --color-lime:       #8DC63F;
+      --color-report-bg:  #ffffff;
+      --color-header-bar: #e82065;
+      --color-navy:       #1B2A4A;
+      --color-page-bg:    #f0f4f8;
+
+      --font-display: 'Playfair Display', serif;
+      --font-body:    'DM Sans', sans-serif;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       RESET & BASE
+       ═══════════════════════════════════════════════════ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-page-bg);
+      color: #2d2d2d;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 100px; /* room for controls bar */
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       REPORT STAGE
+       ═══════════════════════════════════════════════════ */
+    .report-stage {
+      position: relative;
+      max-width: 960px;
+      width: 100%;
+      margin: 24px auto;
+      padding: 0 20px;
+      min-height: 500px;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       REPORT PAGE
+       ═══════════════════════════════════════════════════ */
+    .report-page {
+      background: var(--color-report-bg);
+      border-radius: 4px;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.08);
+      padding: 32px 28px;
+      position: relative;
+      font-size: 11px;
+      line-height: 1.4;
+      color: #333;
+    }
+
+    .report-page + .report-page {
+      margin-top: 24px;
+    }
+
+    /* ── Page 1 Header ─────────────────────────────── */
+    .report-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .report-logo {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--color-purple);
+      letter-spacing: 0.5px;
+    }
+
+    .report-logo span {
+      color: var(--color-r);
+    }
+
+    .report-contact {
+      font-size: 10px;
+      color: #888;
+      text-align: right;
+    }
+
+    /* Patient info grid */
+    .patient-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 4px 24px;
+      font-size: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .patient-info dt {
+      font-weight: 700;
+      color: #666;
+      display: inline;
+    }
+
+    .patient-info dd {
+      display: inline;
+      color: #333;
+      margin-left: 4px;
+    }
+
+    .patient-info .info-row {
+      display: flex;
+      gap: 4px;
+    }
+
+    /* Results banner */
+    .results-banner {
+      background: var(--color-header-bar);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border-radius: 3px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    /* Organisms section */
+    .organisms-section {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .organisms-title {
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #444;
+      margin-bottom: 8px;
+    }
+
+    .organism-list {
+      list-style: none;
+      padding-left: 12px;
+    }
+
+    .organism-list li {
+      padding: 3px 0;
+      font-size: 11px;
+      position: relative;
+    }
+
+    .organism-list li::before {
+      content: '•';
+      position: absolute;
+      left: -12px;
+      color: var(--color-teal);
+      font-weight: 700;
+    }
+
+    .organism-name {
+      font-weight: 600;
+      font-style: italic;
+    }
+
+    .organism-count {
+      color: #666;
+      font-size: 10px;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       LEGEND BOX
+       ═══════════════════════════════════════════════════ */
+    .legend-box {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+      display: inline-block;
+      font-size: 10px;
+      position: relative;
+    }
+
+    .legend-box__title {
+      font-weight: 700;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      color: #444;
+    }
+
+    .legend-box__item {
+      padding: 1px 0;
+    }
+
+    .legend-box__item .legend-key {
+      font-weight: 700;
+      display: inline-block;
+      width: 32px;
+    }
+
+    .legend-key--s   { color: var(--color-s); }
+    .legend-key--i   { color: var(--color-i); }
+    .legend-key--r   { color: var(--color-r); }
+    .legend-key--rgd { color: var(--color-rgd); }
+
+    /* ═══════════════════════════════════════════════════
+       ANTIBIOTIC TABLE — 20 COLUMNS
+       ═══════════════════════════════════════════════════ */
+    .table-wrapper {
+      overflow: visible;
+      position: relative;
+    }
+
+    .past-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9px;
+      table-layout: fixed;
+      transform-origin: center center;
+      transition: transform 0.8s ease;
+    }
+
+    .past-table th,
+    .past-table td {
+      text-align: center;
+      padding: 5px 2px;
+      vertical-align: middle;
+      border: 1px solid #e8e8e8;
+    }
+
+    /* Row label column (first col) */
+    .past-table .row-label {
+      text-align: left;
+      font-weight: 700;
+      font-size: 9px;
+      color: #444;
+      padding-left: 6px;
+      white-space: nowrap;
+      width: 80px;
+      min-width: 80px;
+      background: #fafafa;
+      border-right: 2px solid #ddd;
+    }
+
+    /* Antibiotic header cells */
+    .past-table thead th {
+      background: #f4f4f8;
+      font-weight: 700;
+      font-size: 8px;
+      color: #444;
+      padding: 6px 2px;
+      letter-spacing: -0.2px;
+      line-height: 1.2;
+      border-bottom: 2px solid #ccc;
+    }
+
+    .past-table thead th.row-label {
+      background: #f4f4f8;
+    }
+
+    /* Data cells */
+    .cell-s   { color: var(--color-s); font-weight: 700; font-size: 12px; }
+    .cell-i   { color: var(--color-i); font-weight: 700; font-size: 12px; }
+    .cell-r   { color: var(--color-r); font-weight: 700; font-size: 12px; }
+    .cell-rgd { color: var(--color-rgd); font-size: 8px; font-weight: 700; }
+    .cell-mic { font-size: 9px; color: #555; }
+    .cell-form { font-size: 8px; color: #666; }
+    .cell-check { color: var(--color-teal); font-size: 11px; }
+    .cell-dash { color: #ccc; font-size: 9px; }
+
+    /* Organism check rows */
+    .organism-row td { font-size: 10px; }
+    .organism-row .row-label {
+      font-style: italic;
+      font-weight: 600;
+      font-size: 8px;
+      color: #555;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       HIGHLIGHT LAYER (for animation overlays)
+       ═══════════════════════════════════════════════════ */
+    .highlight-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .highlight-box {
+      position: absolute;
+      pointer-events: none;
+      border-radius: 4px;
+      box-sizing: border-box;
+      opacity: 0;
+    }
+
+    .highlight-box--teal  { border: 2.5px solid var(--color-teal); background: rgba(0,174,129,0.04); }
+    .highlight-box--coral { border: 2.5px solid var(--color-r);    background: rgba(232,32,101,0.04); }
+    .highlight-box--amber { border: 2.5px solid var(--color-i);    background: rgba(201,168,76,0.04); }
+
+    /* ═══════════════════════════════════════════════════
+       CALLOUT BAR
+       ═══════════════════════════════════════════════════ */
+    .callout-bar {
+      position: sticky;
+      bottom: 48px;
+      left: 0;
+      right: 0;
+      background: var(--color-navy);
+      padding: 16px 32px;
+      text-align: center;
+      z-index: 50;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .callout-text {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 500;
+      color: #ffffff;
+      max-width: 800px;
+      line-height: 1.5;
+      opacity: 0;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       CONTROLS BAR
+       ═══════════════════════════════════════════════════ */
+    .controls-bar {
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #111827;
+      padding: 12px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      z-index: 50;
+    }
+
+    .controls-bar button {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 8px 20px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 6px;
+      background: transparent;
+      color: #ffffff;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .controls-bar button:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.4);
+    }
+
+    .controls-bar button.play-btn {
+      background: var(--color-teal);
+      border-color: var(--color-teal);
+    }
+
+    .controls-bar button.play-btn:hover {
+      background: #009570;
+    }
+
+    /* Progress dots */
+    .progress-dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .progress-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.3);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+      padding: 0;
+    }
+
+    .progress-dot.active {
+      background: var(--color-teal);
+      border-color: var(--color-teal);
+    }
+
+    /* ═══════════════════════════════════════════════════
+       PAGE 2 (hidden until Beat 8)
+       ═══════════════════════════════════════════════════ */
+    #page-2 {
+      display: none;
+    }
+
+    /* Page 2 sections */
+    .p2-section {
+      margin-bottom: 16px;
+    }
+
+    .p2-section-header {
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 8px 14px;
+      border-radius: 3px;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+
+    .p2-header--s   { background: var(--color-s); }
+    .p2-header--i   { background: var(--color-i); }
+    .p2-header--r   { background: var(--color-r); }
+    .p2-header--rgd { background: var(--color-rgd); }
+    .p2-header--clear { background: #888; }
+
+    .p2-drug-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px 16px;
+      padding: 4px 0 4px 14px;
+      font-size: 11px;
+    }
+
+    .p2-drug-list li::before {
+      content: '• ';
+      color: inherit;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       COLOR PANELS (Beat 3)
+       ═══════════════════════════════════════════════════ */
+    .color-panels {
+      position: absolute;
+      inset: 0;
+      z-index: 30;
+      display: flex;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .color-panel {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translateX(100%);
+    }
+
+    .color-panel__label {
+      font-family: var(--font-body);
+      font-size: clamp(14px, 2vw, 22px);
+      font-weight: 700;
+      color: #ffffff;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding: 0 20px;
+    }
+    /* ═══════════════════════════════════════════════════
+       ANIMATION STATES
+       ═══════════════════════════════════════════════════ */
+
+    /* Brand close overlay */
+    .brand-close {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 40;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .brand-close__line {
+      font-family: var(--font-body);
+      font-size: clamp(18px, 2.5vw, 24px);
+      font-weight: 500;
+      color: var(--color-navy);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .brand-close__tagline {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
+      color: var(--color-purple);
+      text-align: center;
+    }
+
+    /* Insight arrow */
+    .insight-arrow {
+      position: absolute;
+      pointer-events: none;
+      z-index: 12;
+      opacity: 0;
+    }
+
+    .insight-arrow svg {
+      overflow: visible;
+    }
+
+    /* Connecting line (Beat 9) */
+    .connecting-line {
+      position: absolute;
+      pointer-events: none;
+      z-index: 12;
+      opacity: 0;
+    }
+
+    /* Organism underline wipe */
+    .organism-underline {
+      display: inline-block;
+      position: relative;
+    }
+
+    .organism-underline::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--color-teal);
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+
+    /* Two-page side-by-side layout for Beat 1 & 9 */
+    .report-stage.two-up {
+      display: flex;
+      gap: 24px;
+      max-width: 1200px;
+    }
+
+    .report-stage.two-up .report-page {
+      flex: 1;
+      min-width: 0;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════════════
+       COLOR PANELS (Beat 3 — four concept wipes)
+       ════════════════════════════════════════════════ -->
+  <div class="color-panels" id="color-panels">
+    <div class="color-panel" style="background: var(--color-lime);"><span class="color-panel__label">Pooled Antibiotic Susceptibility Results</span></div>
+    <div class="color-panel" style="background: var(--color-teal);"><span class="color-panel__label">Resistance Genes Detected</span></div>
+    <div class="color-panel" style="background: var(--color-sky);"><span class="color-panel__label">Formulation of Antibiotics</span></div>
+    <div class="color-panel" style="background: var(--color-purple);"><span class="color-panel__label">Supporting Evidence</span></div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════
+       REPORT STAGE
+       ════════════════════════════════════════════════ -->
+  <div class="report-stage" id="report-stage">
+
+    <!-- ════════════════════ PAGE 1 ════════════════════ -->
+    <div class="report-page" id="page-1">
+
+      <!-- Header -->
+      <div class="report-header">
+        <div>
+          <div class="report-logo">GUIDANCE <span>UTI</span></div>
+        </div>
+        <div class="report-contact">
+          <span style="font-size: 14px;">&#x2753;</span> Questions? 800.493.4490
+        </div>
+      </div>
+
+      <!-- Patient Info -->
+      <div class="patient-info">
+        <div><dt>Patient:</dt><dd>First Last</dd></div>
+        <div><dt>Provider:</dt><dd>Doctor Test</dd></div>
+        <div><dt>Case#:</dt><dd>PUGR25-92701</dd></div>
+
+        <div><dt>DOB:</dt><dd>—</dd></div>
+        <div><dt>Facility:</dt><dd>Client</dd></div>
+        <div><dt>Collection:</dt><dd>Voided Urine</dd></div>
+
+        <div><dt>Phone:</dt><dd>—</dd></div>
+        <div><dt>Phone:</dt><dd>1234567890</dd></div>
+        <div><dt>Date Collected:</dt><dd>11-16-2025</dd></div>
+
+        <div><dt>MRN#:</dt><dd>—</dd></div>
+        <div><dt>Fax:</dt><dd>1234567890</dd></div>
+        <div><dt>Date Received:</dt><dd>11-17-2025</dd></div>
+
+        <div></div>
+        <div></div>
+        <div><dt>Date Reported:</dt><dd>11-18-2025</dd></div>
+      </div>
+
+      <!-- Results Banner -->
+      <div class="results-banner" id="results-banner">Results: Pathogenic DNA Detected</div>
+
+      <!-- Organisms Detected -->
+      <div class="organisms-section" id="organisms-section">
+        <div class="organisms-title">Organism(s) Tested — Detected:</div>
+        <ul class="organism-list">
+          <li>
+            <span class="organism-name">Escherichia coli</span>
+            <span class="organism-count" id="org-count-1">≥100,000 cells/mL</span>
+          </li>
+          <li>
+            <span class="organism-name">Staphylococcus aureus</span>
+            <span class="organism-count" id="org-count-2">50,000-99,999 cells/mL</span>
+          </li>
+          <li>
+            <span class="organism-name">Ureaplasma urealyticum</span>
+            <span class="organism-count" id="org-count-3">10,000-49,999 cells/mL</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Legend -->
+      <div class="legend-box" id="legend-box">
+        <div class="legend-box__title">Legend</div>
+        <div class="legend-box__item"><span class="legend-key legend-key--s">S</span> = Pooled Susceptibility Detected</div>
+        <div class="legend-box__item"><span class="legend-key legend-key--i">I</span> = Pooled Intermediate Susceptibility Detected</div>
+        <div class="legend-box__item"><span class="legend-key legend-key--r">R</span> = Pooled Resistance Detected</div>
+        <div class="legend-box__item"><span class="legend-key legend-key--rgd">RGD</span> = Resistance Gene(s) Detected</div>
+      </div>
+
+      <!-- Antibiotic Table — 20 columns -->
+      <div class="table-wrapper" id="table-wrapper">
+        <table class="past-table" id="past-table">
+          <thead>
+            <tr>
+              <th class="row-label"></th>
+              <th class="table-col table-col-1">Doxy<wbr>cycline</th>
+              <th class="table-col table-col-2">Levo<wbr>floxacin</th>
+              <th class="table-col table-col-3">Nitro<wbr>furantoin</th>
+              <th class="table-col table-col-4">Fos<wbr>fomycin</th>
+              <th class="table-col table-col-5">Line<wbr>zolid</th>
+              <th class="table-col table-col-6">Genta<wbr>micin</th>
+              <th class="table-col table-col-7">Mero<wbr>penem</th>
+              <th class="table-col table-col-8">Ampi / Sulb</th>
+              <th class="table-col table-col-9">Cefa<wbr>zolin</th>
+              <th class="table-col table-col-10">Pip / Tazo</th>
+              <th class="table-col table-col-11">Cipro<wbr>floxacin</th>
+              <th class="table-col table-col-12">Amox / Clav</th>
+              <th class="table-col table-col-13">Ampi<wbr>cillin</th>
+              <th class="table-col table-col-14">SMX / TMP</th>
+              <th class="table-col table-col-15">Tri<wbr>methoprim</th>
+              <th class="table-col table-col-16">Vanco<wbr>mycin</th>
+              <th class="table-col table-col-17">Cef<wbr>aclor</th>
+              <th class="table-col table-col-18">Cef<wbr>epime</th>
+              <th class="table-col table-col-19">Ceftaz<wbr>idime</th>
+              <th class="table-col table-col-20">Cef<wbr>triaxone</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Formulations Row -->
+            <tr id="row-form">
+              <td class="row-label">Formulations</td>
+              <td class="cell-form table-col table-col-1">PO/IV</td>
+              <td class="cell-form table-col table-col-2">PO/IV</td>
+              <td class="cell-form table-col table-col-3">PO</td>
+              <td class="cell-form table-col table-col-4">PO</td>
+              <td class="cell-form table-col table-col-5">PO/IV</td>
+              <td class="cell-form table-col table-col-6">IM/IV</td>
+              <td class="cell-form table-col table-col-7">IV</td>
+              <td class="cell-form table-col table-col-8">IV/IM</td>
+              <td class="cell-form table-col table-col-9">IV/IM</td>
+              <td class="cell-form table-col table-col-10">IV</td>
+              <td class="cell-form table-col table-col-11">PO/IV</td>
+              <td class="cell-form table-col table-col-12">PO</td>
+              <td class="cell-form table-col table-col-13">PO/IV</td>
+              <td class="cell-form table-col table-col-14">PO/IV</td>
+              <td class="cell-form table-col table-col-15">PO</td>
+              <td class="cell-form table-col table-col-16">IV</td>
+              <td class="cell-form table-col table-col-17">PO</td>
+              <td class="cell-form table-col table-col-18">IM/IV</td>
+              <td class="cell-form table-col table-col-19">IM/IV</td>
+              <td class="cell-form table-col table-col-20">IM/IV</td>
+            </tr>
+
+            <!-- P-AST Row -->
+            <tr id="row-past">
+              <td class="row-label">P-AST</td>
+              <td class="cell-s table-col table-col-1">S</td>
+              <td class="cell-s table-col table-col-2">S</td>
+              <td class="cell-s table-col table-col-3">S</td>
+              <td class="cell-s table-col table-col-4">S</td>
+              <td class="cell-s table-col table-col-5">S</td>
+              <td class="cell-s table-col table-col-6">S</td>
+              <td class="cell-s table-col table-col-7">S</td>
+              <td class="cell-s table-col table-col-8">S</td>
+              <td class="cell-s table-col table-col-9">S</td>
+              <td class="cell-s table-col table-col-10">S</td>
+              <td class="cell-i table-col table-col-11">I</td>
+              <td class="cell-i table-col table-col-12">I</td>
+              <td class="cell-i table-col table-col-13">I</td>
+              <td class="cell-r table-col table-col-14">R</td>
+              <td class="cell-r table-col table-col-15">R</td>
+              <td class="cell-r table-col table-col-16">R</td>
+              <td class="cell-r table-col table-col-17">R</td>
+              <td class="cell-r table-col table-col-18">R</td>
+              <td class="cell-r table-col table-col-19">R</td>
+              <td class="cell-r table-col table-col-20">R</td>
+            </tr>
+
+            <!-- Resistance Genes Detected Row -->
+            <tr id="row-rgd">
+              <td class="row-label">Resistance Gene(s) Detected</td>
+              <td class="cell-dash table-col table-col-1">—</td>
+              <td class="cell-dash table-col table-col-2">—</td>
+              <td class="cell-dash table-col table-col-3">—</td>
+              <td class="cell-dash table-col table-col-4">—</td>
+              <td class="cell-dash table-col table-col-5">—</td>
+              <td class="cell-dash table-col table-col-6">—</td>
+              <td class="cell-dash table-col table-col-7">—</td>
+              <td class="cell-rgd table-col table-col-8">RGD</td>
+              <td class="cell-rgd table-col table-col-9">RGD</td>
+              <td class="cell-rgd table-col table-col-10">RGD</td>
+              <td class="cell-dash table-col table-col-11">—</td>
+              <td class="cell-rgd table-col table-col-12">RGD</td>
+              <td class="cell-rgd table-col table-col-13">RGD</td>
+              <td class="cell-dash table-col table-col-14">—</td>
+              <td class="cell-dash table-col table-col-15">—</td>
+              <td class="cell-dash table-col table-col-16">—</td>
+              <td class="cell-rgd table-col table-col-17">RGD</td>
+              <td class="cell-rgd table-col table-col-18">RGD</td>
+              <td class="cell-rgd table-col table-col-19">RGD</td>
+              <td class="cell-rgd table-col table-col-20">RGD</td>
+            </tr>
+
+            <!-- Pooled MIC Results Row -->
+            <tr id="row-mic">
+              <td class="row-label">Pooled MIC Results</td>
+              <td class="cell-mic table-col table-col-1">4</td>
+              <td class="cell-mic table-col table-col-2">0.5</td>
+              <td class="cell-mic table-col table-col-3">32</td>
+              <td class="cell-mic table-col table-col-4">64</td>
+              <td class="cell-mic table-col table-col-5">4</td>
+              <td class="cell-mic table-col table-col-6">2</td>
+              <td class="cell-mic table-col table-col-7">1</td>
+              <td class="cell-mic table-col table-col-8">8/4</td>
+              <td class="cell-mic table-col table-col-9">8</td>
+              <td class="cell-mic table-col table-col-10">8/4</td>
+              <td class="cell-mic table-col table-col-11">0.5</td>
+              <td class="cell-mic table-col table-col-12">16/8</td>
+              <td class="cell-mic table-col table-col-13">16</td>
+              <td class="cell-mic table-col table-col-14">—</td>
+              <td class="cell-mic table-col table-col-15">—</td>
+              <td class="cell-mic table-col table-col-16">—</td>
+              <td class="cell-mic table-col table-col-17">—</td>
+              <td class="cell-mic table-col table-col-18">—</td>
+              <td class="cell-mic table-col table-col-19">—</td>
+              <td class="cell-mic table-col table-col-20">—</td>
+            </tr>
+
+            <!-- Organism Check Rows -->
+            <tr class="organism-row" id="row-ecoli">
+              <td class="row-label"><em>E. coli</em></td>
+              <td class="cell-check table-col table-col-1">✓</td>
+              <td class="cell-check table-col table-col-2">✓</td>
+              <td class="cell-check table-col table-col-3">✓</td>
+              <td class="cell-check table-col table-col-4">✓</td>
+              <td class="cell-dash table-col table-col-5">—</td>
+              <td class="cell-check table-col table-col-6">✓</td>
+              <td class="cell-check table-col table-col-7">✓</td>
+              <td class="cell-check table-col table-col-8">✓</td>
+              <td class="cell-check table-col table-col-9">✓</td>
+              <td class="cell-check table-col table-col-10">✓</td>
+              <td class="cell-check table-col table-col-11">✓</td>
+              <td class="cell-check table-col table-col-12">✓</td>
+              <td class="cell-check table-col table-col-13">✓</td>
+              <td class="cell-check table-col table-col-14">✓</td>
+              <td class="cell-dash table-col table-col-15">—</td>
+              <td class="cell-dash table-col table-col-16">—</td>
+              <td class="cell-check table-col table-col-17">✓</td>
+              <td class="cell-check table-col table-col-18">✓</td>
+              <td class="cell-check table-col table-col-19">✓</td>
+              <td class="cell-check table-col table-col-20">✓</td>
+            </tr>
+
+            <tr class="organism-row" id="row-saureus">
+              <td class="row-label"><em>S. aureus</em></td>
+              <td class="cell-check table-col table-col-1">✓</td>
+              <td class="cell-dash table-col table-col-2">—</td>
+              <td class="cell-check table-col table-col-3">✓</td>
+              <td class="cell-dash table-col table-col-4">—</td>
+              <td class="cell-check table-col table-col-5">✓</td>
+              <td class="cell-check table-col table-col-6">✓</td>
+              <td class="cell-dash table-col table-col-7">—</td>
+              <td class="cell-dash table-col table-col-8">—</td>
+              <td class="cell-dash table-col table-col-9">—</td>
+              <td class="cell-dash table-col table-col-10">—</td>
+              <td class="cell-dash table-col table-col-11">—</td>
+              <td class="cell-dash table-col table-col-12">—</td>
+              <td class="cell-dash table-col table-col-13">—</td>
+              <td class="cell-check table-col table-col-14">✓</td>
+              <td class="cell-check table-col table-col-15">✓</td>
+              <td class="cell-check table-col table-col-16">✓</td>
+              <td class="cell-dash table-col table-col-17">—</td>
+              <td class="cell-dash table-col table-col-18">—</td>
+              <td class="cell-dash table-col table-col-19">—</td>
+              <td class="cell-dash table-col table-col-20">—</td>
+            </tr>
+
+            <tr class="organism-row" id="row-ureaplasma">
+              <td class="row-label"><em>Ureaplasma</em></td>
+              <td class="cell-check table-col table-col-1">✓</td>
+              <td class="cell-check table-col table-col-2">✓</td>
+              <td class="cell-dash table-col table-col-3">—</td>
+              <td class="cell-dash table-col table-col-4">—</td>
+              <td class="cell-dash table-col table-col-5">—</td>
+              <td class="cell-dash table-col table-col-6">—</td>
+              <td class="cell-dash table-col table-col-7">—</td>
+              <td class="cell-dash table-col table-col-8">—</td>
+              <td class="cell-dash table-col table-col-9">—</td>
+              <td class="cell-dash table-col table-col-10">—</td>
+              <td class="cell-dash table-col table-col-11">—</td>
+              <td class="cell-dash table-col table-col-12">—</td>
+              <td class="cell-dash table-col table-col-13">—</td>
+              <td class="cell-dash table-col table-col-14">—</td>
+              <td class="cell-dash table-col table-col-15">—</td>
+              <td class="cell-dash table-col table-col-16">—</td>
+              <td class="cell-dash table-col table-col-17">—</td>
+              <td class="cell-dash table-col table-col-18">—</td>
+              <td class="cell-dash table-col table-col-19">—</td>
+              <td class="cell-dash table-col table-col-20">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Highlight layer (populated by JS for animations) -->
+      <div class="highlight-layer" id="highlight-layer-p1"></div>
+
+    </div><!-- /page-1 -->
+
+
+    <!-- ════════════════════ PAGE 2 ════════════════════ -->
+    <div class="report-page" id="page-2">
+
+      <div class="report-header">
+        <div><div class="report-logo">GUIDANCE <span>UTI</span></div></div>
+        <div class="report-contact">Page 2 — Treatment Summary</div>
+      </div>
+
+      <!-- Pooled Susceptibility Detected (S) -->
+      <div class="p2-section" id="p2-s-section">
+        <div class="p2-section-header p2-header--s">Pooled Susceptibility Detected (S)</div>
+        <ul class="p2-drug-list">
+          <li>Ampicillin/Sulbactam (IV/IM)</li>
+          <li>Gentamicin (IV/IM)</li>
+          <li>Meropenem (IV)</li>
+          <li>Cefazolin (IV/IM)</li>
+          <li>Levofloxacin (PO/IV)</li>
+          <li>Nitrofurantoin (PO)</li>
+          <li>Doxycycline (PO/IV)</li>
+          <li>Linezolid (PO/IV)</li>
+          <li>Piperacillin/Tazobactam (IV)</li>
+          <li>Fosfomycin (PO)</li>
+        </ul>
+      </div>
+
+      <!-- Pooled Intermediate (I) -->
+      <div class="p2-section" id="p2-i-section">
+        <div class="p2-section-header p2-header--i">Pooled Intermediate Susceptibility Detected (I)</div>
+        <ul class="p2-drug-list">
+          <li>Amoxicillin/Clavulanate (PO)</li>
+          <li>Ampicillin (PO/IV)</li>
+          <li>Ciprofloxacin (PO/IV)</li>
+        </ul>
+      </div>
+
+      <!-- Pooled Resistance Detected (R) -->
+      <div class="p2-section" id="p2-r-section">
+        <div class="p2-section-header p2-header--r">Pooled Resistance Detected (R)</div>
+        <ul class="p2-drug-list">
+          <li>Cefaclor (PO)</li>
+          <li>Sulfamethoxazole/Trimethoprim (PO/IV)</li>
+          <li>Cefepime (IV/IM)</li>
+          <li>Trimethoprim (PO)</li>
+          <li>Ceftazidime (IV/IM)</li>
+          <li>Vancomycin (IV)</li>
+          <li>Ceftriaxone (IV/IM)</li>
+        </ul>
+      </div>
+
+      <!-- Resistance Gene Groups Detected -->
+      <div class="p2-section" id="p2-rgd-section">
+        <div class="p2-section-header p2-header--rgd">Resistance Gene Groups Detected (RGD)</div>
+        <ul class="p2-drug-list">
+          <li>Ampicillin Resistance</li>
+        </ul>
+      </div>
+
+      <!-- Resistance Genes Tested — Not Detected -->
+      <div class="p2-section" id="p2-not-detected">
+        <div class="p2-section-header p2-header--clear">Resistance Genes Tested — Not Detected</div>
+        <ul class="p2-drug-list">
+          <li>Carbapenem Resistance</li>
+          <li>Methicillin Resistance</li>
+          <li>Vancomycin Resistance</li>
+          <li>ESBL Resistance</li>
+          <li>Quino/Fluoroquinolone</li>
+        </ul>
+      </div>
+
+      <div class="highlight-layer" id="highlight-layer-p2"></div>
+
+    </div><!-- /page-2 -->
+
+  </div><!-- /report-stage -->
+
+
+  <!-- Brand Close Overlay (Beat 9) -->
+  <div class="brand-close" id="brand-close">
+    <div class="brand-close__line" id="brand-line-1">One sample. One pooled test. One clear answer.</div>
+    <div class="brand-close__tagline" id="brand-line-2">Right Treatment. First Time.</div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       CALLOUT BAR
+       ════════════════════════════════════════════════ -->
+  <div class="callout-bar">
+    <div class="callout-text" id="callout">The Guidance UTI report. Two pages — everything your physician needs to make a treatment decision.</div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════
+       CONTROLS BAR
+       ════════════════════════════════════════════════ -->
+  <div class="controls-bar">
+    <button id="btn-prev">◀ Prev</button>
+    <div class="progress-dots" id="progress-dots">
+      <button class="progress-dot active" data-beat="0"></button>
+      <button class="progress-dot" data-beat="1"></button>
+      <button class="progress-dot" data-beat="2"></button>
+      <button class="progress-dot" data-beat="3"></button>
+      <button class="progress-dot" data-beat="4"></button>
+      <button class="progress-dot" data-beat="5"></button>
+      <button class="progress-dot" data-beat="6"></button>
+      <button class="progress-dot" data-beat="7"></button>
+      <button class="progress-dot" data-beat="8"></button>
+    </div>
+    <button id="btn-next">Next ▶</button>
+    <button class="play-btn" id="btn-play">▶ Play</button>
+  </div>
+
+
+  <script>
+    // ═══════════════════════════════════════════════════
+    // BEAT CONTROLLER + ALL 9 BEATS
+    // ═══════════════════════════════════════════════════
+
+    const $ = s => document.querySelector(s);
+    const $$ = s => document.querySelectorAll(s);
+
+    // ── HELPERS ────────────────────────────────────────
+
+    function showCallout(text) {
+      const el = $('#callout');
+      gsap.to(el, { opacity: 0, duration: 0.2, onComplete: () => {
+        el.textContent = text;
+        gsap.to(el, { opacity: 1, duration: 0.4 });
+      }});
+    }
+
+    function clearHighlights() {
+      $$('.highlight-box').forEach(b => b.remove());
+      $$('.insight-arrow').forEach(a => a.remove());
+    }
+
+    function resetStage() {
+      clearHighlights();
+      const stage = $('#report-stage');
+      stage.classList.remove('two-up');
+      gsap.set(stage, { scale: 1, x: 0, y: 0, opacity: 1 });
+      gsap.set('#page-1', { opacity: 1, scale: 1, x: 0, y: 0 });
+      gsap.set('#page-2', { display: 'none', opacity: 0 });
+      gsap.set('#past-table', { rotateX: 0, translateZ: 0, transformPerspective: 'none' });
+      gsap.set('#brand-close', { opacity: 0 });
+      gsap.set('#color-panels', { opacity: 0 });
+      gsap.set('.color-panel', { x: '100%' });
+      $$('.table-col').forEach(c => gsap.set(c, { opacity: 1 }));
+      $$('.organism-underline').forEach(u => {
+        if (u.style) gsap.set(u.querySelector('::after') || u, { scaleX: 0 });
+      });
+    }
+
+    function addHighlightBox(parentId, top, left, width, height, type = 'teal') {
+      const parent = $(parentId);
+      const box = document.createElement('div');
+      box.className = `highlight-box highlight-box--${type}`;
+      box.style.cssText = `top:${top}px;left:${left}px;width:${width}px;height:${height}px;`;
+      (parent.querySelector('.highlight-layer') || parent).appendChild(box);
+      return box;
+    }
+
+    function addHighlightOverElement(el, type = 'teal', padding = 4) {
+      const page = el.closest('.report-page');
+      const pageRect = page.getBoundingClientRect();
+      const elRect = el.getBoundingClientRect();
+      const box = document.createElement('div');
+      box.className = `highlight-box highlight-box--${type}`;
+      box.style.cssText = `
+        top: ${elRect.top - pageRect.top - padding}px;
+        left: ${elRect.left - pageRect.left - padding}px;
+        width: ${elRect.width + padding * 2}px;
+        height: ${elRect.height + padding * 2}px;
+      `;
+      page.querySelector('.highlight-layer').appendChild(box);
+      return box;
+    }
+
+    function drawBox(box, duration = 0.6) {
+      gsap.fromTo(box,
+        { opacity: 0, clipPath: 'inset(0 100% 0 0)' },
+        { opacity: 1, clipPath: 'inset(0 0% 0 0)', duration, ease: 'power2.inOut' }
+      );
+    }
+
+    // ── BEAT DEFINITIONS ──────────────────────────────
+
+    const beats = [
+      // BEAT 1 — Report Introduction
+      {
+        duration: 4000,
+        run() {
+          resetStage();
+          const stage = $('#report-stage');
+          stage.classList.add('two-up');
+          $('#page-2').style.display = 'block';
+          gsap.set([stage, '#page-1', '#page-2'], { opacity: 0 });
+          gsap.set(stage, { scale: 0.65 });
+
+          const tl = gsap.timeline();
+          tl.to([stage, '#page-1', '#page-2'], { opacity: 1, duration: 0.8, ease: 'power2.out' })
+            .to(stage, { scale: 1, duration: 1.2, ease: 'power2.inOut' }, '+=0.5')
+            .call(() => {
+              stage.classList.remove('two-up');
+              $('#page-2').style.display = 'none';
+              gsap.set(stage, { scale: 1 });
+            });
+
+          showCallout("The Guidance UTI report. Two pages — everything your physician needs to make a treatment decision.");
+        }
+      },
+
+      // BEAT 2 — Organisms Detected
+      {
+        duration: 6000,
+        run() {
+          resetStage();
+          showCallout("Three organisms detected — together, in the same sample, interacting. Counts shown as semi-quantitative ranges.");
+
+          const orgSection = $('#organisms-section');
+          const box = addHighlightOverElement(orgSection, 'teal', 6);
+          drawBox(box, 0.8);
+
+          // Underline wipe on each organism name
+          const names = $$('.organism-name');
+          names.forEach((name, i) => {
+            const underline = document.createElement('span');
+            underline.style.cssText = `position:absolute;bottom:-1px;left:0;width:100%;height:2px;background:var(--color-teal);transform:scaleX(0);transform-origin:left;`;
+            name.style.position = 'relative';
+            name.appendChild(underline);
+            gsap.to(underline, { scaleX: 1, duration: 0.5, delay: 1 + i * 0.4, ease: 'power2.out' });
+          });
+        }
+      },
+
+      // BEAT 3 — Four Concepts (Color Panel Wipe)
+      {
+        duration: 8000,
+        run() {
+          resetStage();
+          gsap.to('#page-1', { opacity: 0.2, duration: 0.5 });
+          gsap.set('#color-panels', { opacity: 1 });
+
+          const panels = $$('.color-panel');
+          const tl = gsap.timeline({ delay: 0.5 });
+          panels.forEach((p, i) => {
+            tl.to(p, { x: '0%', duration: 0.5, ease: 'power3.out' }, i * 0.4);
+          });
+
+          // Hold then slide all out
+          tl.to(panels, { x: '-100%', duration: 0.6, ease: 'power3.in', stagger: 0.05 }, '+=2');
+          tl.to('#page-1', { opacity: 1, duration: 0.5 });
+          tl.set('#color-panels', { opacity: 0 });
+          tl.set(panels, { x: '100%' });
+
+          // No callout text — panels ARE the callout
+          gsap.to('#callout', { opacity: 0, duration: 0.2 });
+        }
+      },
+
+      // BEAT 4 — P-AST Table Appears
+      {
+        duration: 5000,
+        run() {
+          resetStage();
+          showCallout("20 antibiotics tested. The Legend tells you how to read every cell: S = susceptible, I = intermediate, R = resistant, RGD = resistance gene detected.");
+
+          const table = $('#past-table');
+          const legend = $('#legend-box');
+          const tableBox = addHighlightOverElement(table, 'teal', 6);
+          const legendBox = addHighlightOverElement(legend, 'teal', 4);
+
+          gsap.timeline({ delay: 0.3 })
+            .call(() => drawBox(tableBox, 0.8))
+            .call(() => drawBox(legendBox, 0.6), [], '+=0.2');
+        }
+      },
+
+      // BEAT 5 — Column Walkthrough (Doxycycline → Nitrofurantoin)
+      {
+        duration: 8000,
+        run() {
+          resetStage();
+
+          // Dim all columns
+          $$('.table-col').forEach(c => gsap.to(c, { opacity: 0.3, duration: 0.3 }));
+
+          // Highlight column 1 (Doxycycline)
+          $$('.table-col-1').forEach(c => gsap.to(c, { opacity: 1, duration: 0.3 }));
+          showCallout("Doxycycline: Pooled susceptibility detected (S). MIC of 4. Available oral and IV. A viable treatment option.");
+
+          // After 3.5s, slide to column 3 (Nitrofurantoin)
+          gsap.delayedCall(3.5, () => {
+            $$('.table-col-1').forEach(c => gsap.to(c, { opacity: 0.3, duration: 0.3 }));
+            $$('.table-col-3').forEach(c => gsap.to(c, { opacity: 1, duration: 0.3 }));
+            showCallout("Nitrofurantoin: Susceptible, oral formulation. One of the most commonly prescribed UTI antibiotics — confirmed effective here.");
+          });
+        }
+      },
+
+      // BEAT 6 — P-AST Row Full Reveal + 3D Lift
+      {
+        duration: 8000,
+        run() {
+          resetStage();
+          showCallout("10 antibiotics show pooled susceptibility. 3 intermediate. 7 resistant. Guidance shows the full picture — all at once.");
+
+          const table = $('#past-table');
+          const tl = gsap.timeline({ delay: 0.3 });
+
+          // 3D lift
+          tl.to(table, {
+            rotateX: -15,
+            translateZ: 40,
+            transformPerspective: 800,
+            duration: 0.8,
+            ease: 'power2.out'
+          });
+
+          // Highlight S cells (cols 1-10) — green
+          tl.call(() => {
+            for (let i = 1; i <= 10; i++) {
+              const cell = $(`#row-past .table-col-${i}`);
+              if (cell) {
+                const box = addHighlightOverElement(cell, 'teal', 2);
+                gsap.set(box, { opacity: 1 });
+              }
+            }
+          }, [], '+=0.3');
+
+          // Highlight R cells (cols 14-20) — coral
+          tl.call(() => {
+            for (let i = 14; i <= 20; i++) {
+              const cell = $(`#row-past .table-col-${i}`);
+              if (cell) {
+                const box = addHighlightOverElement(cell, 'coral', 2);
+                gsap.set(box, { opacity: 1 });
+              }
+            }
+          }, [], '+=0.3');
+
+          // Highlight I cells (cols 11-13) — amber
+          tl.call(() => {
+            for (let i = 11; i <= 13; i++) {
+              const cell = $(`#row-past .table-col-${i}`);
+              if (cell) {
+                const box = addHighlightOverElement(cell, 'amber', 2);
+                gsap.set(box, { opacity: 1 });
+              }
+            }
+          }, [], '+=0.3');
+
+          // Settle back flat
+          tl.to(table, {
+            rotateX: 0,
+            translateZ: 0,
+            duration: 0.8,
+            ease: 'power2.inOut'
+          }, '+=2');
+        }
+      },
+
+      // BEAT 7 — Resistance Genes Row + Insight
+      {
+        duration: 8000,
+        run() {
+          resetStage();
+
+          const rgdLabel = $('#row-rgd .row-label');
+          const labelBox = addHighlightOverElement(rgdLabel, 'teal', 4);
+          drawBox(labelBox, 0.6);
+
+          // Highlight RGD clusters
+          gsap.delayedCall(1, () => {
+            [8,9,10,12,13,17,18,19,20].forEach(i => {
+              const cell = $(`#row-rgd .table-col-${i}`);
+              if (cell) {
+                const box = addHighlightOverElement(cell, 'amber', 2);
+                gsap.fromTo(box, { opacity: 0 }, { opacity: 1, duration: 0.4 });
+              }
+            });
+          });
+
+          // KEY INSIGHT: Arrow from RGD col-8 to P-AST col-8
+          gsap.delayedCall(3, () => {
+            showCallout("Resistance gene detected — but pooled susceptibility is still S. Gene presence does not always equal clinical resistance. P-AST evaluates the actual infection.");
+
+            const rgdCell = $(`#row-rgd .table-col-${8}`);
+            const pastCell = $(`#row-past .table-col-${8}`);
+            if (rgdCell && pastCell) {
+              const page = rgdCell.closest('.report-page');
+              const pageRect = page.getBoundingClientRect();
+              const rgdRect = rgdCell.getBoundingClientRect();
+              const pastRect = pastCell.getBoundingClientRect();
+
+              const arrow = document.createElement('div');
+              arrow.className = 'insight-arrow';
+              const x1 = rgdRect.left - pageRect.left + rgdRect.width / 2;
+              const y1 = rgdRect.top - pageRect.top;
+              const x2 = pastRect.left - pageRect.left + pastRect.width / 2;
+              const y2 = pastRect.top - pageRect.top + pastRect.height;
+
+              arrow.innerHTML = `<svg width="${Math.abs(x2-x1)+20}" height="${Math.abs(y2-y1)+20}" style="overflow:visible;">
+                <defs><marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="var(--color-teal)"/></marker></defs>
+                <line x1="10" y1="${y1-y2+10 > 0 ? y1-y2+10 : 10}" x2="10" y2="10" stroke="var(--color-teal)" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="4,3"/>
+              </svg>`;
+              arrow.style.cssText = `left:${Math.min(x1,x2)-10}px; top:${Math.min(y1,y2)-10}px;`;
+              page.querySelector('.highlight-layer').appendChild(arrow);
+              gsap.to(arrow, { opacity: 1, duration: 0.5 });
+
+              // Highlight the S cell in P-AST row for col 8
+              const sBox = addHighlightOverElement(pastCell, 'teal', 3);
+              gsap.fromTo(sBox, { opacity: 0 }, { opacity: 1, duration: 0.5 });
+            }
+          });
+
+          showCallout("Resistance genes are detected in several columns. But gene presence does not always equal clinical resistance.");
+        }
+      },
+
+      // BEAT 8 — Page 2 Summary
+      {
+        duration: 8000,
+        run() {
+          resetStage();
+          showCallout("Page 2 is the action page. Plain language. The physician sees exactly which antibiotics to use — and which to avoid.");
+
+          // Transition to page 2
+          gsap.to('#page-1', { opacity: 0, duration: 0.5, onComplete: () => {
+            $('#page-1').style.display = 'none';
+          }});
+          $('#page-2').style.display = 'block';
+          gsap.fromTo('#page-2', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, delay: 0.5 });
+
+          // Stagger section headers
+          const sections = ['#p2-s-section', '#p2-i-section', '#p2-r-section'];
+          sections.forEach((sel, i) => {
+            gsap.fromTo(sel, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5, delay: 1.2 + i * 0.5 });
+          });
+
+          // Green highlight sweep down the S drug list
+          gsap.delayedCall(3, () => {
+            const sList = $('#p2-s-section');
+            const box = addHighlightOverElement(sList, 'teal', 6);
+            drawBox(box, 1.0);
+          });
+        }
+      },
+
+      // BEAT 9 — Close
+      {
+        duration: 6000,
+        run() {
+          resetStage();
+
+          // Show both pages side by side at reduced scale
+          const stage = $('#report-stage');
+          stage.classList.add('two-up');
+          $('#page-1').style.display = 'block';
+          $('#page-2').style.display = 'block';
+          gsap.set('#page-1', { opacity: 1 });
+          gsap.set('#page-2', { opacity: 1 });
+          gsap.fromTo(stage, { scale: 0.6, opacity: 0 }, { scale: 0.6, opacity: 1, duration: 0.8 });
+
+          // Fade pages and show brand close
+          gsap.to([stage], { opacity: 0.15, duration: 0.5, delay: 1.5 });
+          gsap.to('#brand-close', { opacity: 1, duration: 0.5, delay: 2 });
+          gsap.fromTo('#brand-line-1', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, delay: 2.2 });
+          gsap.fromTo('#brand-line-2', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, delay: 3.2 });
+
+          showCallout("One sample. One pooled test. One clear answer.");
+        }
+      }
+    ];
+
+    // ── BEAT CONTROLLER ───────────────────────────────
+
+    class BeatController {
+      constructor(beats) {
+        this.beats = beats;
+        this.current = 0;
+        this.isPlaying = false;
+        this.timer = null;
+      }
+
+      play() {
+        this.isPlaying = true;
+        this.updatePlayBtn();
+        this.goTo(this.current);
+        this.scheduleNext();
+      }
+
+      pause() {
+        this.isPlaying = false;
+        clearTimeout(this.timer);
+        this.updatePlayBtn();
+      }
+
+      toggle() {
+        if (this.isPlaying) this.pause();
+        else this.play();
+      }
+
+      next() {
+        if (this.current < this.beats.length - 1) {
+          this.goTo(this.current + 1);
+          if (this.isPlaying) this.scheduleNext();
+        } else {
+          this.pause();
+        }
+      }
+
+      prev() {
+        if (this.current > 0) {
+          this.goTo(this.current - 1);
+          if (this.isPlaying) this.scheduleNext();
+        }
+      }
+
+      goTo(index) {
+        clearTimeout(this.timer);
+        gsap.globalTimeline.clear();
+        this.current = index;
+        this.updateDots();
+        this.beats[index].run();
+      }
+
+      scheduleNext() {
+        clearTimeout(this.timer);
+        this.timer = setTimeout(() => {
+          if (this.isPlaying) this.next();
+        }, this.beats[this.current].duration);
+      }
+
+      updateDots() {
+        $$('.progress-dot').forEach((dot, i) => {
+          dot.classList.toggle('active', i === this.current);
+        });
+      }
+
+      updatePlayBtn() {
+        const btn = $('#btn-play');
+        btn.textContent = this.isPlaying ? '⏸ Pause' : '▶ Play';
+      }
+    }
+
+    // ── INIT ──────────────────────────────────────────
+
+    const controller = new BeatController(beats);
+
+    // Run Beat 1 on load
+    controller.goTo(0);
+
+    // Wire buttons
+    $('#btn-next').addEventListener('click', () => controller.next());
+    $('#btn-prev').addEventListener('click', () => controller.prev());
+    $('#btn-play').addEventListener('click', () => controller.toggle());
+
+    // Wire dots
+    $$('.progress-dot').forEach(dot => {
+      dot.addEventListener('click', () => {
+        controller.pause();
+        controller.goTo(parseInt(dot.dataset.beat));
+      });
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') controller.next();
+      if (e.key === 'ArrowLeft') controller.prev();
+      if (e.key === ' ') { e.preventDefault(); controller.toggle(); }
+    });
+  </script>
+
+</body>
+</html>
