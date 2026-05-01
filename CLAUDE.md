@@ -47,16 +47,27 @@ Files in the repo for this:
   inline CSS, inline SVG turbulence filter for the liquid-ink-in-water
   background, typewriter animation on the H1/H2). No external dependencies
   beyond Google Fonts.
-- `vercel.json` — uses the legacy `routes` config to map `/` →
-  `/coming-soon.html`. Deep links (`/index.html`, `/services`, etc.) are
-  NOT gated; they still serve the real site for QA.
+- `vercel.json` — uses the legacy `routes` config with two rules:
+  1. `^/$` → serves `/coming-soon.html` (URL stays `/`)
+  2. `/.+` → 302 to `https://pathnostics.com/` (catch-all wildcard
+     gating every deep link, including `/index.html`, `/coming-soon.html`,
+     and all CSS/JS/asset paths)
 
-  ⚠️ **Why `routes` and not `rewrites`?** Vercel's modern `rewrites` are
-  evaluated AFTER the static filesystem, so a rewrite for `/` never fires
-  while `index.html` exists at the root — the file wins and the rewrite
-  silently has no effect. The legacy `routes` config is evaluated BEFORE
-  the filesystem, which forces the gate. Don't "modernize" this back to
-  `rewrites` — it'll break the gate.
+  This is a **total gate** — no deep link works on production right now,
+  including the QA path the user previously used. To re-enable a hidden
+  QA preview, add an exception rule ABOVE the catch-all (e.g.
+  `{ "src": "^/qa-preview-<slug>$", "dest": "/index.html" }`).
+
+  ⚠️ **Why `routes` and not `rewrites` + `redirects`?** Vercel's modern
+  `rewrites` are evaluated AFTER the static filesystem, so a rewrite for
+  `/` never fires while `index.html` exists at the root. The legacy
+  `routes` config is evaluated BEFORE the filesystem, which forces the
+  gate. Don't "modernize" this back to `rewrites`/`redirects` — it'll
+  break the gate. (The two configs are mutually exclusive in vercel.json.)
+
+  ⚠️ **302, not 301.** Temporary so browsers and search engines don't
+  cache the redirect past launch. When `vercel.json` is removed at
+  launch, everything reverts cleanly.
 
 ### To launch (remove the gate)
 
