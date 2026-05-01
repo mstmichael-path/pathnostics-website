@@ -55,28 +55,38 @@
   .bg-blobs {
     position: absolute;
     inset: -10%;
-    filter: url(#ink-warp);
   }
+  /* Plain blurred radial gradients — same approach as the whitepaper
+     cover. No SVG displacement filter; the displacement was carving
+     visible iso-opacity rings out of any gradient it touched. */
   .blob {
     position: absolute;
     border-radius: 50%;
-    filter: blur(70px);
-    opacity: 0.9;
+    filter: blur(120px);
+    opacity: 0.95;
   }
   .blob.b1 {
-    width: 60vmax; height: 60vmax;
-    top: -22vmax; right: -18vmax;
-    background: radial-gradient(circle, rgba(232,32,101,0.7) 0%, rgba(232,32,101,0) 60%);
+    width: 70vmax; height: 70vmax;
+    top: -26vmax; right: -22vmax;
+    /* Extra interpolation anchors prevent the 8-bit alpha banding
+       this blob's higher-contrast falloff would otherwise produce. */
+    background: radial-gradient(circle,
+      rgba(232,32,101,0.48) 0%,
+      rgba(232,32,101,0.34) 20%,
+      rgba(232,32,101,0.20) 40%,
+      rgba(232,32,101,0.09) 58%,
+      rgba(232,32,101,0.03) 75%,
+      rgba(232,32,101,0)    100%);
   }
   .blob.b2 {
-    width: 70vmax; height: 70vmax;
-    bottom: -28vmax; left: -22vmax;
-    background: radial-gradient(circle, rgba(143,202,235,0.45) 0%, rgba(143,202,235,0) 60%);
+    width: 80vmax; height: 80vmax;
+    bottom: -32vmax; left: -26vmax;
+    background: radial-gradient(circle, rgba(143,202,235,0.32) 0%, rgba(143,202,235,0) 65%);
   }
   .blob.b3 {
-    width: 50vmax; height: 50vmax;
-    top: 25%; left: -10vmax;
-    background: radial-gradient(circle, rgba(184,0,75,0.55) 0%, rgba(184,0,75,0) 60%);
+    width: 58vmax; height: 58vmax;
+    top: 22%; left: -14vmax;
+    background: radial-gradient(circle, rgba(184,0,75,0.45) 0%, rgba(184,0,75,0) 65%);
     mix-blend-mode: screen;
   }
 
@@ -348,21 +358,12 @@
 </head>
 <body>
 
-<!-- Background liquid-ink layer -->
+<!-- Background bokeh layer -->
 <div class="bg" aria-hidden="true">
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <defs>
-      <filter id="ink-warp" x="-10%" y="-10%" width="120%" height="120%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.011" numOctaves="1" seed="3" result="noise"/>
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="55" xChannelSelector="R" yChannelSelector="G"/>
-      </filter>
-    </defs>
-  </svg>
   <div class="bg-blobs">
     <div class="blob b1"></div>
     <div class="blob b2"></div>
     <div class="blob b3"></div>
-    <div class="blob b4"></div>
   </div>
 </div>
 <div class="bg-grain" aria-hidden="true"></div>
