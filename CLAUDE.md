@@ -39,7 +39,7 @@ from the Dropbox folder before commit.
 ## Current production state — Launch teaser is active
 
 As of 2026-04-30, the homepage is gated behind a launch teaser ahead of the
-**May 4, 2026** launch.
+**May 5, 2026 at 6:00 AM local** launch.
 
 Files in the repo for this:
 
@@ -83,8 +83,8 @@ unreachable. Removing it is optional cleanup, not required.
 
 ### Teaser internals worth knowing
 
-- The countdown targets `new Date(2026, 4, 4, 0, 0, 0)` (midnight local time
-  May 4). After zero, it freezes at "Learn more Monday, May 4th, 2026."
+- The countdown targets `new Date(2026, 4, 5, 6, 0, 0)` (6:00 AM local
+  May 5). After zero, it freezes at "Learn more Tuesday, May 5th, 2026."
 - Typewriter pacing: ~6.6s total. Pauses are deliberately weighted around
   "Yes." → rhetorical pause → "It's a *crisis*." (italic on "crisis", coral
   period). Don't shorten without checking with the user.
