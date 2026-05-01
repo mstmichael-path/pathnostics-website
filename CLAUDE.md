@@ -81,10 +81,13 @@ unreachable. Removing it is optional cleanup, not required.
   `::before` so cursor movement causes zero layout reflow (this was a real
   bug fix — naïve inline-block cursor caused the H1 to jitter when the H2
   started typing).
-- Background animation uses SVG `feTurbulence` + `feDisplacementMap` for the
-  ink-in-water warp. It's heavy — if performance is a concern, lower the
-  displacement scale (currently 50) or `numOctaves` (currently 1) before
-  removing the filter entirely.
+- Background is **static** (no motion). The marbled ink-in-water look is
+  produced by three blurred radial-gradient blobs (coral, sky, magenta)
+  warped through a static SVG `feTurbulence` + `feDisplacementMap` filter.
+  Motion was removed at the user's request after launch — don't reintroduce
+  the blob `@keyframes` or the SVG `<animate>` on `baseFrequency` without
+  asking. If you need to reduce visual weight further, drop the filter
+  entirely before touching blob positions.
 
 ---
 
