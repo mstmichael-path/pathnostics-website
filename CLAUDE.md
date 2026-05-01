@@ -47,9 +47,16 @@ Files in the repo for this:
   inline CSS, inline SVG turbulence filter for the liquid-ink-in-water
   background, typewriter animation on the H1/H2). No external dependencies
   beyond Google Fonts.
-- `vercel.json` — single rewrite: `/` → `/coming-soon.html`. Deep links
-  (`/index.html`, `/services`, etc.) are NOT gated; they still serve the
-  real site for QA.
+- `vercel.json` — uses the legacy `routes` config to map `/` →
+  `/coming-soon.html`. Deep links (`/index.html`, `/services`, etc.) are
+  NOT gated; they still serve the real site for QA.
+
+  ⚠️ **Why `routes` and not `rewrites`?** Vercel's modern `rewrites` are
+  evaluated AFTER the static filesystem, so a rewrite for `/` never fires
+  while `index.html` exists at the root — the file wins and the rewrite
+  silently has no effect. The legacy `routes` config is evaluated BEFORE
+  the filesystem, which forces the gate. Don't "modernize" this back to
+  `rewrites` — it'll break the gate.
 
 ### To launch (remove the gate)
 
