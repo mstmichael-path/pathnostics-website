@@ -101,16 +101,43 @@ const localNavProgress = document.getElementById('local-nav-progress');
 let lastScrollY = 0;
 let ticking = false;
 
+const footerEl = document.querySelector('.footer');
+const pageShellEl = document.querySelector('.page-shell');
+
 function updateNavOnScroll() {
   const y = window.scrollY;
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
   const progress = Math.min(100, (y / Math.max(docHeight, 1)) * 100);
 
-  // Whole nav goes solid purple after 80px
-  if (y > 80) {
+  // "At footer" detection — mode-aware:
+  //   - Reveal mode (body.has-footer-reveal): trigger when more than half
+  //     the footer is exposed below the page-shell's bottom edge. Scales
+  //     with footer height so the trigger fires at a consistent visual
+  //     moment regardless of how tall the footer is.
+  //   - Normal flow: footer scrolls in; use footer's own top crossing mid.
+  // Desktop-only — mobile keeps the normal scrolled nav.
+  let atFooter = false;
+  if (window.innerWidth >= 1024) {
+    if (document.body.classList.contains('has-footer-reveal') && pageShellEl && footerEl) {
+      atFooter = pageShellEl.getBoundingClientRect().bottom < window.innerHeight - footerEl.offsetHeight * 0.5;
+    } else if (footerEl) {
+      atFooter = footerEl.getBoundingClientRect().top < window.innerHeight * 0.5;
+    }
+  }
+
+  // Three states:
+  //   - top of page (y<=80): no class → all 3 nav tiers visible
+  //   - mid-scroll: is-scrolled → utility+global collapse, local sticks
+  //   - at footer: is-at-footer → only global-nav shows on solid purple
+  if (atFooter) {
+    navSystem?.classList.add('is-at-footer');
+    navSystem?.classList.remove('is-scrolled');
+  } else if (y > 80) {
     navSystem?.classList.add('is-scrolled');
+    navSystem?.classList.remove('is-at-footer');
   } else {
     navSystem?.classList.remove('is-scrolled');
+    navSystem?.classList.remove('is-at-footer');
   }
 
   // Coral progress bar fills as user scrolls
@@ -282,3 +309,68 @@ if (wpScroll && wpPrev && wpNext) {
     wpScroll.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
   });
 }
+
+// ── FOOTER PARALLAX REVEAL — desktop + only when footer fits in viewport ──
+// Activates by toggling body.has-footer-reveal. CSS pins the footer at
+// position: fixed; bottom: 0 and gives body padding-bottom = footer height
+// so the page-shell scrolls over the footer. If footer height exceeds 85%
+// of the viewport (e.g. tall references list), reveal is disabled and the
+// footer stays in normal flow.
+(() => {
+  const footer = document.querySelector('.footer');
+  if (!footer) return;
+
+  const sync = () => {
+    if (window.innerWidth >= 1024) {
+      document.body.classList.add('has-footer-reveal');
+      document.body.style.setProperty('--footer-h', footer.offsetHeight + 'px');
+    } else {
+      document.body.classList.remove('has-footer-reveal');
+      document.body.style.removeProperty('--footer-h');
+    }
+    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+  };
+
+  sync();
+  window.addEventListener('load', sync);
+  window.addEventListener('resize', sync);
+})();
+
+// ── FOOTER BACK-TO-TOP — smooth scroll on click ──
+(() => {
+  const btn = document.querySelector('.footer__back-to-top');
+  if (!btn) return;
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+
+// ── FOOTER NEWSLETTER — silent submit + toast confirmation ──
+// Form posts into a hidden iframe so the page doesn't navigate. We show an
+// optimistic "thanks" toast on submit (Mailchimp's actual response loads
+// silently in the iframe and isn't surfaced to the user).
+(() => {
+  const form = document.querySelector('.footer__subscribe');
+  if (!form) return;
+
+  const toast = document.createElement('div');
+  toast.className = 'footer__toast';
+  toast.setAttribute('role', 'status');
+  toast.setAttribute('aria-live', 'polite');
+  document.body.appendChild(toast);
+
+  let timer = null;
+  const show = (msg) => {
+    toast.textContent = msg;
+    toast.classList.add('is-visible');
+    clearTimeout(timer);
+    timer = setTimeout(() => toast.classList.remove('is-visible'), 3500);
+  };
+
+  form.addEventListener('submit', () => {
+    show("Thanks — you're on the list.");
+    setTimeout(() => form.reset(), 200);
+  });
+})();
+

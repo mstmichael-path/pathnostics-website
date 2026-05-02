@@ -274,8 +274,8 @@ img.global-nav__logo-white { display: none; }
 .global-nav__cta {
   background: var(--color-coral);
   color: #ffffff;
-  padding: 11px 25px;
-  font-size: 16px;
+  padding: 8px 20px;
+  font-size: 14px;
   font-weight: 600;
   border-radius: 9999px;
   text-decoration: none;
@@ -773,11 +773,14 @@ img.global-nav__logo-white { display: none; }
 
 
 /* ═══════════════════════════════════════════════════════
-   PUSH BODY DOWN — account for nav height
+   PUSH BODY CONTENT DOWN — account for fixed nav height.
+   Padding lives on .page-shell (not body) so its background
+   extends UP behind the nav and masks the fixed footer when
+   the parallax reveal is active.
    At rest: 4 + 42 + 86 + 62 = 194px
    Scrolled (utility + global collapsed): 4 + 0 + 0 + 78 = 82px
    ═══════════════════════════════════════════════════════ */
-body {
+.page-shell {
   padding-top: 194px;
 }
 
@@ -804,7 +807,56 @@ body {
     justify-content: space-between;
   }
 
-  body {
+  .page-shell {
     padding-top: 68px;
   }
+}
+
+/* ═══════════════════════════════════════════════════════
+   AT-FOOTER STATE — only the global nav shows in purple.
+   Triggered when the parallax-revealed footer dominates
+   the viewport (desktop only).
+   ═══════════════════════════════════════════════════════ */
+.nav-system.is-at-footer {
+  background: var(--color-purple-mid);
+  box-shadow: 0 4px 20px rgba(57, 55, 143, 0.18);
+}
+
+.nav-system.is-at-footer .utility-bar {
+  height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  border-bottom-width: 0;
+}
+
+.nav-system.is-at-footer .local-nav {
+  height: 0;
+  border-top-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* White-on-purple text styling (mirrors is-scrolled) */
+.nav-system.is-at-footer img.global-nav__logo-color { display: none; }
+.nav-system.is-at-footer img.global-nav__logo-white { display: block; }
+
+.nav-system.is-at-footer .global-menu__link {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.nav-system.is-at-footer .global-menu__link:hover,
+.nav-system.is-at-footer .global-menu__item.is-open > .global-menu__link {
+  color: #ffffff;
+}
+
+.nav-system.is-at-footer .global-nav__search-btn {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.nav-system.is-at-footer .global-nav__search-btn:hover {
+  color: #ffffff;
 }
