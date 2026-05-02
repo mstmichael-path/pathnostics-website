@@ -89,59 +89,208 @@ if (prefersReducedMotion) {
   });
 }
 
-// ── NAV SCROLL — GLASSMORPHIC TRANSITION ──────────────────
-const nav = document.querySelector('.nav');
+// ═══════════════════════════════════════════════════════════
+// THREE-TIER NAVIGATION SYSTEM (v10)
+// ═══════════════════════════════════════════════════════════
+
+const utilityBar = document.getElementById('utility-bar');
+const globalNav = document.getElementById('global-nav');
+const localNav = document.getElementById('local-nav');
+const localNavProgress = document.getElementById('local-nav-progress');
+const localNavCurrent = document.getElementById('local-nav-current');
+
+// ── Scroll behavior ─────────────────────────────────────
 let lastScrollY = 0;
+let ticking = false;
+
+function updateNavOnScroll() {
+  const y = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = Math.min(100, (y / docHeight) * 100);
+
+  // Tier 2 — solid purple after 80px
+  if (y > 80) {
+    globalNav?.classList.add('is-scrolled');
+  } else {
+    globalNav?.classList.remove('is-scrolled');
+  }
+
+  // Tier 1 — slide up after 120px
+  if (y > 120) {
+    utilityBar?.classList.add('is-hidden');
+  } else {
+    utilityBar?.classList.remove('is-hidden');
+  }
+
+  // Tier 3 — collapse to progress bar after 200px
+  if (y > 200) {
+    localNav?.classList.add('is-collapsed');
+    document.body.classList.add('nav-collapsed');
+  } else {
+    localNav?.classList.remove('is-collapsed');
+    document.body.classList.remove('nav-collapsed');
+  }
+
+  // Update progress bar fill
+  if (localNavProgress) {
+    localNavProgress.style.width = progress + '%';
+  }
+
+  // Update current section indicator
+  updateActiveSection();
+
+  lastScrollY = y;
+  ticking = false;
+}
 
 window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  if (y > 80) {
-    nav.classList.add('is-scrolled');
-  } else {
-    nav.classList.remove('is-scrolled');
+  if (!ticking) {
+    requestAnimationFrame(updateNavOnScroll);
+    ticking = true;
   }
-  lastScrollY = y;
 }, { passive: true });
 
-// ── HAMBURGER MENU ────────────────────────────────────────
-const hamburger = document.querySelector('.nav-hamburger');
-const mobileNav = document.querySelector('.nav-mobile');
-const mobileClose = document.querySelector('.nav-mobile__close');
+// ── Active section detection (Tier 3) ──────────────────
+const sectionIds = ['hero', 'cost', 'diagnostics-fail', 'tirt', 'product', 'perspectives', 'athome', 'evidence', 'cta'];
+const sectionLabels = {
+  'hero': 'Top',
+  'cost': 'Why It Matters',
+  'diagnostics-fail': 'Diagnostics Fail',
+  'tirt': 'TIRT',
+  'product': 'Guidance UTI',
+  'perspectives': 'Perspectives',
+  'athome': '@Home',
+  'evidence': 'Evidence',
+  'cta': 'Take Action'
+};
 
-function openMobileNav() {
-  mobileNav.classList.add('is-open');
-  mobileNav.setAttribute('aria-hidden', 'false');
-  hamburger.setAttribute('aria-expanded', 'true');
-  document.body.style.overflow = 'hidden';
+function updateActiveSection() {
+  const y = window.scrollY + 200;
+  let active = null;
+
+  for (let i = sectionIds.length - 1; i >= 0; i--) {
+    const sec = document.getElementById(sectionIds[i]);
+    if (sec && sec.offsetTop <= y) {
+      active = sectionIds[i];
+      break;
+    }
+  }
+
+  // Highlight active link in Tier 3
+  document.querySelectorAll('.local-nav__items a').forEach(link => {
+    if (link.dataset.target === active) {
+      link.classList.add('is-active');
+    } else {
+      link.classList.remove('is-active');
+    }
+  });
+
+  // Update current label (visible only when collapsed and hovered)
+  if (localNavCurrent && active) {
+    localNavCurrent.textContent = sectionLabels[active] || '';
+  }
 }
 
-function closeMobileNav() {
-  mobileNav.classList.remove('is-open');
-  mobileNav.setAttribute('aria-hidden', 'true');
-  hamburger.setAttribute('aria-expanded', 'false');
-  document.body.style.overflow = '';
-}
+// ── Mega menu hover handlers ───────────────────────────
+const menuItems = document.querySelectorAll('.global-menu__item[data-menu]');
+let openTimeout = null;
+let closeTimeout = null;
 
-hamburger?.addEventListener('click', openMobileNav);
-mobileClose?.addEventListener('click', closeMobileNav);
+menuItems.forEach(item => {
+  // Open with delay (prevents flickers)
+  item.addEventListener('mouseenter', () => {
+    clearTimeout(closeTimeout);
+    clearTimeout(openTimeout);
+    openTimeout = setTimeout(() => {
+      // Close all others
+      menuItems.forEach(other => {
+        if (other !== item) other.classList.remove('is-open');
+      });
+      item.classList.add('is-open');
+      item.querySelector('.global-menu__link')?.setAttribute('aria-expanded', 'true');
+    }, 150);
+  });
 
-document.querySelectorAll('.nav-mobile a').forEach(link => {
-  link.addEventListener('click', closeMobileNav);
+  // Close with delay
+  item.addEventListener('mouseleave', () => {
+    clearTimeout(openTimeout);
+    closeTimeout = setTimeout(() => {
+      item.classList.remove('is-open');
+      item.querySelector('.global-menu__link')?.setAttribute('aria-expanded', 'false');
+    }, 300);
+  });
+
+  // Click on parent link toggles mega panel (for touch + keyboard)
+  const link = item.querySelector('.global-menu__link');
+  link?.addEventListener('click', (e) => {
+    // Only intercept if mega panel exists; let single-link items pass through
+    if (item.querySelector('.mega-panel')) {
+      e.preventDefault();
+      const isOpen = item.classList.contains('is-open');
+      menuItems.forEach(other => other.classList.remove('is-open'));
+      if (!isOpen) {
+        item.classList.add('is-open');
+        link.setAttribute('aria-expanded', 'true');
+      }
+    }
+  });
 });
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && mobileNav?.classList.contains('is-open')) {
-    closeMobileNav();
+// Close all menus on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    menuItems.forEach(item => item.classList.remove('is-open'));
+    document.querySelectorAll('.global-menu__link').forEach(link => link.setAttribute('aria-expanded', 'false'));
+    document.getElementById('search-dropdown')?.classList.remove('is-open');
   }
 });
 
-// ── SMOOTH SCROLL FOR ANCHOR LINKS ────────────────────────
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+// Close menus when clicking outside
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.global-menu__item') && !e.target.closest('.mega-panel')) {
+    menuItems.forEach(item => item.classList.remove('is-open'));
+  }
+  if (!e.target.closest('.global-nav__search-btn') && !e.target.closest('.search-dropdown')) {
+    document.getElementById('search-dropdown')?.classList.remove('is-open');
+  }
+});
+
+// ── Search dropdown ─────────────────────────────────────
+const searchToggle = document.getElementById('search-toggle');
+const searchDropdown = document.getElementById('search-dropdown');
+
+searchToggle?.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const isOpen = searchDropdown?.classList.toggle('is-open');
+  searchToggle.setAttribute('aria-expanded', isOpen);
+  if (isOpen) {
+    setTimeout(() => searchDropdown.querySelector('input')?.focus(), 50);
+  }
+});
+
+// ── Local nav (Tier 3) click-to-scroll ─────────────────
+document.querySelectorAll('.local-nav__items a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const target = document.getElementById(link.dataset.target);
+    if (target) {
+      e.preventDefault();
+      const offset = 100; // account for sticky nav
+      const targetPos = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top: targetPos, behavior: 'smooth' });
+    }
+  });
+});
+
+// Reference for downstream smooth-scroll handler
+const nav = globalNav;
+
+// ── SMOOTH SCROLL FOR OTHER ANCHOR LINKS ────────────────
+document.querySelectorAll('a[href^="#"]:not(.local-nav__items a)').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     const target = document.querySelector(this.getAttribute('href'));
     if (target) {
       e.preventDefault();
-      const navHeight = nav.offsetHeight + 4;
+      const navHeight = (nav?.offsetHeight || 72) + 8;
       const targetPos = target.getBoundingClientRect().top + window.scrollY - navHeight;
       window.scrollTo({ top: targetPos, behavior: 'smooth' });
     }
