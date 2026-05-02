@@ -90,14 +90,12 @@ if (prefersReducedMotion) {
 }
 
 // ═══════════════════════════════════════════════════════════
-// THREE-TIER NAVIGATION SYSTEM (v10)
+// THREE-TIER NAVIGATION SYSTEM (v11)
+// Whole nav goes purple together. Utility + local stay visible.
 // ═══════════════════════════════════════════════════════════
 
-const utilityBar = document.getElementById('utility-bar');
-const globalNav = document.getElementById('global-nav');
-const localNav = document.getElementById('local-nav');
+const navSystem = document.getElementById('nav-system');
 const localNavProgress = document.getElementById('local-nav-progress');
-const localNavCurrent = document.getElementById('local-nav-current');
 
 // ── Scroll behavior ─────────────────────────────────────
 let lastScrollY = 0;
@@ -106,32 +104,16 @@ let ticking = false;
 function updateNavOnScroll() {
   const y = window.scrollY;
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = Math.min(100, (y / docHeight) * 100);
+  const progress = Math.min(100, (y / Math.max(docHeight, 1)) * 100);
 
-  // Tier 2 — solid purple after 80px
+  // Whole nav goes solid purple after 80px
   if (y > 80) {
-    globalNav?.classList.add('is-scrolled');
+    navSystem?.classList.add('is-scrolled');
   } else {
-    globalNav?.classList.remove('is-scrolled');
+    navSystem?.classList.remove('is-scrolled');
   }
 
-  // Tier 1 — slide up after 120px
-  if (y > 120) {
-    utilityBar?.classList.add('is-hidden');
-  } else {
-    utilityBar?.classList.remove('is-hidden');
-  }
-
-  // Tier 3 — collapse to progress bar after 200px
-  if (y > 200) {
-    localNav?.classList.add('is-collapsed');
-    document.body.classList.add('nav-collapsed');
-  } else {
-    localNav?.classList.remove('is-collapsed');
-    document.body.classList.remove('nav-collapsed');
-  }
-
-  // Update progress bar fill
+  // Coral progress bar fills as user scrolls
   if (localNavProgress) {
     localNavProgress.style.width = progress + '%';
   }
@@ -151,18 +133,7 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 // ── Active section detection (Tier 3) ──────────────────
-const sectionIds = ['hero', 'cost', 'diagnostics-fail', 'tirt', 'product', 'perspectives', 'athome', 'evidence', 'cta'];
-const sectionLabels = {
-  'hero': 'Top',
-  'cost': 'Why It Matters',
-  'diagnostics-fail': 'Diagnostics Fail',
-  'tirt': 'TIRT',
-  'product': 'Guidance UTI',
-  'perspectives': 'Perspectives',
-  'athome': '@Home',
-  'evidence': 'Evidence',
-  'cta': 'Take Action'
-};
+const sectionIds = ['hero', 'cost', 'diagnostics-fail', 'tirt', 'product', 'athome'];
 
 function updateActiveSection() {
   const y = window.scrollY + 200;
@@ -176,19 +147,14 @@ function updateActiveSection() {
     }
   }
 
-  // Highlight active link in Tier 3
-  document.querySelectorAll('.local-nav__items a').forEach(link => {
+  // Highlight active link in Tier 3 (only those with data-target)
+  document.querySelectorAll('.local-nav__items a[data-target]').forEach(link => {
     if (link.dataset.target === active) {
       link.classList.add('is-active');
     } else {
       link.classList.remove('is-active');
     }
   });
-
-  // Update current label (visible only when collapsed and hovered)
-  if (localNavCurrent && active) {
-    localNavCurrent.textContent = sectionLabels[active] || '';
-  }
 }
 
 // ── Mega menu hover handlers ───────────────────────────
@@ -268,21 +234,21 @@ searchToggle?.addEventListener('click', (e) => {
   }
 });
 
-// ── Local nav (Tier 3) click-to-scroll ─────────────────
-document.querySelectorAll('.local-nav__items a').forEach(link => {
+// ── Local nav (Tier 3) click-to-scroll for anchor links only ───
+document.querySelectorAll('.local-nav__items a[data-target]').forEach(link => {
   link.addEventListener('click', (e) => {
     const target = document.getElementById(link.dataset.target);
     if (target) {
       e.preventDefault();
-      const offset = 100; // account for sticky nav
+      const offset = 170; // account for full sticky nav (utility + global + local)
       const targetPos = target.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top: targetPos, behavior: 'smooth' });
     }
   });
 });
 
-// Reference for downstream smooth-scroll handler
-const nav = globalNav;
+// Reference for downstream smooth-scroll handler (kept for compatibility)
+const nav = navSystem;
 
 // ── SMOOTH SCROLL FOR OTHER ANCHOR LINKS ────────────────
 document.querySelectorAll('a[href^="#"]:not(.local-nav__items a)').forEach(anchor => {

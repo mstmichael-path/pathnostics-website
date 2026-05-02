@@ -12,33 +12,53 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  isolation: isolate; /* establish stacking context for all children */
+  isolation: isolate;
+  /* Solid white at top to prevent see-through during transitions */
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: background 0.3s ease;
+}
+
+/* Whole nav goes solid purple on scroll */
+.nav-system.is-scrolled {
+  background: rgb(85, 84, 173);
+  box-shadow: 0 4px 24px rgba(57, 55, 143, 0.16);
+}
+
+/* Utility bar matches when scrolled */
+.nav-system.is-scrolled .utility-bar {
+  background: rgba(57, 55, 143, 0.4);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.nav-system.is-scrolled .utility-bar a,
+.nav-system.is-scrolled .utility-bar__phone {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.nav-system.is-scrolled .utility-bar a:hover {
+  color: #ffffff;
 }
 
 /* ═══════════════════════════════════════════════════════
-   TIER 1 — UTILITY BAR
+   TIER 1 — UTILITY BAR (improved contrast for accessibility)
    ═══════════════════════════════════════════════════════ */
 .utility-bar {
-  background: rgba(57, 55, 143, 0.06);
-  border-bottom: 1px solid rgba(57, 55, 143, 0.06);
-  height: 36px;
+  background: rgba(57, 55, 143, 0.10);
+  border-bottom: 1px solid rgba(57, 55, 143, 0.12);
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 var(--section-padding-x);
   font-family: var(--font-body);
-  font-size: 12px;
-  color: var(--color-slate);
-  letter-spacing: 0.02em;
-  transition: transform 0.3s ease, height 0.3s ease, opacity 0.3s ease;
-  transform-origin: top;
-  overflow: hidden;
-}
-
-.utility-bar.is-hidden {
-  height: 0;
-  opacity: 0;
-  transform: scaleY(0);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-purple);
+  letter-spacing: 0.01em;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .utility-bar__left,
@@ -49,12 +69,13 @@
 }
 
 .utility-bar a {
-  color: var(--color-slate);
+  color: var(--color-purple);
   text-decoration: none;
   transition: color 0.2s ease;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  font-weight: 500;
 }
 
 .utility-bar a:hover {
@@ -62,7 +83,7 @@
 }
 
 .utility-bar__phone {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-purple);
 }
 
@@ -71,11 +92,17 @@
 }
 
 .utility-bar__phone svg {
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
   stroke: currentColor;
   fill: none;
-  stroke-width: 1.8;
+  stroke-width: 2;
+}
+
+/* On scroll: utility bar goes purple alongside everything else */
+.global-nav.is-scrolled ~ .local-nav,
+.nav-system.is-scrolled .utility-bar {
+  /* placeholder for sibling combinator updates below */
 }
 
 
@@ -83,20 +110,10 @@
    TIER 2 — GLOBAL NAV (Glassmorphic)
    ═══════════════════════════════════════════════════════ */
 .global-nav {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  background: transparent;
   position: relative;
   z-index: 200;
-}
-
-.global-nav.is-scrolled {
-  background: rgba(85, 84, 173, 0.95);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 4px 24px rgba(57, 55, 143, 0.12);
+  transition: background 0.3s ease;
 }
 
 .global-nav__inner {
@@ -119,8 +136,8 @@
 .global-nav__logo-color { display: block; }
 .global-nav__logo-white { display: none; }
 
-.global-nav.is-scrolled .global-nav__logo-color { display: none; }
-.global-nav.is-scrolled .global-nav__logo-white { display: block; }
+.nav-system.is-scrolled .global-nav__logo-color { display: none; }
+.nav-system.is-scrolled .global-nav__logo-white { display: block; }
 
 
 /* ── Menu (top-level items) ────────────────────────── */
@@ -159,13 +176,13 @@
   color: var(--color-coral-dark);
 }
 
-.global-nav.is-scrolled .global-menu__link {
-  color: rgba(255, 255, 255, 0.85);
+.nav-system.is-scrolled .global-menu__link {
+  color: rgba(255, 255, 255, 0.92);
 }
 
-.global-nav.is-scrolled .global-menu__link:hover,
-.global-nav.is-scrolled .global-menu__item.is-open > .global-menu__link {
-  background: rgba(255, 255, 255, 0.12);
+.nav-system.is-scrolled .global-menu__link:hover,
+.nav-system.is-scrolled .global-menu__item.is-open > .global-menu__link {
+  background: rgba(255, 255, 255, 0.14);
   color: #ffffff;
 }
 
@@ -205,12 +222,12 @@
   background: rgba(57, 55, 143, 0.08);
 }
 
-.global-nav.is-scrolled .global-nav__search-btn {
-  color: rgba(255, 255, 255, 0.85);
+.nav-system.is-scrolled .global-nav__search-btn {
+  color: rgba(255, 255, 255, 0.92);
 }
 
-.global-nav.is-scrolled .global-nav__search-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
+.nav-system.is-scrolled .global-nav__search-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
   color: #ffffff;
 }
 
@@ -338,16 +355,11 @@
   position: fixed;
   left: 50%;
   transform: translateX(-50%) translateY(8px);
-  top: calc(36px + 72px + 4px); /* utility + nav + accent line */
+  top: calc(38px + 72px + 4px + 4px); /* utility + global + accent + small offset */
 }
 
 .global-menu__item.is-open > .mega-panel--tests {
   transform: translateX(-50%) translateY(0);
-}
-
-/* When utility bar hides, mega panel adjusts top */
-body.nav-collapsed .mega-panel--tests {
-  top: calc(72px + 4px);
 }
 
 .mega-tests__hero {
@@ -551,18 +563,19 @@ body.nav-collapsed .mega-panel--tests {
 
 
 /* ═══════════════════════════════════════════════════════
-   TIER 3 — LOCAL ANCHORS / PROGRESS BAR
+   TIER 3 — LOCAL NAV (always visible, coral progress bar)
    ═══════════════════════════════════════════════════════ */
 .local-nav {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(57, 55, 143, 0.06);
+  background: transparent;
+  border-top: 1px solid rgba(57, 55, 143, 0.06);
   height: 48px;
-  transition: height 0.3s ease, background 0.3s ease;
-  overflow: hidden;
+  transition: background 0.3s ease, border-color 0.3s ease;
   position: relative;
   z-index: 100;
+}
+
+.nav-system.is-scrolled .local-nav {
+  border-top-color: rgba(255, 255, 255, 0.12);
 }
 
 .local-nav__inner {
@@ -572,18 +585,16 @@ body.nav-collapsed .mega-panel--tests {
   height: 100%;
   display: flex;
   align-items: center;
-  gap: 24px;
+  justify-content: center;  /* centered */
   font-size: 13px;
   font-family: var(--font-body);
   font-weight: 500;
-  color: var(--on-surface-variant);
 }
 
 .local-nav__items {
   display: flex;
   align-items: center;
   gap: 4px;
-  flex: 1;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -592,103 +603,66 @@ body.nav-collapsed .mega-panel--tests {
 .local-nav__items a {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 6px 12px;
-  color: var(--color-slate);
+  padding: 7px 14px;
+  color: var(--color-purple);
   text-decoration: none;
   border-radius: 6px;
   transition: color 0.2s ease, background 0.2s ease;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-}
-
-.local-nav__items a::before {
-  content: '#';
-  color: rgba(57, 55, 143, 0.3);
-  font-weight: 400;
-  margin-right: 2px;
-}
-
-.local-nav__items a:hover,
-.local-nav__items a.is-active {
-  color: var(--color-coral-dark);
-  background: rgba(232, 32, 101, 0.06);
-}
-
-.local-nav__current {
-  font-size: 12px;
-  color: var(--color-slate);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
   font-weight: 600;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  letter-spacing: 0.01em;
   white-space: nowrap;
 }
 
-/* Collapsed state — becomes a thin progress bar */
-.local-nav.is-collapsed {
-  height: 6px;
-  background: rgba(255, 255, 255, 0.95);
-  cursor: pointer;
+.local-nav__items a:hover {
+  color: var(--color-coral);
+  background: rgba(232, 32, 101, 0.06);
 }
 
-.local-nav.is-collapsed .local-nav__inner {
-  padding: 0;
-  align-items: stretch;
+.local-nav__items a.is-active {
+  color: var(--color-coral);
+  background: rgba(232, 32, 101, 0.08);
 }
 
-.local-nav.is-collapsed .local-nav__items {
+/* Scrolled state — purple bg, white text */
+.nav-system.is-scrolled .local-nav__items a {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.nav-system.is-scrolled .local-nav__items a:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.nav-system.is-scrolled .local-nav__items a.is-active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+/* Hide the "current" indicator (was for collapsed state) */
+.local-nav__current {
   display: none;
 }
 
-.local-nav.is-collapsed .local-nav__current {
-  display: none;
-}
-
-/* Expand back on hover */
-.local-nav.is-collapsed:hover {
-  height: 48px;
-  background: rgba(255, 255, 255, 0.85);
-  cursor: default;
-}
-
-.local-nav.is-collapsed:hover .local-nav__items {
-  display: flex;
-}
-
-.local-nav.is-collapsed:hover .local-nav__current {
-  display: block;
-}
-
-/* The progress bar fill */
+/* Coral progress bar — always visible at bottom of local-nav */
 .local-nav__progress {
   position: absolute;
   bottom: 0;
   left: 0;
-  height: 6px;
+  height: 3px;
   width: 0%;
-  background: var(--gradient-brand);
+  background: var(--color-coral);
   transition: width 0.1s linear;
   pointer-events: none;
-}
-
-.local-nav:not(.is-collapsed) .local-nav__progress {
-  display: none;
+  box-shadow: 0 0 8px rgba(232, 32, 101, 0.4);
 }
 
 
 /* ═══════════════════════════════════════════════════════
-   PUSH BODY DOWN — account for nav height
+   PUSH BODY DOWN — account for nav height (constant)
    ═══════════════════════════════════════════════════════ */
 body {
-  /* 4px gradient + 36px utility + 72px global + 48px local = 160px */
-  padding-top: 160px;
-}
-
-body.nav-collapsed {
-  /* When utility hides + local collapses: 4 + 0 + 72 + 6 = 82px */
-  padding-top: 82px;
+  /* 4px gradient + 38px utility + 72px global + 48px local = 162px */
+  padding-top: 162px;
 }
 
 
