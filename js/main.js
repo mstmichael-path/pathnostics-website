@@ -248,6 +248,68 @@ document.addEventListener('click', (e) => {
   }
 });
 
+// ── Mobile drawer ───────────────────────────────────────
+const mobileToggle = document.getElementById('mobile-toggle');
+const mobileDrawer = document.getElementById('mobile-drawer');
+const mobileBackdrop = document.getElementById('mobile-backdrop');
+
+function setMobileDrawer(open) {
+  if (!mobileDrawer || !mobileToggle) return;
+  mobileDrawer.classList.toggle('is-open', open);
+  mobileBackdrop?.classList.toggle('is-open', open);
+  mobileToggle.classList.toggle('is-open', open);
+  mobileToggle.setAttribute('aria-expanded', String(open));
+  mobileToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  mobileDrawer.setAttribute('aria-hidden', String(!open));
+  document.body.classList.toggle('mobile-menu-open', open);
+}
+
+mobileToggle?.addEventListener('click', () => {
+  const isOpen = mobileDrawer?.classList.contains('is-open');
+  setMobileDrawer(!isOpen);
+});
+
+mobileBackdrop?.addEventListener('click', () => setMobileDrawer(false));
+
+// Close drawer when a link inside it is clicked
+mobileDrawer?.addEventListener('click', (e) => {
+  if (e.target.closest('a')) {
+    setMobileDrawer(false);
+  }
+});
+
+// Accordion toggle inside mobile drawer
+document.querySelectorAll('.mobile-accordion__head').forEach(head => {
+  if (head.tagName !== 'BUTTON') return; // skip single-link items
+  head.addEventListener('click', () => {
+    const item = head.closest('.mobile-accordion__item');
+    const wasOpen = item.classList.contains('is-open');
+    // Close all others
+    document.querySelectorAll('.mobile-accordion__item.is-open').forEach(other => {
+      if (other !== item) {
+        other.classList.remove('is-open');
+        other.querySelector('.mobile-accordion__head')?.setAttribute('aria-expanded', 'false');
+      }
+    });
+    item.classList.toggle('is-open', !wasOpen);
+    head.setAttribute('aria-expanded', String(!wasOpen));
+  });
+});
+
+// Close drawer on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && mobileDrawer?.classList.contains('is-open')) {
+    setMobileDrawer(false);
+  }
+});
+
+// Close drawer if viewport goes back to desktop
+window.addEventListener('resize', () => {
+  if (window.innerWidth >= 1024 && mobileDrawer?.classList.contains('is-open')) {
+    setMobileDrawer(false);
+  }
+});
+
 // ── Search dropdown ─────────────────────────────────────
 const searchToggle = document.getElementById('search-toggle');
 const searchDropdown = document.getElementById('search-dropdown');

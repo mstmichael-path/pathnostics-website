@@ -35,8 +35,8 @@
   <div class="utility-bar" id="utility-bar">
     <div class="utility-bar__left">
       <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a>
-      <a href="/provider-login">Provider Login</a>
-      <a href="/contact">Contact</a>
+      <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a>
+      <a href="/contact/">Contact</a>
     </div>
     <div class="utility-bar__right">
       <a href="tel:8004934490" class="utility-bar__phone" aria-label="Call 800.493.4490">800.493.4490</a>
@@ -52,17 +52,32 @@
         <img class="global-nav__logo-white" src="assets/Path_Logo_White.png" alt="Pathnostics">
       </a>
 
+      <!-- Mobile-only cluster: phone + hamburger -->
+      <div class="mobile-bar">
+        <a href="tel:8004934490" class="mobile-bar__phone" aria-label="Call 800.493.4490">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+        </a>
+        <button type="button" class="mobile-bar__toggle" id="mobile-toggle" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false">
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+        </button>
+      </div>
+
       <ul class="global-menu">
 
         <!-- Our Tests (mega) -->
         <li class="global-menu__item" data-menu="tests">
-          <a href="/tests" class="global-menu__link">
+          <a href="/tests/" class="global-menu__link">
             Our Tests
             <svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="2 4 5 7 8 4"/></svg>
           </a>
           <div class="mega-panel mega-panel--tests" role="menu" aria-label="Our Tests">
             <div class="mega-tests__hero">
-              <div>
+              <img src="assets/guidance-uti-header-image.webp" alt="Guidance UTI test kit" class="mega-tests__hero-image">
+              <div class="mega-tests__hero-body">
                 <div class="mega-tests__hero-tag">Flagship Test</div>
                 <h3 class="mega-tests__hero-title">Guidance UTI<br>with <em>P-AST.</em></h3>
                 <p class="mega-tests__hero-desc">Pooled antibiotic susceptibility testing that evaluates how antibiotics perform against the infection as a whole — including in polymicrobial cases. Results in 24–36 hours.</p>
@@ -74,38 +89,23 @@
             </div>
             <div class="mega-tests__directory">
               <div class="mega-tests__group">
-                <h5>By Provider</h5>
+                <h5>All Tests</h5>
                 <ul>
-                  <li><a href="/tests/?audience=urology">Urologists</a></li>
-                  <li><a href="/tests/?audience=primary-care">Primary Care</a></li>
-                  <li><a href="/tests/?audience=gastroenterology">Gastroenterology</a></li>
-                  <li><a href="/tests/?audience=gynecology">Gynecology</a></li>
-                  <li><a href="/tests/?audience=medical-director">Medical Director</a></li>
+                  <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+                  <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+                  <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+                  <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+                  <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+                  <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
                 </ul>
               </div>
-              <div class="mega-tests__group">
-                <h5>By Care Setting</h5>
-                <ul>
-                  <li><a href="/tests/?setting=post-acute">Post-Acute Care</a></li>
-                  <li><a href="/tests/?setting=at-home">Healthcare at Home</a></li>
-                  <li><a href="/tests/?setting=urology-clinic">Urology Clinic</a></li>
-                  <li><a href="/tests/?setting=urgent-care">Urgent Care</a></li>
-                  <li><a href="/tests/?setting=telemedicine">Telemedicine</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="mega-tests__footer">
-              <a href="/tests" class="mega-tests__view-all">
-                View all tests
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-              </a>
             </div>
           </div>
         </li>
 
         <!-- Providers (flyout) -->
         <li class="global-menu__item" data-menu="providers">
-          <a href="/providers" class="global-menu__link">
+          <a href="/providers/" class="global-menu__link">
             Providers
             <svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="2 4 5 7 8 4"/></svg>
           </a>
@@ -200,7 +200,7 @@
       </a>
       <ul class="local-nav__items">
         <li><a href="#cost" data-target="cost">Why it Matters</a></li>
-        <li><a href="/uti-crisis">UTI Crisis</a></li>
+        <li><a href="/uti-crisis/">UTI Crisis</a></li>
         <li><a href="#diagnostics-fail" data-target="diagnostics-fail">Current Standard</a></li>
         <li><a href="#tirt" data-target="tirt">Different Approach</a></li>
         <li><a href="#product" data-target="product">Guidance UTI</a></li>
@@ -213,6 +213,100 @@
   </div>
 
 </div>
+
+<!-- ── MOBILE DRAWER (slide-in from right, mobile-only) ─── -->
+<div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
+<aside class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
+  <div class="mobile-drawer__inner">
+
+    <a href="#contact" class="mobile-drawer__cta">Talk to a Rep</a>
+
+    <nav class="mobile-drawer__nav" aria-label="Mobile primary">
+      <ul class="mobile-accordion">
+
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">
+            Our Tests
+            <svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg>
+          </button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/tests/guidance-uti/">Guidance<sup>&reg;</sup> UTI with P-AST</a></li>
+            <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+            <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+            <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+            <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+            <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+            <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+          </ul>
+        </li>
+
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">
+            Providers
+            <svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg>
+          </button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+            <li><a href="/order-supplies/">Order Supplies</a></li>
+            <li><a href="/customer-care/">Customer Care</a></li>
+            <li><a href="/testimonials/">Testimonials</a></li>
+          </ul>
+        </li>
+
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">
+            Patient Resources
+            <svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg>
+          </button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/billing/">Billing</a></li>
+            <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+            <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+          </ul>
+        </li>
+
+        <li class="mobile-accordion__item mobile-accordion__item--single">
+          <a href="/payors/" class="mobile-accordion__head mobile-accordion__head--link">Payors</a>
+        </li>
+
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">
+            Clinical Resources
+            <svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg>
+          </button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+            <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+          </ul>
+        </li>
+
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">
+            About
+            <svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg>
+          </button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/our-team/">Our Team</a></li>
+            <li><a href="/careers/">Careers</a></li>
+            <li><a href="/news/">News &amp; Events</a></li>
+            <li><a href="/innovation/">Innovation</a></li>
+            <li><a href="/p-ast/">P-AST&trade;</a></li>
+            <li><a href="/contact/">Contact Us</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+
+    <ul class="mobile-drawer__utility">
+      <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+      <li><a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      <li><a href="tel:8004934490" class="mobile-drawer__phone">800.493.4490</a></li>
+    </ul>
+
+  </div>
+</aside>
 
 
 <main class="page-shell">

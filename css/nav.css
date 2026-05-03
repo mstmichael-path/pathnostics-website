@@ -395,13 +395,25 @@ img.global-nav__logo-white { display: none; }
 }
 
 .mega-tests__hero {
-  padding: 36px 32px;
+  padding: 0 0 28px;
   background: linear-gradient(135deg, rgba(57,55,143,0.04) 0%, rgba(232,32,101,0.04) 100%);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 20px;
+  gap: 18px;
   border-right: 1px solid rgba(57, 55, 143, 0.06);
+}
+
+.mega-tests__hero-image {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: center 72%;
+  border-top-left-radius: 16px;
+}
+
+.mega-tests__hero-body {
+  padding: 4px 32px 0;
 }
 
 .mega-tests__hero-tag {
@@ -439,6 +451,7 @@ img.global-nav__logo-white { display: none; }
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  margin: 0 32px;
   padding: 10px 22px;
   background: var(--color-coral);
   color: #ffffff;
@@ -457,7 +470,7 @@ img.global-nav__logo-white { display: none; }
 }
 
 .mega-tests__directory {
-  padding: 28px 28px 24px;
+  padding: 32px 28px 24px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -487,12 +500,18 @@ img.global-nav__logo-white { display: none; }
 
 .mega-tests__group a {
   display: block;
-  padding: 6px 0;
+  padding: 8px 0;
   font-family: var(--font-body);
   font-size: 13px;
   color: var(--color-text-body);
   text-decoration: none;
   transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.mega-tests__group a sup {
+  font-size: 0.6em;
+  vertical-align: super;
+  margin-left: 1px;
 }
 
 .mega-tests__group a:hover {
@@ -786,7 +805,296 @@ img.global-nav__logo-white { display: none; }
 
 
 /* ═══════════════════════════════════════════════════════
-   MOBILE — hide global menu, show hamburger (handled later)
+   MOBILE BAR — phone + hamburger cluster
+   Hidden by default, shown only at <1024px
+   ═══════════════════════════════════════════════════════ */
+.mobile-bar {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.mobile-bar__phone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: var(--color-purple);
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.mobile-bar__phone svg {
+  width: 20px;
+  height: 20px;
+}
+
+.mobile-bar__phone:hover,
+.mobile-bar__phone:focus-visible {
+  background: rgba(57, 55, 143, 0.08);
+  color: var(--color-coral);
+}
+
+.nav-system.is-scrolled .mobile-bar__phone {
+  color: rgba(255, 255, 255, 0.94);
+}
+.nav-system.is-scrolled .mobile-bar__phone:hover,
+.nav-system.is-scrolled .mobile-bar__phone:focus-visible {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+/* Hamburger — three lines that morph to X */
+.mobile-bar__toggle {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-bar__toggle-bar {
+  position: absolute;
+  left: 12px;
+  width: 20px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--color-purple);
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.18s ease,
+              top 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.2s ease;
+}
+
+.mobile-bar__toggle-bar:nth-child(1) { top: 14px; }
+.mobile-bar__toggle-bar:nth-child(2) { top: 21px; }
+.mobile-bar__toggle-bar:nth-child(3) { top: 28px; }
+
+.nav-system.is-scrolled .mobile-bar__toggle-bar {
+  background: #ffffff;
+}
+
+/* Open state — morph to X */
+.mobile-bar__toggle.is-open .mobile-bar__toggle-bar:nth-child(1) {
+  top: 21px;
+  transform: rotate(45deg);
+}
+.mobile-bar__toggle.is-open .mobile-bar__toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+.mobile-bar__toggle.is-open .mobile-bar__toggle-bar:nth-child(3) {
+  top: 21px;
+  transform: rotate(-45deg);
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE DRAWER — slide-in from right
+   ═══════════════════════════════════════════════════════ */
+.mobile-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 18, 60, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+  z-index: 998;
+}
+
+.mobile-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-drawer {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(380px, 100vw);
+  height: 100dvh;
+  background: linear-gradient(180deg, #ffffff 0%, #f5f3ff 100%);
+  box-shadow: -8px 0 32px rgba(57, 55, 143, 0.18);
+  transform: translateX(100%);
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 999;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-drawer.is-open {
+  transform: translateX(0);
+}
+
+.mobile-drawer__inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 76px 24px 24px;
+  gap: 20px;
+}
+
+/* Coral CTA at top */
+.mobile-drawer__cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 22px;
+  background: var(--color-coral);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 9999px;
+  transition: background 0.2s ease;
+}
+
+.mobile-drawer__cta:hover,
+.mobile-drawer__cta:focus-visible {
+  background: var(--color-coral-dark);
+}
+
+/* Accordion */
+.mobile-accordion {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(57, 55, 143, 0.1);
+}
+
+.mobile-accordion__item {
+  border-bottom: 1px solid rgba(57, 55, 143, 0.1);
+}
+
+.mobile-accordion__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 4px;
+  background: transparent;
+  border: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-purple);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.mobile-accordion__head:hover,
+.mobile-accordion__head:focus-visible {
+  color: var(--color-coral);
+}
+
+.mobile-accordion__caret {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  transition: transform 0.28s ease;
+}
+
+.mobile-accordion__head[aria-expanded="true"] .mobile-accordion__caret {
+  transform: rotate(180deg);
+}
+
+.mobile-accordion__panel {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.32s ease;
+}
+
+.mobile-accordion__item.is-open .mobile-accordion__panel {
+  max-height: 600px;
+}
+
+.mobile-accordion__panel li a {
+  display: block;
+  padding: 10px 4px 10px 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--on-surface-variant);
+  text-decoration: none;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.mobile-accordion__panel li:last-child a {
+  padding-bottom: 16px;
+}
+
+.mobile-accordion__panel li a:hover,
+.mobile-accordion__panel li a:focus-visible {
+  color: var(--color-coral);
+  padding-left: 20px;
+}
+
+.mobile-accordion__panel sup {
+  font-size: 0.65em;
+  vertical-align: super;
+  margin-left: 1px;
+}
+
+/* Utility list at bottom of drawer */
+.mobile-drawer__utility {
+  list-style: none;
+  margin: auto 0 0;
+  padding: 20px 0 0;
+  border-top: 1px solid rgba(57, 55, 143, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mobile-drawer__utility a {
+  display: block;
+  padding: 8px 4px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--on-surface-variant);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.mobile-drawer__utility a:hover,
+.mobile-drawer__utility a:focus-visible {
+  color: var(--color-coral);
+}
+
+.mobile-drawer__phone {
+  font-weight: 700;
+  color: var(--color-purple) !important;
+  letter-spacing: 0.02em;
+}
+
+/* Lock body scroll while drawer is open */
+body.mobile-menu-open {
+  overflow: hidden;
+}
+
+/* When drawer is open, give the bar a solid background so the
+   dark backdrop doesn't show through the nav-system's translucent gradient. */
+body.mobile-menu-open .nav-system {
+  background: #ffffff;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE — hide desktop nav, show mobile bar + drawer
    ═══════════════════════════════════════════════════════ */
 @media (max-width: 1023px) {
   .utility-bar {
@@ -805,6 +1113,20 @@ img.global-nav__logo-white { display: none; }
   .global-nav__inner {
     height: 64px;
     justify-content: space-between;
+    padding: 0 16px;
+  }
+
+  .global-nav__logo img {
+    height: 28px;
+  }
+
+  .mobile-bar {
+    display: inline-flex;
+  }
+
+  .mobile-backdrop,
+  .mobile-drawer {
+    display: block;
   }
 
   .page-shell {
