@@ -144,12 +144,12 @@ body::before {
 .global-nav__inner {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 10px var(--section-padding-x);
+  padding: 10px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 86px;
-  gap: 36px;
+  gap: 40px;
 }
 
 .global-nav__logo {
@@ -808,7 +808,7 @@ img.global-nav__logo-white { display: none; }
    LAPTOP RANGE — compress global nav so it fits 1024–1279px
    without clipping. Mobile breakpoint stays at <1024.
    ═══════════════════════════════════════════════════════ */
-@media (min-width: 1024px) and (max-width: 1359.98px) {
+@media (min-width: 1024px) and (max-width: 1399.98px) {
   .global-nav__inner {
     gap: 12px;
     padding-left: 16px;
@@ -840,11 +840,31 @@ img.global-nav__logo-white { display: none; }
     padding: 0 20px;
   }
   .local-nav__inner {
-    padding: 0 20px;
-    gap: 8px;
+    padding: 0 16px;
+  }
+  .local-nav__items {
+    gap: 4px;
   }
   .local-nav__items a {
-    padding: 12px 8px;
+    padding: 0 8px;
+    font-size: 13px;
+  }
+
+  /* Scrolled state — local nav becomes the primary row, must not clip */
+  .nav-system.is-scrolled .local-nav__inner {
+    gap: 12px;
+  }
+  .nav-system.is-scrolled .local-nav__logo img {
+    height: 24px;
+  }
+  .nav-system.is-scrolled .local-nav__items a,
+  .nav-system.is-scrolled .local-nav__items a.is-active {
+    padding: 0 6px;
+    font-size: 13px;
+  }
+  .nav-system.is-scrolled .local-nav__cta {
+    padding: 8px 14px;
+    font-size: 13px;
   }
 }
 
