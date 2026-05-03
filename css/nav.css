@@ -845,7 +845,7 @@ img.global-nav__logo-white { display: none; }
     padding: 0 20px;
   }
   .local-nav__inner {
-    padding: 0 16px;
+    padding: 0 28px;
   }
   .local-nav__items {
     gap: 4px;
@@ -857,10 +857,10 @@ img.global-nav__logo-white { display: none; }
 
   /* Scrolled state — local nav becomes the primary row, must not clip */
   .nav-system.is-scrolled .local-nav__inner {
-    gap: 12px;
+    gap: 20px;
   }
   .nav-system.is-scrolled .local-nav__logo img {
-    height: 24px;
+    height: 30px;
   }
   .nav-system.is-scrolled .local-nav__items a,
   .nav-system.is-scrolled .local-nav__items a.is-active {
@@ -868,7 +868,7 @@ img.global-nav__logo-white { display: none; }
     /* font-size handled by base clamp */
   }
   .nav-system.is-scrolled .local-nav__cta {
-    padding: 8px 14px;
+    padding: 10px 22px;
     /* font-size handled by base clamp */
   }
 }
