@@ -822,7 +822,8 @@ img.global-nav__logo-white { display: none; }
   }
   .global-menu__link {
     padding: 8px 8px;
-    font-size: 14px;
+    /* fluid: 14px @ 1024 → 18px @ 1400, then desktop styles take over */
+    font-size: clamp(14px, 1.06vw + 3.15px, 18px);
   }
   .global-nav__actions {
     gap: 8px;
@@ -833,10 +834,12 @@ img.global-nav__logo-white { display: none; }
   }
   .global-nav__cta {
     padding: 7px 14px;
-    font-size: 13px;
+    /* 13px @ 1024 → 14px @ 1400 */
+    font-size: clamp(13px, 0.266vw + 10.28px, 14px);
   }
   .utility-bar {
-    font-size: 14px;
+    /* 14px @ 1024 → 15px @ 1400 */
+    font-size: clamp(14px, 0.266vw + 11.28px, 15px);
     padding: 0 20px;
   }
   .local-nav__inner {
@@ -847,7 +850,8 @@ img.global-nav__logo-white { display: none; }
   }
   .local-nav__items a {
     padding: 0 8px;
-    font-size: 13px;
+    /* 13px @ 1024 → 14px @ 1400 */
+    font-size: clamp(13px, 0.266vw + 10.28px, 14px);
   }
 
   /* Scrolled state — local nav becomes the primary row, must not clip */
@@ -860,11 +864,11 @@ img.global-nav__logo-white { display: none; }
   .nav-system.is-scrolled .local-nav__items a,
   .nav-system.is-scrolled .local-nav__items a.is-active {
     padding: 0 6px;
-    font-size: 13px;
+    font-size: clamp(13px, 0.266vw + 10.28px, 14px);
   }
   .nav-system.is-scrolled .local-nav__cta {
     padding: 8px 14px;
-    font-size: 13px;
+    font-size: clamp(13px, 0.266vw + 10.28px, 14px);
   }
 }
 
