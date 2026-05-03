@@ -1,7 +1,0 @@
-{
-  "trailingSlash": true,
-  "routes": [
-    { "src": "^/$", "dest": "/coming-soon.html" },
-    { "src": "/.+", "status": 302, "headers": { "Location": "https://pathnostics.com/" } }
-  ]
-}
