@@ -805,6 +805,50 @@ img.global-nav__logo-white { display: none; }
 
 
 /* ═══════════════════════════════════════════════════════
+   LAPTOP RANGE — compress global nav so it fits 1024–1279px
+   without clipping. Mobile breakpoint stays at <1024.
+   ═══════════════════════════════════════════════════════ */
+@media (min-width: 1024px) and (max-width: 1359.98px) {
+  .global-nav__inner {
+    gap: 12px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .global-nav__logo img {
+    height: 26px;
+  }
+  .global-menu {
+    gap: 0;
+  }
+  .global-menu__link {
+    padding: 8px 8px;
+    font-size: 14px;
+  }
+  .global-nav__actions {
+    gap: 8px;
+  }
+  .global-nav__search-btn {
+    width: 40px;
+    height: 40px;
+  }
+  .global-nav__cta {
+    padding: 7px 14px;
+    font-size: 13px;
+  }
+  .utility-bar {
+    font-size: 14px;
+    padding: 0 20px;
+  }
+  .local-nav__inner {
+    padding: 0 20px;
+    gap: 8px;
+  }
+  .local-nav__items a {
+    padding: 12px 8px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
    MOBILE BAR — phone + hamburger cluster
    Hidden by default, shown only at <1024px
    ═══════════════════════════════════════════════════════ */
