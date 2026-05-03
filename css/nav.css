@@ -295,7 +295,7 @@ img.global-nav__logo-white { display: none; }
    ═══════════════════════════════════════════════════════ */
 .mega-panel {
   position: absolute;
-  top: calc(100% + 4px);
+  top: 100%;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
@@ -312,16 +312,8 @@ img.global-nav__logo-white { display: none; }
   overflow: hidden;
 }
 
-.mega-panel::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--gradient-coral-purple);
-  z-index: 1;
-}
+/* Top gradient bar removed — was visually colliding with the local-nav progress
+   bar (also coral) creating an "off by a few pixels" double-line effect. */
 
 .global-menu__item.is-open > .mega-panel {
   opacity: 1;
