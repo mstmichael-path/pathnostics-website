@@ -1,0 +1,62 @@
+/* ═══════════════════════════════════════════════════════
+   test-guidance-prostatitis.css — Page-specific overrides
+   Colorway: GREEN  (#00ae81 with #00694d for darker accents)
+   Sister to Guidance UTI — keep green family, but vary tones
+   so the green closing CTA still feels like a transition.
+   ═══════════════════════════════════════════════════════ */
+
+/* Hero — green-tinted radial over a soft mint-white linear */
+.ft-hero {
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 0%, rgba(0, 174, 129, 0.18) 0%, transparent 70%),
+    linear-gradient(180deg, #f0fbf7 0%, #ffffff 70%);
+}
+
+/* Hero overline / italic emphasis pop in mid-green */
+.ft-hero__overline {
+  color: var(--color-green);
+}
+
+.ft-hero__title em,
+.ft-capabilities__title em,
+.ft-report__title em,
+.ft-athome__title em,
+.ft-faq__title em {
+  color: var(--color-green-dark);
+}
+
+/* Capability cards — featured tile leans dark green for variation */
+.ft-capability--featured {
+  background: linear-gradient(180deg, #ffffff 0%, rgba(0, 174, 129, 0.08) 100%);
+  border-color: rgba(0, 105, 77, 0.30);
+}
+
+.ft-capability--featured .ft-capability__num {
+  color: var(--color-green-dark);
+}
+
+.ft-capability__advantage-label {
+  color: var(--color-green-dark);
+}
+
+/* Sample-report download text link — recolored for green family */
+.ft-report__download:hover {
+  color: var(--color-green-dark);
+  text-decoration-color: var(--color-green-dark);
+}
+
+/* @home backdrop — same soft mint instead of sky */
+.ft-athome {
+  background: linear-gradient(180deg, #ffffff 0%, rgba(0, 174, 129, 0.10) 100%);
+}
+
+/* FAQ category headings (h5 inside answers) */
+.ft-faq__a h5 {
+  color: var(--color-green-dark);
+}
+
+/* References — push entirely into green-dark, with a deeper bottom,
+   so the standard-green closing CTA above it feels like a transition. */
+.references {
+  background: linear-gradient(180deg, var(--color-green-dark) 0%, #00432f 100%);
+}
