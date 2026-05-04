@@ -70,7 +70,7 @@ When a session completes its full scope, write a closing line:
 [2026-05-03 23:00] Orchestrator — wrote SESSION_BRIEF_A2_test_pages.md
                    for the 6 remaining test product pages. Each page
                    gets a different brand colorway as primary accent:
-                   prostatitis=coral, anatomic-pathology=green,
+                   prostatitis=green, anatomic-pathology=coral,
                    barretts=navy, gyn-cytology-hr=sky,
                    bladder-fish-urovysion=lime,
                    womens-cytology-high-risk-hpv=coral-dark.

@@ -27,8 +27,8 @@ primary accent color.** Push to `qa-preview` only. Do not push to `main`.
 
 | Slug | Output path | Scraped source folder | **Primary colorway** |
 |---|---|---|---|
-| `/tests/guidance-prostatitis/` | `/tests/guidance-prostatitis/index.html` | `tests--guidance-prostatitis` | **Coral** `#e82065` (sister to Guidance UTI in urology family) |
-| `/tests/anatomic-pathology/` | `/tests/anatomic-pathology/index.html` | `tests--anatomic-pathology` | **Green** `#00ae81` (clinical evidence) |
+| `/tests/guidance-prostatitis/` | `/tests/guidance-prostatitis/index.html` | `tests--guidance-prostatitis` | **Green** `#00ae81` (clinical evidence; sister to Guidance UTI) |
+| `/tests/anatomic-pathology/` | `/tests/anatomic-pathology/index.html` | `tests--anatomic-pathology` | **Coral** `#e82065` (warm accent, distinct from green flagship) |
 | `/tests/barretts-esophagus/` | `/tests/barretts-esophagus/index.html` | `tests--barretts-esophagus` | **Navy deep** `#1B2A4A` (gravitas — precancerous condition) |
 | `/tests/gyn-cytology-hr/` | `/tests/gyn-cytology-hr/index.html` | `tests--gyn-cytology-hr` | **Sky** `#8fcaeb` (women's health, approachable) |
 | `/tests/bladder-fish-urovysion/` | `/tests/bladder-fish-urovysion/index.html` | `tests--bladder-fish-urovysion` | **Lime** `#b6cd2f` (distinct accent identity) |
@@ -77,19 +77,19 @@ override that extends `flagship-test.css`. Pattern:
 
 ```css
 /* css/test-guidance-prostatitis.css */
-/* Colorway: Coral #e82065 */
+/* Colorway: Green #00ae81 */
 
 .ft-hero {
   background:
-    radial-gradient(ellipse 80% 60% at 30% 0%, rgba(232, 32, 101, 0.18) 0%, transparent 70%),
-    linear-gradient(180deg, #fff5f7 0%, #ffffff 70%);
+    radial-gradient(ellipse 80% 60% at 30% 0%, rgba(0, 174, 129, 0.18) 0%, transparent 70%),
+    linear-gradient(180deg, #f0fbf7 0%, #ffffff 70%);
 }
 
 .ft-hero__overline,
 .ft-hero__title em,
 .ft-section__title em,
 .ft-evidence__stat-number {
-  color: #e82065;
+  color: #00ae81;
 }
 
 /* ...other overrides as needed... */
@@ -104,6 +104,14 @@ In each page's `<head>`, load BOTH stylesheets:
 
 ### Special notes per colorway
 
+- **Green `#00ae81` (Guidance Prostatitis)** — the closing CTA on every
+  page is also green, so a green-primary page risks reading monotonous.
+  Create tonal variation within the green family: use `#00ae81` for
+  hero accents and italic emphasis, but use `--color-green-dark`
+  `#00694d` for the references section gradient and section titles' rule
+  lines. The closing CTA stays the standard green it has on Guidance UTI
+  — that contrast (dark-green-on-page → standard-green CTA) creates the
+  visual transition.
 - **Sky `#8fcaeb`** is the lightest. Its hero gradient must be more
   saturated (try `rgba(143, 202, 235, 0.32)` not `0.18`). For italic
   emphasis text on white, sky alone is too pale — pair with a darker
@@ -234,7 +242,7 @@ When fully done with your scope:
 
 ```
 [2026-05-XX HH:MM] Session A2 COMPLETE — built 6 test pages.
-                   Colorways: prostatitis=coral, anatomic=green,
+                   Colorways: prostatitis=green, anatomic=coral,
                    barretts=navy, gyn-cytology=sky, bladder-fish=lime,
                    hpv=coral-dark.
                    Awaiting orchestrator review and cherry-pick to main.
