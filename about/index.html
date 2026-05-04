@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us &mdash; Pathnostics</title>
+  <meta name="description" content="Pathnostics is pioneering a better future for physicians, patients, and healthcare with solutions that transform diagnostic and therapeutic dilemmas.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/nav.css">
+  <link rel="stylesheet" href="/css/info-page.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════
+     NAV SYSTEM — verbatim from /index.html
+     ════════════════════════════════════════════════════ -->
+<div class="nav-system" id="nav-system" role="navigation" aria-label="Primary">
+
+  <div class="utility-bar" id="utility-bar">
+    <div class="utility-bar__left">
+      <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a>
+      <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div class="utility-bar__right">
+      <a href="tel:8004934490" class="utility-bar__phone" aria-label="Call 800.493.4490">800.493.4490</a>
+    </div>
+  </div>
+
+  <div class="global-nav" id="global-nav">
+    <div class="global-nav__inner">
+
+      <a href="/" class="global-nav__logo" aria-label="Pathnostics Home">
+        <img class="global-nav__logo-color" src="/assets/pathnostics-logo-color.png" alt="Pathnostics">
+        <img class="global-nav__logo-white" src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+
+      <div class="mobile-bar">
+        <a href="tel:8004934490" class="mobile-bar__phone" aria-label="Call 800.493.4490">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+        <button type="button" class="mobile-bar__toggle" id="mobile-toggle" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false">
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+        </button>
+      </div>
+
+      <ul class="global-menu">
+        <li class="global-menu__item" data-menu="tests">
+          <a href="/tests/" class="global-menu__link">Our Tests<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--tests" role="menu" aria-label="Our Tests">
+            <div class="mega-tests__hero">
+              <img src="/assets/guidance-uti-header-image.webp" alt="Guidance UTI test kit" class="mega-tests__hero-image">
+              <div class="mega-tests__hero-body">
+                <div class="mega-tests__hero-tag">Flagship Test</div>
+                <h3 class="mega-tests__hero-title">Guidance UTI<br>with <em>P-AST.</em></h3>
+                <p class="mega-tests__hero-desc">Pooled antibiotic susceptibility testing that evaluates how antibiotics perform against the infection as a whole &mdash; including in polymicrobial cases. Results in 24&ndash;36 hours.</p>
+              </div>
+              <a href="/tests/guidance-uti/" class="mega-tests__hero-cta">Explore Guidance UTI<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+            </div>
+            <div class="mega-tests__directory">
+              <div class="mega-tests__group">
+                <h5>All Tests</h5>
+                <ul>
+                  <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+                  <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+                  <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+                  <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+                  <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+                  <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="providers">
+          <a href="/providers/" class="global-menu__link">Providers<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Providers">
+            <ul>
+              <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+              <li><a href="/order-supplies/">Order Supplies</a></li>
+              <li><a href="/customer-care/">Customer Care</a></li>
+              <li><a href="/testimonials/">Testimonials</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="patients">
+          <a href="/patient-resources/" class="global-menu__link">Patient Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Patient Resources">
+            <ul>
+              <li><a href="/billing/">Billing</a></li>
+              <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+              <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item">
+          <a href="/payors/" class="global-menu__link">Payors</a>
+        </li>
+        <li class="global-menu__item" data-menu="clinical">
+          <a href="/clinical-resources/" class="global-menu__link">Clinical Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Clinical Resources">
+            <ul>
+              <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+              <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="about">
+          <a href="/about/" class="global-menu__link">About<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="About">
+            <ul>
+              <li><a href="/our-team/">Our Team</a></li>
+              <li><a href="/careers/">Careers</a></li>
+              <li><a href="/news/">News &amp; Events</a></li>
+              <li><a href="/innovation/">Innovation</a></li>
+              <li><a href="/p-ast/">P-AST&trade;</a></li>
+              <li><a href="/contact/">Contact Us</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+
+      <div class="global-nav__actions">
+        <button class="global-nav__search-btn" id="search-toggle" aria-label="Search" aria-expanded="false">
+          <svg viewBox="0 0 24 24" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <a href="#contact" class="global-nav__cta">Talk to a Rep</a>
+      </div>
+
+      <div class="search-dropdown" id="search-dropdown" aria-hidden="true">
+        <form method="get" action="/search">
+          <input type="search" name="q" placeholder="Search Pathnostics&hellip;" aria-label="Search query" autocomplete="off">
+          <button type="submit">Go</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tier 3 local nav — anchors page-specific -->
+  <div class="local-nav" id="local-nav">
+    <div class="local-nav__inner">
+      <a href="/" class="local-nav__logo" aria-label="Pathnostics Home">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+      <ul class="local-nav__items">
+        <li><a href="#mission" data-target="mission">Mission</a></li>
+        <li><a href="#who-we-serve" data-target="who-we-serve">Who We Serve</a></li>
+        <li><a href="#capabilities" data-target="capabilities">Capabilities</a></li>
+        <li><a href="#headquarters" data-target="headquarters">Headquarters</a></li>
+        <li><a href="#licenses" data-target="licenses">Licenses</a></li>
+      </ul>
+      <a href="#contact" class="local-nav__cta">Talk to a Rep</a>
+    </div>
+    <div class="local-nav__progress" id="local-nav-progress"></div>
+  </div>
+</div>
+
+<!-- Mobile drawer — verbatim from /index.html -->
+<div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
+<aside class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
+  <div class="mobile-drawer__inner">
+    <a href="#contact" class="mobile-drawer__cta">Talk to a Rep</a>
+    <nav class="mobile-drawer__nav" aria-label="Mobile primary">
+      <ul class="mobile-accordion">
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Our Tests<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/tests/guidance-uti/">Guidance<sup>&reg;</sup> UTI with P-AST</a></li>
+            <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+            <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+            <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+            <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+            <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+            <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Providers<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+            <li><a href="/order-supplies/">Order Supplies</a></li>
+            <li><a href="/customer-care/">Customer Care</a></li>
+            <li><a href="/testimonials/">Testimonials</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Patient Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/billing/">Billing</a></li>
+            <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+            <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item mobile-accordion__item--single">
+          <a href="/payors/" class="mobile-accordion__head mobile-accordion__head--link">Payors</a>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Clinical Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+            <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">About<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/our-team/">Our Team</a></li>
+            <li><a href="/careers/">Careers</a></li>
+            <li><a href="/news/">News &amp; Events</a></li>
+            <li><a href="/innovation/">Innovation</a></li>
+            <li><a href="/p-ast/">P-AST&trade;</a></li>
+            <li><a href="/contact/">Contact Us</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <ul class="mobile-drawer__utility">
+      <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+      <li><a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      <li><a href="tel:8004934490" class="mobile-drawer__phone">800.493.4490</a></li>
+    </ul>
+  </div>
+</aside>
+
+
+<main class="page-shell">
+
+  <!-- HERO -->
+  <section class="ip-hero" id="top">
+    <div class="container ip-hero__inner">
+      <div class="ip-hero__copy">
+        <div class="ip-hero__overline">About Pathnostics</div>
+        <h1 class="ip-hero__title">
+          Pioneering a better future<br>
+          <em>for physicians, patients, and healthcare.</em>
+        </h1>
+        <p class="ip-hero__lede">
+          Diagnostic and therapeutic solutions that transform decisions &mdash;
+          built since 2011 to help clinicians get treatment right the first time.
+        </p>
+        <div class="ip-hero__actions">
+          <a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative" class="btn-primary">Talk to a Rep</a>
+          <a href="#mission" class="btn-secondary">Our Mission</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- MISSION -->
+  <section class="ip-mission" id="mission">
+    <div class="container">
+      <span class="overline">Our Mission</span>
+      <p class="ip-mission__statement">
+        Established in 2011, Pathnostics is driven to <em>pioneer a better future</em>
+        for physicians, patients, and the healthcare system &mdash; with solutions that
+        transform diagnostic and therapeutic dilemmas.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- WHO WE SERVE -->
+  <section class="ip-cohort" id="who-we-serve">
+    <div class="container">
+      <header class="ip-cohort__header">
+        <span class="overline">Who We Serve</span>
+        <h2 class="ip-cohort__title">
+          Built for the providers and care settings <em>where the work happens.</em>
+        </h2>
+      </header>
+
+      <div class="ip-cohort__grid">
+        <div class="ip-cohort__col">
+          <h3 class="ip-cohort__col-title">Healthcare Providers</h3>
+          <ul class="ip-cohort__list">
+            <li>Urologists</li>
+            <li>Primary Care Physicians</li>
+            <li>Gynecologists</li>
+            <li>Gastroenterologists</li>
+            <li>Medical Directors</li>
+          </ul>
+        </div>
+        <div class="ip-cohort__col">
+          <h3 class="ip-cohort__col-title">Care Settings</h3>
+          <ul class="ip-cohort__list">
+            <li>Post-Acute Care</li>
+            <li>Immediate Care / Urgent Care</li>
+            <li>Healthcare at Home</li>
+            <li>Urology Clinic</li>
+            <li>Telemedicine</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CAPABILITIES -->
+  <section class="ip-content" id="capabilities">
+    <div class="container">
+      <div class="ip-content__body">
+        <h2>Core capabilities in <em style="font-style:italic;color:var(--color-coral-dark);">infectious disease and cancer diagnostics</em></h2>
+        <p>
+          A CAP-accredited and CLIA-certified laboratory, Pathnostics drives forward patient care
+          with a range of unique and advanced tests &mdash; a robust offering of histopathology, cytology,
+          and molecular tests across urology, women&rsquo;s health, and gastroenterology.
+        </p>
+        <p>
+          Pathnostics believes in robust science to demonstrate safety, efficacy, and clinical utility.
+          To date, we have completed eight clinical studies involving more than 73,000 subjects for
+          Guidance<sup>&reg;</sup> UTI &mdash; our flagship platform that combines molecular detection
+          with our proprietary Pooled Antibiotic Susceptibility Testing (P-AST&trade;) technology.
+          Key findings are published in fifteen peer-reviewed journals.
+        </p>
+        <p>
+          <a href="/innovation/">View our studies &rarr;</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- TEAM TEASER -->
+  <section class="ip-mission" id="team-teaser" style="background:linear-gradient(180deg,#ffffff 0%,rgba(143,202,235,0.08) 100%);">
+    <div class="container">
+      <span class="overline">Our Team</span>
+      <p class="ip-mission__statement">
+        Pathnostics is <em>not just a laboratory.</em>
+      </p>
+      <p style="font-family:var(--font-body);font-size:17px;line-height:1.65;color:var(--on-surface-variant);max-width:720px;margin:1.25rem auto 1.5rem;text-align:center;">
+        Our dedicated executive management team, Board of Directors, and Scientific Advisory Board
+        aim to resolve diagnostic and therapeutic dilemmas through continuous research, clinical
+        evidence development, product implementation, and service delivery.
+      </p>
+      <p style="text-align:center;margin:0;">
+        <a href="/our-team/" class="btn-primary">Meet the Team</a>
+      </p>
+    </div>
+  </section>
+
+
+  <!-- HEADQUARTERS -->
+  <section class="ip-content" id="headquarters">
+    <div class="container">
+      <div class="ip-content__body">
+        <h2>Our headquarters</h2>
+        <p>
+          Pathnostics&rsquo; headquarters is located in Irvine, California, at the heart of Orange County&rsquo;s
+          thriving medical and biotech community. Our state-of-the-art facility houses cutting-edge
+          laboratories, advanced diagnostic technology, and a dedicated team of experts committed to
+          improving patient outcomes through innovative testing solutions.
+        </p>
+        <p>
+          This central location enables us to collaborate with leading healthcare providers and
+          researchers, driving advancements in precision medicine and infectious disease diagnostics.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CAREERS TEASER -->
+  <section class="ip-mission" id="careers-teaser">
+    <div class="container">
+      <span class="overline">Careers</span>
+      <p class="ip-mission__statement">
+        Pathnostics is rapidly growing and looking for <em>dedicated individuals</em> to join our team.
+      </p>
+      <p style="font-family:var(--font-body);font-size:17px;line-height:1.65;color:var(--on-surface-variant);max-width:720px;margin:1.25rem auto 1.5rem;text-align:center;">
+        We value our employees as integral to the pioneering of groundbreaking solutions. When you work
+        at Pathnostics, you are a part of a greater purpose to improve the lives of patients every day.
+      </p>
+      <p style="text-align:center;margin:0;">
+        <a href="/careers/" class="btn-primary">Join the Team</a>
+      </p>
+    </div>
+  </section>
+
+
+  <!-- LICENSES & ACCREDITATIONS -->
+  <section class="ip-content" id="licenses">
+    <div class="container">
+      <div class="ip-content__body">
+        <h2>Licenses and accreditations</h2>
+        <h3>Corporate</h3>
+        <ul>
+          <li><a href="https://pathnostics.com/wp-content/uploads/2023/12/CAP-Accreditation-Certificate-exp-10.23.2025.pdf" target="_blank" rel="noopener">College of American Pathologists</a> &mdash; 7541770</li>
+          <li>Business License &mdash; BL037033</li>
+        </ul>
+        <h3>California laboratory</h3>
+        <ul>
+          <li><a href="https://pathnostics.com/wp-content/uploads/2026/01/CA_CLIA_1.14.28.pdf" target="_blank" rel="noopener">CLIA of 1988 (CA)</a> &mdash; 05D2024468</li>
+          <li><a href="https://pathnostics.com/wp-content/uploads/2026/02/CA_CA_2.6.27.pdf" target="_blank" rel="noopener">California Department of Public Health</a> &mdash; CDF-00340926</li>
+          <li><a href="https://pathnostics.com/wp-content/uploads/2023/03/State-of-Maryland-Department-of-Public-Health-2023.pdf" target="_blank" rel="noopener">Maryland Department of Public Health (CA)</a> &mdash; 2204</li>
+          <li><a href="https://pathnostics.com/wp-content/uploads/2025/07/CA_NY_6.30.26.pdf" target="_blank" rel="noopener">New York State Department of Health PFI (CA)</a> &mdash; 8593</li>
+          <li><a href="https://pathnostics.com/wp-content/uploads/2025/08/CA_PA-Lic_8.15.26.pdf" target="_blank" rel="noopener">Pennsylvania Department of Health (CA)</a> &mdash; 33397</li>
+          <li><a href="https://pathnostics.com/wp-content/uploads/2025/01/CA_RI_12.30.26.pdf" target="_blank" rel="noopener">Rhode Island Department of Health (CA)</a> &mdash; LCO01608</li>
+        </ul>
+        <h3>Florida laboratory</h3>
+        <ul>
+          <li><a href="https://pathnostics.com/wp-content/uploads/2025/04/FL_CLIA_02.26.27.pdf" target="_blank" rel="noopener">CLIA of 1988 (FL)</a> &mdash; 10D2269099</li>
+          <li><a href="https://pathnostics.com/wp-content/uploads/2025/12/FL_CA_11.27.26.pdf" target="_blank" rel="noopener">California Department of Health (FL)</a> &mdash; COS-90008245</li>
+          <li><a href="https://pathnostics.com/wp-content/uploads/2025/12/FL_MD_non-exp.pdf" target="_blank" rel="noopener">Maryland Department of Public Health (FL)</a> &mdash; 3659</li>
+          <li><a href="https://pathnostics.com/wp-content/uploads/2025/11/FL_NY_6014_6.30.26.pdf" target="_blank" rel="noopener">New York State Department of Health PFI (FL)</a> &mdash; 6014</li>
+          <li><a href="https://pathnostics.com/wp-content/uploads/2025/08/FL_PA_08.15.26.pdf" target="_blank" rel="noopener">Pennsylvania Department of Health (FL)</a> &mdash; 40252</li>
+          <li><a href="https://pathnostics.com/wp-content/uploads/2025/12/FL_RI_12.30.27.pdf" target="_blank" rel="noopener">Rhode Island Department of Health (FL)</a> &mdash; LCO01585</li>
+        </ul>
+        <h3>Michigan laboratory</h3>
+        <ul>
+          <li><a href="/wp-content/uploads/2022/05/Centers-for-Medicare-Medicaid-Services-Clinical-Laboratory-Improvement-Amendments-Certificate-of-Accreditation-MI.pdf" target="_blank" rel="noopener">CLIA of 1988 (MI)</a> &mdash; 23D2155344</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CLOSING CTA -->
+  <section class="section--green closing-cta">
+    <div class="container">
+      <h2 class="closing-cta__headline">
+        Ready to see what better diagnostics <em>can do for your practice?</em>
+      </h2>
+      <p class="closing-cta__sub">
+        Talk to a Pathnostics representative about Guidance<sup>&reg;</sup> UTI and our other tests.
+      </p>
+      <div class="closing-cta__actions">
+        <a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative" class="btn-primary">Talk to a Rep</a>
+        <a href="/tests/" class="btn-ghost-white">See Our Tests</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ════════════════════════════════════════════════════
+     FOOTER — verbatim from /index.html
+     ════════════════════════════════════════════════════ -->
+<footer class="section--navy footer" id="contact">
+  <a href="#top" class="footer__back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </a>
+  <div class="container" style="padding-top: var(--section-padding-y); padding-bottom: var(--gap-xl);">
+    <p class="footer__big-tagline">
+      Better decisions. Better outcomes. Better lives<span class="footer__big-tagline-period">.</span>
+    </p>
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics" loading="lazy">
+        <div class="footer__social">
+          <a href="https://www.linkedin.com/company/pathnostics/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg></a>
+          <a href="https://twitter.com/Pathnostics" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+        <iframe name="footer-subscribe-iframe" class="footer__subscribe-iframe" aria-hidden="true" tabindex="-1"></iframe>
+        <form class="footer__subscribe" action="https://pathnostics.us4.list-manage.com/subscribe/post?u=a1401745b75d8b6b5e62ed930&amp;id=35ede7f928&amp;f_id=009c57e9f0" method="post" target="footer-subscribe-iframe" novalidate>
+          <label for="footer-subscribe-email" class="footer__subscribe-label">Stay Informed</label>
+          <div class="footer__subscribe-row">
+            <input id="footer-subscribe-email" type="email" name="EMAIL" placeholder="Email address" required class="footer__subscribe-input" autocomplete="email">
+            <button type="submit" class="footer__subscribe-btn">Subscribe</button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <p class="footer__heading">Our Solutions</p>
+        <div class="footer__links">
+          <a href="/tests/guidance-uti/">Guidance UTI with P-AST</a>
+          <a href="/#athome">Guidance @Home</a>
+          <a href="/providers/">For Providers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Resources</p>
+        <div class="footer__links">
+          <a href="/evidence.html">Published Evidence</a>
+          <a href="/clinical-resources/">Clinical Resources</a>
+          <a href="/patient-resources/">Patient Resources</a>
+          <a href="/news/">News &amp; Events</a>
+          <a href="/careers/">Careers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Get in Touch</p>
+        <p class="footer__contact-text">Ready to see how Guidance can support your practice?</p>
+        <a href="#contact" class="btn-primary footer__cta">Talk to a Rep</a>
+        <div class="footer__utility">
+          <a href="/customer-care/">Customer Care</a>
+          <a href="/billing/">Billing</a>
+          <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener noreferrer">Pay Your Bill</a>
+          <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener noreferrer">Provider Login</a>
+          <a href="/order-supplies/">Order Supplies</a>
+          <a href="/veterans/">For Veterans</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copyright">&copy; 2026 Pathnostics | All rights reserved</p>
+      <div class="footer__legal">
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/patient-privacy/">Patient Privacy</a>
+        <a href="https://secure.ethicspoint.com/domain/media/en/gui/44588/index.html" target="_blank" rel="noopener noreferrer">Confidential Reporting</a>
+        <a href="/privacy-policy/#Section9">About Ads</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
