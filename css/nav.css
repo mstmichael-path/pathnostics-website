@@ -219,8 +219,9 @@ img.global-nav__logo-white { display: none; }
 }
 
 .global-menu__caret {
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: 14px;
+  stroke-width: 2.4;
   transition: transform 0.2s ease;
 }
 
