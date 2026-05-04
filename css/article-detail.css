@@ -1,0 +1,333 @@
+/* ═══════════════════════════════════════════════════════
+   ARTICLE-DETAIL.CSS — Individual publication, KC article,
+   and news post pages.
+
+   Reuses tokens / nav / components / layout from the homepage.
+   Reuses .ip-hero, .ip-content, .references, closing-cta
+   patterns from info-page.css and layout.css.
+   Page-specific classes prefixed `ad-`.
+   ═══════════════════════════════════════════════════════ */
+
+
+/* ── HERO (narrower than info-page) ─────────────────────
+   Single column, more compact. Ledes are optional. */
+.ad-hero {
+  position: relative;
+  padding: var(--gap-3xl) 0 var(--gap-xl);
+  background:
+    radial-gradient(ellipse 70% 60% at 25% 0%, rgba(143, 202, 235, 0.18) 0%, transparent 65%),
+    linear-gradient(180deg, #f5f3ff 0%, #ffffff 75%);
+  overflow: hidden;
+}
+
+.ad-hero__inner {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.ad-hero__overline {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-coral-dark);
+  margin-bottom: var(--gap-sm);
+}
+
+.ad-hero__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.875rem, 3.6vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-purple);
+  margin: 0 0 var(--gap-md);
+}
+
+.ad-hero__title em {
+  font-style: italic;
+  color: var(--color-coral-dark);
+}
+
+.ad-hero__title sup {
+  font-size: 0.4em;
+  vertical-align: super;
+  font-weight: 500;
+}
+
+.ad-hero__meta {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--color-purple-mid);
+  margin: 0 0 var(--gap-lg);
+}
+
+.ad-hero__meta strong {
+  color: var(--color-purple);
+  font-weight: 700;
+}
+
+.ad-hero__meta em {
+  font-style: italic;
+}
+
+.ad-hero__lede {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  line-height: 1.55;
+  color: var(--on-surface-variant);
+  margin: 0 0 var(--gap-md);
+}
+
+.ad-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-sm);
+  margin-top: var(--gap-md);
+}
+
+
+/* ── BACK LINK / BREADCRUMB ──────────────────────────────
+   Small "back to all X" link above the title. */
+.ad-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-purple-mid);
+  text-decoration: none;
+  margin-bottom: var(--gap-md);
+  transition: color 0.18s ease, transform 0.18s ease;
+}
+
+.ad-back:hover {
+  color: var(--color-coral-dark);
+}
+
+.ad-back svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.18s ease;
+}
+
+.ad-back:hover svg {
+  transform: translateX(-2px);
+}
+
+
+/* ── ARTICLE BODY ────────────────────────────────────────
+   Reuses .ip-content / .ip-content__body pattern from
+   info-page.css for the markdown-rendered prose.
+   Adds a class for the WP "featured image at top" pattern. */
+.ad-content {
+  padding: var(--gap-xl) 0 var(--gap-2xl);
+  background: #ffffff;
+}
+
+.ad-content__body {
+  max-width: 720px;
+  margin: 0 auto;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--on-surface);
+}
+
+.ad-content__body > img:first-child,
+.ad-content__body > p:first-child > img:only-child,
+.ad-content__featured-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 720px;
+  margin: 0 auto var(--gap-lg);
+  border-radius: var(--radius-lg);
+}
+
+.ad-content__author {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-coral-dark);
+  margin: 0 0 var(--gap-lg);
+}
+
+.ad-content__body h2,
+.ad-content__body h3,
+.ad-content__body h4,
+.ad-content__body h5 {
+  color: var(--color-purple);
+  letter-spacing: -0.01em;
+  scroll-margin-top: 200px;
+}
+
+.ad-content__body h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.625rem, 2.6vw, 2.125rem);
+  line-height: 1.18;
+  margin: var(--gap-2xl) 0 var(--gap-md);
+}
+
+.ad-content__body h2:first-child { margin-top: 0; }
+
+.ad-content__body h2 em { font-style: italic; color: var(--color-coral-dark); }
+
+.ad-content__body h3 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin: var(--gap-xl) 0 var(--gap-sm);
+}
+
+.ad-content__body h4,
+.ad-content__body h5 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: var(--gap-lg) 0 4px;
+  color: var(--color-coral-dark);
+}
+
+.ad-content__body h4 em,
+.ad-content__body h5 em {
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.ad-content__body p { margin: 0 0 var(--gap-md); }
+
+.ad-content__body ul,
+.ad-content__body ol {
+  margin: 0 0 var(--gap-md) 0;
+  padding-left: 1.5em;
+}
+
+.ad-content__body li { margin-bottom: 6px; }
+
+.ad-content__body a {
+  color: var(--color-coral-dark);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.18s ease;
+  word-break: break-word;
+}
+
+.ad-content__body a:hover { color: var(--color-coral); }
+
+.ad-content__body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  margin: var(--gap-md) 0;
+}
+
+.ad-content__body em { font-style: italic; }
+.ad-content__body strong { color: var(--color-purple); font-weight: 700; }
+
+/* Quote block */
+.ad-content__body blockquote {
+  border-left: 3px solid var(--color-coral);
+  padding: 6px 0 6px var(--gap-md);
+  margin: var(--gap-lg) 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.125rem;
+  color: var(--color-purple);
+}
+
+/* Inline references (parenthesized superscript numbers) */
+.ad-content__body sup,
+.ad-content__body sub { font-size: 0.7em; }
+
+
+/* ── REFERENCES SECTION ──────────────────────────────────
+   Reuses the homepage references pattern (green gradient
+   + lime accent) — defined in layout.css. The detail-page
+   references list often contains many entries, so allow
+   smaller type and tighter spacing. */
+.ad-content + .references {
+  margin-top: 0;
+}
+
+.ad-references {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.ad-references li {
+  margin-bottom: 10px;
+}
+
+
+/* ── INLINE CTA (between content and references) ─────────
+   For "View on Journal Site" / "Download PDF" buttons. */
+.ad-inline-cta {
+  max-width: 720px;
+  margin: var(--gap-xl) auto 0;
+  padding: var(--gap-lg);
+  background: linear-gradient(135deg, rgba(57, 55, 143, 0.04), rgba(232, 32, 101, 0.04));
+  border: 1px solid rgba(57, 55, 143, 0.12);
+  border-radius: var(--radius-xl);
+  text-align: center;
+}
+
+.ad-inline-cta__label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-coral-dark);
+  margin-bottom: var(--gap-sm);
+}
+
+.ad-inline-cta__text {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  color: var(--color-purple);
+  margin: 0 0 var(--gap-md);
+}
+
+
+/* ── ABOUT THE AUTHOR (KC posts) ─────────────────────────
+   Trailing block on KC organism / antibiotic posts. */
+.ad-author-card {
+  max-width: 720px;
+  margin: var(--gap-2xl) auto 0;
+  padding: var(--gap-lg);
+  background: var(--surface-container-low);
+  border-radius: var(--radius-lg);
+}
+
+.ad-author-card__label {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-coral-dark);
+  margin: 0 0 var(--gap-sm);
+}
+
+.ad-author-card__bio {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--on-surface);
+  margin: 0;
+}

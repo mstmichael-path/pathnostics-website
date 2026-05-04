@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polymicrobial Infections in the Urinary Tract — Pathnostics</title>
+  <meta name="description" content="The rate of polymicrobial infections, or infections involving two or more micro-organisms, is as high as 39% in urinary tract infections (UTI) (1). How can polymicrobial infections form in the urinary tract? Years of clinical research have ">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+  <!-- CSS — absolute paths so this works from any depth -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/nav.css">
+  <link rel="stylesheet" href="/css/info-page.css">
+
+  <link rel="stylesheet" href="/css/article-detail.css">
+
+  <!-- GSAP — REQUIRED. main.js errors at line 1 without these,
+       which breaks scroll-collapse + footer parallax. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+<!-- ════════════════════════════════════════════════════
+     NAV SYSTEM — verbatim from /index.html.
+     If the homepage nav changes, sync this section.
+     The local nav (Tier 3) anchors are PAGE-SPECIFIC.
+     ════════════════════════════════════════════════════ -->
+<div class="nav-system" id="nav-system" role="navigation" aria-label="Primary">
+
+  <div class="utility-bar" id="utility-bar">
+    <div class="utility-bar__left">
+      <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a>
+      <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div class="utility-bar__right">
+      <a href="tel:8004934490" class="utility-bar__phone" aria-label="Call 800.493.4490">800.493.4490</a>
+    </div>
+  </div>
+
+  <div class="global-nav" id="global-nav">
+    <div class="global-nav__inner">
+
+      <a href="/" class="global-nav__logo" aria-label="Pathnostics Home">
+        <img class="global-nav__logo-color" src="/assets/pathnostics-logo-color.png" alt="Pathnostics">
+        <img class="global-nav__logo-white" src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+
+      <div class="mobile-bar">
+        <a href="tel:8004934490" class="mobile-bar__phone" aria-label="Call 800.493.4490">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+        <button type="button" class="mobile-bar__toggle" id="mobile-toggle" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false">
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+        </button>
+      </div>
+
+      <ul class="global-menu">
+        <li class="global-menu__item" data-menu="tests">
+          <a href="/tests/" class="global-menu__link">Our Tests<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--tests" role="menu" aria-label="Our Tests">
+            <div class="mega-tests__hero">
+              <img src="/assets/guidance-uti-header-image.webp" alt="Guidance UTI test kit" class="mega-tests__hero-image">
+              <div class="mega-tests__hero-body">
+                <div class="mega-tests__hero-tag">Flagship Test</div>
+                <h3 class="mega-tests__hero-title">Guidance UTI<br>with <em>P-AST.</em></h3>
+                <p class="mega-tests__hero-desc">Pooled antibiotic susceptibility testing that evaluates how antibiotics perform against the infection as a whole — including in polymicrobial cases. Results in 24–36 hours.</p>
+              </div>
+              <a href="/tests/guidance-uti/" class="mega-tests__hero-cta">Explore Guidance UTI<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+            </div>
+            <div class="mega-tests__directory">
+              <div class="mega-tests__group">
+                <h5>All Tests</h5>
+                <ul>
+                  <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+                  <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+                  <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+                  <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+                  <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+                  <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="providers">
+          <a href="/providers/" class="global-menu__link">Providers<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Providers">
+            <ul>
+              <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+              <li><a href="/order-supplies/">Order Supplies</a></li>
+              <li><a href="/customer-care/">Customer Care</a></li>
+              <li><a href="/testimonials/">Testimonials</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="patients">
+          <a href="/patient-resources/" class="global-menu__link">Patient Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Patient Resources">
+            <ul>
+              <li><a href="/billing/">Billing</a></li>
+              <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+              <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item">
+          <a href="/payors/" class="global-menu__link">Payors</a>
+        </li>
+        <li class="global-menu__item" data-menu="clinical">
+          <a href="/clinical-resources/" class="global-menu__link">Clinical Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Clinical Resources">
+            <ul>
+              <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+              <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="about">
+          <a href="/about/" class="global-menu__link">About<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="About">
+            <ul>
+              <li><a href="/our-team/">Our Team</a></li>
+              <li><a href="/careers/">Careers</a></li>
+              <li><a href="/news/">News &amp; Events</a></li>
+              <li><a href="/innovation/">Innovation</a></li>
+              <li><a href="/p-ast/">P-AST&trade;</a></li>
+              <li><a href="/contact/">Contact Us</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+
+      <div class="global-nav__actions">
+        <button class="global-nav__search-btn" id="search-toggle" aria-label="Search" aria-expanded="false">
+          <svg viewBox="0 0 24 24" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <a href="#contact" class="global-nav__cta">Talk to a Rep</a>
+      </div>
+
+      <div class="search-dropdown" id="search-dropdown" aria-hidden="true">
+        <form method="get" action="/search">
+          <input type="search" name="q" placeholder="Search Pathnostics…" aria-label="Search query" autocomplete="off">
+          <button type="submit">Go</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tier 3 local nav — anchors to THIS page's sections -->
+  <div class="local-nav" id="local-nav">
+    <div class="local-nav__inner">
+      <a href="/" class="local-nav__logo" aria-label="Pathnostics Home">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+      <ul class="local-nav__items">
+        <li><a href="#top" data-target="top">UTI Knowledge Center</a></li>
+        <li><a href="#contact" data-target="contact">Talk to a Rep</a></li>
+      </ul>
+      <a href="#contact" class="local-nav__cta">Talk to a Rep</a>
+    </div>
+    <div class="local-nav__progress" id="local-nav-progress"></div>
+  </div>
+</div>
+
+<!-- Mobile drawer — verbatim from /index.html -->
+<div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
+<aside class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
+  <div class="mobile-drawer__inner">
+    <a href="#contact" class="mobile-drawer__cta">Talk to a Rep</a>
+    <nav class="mobile-drawer__nav" aria-label="Mobile primary">
+      <ul class="mobile-accordion">
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Our Tests<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/tests/guidance-uti/">Guidance<sup>&reg;</sup> UTI with P-AST</a></li>
+            <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+            <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+            <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+            <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+            <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+            <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Providers<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+            <li><a href="/order-supplies/">Order Supplies</a></li>
+            <li><a href="/customer-care/">Customer Care</a></li>
+            <li><a href="/testimonials/">Testimonials</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Patient Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/billing/">Billing</a></li>
+            <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+            <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item mobile-accordion__item--single">
+          <a href="/payors/" class="mobile-accordion__head mobile-accordion__head--link">Payors</a>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Clinical Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+            <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">About<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/our-team/">Our Team</a></li>
+            <li><a href="/careers/">Careers</a></li>
+            <li><a href="/news/">News &amp; Events</a></li>
+            <li><a href="/innovation/">Innovation</a></li>
+            <li><a href="/p-ast/">P-AST&trade;</a></li>
+            <li><a href="/contact/">Contact Us</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <ul class="mobile-drawer__utility">
+      <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+      <li><a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      <li><a href="tel:8004934490" class="mobile-drawer__phone">800.493.4490</a></li>
+    </ul>
+  </div>
+</aside>
+<main class="page-shell">
+
+  <section class="ad-hero" id="top">
+    <div class="container ad-hero__inner">
+      <a href="/uti-knowledge-center/" class="ad-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        UTI Knowledge Center
+      </a>
+      <div class="ad-hero__overline">Knowledge Center</div>
+      <h1 class="ad-hero__title">Polymicrobial Infections in the Urinary Tract</h1>
+      
+    </div>
+  </section>
+
+  <section class="ad-content">
+    <div class="container">
+      <div class="ad-content__body">
+<p>The rate of polymicrobial infections, or infections involving two or more micro-organisms, is as high as 39% in urinary tract infections (UTI) (1).</p>
+<p><strong>How can polymicrobial infections form in the urinary tract?</strong></p>
+<p>Years of clinical research have established that many microorganisms colonize the human body and form microbiomes. Microbiomes are defined as the aggregates of microorganisms (bacteria, archaea, fungi, protists, and viruses) that reside on or within human tissues and biofluids along with the corresponding anatomical sites. These sites include, but are not limited to skin, oral mucosa, saliva, gastrointestinal tract, lung, and genitourinary system (2).</p>
+<p>In 2008, the National Institutes of Health (NIH) initiated the Human Microbiome Project (HMP) to provide the resources necessary for the comprehensive characterization of the microbial communities and analyze their roles in human development, health, and diseases (3).</p>
+<p>Would you like to learn more about the Bladder Microbiome? <a href="https://bit.ly/34FRGOk">Watch On-Demand Webinar</a></p>
+<blockquote>
+<h3><strong>Polymicrobial infections may be formed on the basis of the polymicrobial tendency of urobiomes.</strong></h3>
+</blockquote>
+<p>Evidence supporting the presence of urinary microbiome, or urobiome, was relatively new and surfaced less than a decade ago (4-6). Historically, urine was thought sterile due to the long-standing use of standard urine culture (SUC). Using 16S rRNA gene sequencing, Wolfe et al. demonstrated that a wide variety of microbes DNA existed in the urine samples from consenting participants free of known UTIs (4).</p>
+<p>Aiming to determine if the DNA belonged to bladder living microorganisms, an enhanced quantitative urine culture (EQUC) involves plating a larger volume of urine, varying atmospheric conditions, more prolonged incubation, and additional plating conditions, was subsequently developed. Using this enhanced culture technique, Price et al. studied the presence of different microbes in the bladders of 75 healthy women that did not meet the clinical UTI definition (no-UTI cohort). They discovered 72 uropathogens, 93% of which was missed by SUC, in the flora from the 75 healthy women, demonstrating that the microbes were living organisms in the bladder (7).</p>
+<p>The majority of these women [89% (67/75)] had positive bacterial cultures using the EQUC technology, further supporting the presence of urobiome in the bladder. The median number of bacterial species detected was two, indicating that many of the urobiomes in the women free of UTI were polymicrobial (7). The polymicrobial tendency of urobiomes may be the basis for polymicrobial infections.</p>
+<p>Interest in learning more about the implications of urobiome? <a href="https://bit.ly/34FRGOk">Watch Now</a></p>
+<blockquote>
+<h3><strong>Polymicrobial infections contain many relevant UTI uropathogens clinically missed by SUC.</strong></h3>
+</blockquote>
+<p>In addition to the 75 women in the no-UTI cohort, Price et al. also included 75 women in the UTI cohort in their study (7). They found that the EQUC protocol detected a total of 182 uropathogens, including 110 in the UTI cohort and 72 in the no-UTI cohort. They discovered the ineffectiveness of SUC in identifying microorganisms, especially in polymicrobial infections: Whereas EQUC did not miss any uropathogen identified by SUC, the SUC only identified 33% (60/182) of all EQUC-detected uropathogens, 7% (5/72) of those detected in the non-UTI cohort, and missed 50% of the uropathogens (55/110), including Gram-positive uropathogens, in the UTI cohort (7).</p>
+<p>Following clinically selected treatment based on SUC, 41% of patients in the UTI cohort reported no symptom resolution, half of whom had at least one uropathogen, either Gram-negative or Gram-positive, missed by SUC (7).</p>
+<p>The researchers also found that the UTI and the no-UTI cohorts differed in organism diversity, genus-level composition, and species-level composition based on the EQUC results. The no-UTI cohort had more variety with greater species richness. The genera <em>Streptococcus</em> and <em>Gardnerella</em> were more prevalent in the no-UTI cohort, while the genus <em>Escherichia</em> was more common in the UTI cohort (7).</p>
+<blockquote>
+<h3><strong>Polymicrobial infections may be caused by dysbiosis of the urobiome in the urinary tract.</strong></h3>
+</blockquote>
+<p>Studies have also shown that the urobiome changes constituents in response to host interaction and exogenous factors, such as antibiotics (8,9). Disruption of a healthy urinary microbiome may lead to dysbiosis, the imbalance that may permit pathogenic bacteria, fungi, or viruses to cause a UTI (10).</p>
+<p>In <a href="/polymicrobial-infections-in-the-urinary-tract/">polymicrobial infections</a>, unhealthy consortia, defined as non-random communities of microbes, may interact to provide community members with growth and survival advantages while driving a pathogenic inflammatory process (11-13).</p>
+<h2><strong>Polymicrobial infections: What technologies can effectively identify them?</strong></h2>
+<p>What technologies can effectively identify polymicrobial infections and detect the microorganism components in polymicrobial infections? SUC has shown to be inadequate in achieving these goals.</p>
+<p>Besides its limitation associated with the CFU threshold, by nature, SUC is biased toward <em>E. coli</em>-centric faster-growing microorganisms that thrive in aerobic conditions than slow-growing organisms that are either fastidious or grow under anaerobic conditions. SUC favors the growth of Gram-negative bacterial species as opposed to Gram-positive species. It is also inferior in identifying polymicrobial infections (14,15).</p>
+<p>Newer technologies, such as polymerase chain reaction (PCR), mass spectrometry, and next-generation sequencing, are more widely used to expand our understanding of polymicrobial infections and UTIs (4).</p>
+<p>Pathnostics designed the <a href="/tests/guidance-uti/">Guidance® UTI</a> test based on the advanced multiplex PCR (M-PCR) technology and a proprietary Pooled-Antibiotic Susceptibility Testing.  Research studies have demonstrated the test’s increased ability to detect bacteria in urine samples compared to SUC. Guidance® UTI more credibly detects Gram-positive bacteria, and thus detects polymicrobial infections. Based on results from a study using Guidance® UTI, more than one in two patients (56.1%) tested positive for UTIs were polymicrobial infections (16).</p>
+<h2><strong>Polymicrobial infections and antibiotic susceptibilities</strong></h2>
+<p>CLSI (Clinical and Laboratory Standards Institute) provides antibiotic susceptibility and resistance standards in monomicrobial infections but not for polymicrobial infections.</p>
+<p>What technologies can effectively characterize the susceptibility of the microorganisms in polymicrobial infections to different antibiotics?</p>
+<blockquote>
+<h3><strong>Bacterial interactions in polymicrobial infections are ignored by traditional antibiotic susceptibility testing.</strong></h3>
+</blockquote>
+<p>In a traditional antibiotic susceptibility assay, each bacterium is tested in isolation against an antibiotic, providing no opportunity to assess bacterial interactions, leading to potential treatment failure, or preventing the use of efficacious antibiotics.</p>
+<blockquote>
+<h3><strong>Historical studies suggest that bacterial interactions impact antibiotic susceptibilities.</strong></h3>
+</blockquote>
+<p>Interactions among bacterial cells of the same or different species are potentially crucial for the growth and survival of bacteria in polymicrobial communities. Even if not all the organisms are directly pathogenic and associated with UTI symptoms, the interactions can alter the pathogenic bacteria’s responses to antibiotics in polymicrobial settings (11,17-19).</p>
+<p>One crucial example of bacterial interaction mechanisms is quorum sensing, a cell-to-cell communication system that exists widely in the microbiome and is related to cell density. The high-density colony community can generate sufficient small molecular signals and activate various downstream cellular processes that may impact the pathogens’ virulence and drug resistance behaviors.</p>
+<p>Previous studies also show that clinical isolates can protect other species from antibiotics with various interactions demonstrating a higher than 3.5-fold increase in antimicrobial tolerance (11). For example, a single resistant bacterial species’ ability to break down a β-lactamase inhibitor may protect the whole bacterial population against penicillin’s or cephalosporins (20).</p>
+<p>The urine sample’s likelihood of containing such a protective species increases with each additional bacterial species added to the <a href="/does-p-ast-more-accurately-determine-susceptibility-for-polymicrobial-samples/">polymicrobial infection</a>. Additionally, one bacterium can confer antibiotic resistance on another bacterium through horizontal gene transfer (HGT) of antibiotic resistance genes (21).</p>
+<blockquote>
+<h3><strong>A new study of polymicrobial infections by Pathnostics demonstrated the fundamental impact of bacterial interactions on antibiotic susceptibility.</strong></h3>
+</blockquote>
+<p>Indeed, a large cohort national study by Pathnostics titled ‘Bacterial Interactions as Detected by <a href="/does-p-ast-more-accurately-determine-susceptibility-for-polymicrobial-samples/">Pooled Antibiotic Susceptibility Testing (P-AST™)</a> in Polymicrobial Urine Specimens,’ published in the Journal of Surgical Urology, also demonstrates the fundamental impact of bacterial interactions on antibiotic susceptibility.</p>
+<p>Combining data from two Institutional Review Board-approved studies that collected urine specimens from 3,124 symptomatic UTI patients in 37 urology clinics across the United States, the study measured antibiotic susceptibility by the <a href="/tests/guidance-uti/">Guidance® UTI</a> test utilizing P-AST™. Key findings of the study include:</p>
+<ul>
+<li>The odds of resistance to most antibiotic treatments increased with each additional bacterial organism present in polymicrobial specimens.</li>
+<li>The interactions between the bacterial organisms present in the polymicrobial infections significantly altered the patients’ responses to specific antibiotic treatments. There are 44 situations for which 13 pairs of bacterial species exhibited statistically significant interactions, which caused susceptibility patterns to change as measured by the Highest Single Agent Principle or Union Principle statistical analysis models.</li>
+</ul>
+<p>These findings align with the results reported by De Vos et al., who examined the interactions between 72 bacterial isolates from older adults with UTI symptoms. The researchers measured the impact of species-to-species interactions on antibiotic efficacy.</p>
+<p>Using media conditioned by donor isolates, they observed that clinical isolates often protected each other from the antibiotics commonly used for UTIs. For example, 25% of tested species-to-species interactions showed a greater than 3.5-fold increase in tolerance for trimethoprim-sulfamethoxazole, but decreases of the same magnitude only occurred in 12% of patient results (11).</p>
+<h2><strong>The advantages of detecting polymicrobial infections and taking into consideration bacterial interactions in polymicrobial infections</strong></h2>
+<p>This new research highlights the importance of bacterial interactions in their antibiotic responses in UTIs and how Pathnostics’ Guidance® UTI test can have a significant and positive impact on antibiotic stewardship. The P-AST™ in the Guidance® UTI test is a game-changer in supporting physicians with diagnosing and prescribing antibiotics to treat urinary tract infections (UTIs) by taking bacterial interactions in polymicrobial infections into consideration.</p>
+<blockquote>
+<h3><strong>Large health care cost associated with UTI</strong></h3>
+</blockquote>
+<p>UTIs are associated with high healthcare costs, accounting for more than 10 million office visits, and 3 million emergency department visits annually in the U.S (22,23). It is the second most common infection in geriatric populations (24). A significant proportion of these infections may be polymicrobial infections (1). <a href="https://www.pathnostics.com/resources/new-large-patient-study-reveals-significant-reduction-in-hospital-admissions-from-pathnostics-advanced-uti-test/">Read more</a></p>
+<blockquote>
+<h3><strong>Huge clinical impacts and cost-savings of Guidance® UTI test in the management of UTI</strong></h3>
+</blockquote>
+<p>The use of sensitive and accurate M-PCR technology in pathogen identification and the consideration of <a href="/does-p-ast-more-accurately-determine-susceptibility-for-polymicrobial-samples/">bacterial interaction</a> in antibiotic susceptibility in the <a href="/tests/guidance-uti">Guidance® UTI</a> test have demonstrated significant clinical impacts.</p>
+<p>Daly A. et al. associated the M-PCR/P-AST results with better outcomes in a study with 66,381 patients seen for UTIs by primary care providers in their homes or assisted living locations. The clinical outcomes measured in the study included numbers of hospital admission and/or emergency department (ED) utilization. The patients were divided into two non-overlapping cohorts: physicians treated patients in cohort one (N=34,414) based upon SUC results and the other cohort (N=31,967) based upon the results from the <a href="/tests/guidance-uti/">Guidance® UTI</a> test. The two patient cohorts had similar demographics, comorbidities, Charlson/Deyo Index Scores, the number of provider visits, and enrollment locations.</p>
+<p>The analysis detected a <a href="/guidance-uti-is-associated-with-13-7-reduction-in-hospital-admissions-compared-to-suc/">13.7% reduction in hospital admissions</a> and/or emergency department utilization associated with the use of the Guidance® UTI test compared with traditional SUC. The 13.7% reduction in hospitalization, when normalized to 34,414 patients in the SUC cohort, would result in 156 fewer patients attending the ED/hospitalizations and/or ED utilization from a UTI (16).</p>
+<p>Another study has demonstrated savings of up to $64,000 per UTI patient by keeping them out of hospitals, considering the dollars paid by the patient and insurance (25). Thus, cost avoidance for 156 patients is as high as $10,000,000. The cost of testing using M-PCR/P-AST for the target population suffering from UTIs is well below the cost associated with adverse effects that result in ED or hospitalization.</p>
+<p>References</p>
+<ol>
+<li>Laudisio A, Marinosci F, Fontana D, Gemma A, Zizzo A, Coppola A, Rodano L, Antonelli Incalzi R. The burden of comorbidity is associated with symptomatic polymicrobial urinary tract infection among institutionalized elderly. Aging Clin Exp Res. 2015; 27(6):805-12.</li>
+<li>Marchesi, J.R., Ravel, J. The vocabulary of microbiome research: a proposal.  2015;3, 31.</li>
+<li><a href="https://commonfund.nih.gov/hmp/overview">https://commonfund.nih.gov/hmp/overview</a>. Last accessed on 09/25/2020.</li>
+<li>Wolfe AJ, Toh E, Shibata N, et al. Evidence of uncultivated bacteria in the adult female bladder. J Clin Microbiol. 2012;50(4):1376-1383.</li>
+<li>Wolfe AJ, Brubaker L. Urobiome updates: advances in urinary microbiome research. Nature Reviews Urology. 2019;16 (2): 73–74.</li>
+<li>Drake MJ, Morris N, Apostolidis A, Rahnama’i MS, Marchesi JR. The urinary microbiome and its contribution to lower urinary tract symptoms; ICI-RS 2015. Neurourology and Urodynamics. 2017;36 (4): 850–853.</li>
+<li>Price TK, Dune T, Hilt EE, Thomas-White KJ, Kliethermes S, Brincat C, Brubaker L, Wolfe AJ, Mueller ER, Schreckenberger PC. The clinical urine culture: enhanced techniques improve detection of clinically relevant microorganisms. J Clin Microbiol. 2016;54(5):1216-22.</li>
+<li>Gottschick C, Deng ZL, Vital M, et al. The urinary microbiota of men and women and its changes in women during bacterial vaginosis and antibiotic treatment. Microbiome. 2017;5(1):99.</li>
+<li>Modena B.D., Milam R., Harrison F., Cheeseman J.A., Abecassis M.M., Friedewald J.J., Kirk A.D., Salomon D.R. Changes in urinary microbiome populations correlate in kidney transplants with interstitial fibrosis and tubular atrophy documented in early surveillance biopsies.  J. Transplant. 2017;17:712–723.</li>
+<li>Zampini A, Nguyen AH, Rose E, Monga M, Miller AW. Defining dysbiosis in patients with urolithiasis. Sci Rep-uk. 2019;9(1):5425.</li>
+<li>Vos MG de, Zagorski M, McNally A, Bollenbach T. Interaction networks, ecological stability, and collective antibiotic tolerance in polymicrobial infections. PNAS. 2017;114(40):10666-10671.</li>
+<li>Xavier JB. Sociomicrobiology and pathogenic bacteria. Microbiol Spectr. 2016;4(3):10.1128/microbiolspec.VMBF-0019-2015.</li>
+<li>Lattar SM, Wu X, Brophy J, Sakai F, Klugman KP, Vidal JE. A mechanism of unidirectional transformation, leading to antibiotic resistance, occurs within nasopharyngeal pneumococcal biofilm consortia. Mbio. 2018;9(3):e00561-18.</li>
+<li>Vollstedt A, Baunoch D, Wojno KJ, Luke N, Cline K, et al. Multisite prospective comparison of multiplex polymerase chain reaction testing with urine culture for giagnosis of urinary tract infections in symptomatic patients. J Sur urology. 2020;JSU-102.</li>
+<li>Wojno KJ, Baunoch D, Luke N, et al. Multiplex PCR based urinary tract infection (UTI) analysis compared to traditional urine culture in identifying significant pathogens in symptomatic patients. Urology. 2020;136:119-126.</li>
+<li>Daly A, Baunoch D, Rehling K, Luke N, Campbell M, et al. Utilization of M-PCR and P-AST for diagnosis and management of urinary tract infections in home-based primary care. JOJ uro &amp; nephron. 2020;7(2): JOJUN.MS.ID.555707.</li>
+<li>Rogers GB, Hoffman LR, Whiteley M, Daniels TWV, Carroll MP, et al. Revealing the dynamics of polymicrobial infections: implications for antibiotic therapy. Trends in Microbiology. 2010;18: 357-364.</li>
+<li>Peters BM, Jabra-Rizk MA, O’May GA, Costerton JW, Shirtliff ME. Polymicrobial interactions: impact on pathogenesis and human disease. Clin Microbiol Rev. 2012;25(1):193-213.</li>
+<li>Adamowicz EM, Flynn J, Hunter RC, Harcombe WR. Cross-feeding modulates antibiotic tolerance in bacterial communities. The ISME Journal. 2010;12: 2723-2735.</li>
+<li>Yurtsev EA, Chao HX, Datta MS, Artemova T, Gore J. Bacterial cheating drives the population dynamics of cooperative antibiotic resistance plasmids. Mol Syst Biol. 2013;9:683.</li>
+<li>Bolotin E, Hershberg R. Horizontally Acquired Genes Are Often 10. Shared between closely related bacterial species. Front Microbiol. 2017;8: 1536.</li>
+<li>Flores-Mireles, A. L., Walker, J. N., Caparon, M. &amp; Hultgren, S. J. Urinary tract infections: epidemiology, mechanisms of infection and treatment options.  Rev. Microbiol.2015;13, 269–284.</li>
+<li>Simmering, J. E., Tang, F., Cavanaugh, J. E., Polgreen, L. A. &amp; Polgreen, P. M. The increase in hospitalizations for urinary tract infections and the associated costs in the United States, 1998-2011. Open Forum Infect. Dis.2017;4, ofw281.</li>
+<li>Alpay Y, Aykin N, Korkmaz P, Gulduren HM, Caglan FC. Urinary tract infections in the geriatric patients. Pak J Med Sci. 2018;34(1):67-72.</li>
+<li>Turner RM, Wu B, Lawrence K, Hackett J, Karve S, Tunceli O. Assessment of outpatient and inpatient antibiotic treatment patterns and health care costs of patients with complicated urinary tract infections. Clin Ther. 2015;37(9):2037-2047.</li>
+</ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA — required on every sub-page. -->
+  <section class="section--green closing-cta">
+    <div class="container">
+      <h2 class="closing-cta__headline">
+        Ready to see what better diagnostics <em>can do for your practice?</em>
+      </h2>
+      <p class="closing-cta__sub">
+        Talk to a Pathnostics representative about Guidance® UTI and our other tests.
+      </p>
+      <div class="closing-cta__actions">
+        <a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative" class="btn-primary">Talk to a Rep</a>
+        <a href="/tests/" class="btn-ghost-white">See Our Tests</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ════════════════════════════════════════════════════
+     FOOTER — verbatim from /index.html.
+     ════════════════════════════════════════════════════ -->
+<footer class="section--navy footer" id="contact">
+  <a href="#top" class="footer__back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </a>
+  <div class="container" style="padding-top: var(--section-padding-y); padding-bottom: var(--gap-xl);">
+    <p class="footer__big-tagline">
+      Better decisions. Better outcomes. Better lives<span class="footer__big-tagline-period">.</span>
+    </p>
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics" loading="lazy">
+        <div class="footer__social">
+          <a href="https://www.linkedin.com/company/pathnostics/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg></a>
+          <a href="https://twitter.com/Pathnostics" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+        <iframe name="footer-subscribe-iframe" class="footer__subscribe-iframe" aria-hidden="true" tabindex="-1"></iframe>
+        <form class="footer__subscribe" action="https://pathnostics.us4.list-manage.com/subscribe/post?u=a1401745b75d8b6b5e62ed930&amp;id=35ede7f928&amp;f_id=009c57e9f0" method="post" target="footer-subscribe-iframe" novalidate>
+          <label for="footer-subscribe-email" class="footer__subscribe-label">Stay Informed</label>
+          <div class="footer__subscribe-row">
+            <input id="footer-subscribe-email" type="email" name="EMAIL" placeholder="Email address" required class="footer__subscribe-input" autocomplete="email">
+            <button type="submit" class="footer__subscribe-btn">Subscribe</button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <p class="footer__heading">Our Solutions</p>
+        <div class="footer__links">
+          <a href="/tests/guidance-uti/">Guidance UTI with P-AST</a>
+          <a href="/#athome">Guidance @Home</a>
+          <a href="/providers/">For Providers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Resources</p>
+        <div class="footer__links">
+          <a href="/evidence.html">Published Evidence</a>
+          <a href="/clinical-resources/">Clinical Resources</a>
+          <a href="/patient-resources/">Patient Resources</a>
+          <a href="/news/">News &amp; Events</a>
+          <a href="/careers/">Careers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Get in Touch</p>
+        <p class="footer__contact-text">Ready to see how Guidance can support your practice?</p>
+        <a href="#contact" class="btn-primary footer__cta">Talk to a Rep</a>
+        <div class="footer__utility">
+          <a href="/customer-care/">Customer Care</a>
+          <a href="/billing/">Billing</a>
+          <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener noreferrer">Pay Your Bill</a>
+          <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener noreferrer">Provider Login</a>
+          <a href="/order-supplies/">Order Supplies</a>
+          <a href="/veterans/">For Veterans</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copyright">&copy; 2026 Pathnostics | All rights reserved</p>
+      <div class="footer__legal">
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/patient-privacy/">Patient Privacy</a>
+        <a href="https://secure.ethicspoint.com/domain/media/en/gui/44588/index.html" target="_blank" rel="noopener noreferrer">Confidential Reporting</a>
+        <a href="/privacy-policy/#Section9">About Ads</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

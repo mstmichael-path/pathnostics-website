@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UTI Knowledge Center — Pathnostics</title>
+  <meta name="description" content="Explore the organisms and antibiotics on the Guidance® UTI panel — clinical relevance, treatment context, and the evidence behind each one.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+  <!-- CSS — absolute paths so this works from any depth -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/nav.css">
+  <link rel="stylesheet" href="/css/info-page.css">
+
+  <link rel="stylesheet" href="/css/listing-page.css">
+
+  <!-- GSAP — REQUIRED. main.js errors at line 1 without these,
+       which breaks scroll-collapse + footer parallax. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+<!-- ════════════════════════════════════════════════════
+     NAV SYSTEM — verbatim from /index.html.
+     If the homepage nav changes, sync this section.
+     The local nav (Tier 3) anchors are PAGE-SPECIFIC.
+     ════════════════════════════════════════════════════ -->
+<div class="nav-system" id="nav-system" role="navigation" aria-label="Primary">
+
+  <div class="utility-bar" id="utility-bar">
+    <div class="utility-bar__left">
+      <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a>
+      <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div class="utility-bar__right">
+      <a href="tel:8004934490" class="utility-bar__phone" aria-label="Call 800.493.4490">800.493.4490</a>
+    </div>
+  </div>
+
+  <div class="global-nav" id="global-nav">
+    <div class="global-nav__inner">
+
+      <a href="/" class="global-nav__logo" aria-label="Pathnostics Home">
+        <img class="global-nav__logo-color" src="/assets/pathnostics-logo-color.png" alt="Pathnostics">
+        <img class="global-nav__logo-white" src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+
+      <div class="mobile-bar">
+        <a href="tel:8004934490" class="mobile-bar__phone" aria-label="Call 800.493.4490">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+        <button type="button" class="mobile-bar__toggle" id="mobile-toggle" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false">
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+        </button>
+      </div>
+
+      <ul class="global-menu">
+        <li class="global-menu__item" data-menu="tests">
+          <a href="/tests/" class="global-menu__link">Our Tests<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--tests" role="menu" aria-label="Our Tests">
+            <div class="mega-tests__hero">
+              <img src="/assets/guidance-uti-header-image.webp" alt="Guidance UTI test kit" class="mega-tests__hero-image">
+              <div class="mega-tests__hero-body">
+                <div class="mega-tests__hero-tag">Flagship Test</div>
+                <h3 class="mega-tests__hero-title">Guidance UTI<br>with <em>P-AST.</em></h3>
+                <p class="mega-tests__hero-desc">Pooled antibiotic susceptibility testing that evaluates how antibiotics perform against the infection as a whole — including in polymicrobial cases. Results in 24–36 hours.</p>
+              </div>
+              <a href="/tests/guidance-uti/" class="mega-tests__hero-cta">Explore Guidance UTI<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+            </div>
+            <div class="mega-tests__directory">
+              <div class="mega-tests__group">
+                <h5>All Tests</h5>
+                <ul>
+                  <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+                  <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+                  <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+                  <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+                  <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+                  <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="providers">
+          <a href="/providers/" class="global-menu__link">Providers<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Providers">
+            <ul>
+              <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+              <li><a href="/order-supplies/">Order Supplies</a></li>
+              <li><a href="/customer-care/">Customer Care</a></li>
+              <li><a href="/testimonials/">Testimonials</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="patients">
+          <a href="/patient-resources/" class="global-menu__link">Patient Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Patient Resources">
+            <ul>
+              <li><a href="/billing/">Billing</a></li>
+              <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+              <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item">
+          <a href="/payors/" class="global-menu__link">Payors</a>
+        </li>
+        <li class="global-menu__item" data-menu="clinical">
+          <a href="/clinical-resources/" class="global-menu__link">Clinical Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Clinical Resources">
+            <ul>
+              <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+              <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="about">
+          <a href="/about/" class="global-menu__link">About<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="About">
+            <ul>
+              <li><a href="/our-team/">Our Team</a></li>
+              <li><a href="/careers/">Careers</a></li>
+              <li><a href="/news/">News &amp; Events</a></li>
+              <li><a href="/innovation/">Innovation</a></li>
+              <li><a href="/p-ast/">P-AST&trade;</a></li>
+              <li><a href="/contact/">Contact Us</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+
+      <div class="global-nav__actions">
+        <button class="global-nav__search-btn" id="search-toggle" aria-label="Search" aria-expanded="false">
+          <svg viewBox="0 0 24 24" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <a href="#contact" class="global-nav__cta">Talk to a Rep</a>
+      </div>
+
+      <div class="search-dropdown" id="search-dropdown" aria-hidden="true">
+        <form method="get" action="/search">
+          <input type="search" name="q" placeholder="Search Pathnostics…" aria-label="Search query" autocomplete="off">
+          <button type="submit">Go</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tier 3 local nav — anchors to THIS page's sections -->
+  <div class="local-nav" id="local-nav">
+    <div class="local-nav__inner">
+      <a href="/" class="local-nav__logo" aria-label="Pathnostics Home">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+      <ul class="local-nav__items">
+        <li><a href="#featured" data-target="featured">Featured</a></li>
+        <li><a href="#microorganisms" data-target="microorganisms">Microorganisms</a></li>
+        <li><a href="#antibiotics" data-target="antibiotics">Antibiotics</a></li>
+        <li><a href="#articles" data-target="articles">More Articles</a></li>
+      </ul>
+      <a href="#contact" class="local-nav__cta">Talk to a Rep</a>
+    </div>
+    <div class="local-nav__progress" id="local-nav-progress"></div>
+  </div>
+</div>
+
+<!-- Mobile drawer — verbatim from /index.html -->
+<div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
+<aside class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
+  <div class="mobile-drawer__inner">
+    <a href="#contact" class="mobile-drawer__cta">Talk to a Rep</a>
+    <nav class="mobile-drawer__nav" aria-label="Mobile primary">
+      <ul class="mobile-accordion">
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Our Tests<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/tests/guidance-uti/">Guidance<sup>&reg;</sup> UTI with P-AST</a></li>
+            <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+            <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+            <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+            <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+            <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+            <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Providers<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+            <li><a href="/order-supplies/">Order Supplies</a></li>
+            <li><a href="/customer-care/">Customer Care</a></li>
+            <li><a href="/testimonials/">Testimonials</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Patient Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/billing/">Billing</a></li>
+            <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+            <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item mobile-accordion__item--single">
+          <a href="/payors/" class="mobile-accordion__head mobile-accordion__head--link">Payors</a>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Clinical Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+            <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">About<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/our-team/">Our Team</a></li>
+            <li><a href="/careers/">Careers</a></li>
+            <li><a href="/news/">News &amp; Events</a></li>
+            <li><a href="/innovation/">Innovation</a></li>
+            <li><a href="/p-ast/">P-AST&trade;</a></li>
+            <li><a href="/contact/">Contact Us</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <ul class="mobile-drawer__utility">
+      <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+      <li><a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      <li><a href="tel:8004934490" class="mobile-drawer__phone">800.493.4490</a></li>
+    </ul>
+  </div>
+</aside>
+<main class="page-shell">
+
+  <section class="ip-hero ip-hero--listing" id="top">
+    <div class="container ip-hero__inner">
+      <div class="ip-hero__copy">
+        <div class="ip-hero__overline">UTI Knowledge Center</div>
+        <h1 class="ip-hero__title">
+          The clinical context behind <em>every line of the report.</em>
+        </h1>
+        <p class="ip-hero__lede">
+          A library covering the organisms and antibiotics on the Guidance<sup>&reg;</sup> UTI panel —
+          why each is clinically relevant and why it earned a place in targeted treatment decisions.
+        </p>
+        <div class="ip-hero__actions">
+          <a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative" class="btn-primary">Talk to a Rep</a>
+          <a href="#microorganisms" class="btn-secondary">Browse the Library</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-grid-section" id="featured">
+    <div class="container">
+      <h2 class="lp-grid-section__heading">Featured <em>posts.</em></h2>
+      <div class="lp-grid">
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/guidance-uti-tracking-microorganisms-and-antibiotics-for-better-care/">Guidance® UTI: Tracking Microorganisms and Antibiotics for Better Care</a></h3>
+            <p class="lp-card__excerpt">The Importance of a Comprehensive UTI Panel Urinary tract infections (UTIs) are among the most common bacterial infections. They affect millions of people each year. Standard urine cultures often miss key pathogens or fail to provide timely</p>
+            <a href="/guidance-uti-tracking-microorganisms-and-antibiotics-for-better-care/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/introduction-to-antibiotic-spotlights/">Introduction to Antibiotic Spotlights</a></h3>
+            <p class="lp-card__excerpt">Administration Routes</p>
+            <a href="/introduction-to-antibiotic-spotlights/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/introduction-to-microorganism-spotlights/">Introduction to Microorganism Spotlights</a></h3>
+            <p class="lp-card__excerpt"></p>
+            <a href="/introduction-to-microorganism-spotlights/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-grid-section" id="microorganisms">
+    <div class="container">
+      <h2 class="lp-grid-section__heading"><em>Microorganism</em> spotlights.</h2>
+      <div class="lp-icon-grid">
+        <a href="/a-baumannii/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">AB</div>
+          <h4 class="lp-icon-card__title"><i>A. baumannii</i></h4>
+        </a>
+        <a href="/a-omnicolens/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">AO</div>
+          <h4 class="lp-icon-card__title"><i>A. omnicolens</i></h4>
+        </a>
+        <a href="/a-schaalii/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">AS</div>
+          <h4 class="lp-icon-card__title"><i>A. schaalii</i></h4>
+        </a>
+        <a href="/a-urinae/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">AU</div>
+          <h4 class="lp-icon-card__title"><i>A. urinae</i></h4>
+        </a>
+        <a href="/add-on-testing-for-sexually-transmitted-infections-stis/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">ATF</div>
+          <h4 class="lp-icon-card__title">Add-On Testing for Sexually Transmitted Infections (STIs)</h4>
+        </a>
+        <a href="/add-on-testing-for-viruses/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">ATF</div>
+          <h4 class="lp-icon-card__title">Add-On Testing for Urinary-Associated Viruses</h4>
+        </a>
+        <a href="/c-albicans/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">CA</div>
+          <h4 class="lp-icon-card__title"><i>C. albicans</i></h4>
+        </a>
+        <a href="/c-auris/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">CA</div>
+          <h4 class="lp-icon-card__title"><i>C. auris</i></h4>
+        </a>
+        <a href="/c-freundii/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">CF</div>
+          <h4 class="lp-icon-card__title"><i>C. freundii</i></h4>
+        </a>
+        <a href="/c-glabrata/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">CG</div>
+          <h4 class="lp-icon-card__title"><i>C. glabrata</i></h4>
+        </a>
+        <a href="/c-koseri/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">CK</div>
+          <h4 class="lp-icon-card__title"><i>C. koseri</i></h4>
+        </a>
+        <a href="/c-parapsilosis/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">CP</div>
+          <h4 class="lp-icon-card__title"><i>C. parapsilosis</i></h4>
+        </a>
+        <a href="/c-riegelii/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">CR</div>
+          <h4 class="lp-icon-card__title"><i>C. riegelii</i></h4>
+        </a>
+        <a href="/cons/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">C</div>
+          <h4 class="lp-icon-card__title">CoNS</h4>
+        </a>
+        <a href="/e-coli/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">EC</div>
+          <h4 class="lp-icon-card__title"><i>E. coli</i></h4>
+        </a>
+        <a href="/e-faecalis/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">EF</div>
+          <h4 class="lp-icon-card__title"><i>E. faecalis</i></h4>
+        </a>
+        <a href="/e-faecium/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">EF</div>
+          <h4 class="lp-icon-card__title"><i>E. faecium</i></h4>
+        </a>
+        <a href="/enterobacter-group/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">EG</div>
+          <h4 class="lp-icon-card__title">Enterobacter Group</h4>
+        </a>
+        <a href="/g-vaginalis/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">GV</div>
+          <h4 class="lp-icon-card__title"><i>G. vaginalis</i></h4>
+        </a>
+        <a href="/k-oxytoca/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">KO</div>
+          <h4 class="lp-icon-card__title"><i>K. oxytoca</i></h4>
+        </a>
+        <a href="/k-pneumoniae/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">KP</div>
+          <h4 class="lp-icon-card__title"><i>K. pneumoniae</i></h4>
+        </a>
+        <a href="/m-hominis/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">MH</div>
+          <h4 class="lp-icon-card__title"><i>M. hominis</i></h4>
+        </a>
+        <a href="/m-morganii/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">MM</div>
+          <h4 class="lp-icon-card__title"><i>M. morganii</i></h4>
+        </a>
+        <a href="/p-aeruginosa/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">PA</div>
+          <h4 class="lp-icon-card__title"><i>P. aeruginosa</i></h4>
+        </a>
+        <a href="/p-mirabilis/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">PM</div>
+          <h4 class="lp-icon-card__title"><i>P. mirabilis</i></h4>
+        </a>
+        <a href="/p-stuartii/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">PS</div>
+          <h4 class="lp-icon-card__title"><i>P. stuartii</i></h4>
+        </a>
+        <a href="/s-agalactiae/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">SA</div>
+          <h4 class="lp-icon-card__title"><i>S. agalactiae</i></h4>
+        </a>
+        <a href="/s-aureus/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">SA</div>
+          <h4 class="lp-icon-card__title"><i>S. aureus</i></h4>
+        </a>
+        <a href="/s-marcescens/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">SM</div>
+          <h4 class="lp-icon-card__title"><i>S. marcescens</i></h4>
+        </a>
+        <a href="/u-urealyticum/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">UU</div>
+          <h4 class="lp-icon-card__title"><i>U. urealyticum</i></h4>
+        </a>
+        <a href="/vgs/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">VGS</div>
+          <h4 class="lp-icon-card__title">Viridans Group Streptococci</h4>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-grid-section" id="antibiotics">
+    <div class="container">
+      <h2 class="lp-grid-section__heading"><em>Antibiotic</em> spotlights.</h2>
+      <div class="lp-icon-grid">
+        <a href="/amoxicillin-clavulanate/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">AC</div>
+          <h4 class="lp-icon-card__title">Amoxicillin/Clavulanate</h4>
+        </a>
+        <a href="/ampicillin/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">A</div>
+          <h4 class="lp-icon-card__title">Ampicillin</h4>
+        </a>
+        <a href="/ampicillin-sulbactam/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">A</div>
+          <h4 class="lp-icon-card__title">Ampicillin-Sulbactam</h4>
+        </a>
+        <a href="/cefaclor/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">C</div>
+          <h4 class="lp-icon-card__title">Cefaclor</h4>
+        </a>
+        <a href="/cefazolin/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">C</div>
+          <h4 class="lp-icon-card__title">Cefazolin</h4>
+        </a>
+        <a href="/cefepime/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">C</div>
+          <h4 class="lp-icon-card__title">Cefepime</h4>
+        </a>
+        <a href="/ceftazidime/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">C</div>
+          <h4 class="lp-icon-card__title">Ceftazidime</h4>
+        </a>
+        <a href="/ceftriaxone/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">C</div>
+          <h4 class="lp-icon-card__title">Ceftriaxone</h4>
+        </a>
+        <a href="/ciprofloxacin/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">C</div>
+          <h4 class="lp-icon-card__title">Ciprofloxacin</h4>
+        </a>
+        <a href="/doxycycline/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">D</div>
+          <h4 class="lp-icon-card__title">Doxycycline</h4>
+        </a>
+        <a href="/fosfomycin/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">F</div>
+          <h4 class="lp-icon-card__title">Fosfomycin</h4>
+        </a>
+        <a href="/gentamicin/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">G</div>
+          <h4 class="lp-icon-card__title">Gentamicin</h4>
+        </a>
+        <a href="/levofloxacin/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">L</div>
+          <h4 class="lp-icon-card__title">Levofloxacin</h4>
+        </a>
+        <a href="/linezolid/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">L</div>
+          <h4 class="lp-icon-card__title">Linezolid</h4>
+        </a>
+        <a href="/meropenem/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">M</div>
+          <h4 class="lp-icon-card__title">Meropenem</h4>
+        </a>
+        <a href="/nitrofurantoin/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">N</div>
+          <h4 class="lp-icon-card__title">Nitrofurantoin</h4>
+        </a>
+        <a href="/piperacillin-tazobactam/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">PT</div>
+          <h4 class="lp-icon-card__title">Piperacillin/Tazobactam</h4>
+        </a>
+        <a href="/sulfamethoxazole-trimethoprim/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">ST</div>
+          <h4 class="lp-icon-card__title">Sulfamethoxazole/Trimethoprim</h4>
+        </a>
+        <a href="/trimethoprim/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">T</div>
+          <h4 class="lp-icon-card__title">Trimethoprim</h4>
+        </a>
+        <a href="/vancomycin/" class="lp-icon-card">
+          <div class="lp-icon-card__thumb">V</div>
+          <h4 class="lp-icon-card__title">Vancomycin</h4>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-grid-section" id="articles">
+    <div class="container">
+      <h2 class="lp-grid-section__heading">More <em>articles &amp; resources.</em></h2>
+      <div class="lp-grid">
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/advancements-in-uti-testing/">Advancements in UTI Testing</a></h3>
+            <p class="lp-card__excerpt">watch webinar &gt;</p>
+            <a href="/advancements-in-uti-testing/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/advancements-in-uti-testing-a-multi-omics-approach/">Advancements in UTI Testing: A Multi-omics Approach</a></h3>
+            <p class="lp-card__excerpt">watch webinar &gt;</p>
+            <a href="/advancements-in-uti-testing-a-multi-omics-approach/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/antimicrobial-resistance-and-the-importance-of-antibiotic-stewardship/">Antimicrobial Resistance and the Importance of Antibiotic Stewardship</a></h3>
+            <p class="lp-card__excerpt">Margo Lee, Ph.D. The emergence of antimicrobial resistance (AMR) poses a global health crisis that affects our ability to treat many common infectious diseases. The rise of antibiotic-resistant pathogens has created challenges in treating p</p>
+            <a href="/antimicrobial-resistance-and-the-importance-of-antibiotic-stewardship/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/biology-and-natural-history-of-human-papillomavirus-infection/">Biology and natural history of human papillomavirus infection</a></h3>
+            <p class="lp-card__excerpt">Human papillomavirus (HPV) is one of the most common causes of sexually transmitted diseases worldwide. It has been proposed that the great majority of women and men have been infected with HPV at least once during their lifetime. HPV infec</p>
+            <a href="/biology-and-natural-history-of-human-papillomavirus-infection/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/comparison-of-cervical-cancer-screening-results-among-256648-women-in-multiple-clinical-practices/">Comparison of Cervical Cancer Screening Results Among 256,648 Women in Multiple Clinical Practices</a></h3>
+            <p class="lp-card__excerpt">In the United States, human papillomavirus (HPV) and Papanicolaou (Pap) testing (cotesting) for cervical screening in women ages 30 to 65 years is the preferred strategy, and cytology alone is acceptable. Recently, a proprietary automated t</p>
+            <a href="/comparison-of-cervical-cancer-screening-results-among-256648-women-in-multiple-clinical-practices/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/does-a-test-that-is-more-sensitive-provide-faster-turn-around-time-and-more-accurate-determine-susceptibility-make-a-clinical-difference/">Does a test that is more sensitive, provide faster turnaround time, and more accurate determine susceptibility make a clinical difference?</a></h3>
+            <p class="lp-card__excerpt">We investigated this very question by retrospectively reviewing the hospitalization/ED visit rate of 66,383 patients who were either treated against Standard Urine Culture or Guidance-UTI. The cohort which was treated using Guidance UTI ill</p>
+            <a href="/does-a-test-that-is-more-sensitive-provide-faster-turn-around-time-and-more-accurate-determine-susceptibility-make-a-clinical-difference/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/does-antibiotic-resistance-gene-detection-alone-provide-enough-data-for-antibiotic-treatment-decisions/">Does antibiotic resistance gene detection alone provide enough data for antibiotic treatment decisions?</a></h3>
+            <p class="lp-card__excerpt">Studies have shown that multiple genes influence antibiotic susceptibility, but the relationship between genotypic and phenotypic antibiotic susceptibility is unclear. In this paper, we analyzed the concordance between the presence of antib</p>
+            <a href="/does-antibiotic-resistance-gene-detection-alone-provide-enough-data-for-antibiotic-treatment-decisions/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/does-m-pcr-identify-organisms-more-accurately-than-culture-in-patients-symptomatic-of-a-uti/">Does M-PCR identify organisms more accurately than culture in patients symptomatic of a UTI?</a></h3>
+            <p class="lp-card__excerpt">This study was designed to further compare the performance of Multiplex-Polymerase Chain Reaction (M-PCR) relative to Standard Urine Culture (SUC) in the urology practice. The study included over 2,500 elderly patients presenting with sympt</p>
+            <a href="/does-m-pcr-identify-organisms-more-accurately-than-culture-in-patients-symptomatic-of-a-uti/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/does-p-ast-more-accurately-determine-susceptibility-for-polymicrobial-samples/">Does P-AST™ more accurately determine susceptibility for polymicrobial samples?</a></h3>
+            <p class="lp-card__excerpt">Antimicrobial sensitivity protocols are standardized for monomicrobial infections; however, the standard methods do not consider bacterial interactions that impact susceptibility results. In this study, antibiotic susceptibility patterns we</p>
+            <a href="/does-p-ast-more-accurately-determine-susceptibility-for-polymicrobial-samples/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/guidance-uti-evidence-summary/">Guidance® UTI Evidence Summary</a></h3>
+            <p class="lp-card__excerpt">Guidance® UTI: Personalized Therapy Options from Sample to Result in Less than One Day Urinary Tract Infections (UTIs) can cause many potentially life-threatening complications, with approximately 25% of all adult sepsis cases resulting fro</p>
+            <a href="/guidance-uti-evidence-summary/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/guidance-uti-is-associated-with-13-7-reduction-in-hospital-admissions-compared-to-suc/">Guidance UTI is Associated with 13.7% Reduction in Hospital Admissions Compared to SUC</a></h3>
+            <p class="lp-card__excerpt">Guidance® UTI Associated with a 13.7% Reduction in Hospitalization The health care industry is focused more than ever on reducing hospital visits and admissions.Results from a new study byPathnostics® titled “Utilization of M-PCR and P-AST™</p>
+            <a href="/guidance-uti-is-associated-with-13-7-reduction-in-hospital-admissions-compared-to-suc/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/how-bacterial-interactions-in-uti-infections-can-alter-antibiotic-resistance/">How Bacterial Interactions in UTI Infections Can Alter Antibiotic Resistance</a></h3>
+            <p class="lp-card__excerpt">Margo Lee, Ph.D. Bacterial organisms coexist as multispecies communities in nature. These communities can range from a couple of bacteria to millions of microorganisms assembled in a complex, dynamic environment. Many species in these commu</p>
+            <a href="/how-bacterial-interactions-in-uti-infections-can-alter-antibiotic-resistance/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/increased-human-pathogenic-potential/">Increased human pathogenic potential</a></h3>
+            <p class="lp-card__excerpt">The current diagnostic standard procedure outlined by the Health Protection Agency for urinary tract infections (UTIs) in clinical laboratories does not report bacteria isolated from samples containing three or more different bacterial spec</p>
+            <a href="/increased-human-pathogenic-potential/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/innovation-in-bladder-cancer/">Innovation in Bladder Cancer</a></h3>
+            <p class="lp-card__excerpt">How you can manage costs without losing quality A Better Way to Detect Bladder Cancer ProExC labels the cell cycle proteins, minichromosome maintenance protein-2 (MCM2) and topoisomerase II-a (TOP2A). MCM2 belongs to the DNA licensing facto</p>
+            <a href="/innovation-in-bladder-cancer/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/is-m-pcr-safe-to-use-instead-of-culture-to-identify-organisms-in-patients-symptomatic-of-a-uti/">Is M-PCR safe to use instead of culture to identify organisms in patients symptomatic of a UTI?</a></h3>
+            <p class="lp-card__excerpt">This retrospective study was designed to determine if Multiplex-Polymerase Chain Reaction (M-PCR) is safe to use in the urology practice. The test results of 582 elderly patients presenting with symptoms of lower urinary tract infections fr</p>
+            <a href="/is-m-pcr-safe-to-use-instead-of-culture-to-identify-organisms-in-patients-symptomatic-of-a-uti/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/limitations-of-pcr-only/">Limitations of PCR Only</a></h3>
+            <p class="lp-card__excerpt">PCR testing for UTI’s may not tell the whole story. Polymerase Chain Reaction (PCR) testing is often utilized to identify the organisms found when Urinary Tract Infection (UTI) testing is performed. Results from PCR testing are intended to </p>
+            <a href="/limitations-of-pcr-only/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/limitations-of-standard-urine-culture-in-detection-of-polymicrobial-uti-infections/">Limitations of Standard Urine Culture in Detection of Polymicrobial UTI Infections</a></h3>
+            <p class="lp-card__excerpt">Margo Lee, Ph.D. Standard urine culture (SUC) is a laboratory test first standardized in the 1950s to diagnose urinary tract infections.1 The test is performed by using a urine specimen from a patient and placing it in a culture environment</p>
+            <a href="/limitations-of-standard-urine-culture-in-detection-of-polymicrobial-uti-infections/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/new-real-world-evidence-shows-improvements-in-outcomes-and-reduction-in-healthcare-costs-with-guidance-uti-precision-diagnostic-test-compared-to-standard-urine-culture-in-patients-with-complicat/">New Real-World Evidence Shows Improvements in Outcomes and Reduction in Healthcare Costs with Guidance® UTI Precision Diagnostic Test Compared to Standard Urine Culture in Patients with Complicated Urinary Tract Infections</a></h3>
+            <p class="lp-card__excerpt">Medicare database analysis presented at the 2022 American Urology Association Meeting found 44% lower total costs and 77% lower clinically-advanced costs with Guidance UTI versus standard urine culture (SUC) IRVINE, Calif., May 14, 2022 /PR</p>
+            <a href="/new-real-world-evidence-shows-improvements-in-outcomes-and-reduction-in-healthcare-costs-with-guidance-uti-precision-diagnostic-test-compared-to-standard-urine-culture-in-patients-with-complicat/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/personalized-therapy-options-for-recurrent-utis/">Personalized Therapy Options for Recurrent UTI&amp;#8217;s</a></h3>
+            <p class="lp-card__excerpt">Recurrent urinary tract infections (UTIs) present a significant health issue for women, with uncomplicated UTI occurring in at least 50% of women, and about 30% experiencing recurrent UTI (rUTI).1–3 Although there are multiple definitions f</p>
+            <a href="/personalized-therapy-options-for-recurrent-utis/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/polymicrobial-infections-in-the-urinary-tract/">Polymicrobial Infections in the Urinary Tract</a></h3>
+            <p class="lp-card__excerpt">The rate of polymicrobial infections, or infections involving two or more micro-organisms, is as high as 39% in urinary tract infections (UTI) (1). How can polymicrobial infections form in the urinary tract? Years of clinical research have </p>
+            <a href="/polymicrobial-infections-in-the-urinary-tract/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/pooled-antibiotic-susceptibility-of-urinary-tract-infections/">Pooled Antibiotic Susceptibility of Urinary Tract Infections</a></h3>
+            <p class="lp-card__excerpt">Margo Lee, Ph.D. Urinary tract infections (UTIs) are common infections that are caused by bacteria that inhabit the kidneys, bladder, ureter, or urethra.1 These infections effect more than 150 million people globally per year and account fo</p>
+            <a href="/pooled-antibiotic-susceptibility-of-urinary-tract-infections/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/prediction-of-outcome-in-patients-with-low-grade-squamous-intraepithelial-lesions-by-fluorescence-in-situ-hybridization-analysis-of-human-papillomavirus-terc-and-myc/">Prediction of Outcome in Patients With Low-Grade Squamous Intraepithelial Lesions by Fluorescence In Situ Hybridization Analysis of Human Papillomavirus, TERC, and MYC</a></h3>
+            <p class="lp-card__excerpt">Cytology is an excellent method with which to diagnose preinvasive lesions of the uterine cervix, but it suffers from limited specificity for clinically significant lesions. Supplementary methods might predict the natural course of the dete</p>
+            <a href="/prediction-of-outcome-in-patients-with-low-grade-squamous-intraepithelial-lesions-by-fluorescence-in-situ-hybridization-analysis-of-human-papillomavirus-terc-and-myc/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/real-world-evidence/">Real World Evidence</a></h3>
+            <p class="lp-card__excerpt">Real World Evidence Summary</p>
+            <a href="/real-world-evidence/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/role-of-amacr-expression-to-identify-dysplasia-of-barretts-esophagus/">Role of AMACR Expression to Identify Dysplasia of Barrett&amp;#8217;s Esophagus</a></h3>
+            <p class="lp-card__excerpt">Increased levels of AMACR (P504S) protein concentration and activity are typically associated with prostate cancer, used widely as a biomarker in prostate biopsy tissues. In recent years, many studies have also identified AMACR as a useful </p>
+            <a href="/role-of-amacr-expression-to-identify-dysplasia-of-barretts-esophagus/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/sensitivity-testing-methods-for-polymicrobial-infections-are-not-created-equally/">Sensitivity Testing Methods for Polymicrobial Infections are NOT Created Equally</a></h3>
+            <p class="lp-card__excerpt">Do you value having antibiotic sensitivity testing results when deciding on treatment options for your recurrent or complicated UTI patients? You know the importance of understanding both phenotypic and genotypic information in these infect</p>
+            <a href="/sensitivity-testing-methods-for-polymicrobial-infections-are-not-created-equally/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/the-clinical-impact-of-using-p16ink4a-immunochemistry-in-cervical-histopathology-and-cytology-an-update-of-recent-developments/">The clinical impact of using p16INK4a immunochemistry in cervical histopathology and cytology: An update of recent developments</a></h3>
+            <p class="lp-card__excerpt">Cervical cancer screening test performance has been hampered by either lack of sensitivity of Pap cytology or lack of specificity of Human Papillomavirus (HPV) testing. This uncertainty can lead to unnecessary referral and treatment, which </p>
+            <a href="/the-clinical-impact-of-using-p16ink4a-immunochemistry-in-cervical-histopathology-and-cytology-an-update-of-recent-developments/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/the-clinical-urine-culture-enhanced-techniques-improve-detection-of-clinically-relevant-microorganisms/">The Clinical Urine Culture: Enhanced Techniques Improve Detection of Clinically Relevant Microorganisms</a></h3>
+            <p class="lp-card__excerpt">Enhanced quantitative urine culture (EQUC) detects live microorganisms in the vast majority of urine specimens reported as “no growth” by the standard urine culture protocol. Here, we evaluated an expanded set of EQUC conditions (expanded-s</p>
+            <a href="/the-clinical-urine-culture-enhanced-techniques-improve-detection-of-clinically-relevant-microorganisms/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/the-history-of-culture-testing/">The History of Culture Testing</a></h3>
+            <p class="lp-card__excerpt">It took nearly 2,500 years to get past the cutting edge practice of tasting urine to diagnose diseases. It has taken less than 150 years to advance from tasting urine, to clinical culture, and on to molecular diagnostics. Hippocrates (460 –</p>
+            <a href="/the-history-of-culture-testing/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card">
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Knowledge Center</span>
+            <h3 class="lp-card__title"><a href="/urine-is-not-sterile/">Urine Is Not Sterile</a></h3>
+            <p class="lp-card__excerpt">Our previous study showed that bacterial genomes can be identified using 16S rRNA sequencing in urine specimens of both symptomatic and asymptomatic patients who are culture negative according to standard urine culture protocols. In the pre</p>
+            <a href="/urine-is-not-sterile/" class="lp-card__cta">Read more<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA — required on every sub-page. -->
+  <section class="section--green closing-cta">
+    <div class="container">
+      <h2 class="closing-cta__headline">
+        Ready to see what better diagnostics <em>can do for your practice?</em>
+      </h2>
+      <p class="closing-cta__sub">
+        Talk to a Pathnostics representative about Guidance® UTI and our other tests.
+      </p>
+      <div class="closing-cta__actions">
+        <a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative" class="btn-primary">Talk to a Rep</a>
+        <a href="/tests/" class="btn-ghost-white">See Our Tests</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ════════════════════════════════════════════════════
+     FOOTER — verbatim from /index.html.
+     ════════════════════════════════════════════════════ -->
+<footer class="section--navy footer" id="contact">
+  <a href="#top" class="footer__back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </a>
+  <div class="container" style="padding-top: var(--section-padding-y); padding-bottom: var(--gap-xl);">
+    <p class="footer__big-tagline">
+      Better decisions. Better outcomes. Better lives<span class="footer__big-tagline-period">.</span>
+    </p>
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics" loading="lazy">
+        <div class="footer__social">
+          <a href="https://www.linkedin.com/company/pathnostics/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg></a>
+          <a href="https://twitter.com/Pathnostics" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+        <iframe name="footer-subscribe-iframe" class="footer__subscribe-iframe" aria-hidden="true" tabindex="-1"></iframe>
+        <form class="footer__subscribe" action="https://pathnostics.us4.list-manage.com/subscribe/post?u=a1401745b75d8b6b5e62ed930&amp;id=35ede7f928&amp;f_id=009c57e9f0" method="post" target="footer-subscribe-iframe" novalidate>
+          <label for="footer-subscribe-email" class="footer__subscribe-label">Stay Informed</label>
+          <div class="footer__subscribe-row">
+            <input id="footer-subscribe-email" type="email" name="EMAIL" placeholder="Email address" required class="footer__subscribe-input" autocomplete="email">
+            <button type="submit" class="footer__subscribe-btn">Subscribe</button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <p class="footer__heading">Our Solutions</p>
+        <div class="footer__links">
+          <a href="/tests/guidance-uti/">Guidance UTI with P-AST</a>
+          <a href="/#athome">Guidance @Home</a>
+          <a href="/providers/">For Providers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Resources</p>
+        <div class="footer__links">
+          <a href="/evidence.html">Published Evidence</a>
+          <a href="/clinical-resources/">Clinical Resources</a>
+          <a href="/patient-resources/">Patient Resources</a>
+          <a href="/news/">News &amp; Events</a>
+          <a href="/careers/">Careers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Get in Touch</p>
+        <p class="footer__contact-text">Ready to see how Guidance can support your practice?</p>
+        <a href="#contact" class="btn-primary footer__cta">Talk to a Rep</a>
+        <div class="footer__utility">
+          <a href="/customer-care/">Customer Care</a>
+          <a href="/billing/">Billing</a>
+          <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener noreferrer">Pay Your Bill</a>
+          <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener noreferrer">Provider Login</a>
+          <a href="/order-supplies/">Order Supplies</a>
+          <a href="/veterans/">For Veterans</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copyright">&copy; 2026 Pathnostics | All rights reserved</p>
+      <div class="footer__legal">
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/patient-privacy/">Patient Privacy</a>
+        <a href="https://secure.ethicspoint.com/domain/media/en/gui/44588/index.html" target="_blank" rel="noopener noreferrer">Confidential Reporting</a>
+        <a href="/privacy-policy/#Section9">About Ads</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
