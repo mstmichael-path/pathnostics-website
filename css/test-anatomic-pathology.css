@@ -1,0 +1,145 @@
+/* ═══════════════════════════════════════════════════════
+   test-anatomic-pathology.css — Page-specific overrides
+   Colorway: CORAL  (#e82065 with #b8004b for darker emphasis)
+   This is a service-line page — no evidence, sample report,
+   @home, or FAQ sections. Compact shell.
+   ═══════════════════════════════════════════════════════ */
+
+.ft-hero {
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 0%, rgba(232, 32, 101, 0.16) 0%, transparent 70%),
+    linear-gradient(180deg, #fff5f8 0%, #ffffff 70%);
+}
+
+.ft-hero__overline {
+  color: var(--color-coral);
+}
+
+/* Italic emphasis throughout — leans into the deep coral so it
+   reads distinctly on the warm cream backdrop and on white. */
+.ft-hero__title em,
+.ft-capabilities__title em,
+.ft-faq__title em {
+  color: var(--color-coral-dark);
+}
+
+.ft-capability__advantage-label {
+  color: var(--color-coral-dark);
+}
+
+/* ── SERVICE LINES (custom section for AP) ──────────────
+   Two-up cards: Prostate Cancer / Bladder Cancer. */
+.ap-services {
+  padding: var(--gap-3xl) 0;
+  background: linear-gradient(180deg, #ffffff 0%, rgba(232, 32, 101, 0.06) 100%);
+}
+
+.ap-services__header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto var(--gap-2xl);
+}
+
+.ap-services__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-purple);
+  margin: var(--gap-sm) 0 0;
+}
+
+.ap-services__title em {
+  font-style: italic;
+  color: var(--color-coral-dark);
+}
+
+.ap-services__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-lg);
+}
+
+@media (min-width: 768px) {
+  .ap-services__grid { grid-template-columns: 1fr 1fr; }
+}
+
+.ap-service {
+  padding: var(--gap-xl);
+  background: #ffffff;
+  border: 1px solid rgba(57, 55, 143, 0.10);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 1px 0 rgba(57, 55, 143, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ap-service:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -8px rgba(232, 32, 101, 0.18);
+}
+
+.ap-service__overline {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-coral-dark);
+  margin: 0 0 var(--gap-sm);
+}
+
+.ap-service__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.75rem;
+  color: var(--color-purple);
+  margin: 0 0 var(--gap-md);
+  line-height: 1.2;
+}
+
+.ap-service__title a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 2px solid rgba(232, 32, 101, 0.3);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.ap-service__title a:hover {
+  color: var(--color-coral-dark);
+  border-bottom-color: var(--color-coral-dark);
+}
+
+.ap-service__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ap-service__list li {
+  position: relative;
+  padding-left: 22px;
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.5;
+  color: var(--on-surface);
+}
+
+.ap-service__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-coral);
+}
+
+/* References gradient — coral → coral-dark when present */
+.references {
+  background: linear-gradient(180deg, var(--color-coral) 0%, var(--color-coral-dark) 100%);
+}
