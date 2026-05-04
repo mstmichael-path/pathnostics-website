@@ -1,0 +1,49 @@
+/* ═══════════════════════════════════════════════════════
+   test-womens-cytology-high-risk-hpv.css — Page-specific
+   Colorway: CORAL-DARK / BURGUNDY  (#b8004b)
+   Sister to Anatomic Pathology's coral — coral-dark page
+   leans burgundy in its hero gradient on a warm cream
+   so the two coral pages stay visibly distinct.
+   ═══════════════════════════════════════════════════════ */
+
+.ft-hero {
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 0%, rgba(184, 0, 75, 0.16) 0%, transparent 70%),
+    linear-gradient(180deg, #fff8f5 0%, #ffffff 70%);
+}
+
+.ft-hero__overline {
+  color: var(--color-coral-dark);
+  letter-spacing: var(--tracking-wider);
+}
+
+/* Italic emphasis throughout */
+.ft-hero__title em,
+.ft-capabilities__title em,
+.ft-faq__title em {
+  color: var(--color-coral-dark);
+}
+
+.ft-capability__advantage-label {
+  color: var(--color-coral-dark);
+}
+
+.ft-capability--featured {
+  background: linear-gradient(180deg, #ffffff 0%, rgba(184, 0, 75, 0.08) 100%);
+  border-color: rgba(184, 0, 75, 0.30);
+}
+
+.ft-capability--featured .ft-capability__num {
+  color: var(--color-coral-dark);
+}
+
+.ft-faq__a h5 { color: var(--color-coral-dark); }
+
+/* References — burgundy gradient */
+.references {
+  background: linear-gradient(180deg, var(--color-coral-dark) 0%, #7a0030 100%);
+}
+
+.references::before {
+  background: linear-gradient(90deg, var(--color-coral), rgba(232,32,101,0.3));
+}
