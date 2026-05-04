@@ -1,0 +1,67 @@
+/* ═══════════════════════════════════════════════════════
+   test-gyn-cytology-hr.css — Page-specific overrides
+   Colorway: SKY  (#8fcaeb) paired with darker blue (#5099c8)
+   for legibility on white. Sky reads pale alone — used
+   primarily as backdrop / accent, with the darker blue
+   carrying italic emphasis text.
+   ═══════════════════════════════════════════════════════ */
+
+/* Hero — sky-saturated radial (0.32 not 0.18 per brief) */
+.ft-hero {
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 0%, rgba(143, 202, 235, 0.32) 0%, transparent 70%),
+    linear-gradient(180deg, #f3faff 0%, #ffffff 70%);
+}
+
+.ft-hero__overline {
+  color: #3a7eaf;
+  letter-spacing: var(--tracking-wider);
+}
+
+/* Italic emphasis text uses the darker blue, not sky — sky is too
+   pale for small text on white. */
+.ft-hero__title em,
+.ft-capabilities__title em,
+.ft-faq__title em {
+  color: #2c6694;
+}
+
+.ft-capability__advantage-label {
+  color: #2c6694;
+}
+
+.ft-capability--featured {
+  background: linear-gradient(180deg, #ffffff 0%, rgba(143, 202, 235, 0.18) 100%);
+  border-color: rgba(143, 202, 235, 0.55);
+}
+
+.ft-capability--featured .ft-capability__num {
+  color: #2c6694;
+  font-style: italic;
+}
+
+/* Sky is fine for the rapid-results / accent strip backdrop */
+.ft-capabilities__rapid {
+  background: rgba(143, 202, 235, 0.20);
+  border-color: rgba(143, 202, 235, 0.55);
+}
+
+.ft-capabilities__rapid svg { color: #2c6694; }
+
+/* @home / accent strip backdrop — leans sky */
+.ft-athome {
+  background: linear-gradient(180deg, #ffffff 0%, rgba(143, 202, 235, 0.20) 100%);
+}
+
+/* FAQ category headings */
+.ft-faq__a h5 { color: #2c6694; }
+
+/* References — sky pairs with navy companion (brief: pair light
+   colorways with a darker companion so text stays legible) */
+.references {
+  background: linear-gradient(180deg, #5099c8 0%, var(--color-navy-deep) 100%);
+}
+
+.references::before {
+  background: linear-gradient(90deg, var(--color-sky), rgba(143,202,235,0.3));
+}
