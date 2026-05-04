@@ -312,8 +312,16 @@ img.global-nav__logo-white { display: none; }
   overflow: hidden;
 }
 
-/* Top gradient bar removed — was visually colliding with the local-nav progress
-   bar (also coral) creating an "off by a few pixels" double-line effect. */
+.mega-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-coral-purple);
+  z-index: 1;
+}
 
 .global-menu__item.is-open > .mega-panel {
   opacity: 1;
