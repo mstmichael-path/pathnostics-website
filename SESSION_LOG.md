@@ -125,3 +125,60 @@ When a session completes its full scope, write a closing line:
                    as Session B's note. Tracked for orchestrator follow-up.
 
                    Awaiting orchestrator review and cherry-pick to main.
+
+[2026-05-03 22:37] Session A2 built /tests/guidance-prostatitis/ — pushed f116383
+                   — colorway: green (#00ae81 hero / #00694d emphasis & refs)
+[2026-05-03 22:37] Session A2 built /tests/anatomic-pathology/ — pushed 044fed6
+                   — colorway: coral (compact 4-section service-line shell)
+[2026-05-03 22:37] Session A2 built /tests/barretts-esophagus/ — pushed 5b6bea4
+                   — colorway: navy (#1B2A4A) paired with lime accent
+[2026-05-03 22:37] Session A2 built /tests/gyn-cytology-hr/ — pushed c2e077b
+                   — colorway: sky (#8fcaeb backdrop, #2c6694 emphasis)
+[2026-05-03 22:37] Session A2 built /tests/bladder-fish-urovysion/ — pushed 62c32b6
+                   — colorway: lime (#b6cd2f) paired with green-dark emphasis
+[2026-05-03 22:37] Session A2 built /tests/womens-cytology-high-risk-hpv/ — pushed 6c1fdb6
+                   — colorway: coral-dark / burgundy (#b8004b)
+
+[2026-05-03 22:37] Session A2 COMPLETE — built 6 test pages.
+                   Colorways: prostatitis=green, anatomic=coral,
+                   barretts=navy, gyn-cytology=sky, bladder-fish=lime,
+                   hpv=coral-dark.
+
+                   Each page is a thin per-page CSS override of
+                   /css/flagship-test.css. Anchor /tests/guidance-uti/
+                   was not modified. Per-page section structure varies by
+                   what the scraped content supports — Prostatitis used
+                   the full 7-section shell; thin pages (Anatomic, Gyn
+                   Cytology HR, HPV) use compact 4-5 section shells with
+                   evidence/sample-report/at-home dropped where source
+                   had nothing to fill them. Closing CTA stays standard
+                   green on every page (consistent brand outro per the
+                   brief). Full nav, mobile drawer, and footer markup
+                   verbatim from the homepage anchor; Tier 3 local-nav
+                   anchors are page-specific.
+
+                   Sister-page differentiation worked out by leaning into
+                   each test's distinct clinical role: Gyn Cytology HR is
+                   framed around stratifying borderline Pap results;
+                   Cytology / HR HPV is framed as a broader screening
+                   panel. Both pages cross-link to each other in their
+                   FAQ to spell out the difference.
+
+                   IMAGES NOT MIGRATED: every page reuses
+                   /assets/guidance-uti-header-image.webp as a hero
+                   placeholder, and Prostatitis + Bladder FISH reuse
+                   /assets/Guidance-UTI-Sample-Test-Report.png as a
+                   sample-report placeholder. All placeholders flagged
+                   with `<!-- TODO: optimize / replace -->` comments.
+                   Test-specific WP-hosted assets (e.g. Prostatitis
+                   sample-report PDFs, Bladder cancer brochure PDF, HPV
+                   risk-stratification markers PDF) still point at
+                   pathnostics.com/wp-content/uploads/... — needs
+                   migration to /assets/ before WP backend goes away.
+                   Same caveat as Sessions A & B.
+
+                   /tests/prostate-biopsy/ is referenced from the
+                   Anatomic Pathology service-lines block but is not
+                   built yet — flagged with HTML comment.
+
+                   Awaiting orchestrator review and cherry-pick to main.
