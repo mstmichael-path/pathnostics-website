@@ -1,31 +1,58 @@
 # Pathnostics Website — Working Notes
 
-## Session handoff — current state (May 3, 2026)
+## Session handoff — current state (May 3, 2026, evening)
 
-v13 has shipped on top of v12: mobile menu (hamburger + slide-in drawer),
-"Our Tests" mega panel image + flat list, trailing-slash normalization,
-laptop-range responsive nav (clamp-based fluid typography 1024–1399px),
-scroll-collapsed local nav polish, asset filename ASCII fix.
+**v13** shipped (mobile menu, Our Tests mega panel rework, trailing-slash
+normalization, laptop-range fluid clamp typography, scroll-collapsed local
+nav polish, asset filename ASCII fix). All on both branches.
 
-All v13 commits have been cherry-picked to `main` (still gated by
-`coming-soon.html`) and are also on `qa-preview` (the QA working branch
-that powers the ungated Vercel preview at
-`pathnostics-website-git-qa-preview-pathnostics.vercel.app`).
+**Guidance UTI flagship-test page** shipped at `/tests/guidance-uti/` with
+its own page-specific stylesheet `/css/flagship-test.css`. This is the
+**anchor for the flagship-test template** — to be reused for the other
+six test pages (Guidance Prostatitis, Anatomic Pathology, Barrett's
+Esophagus, Gyn Cytology HRT, Bladder FISH/UroVysion, Cytology HR HPV).
+Page assets: `/assets/guidance-uti-header-image.webp`,
+`/assets/Guidance-UTI-Sample-Test-Report.png`,
+`/assets/Dec.-1-Guidance-UTI-Sample-Report_EH.pdf`,
+`/assets/Real-World-Evidence-Summary.pdf`.
 
-The user is running **multiple parallel sessions**:
-- **Design session** (this one): focused on homepage design — footer redesign,
-  mobile menu (DONE in v13), page templates per section, UTI Crisis page,
-  re-skin of scraped legacy pages.
-- **Other concurrent session(s)** may be touching the whitepaper subproject,
-  the coming-soon teaser, or other independent areas.
+**Info-page anchor template** built at `/templates/info-page.html` (with
+`/css/info-page.css`). Designed around `/about/` content; reusable for
+all static-content sub-pages (about, our-team, careers, innovation,
+veterans, customer-care, billing, order-supplies, patient-resources,
+clinical-resources, payors).
+
+**Parallel-session work in flight (May 3, 2026, evening):**
+
+The user spawned two parallel sessions tonight to re-skin the legacy
+pages. They run autonomously (Claude Code Auto Mode) per their briefs.
+
+- **Session A** — `/SESSION_BRIEF_A_info_pages.md`. Builds 11 info pages
+  using `/templates/info-page.html` as anchor.
+- **Session B** — `/SESSION_BRIEF_B_listing_pages.md`. Builds three index
+  pages (`/guidance-uti-publications/`, `/uti-knowledge-center/`, `/news/`)
+  plus ~150 detail pages. Builds two new templates of its own:
+  `templates/listing-page.html` and `templates/article-detail.html`.
+
+Both sessions push to `qa-preview` only and append to `/SESSION_LOG.md`.
+**Orchestrator (this session) handles cherry-picks to `main`.** When you
+return after compaction:
+1. Read `/SESSION_LOG.md` to see what they shipped.
+2. `git log main..qa-preview --oneline` (or better: `git cherry main qa-preview`)
+   in the clone to see unmerged commits.
+3. User reviews on QA URL, says "go", you cherry-pick.
+
+**Scraped content lives at sibling folder:**
+`/Users/msm_macstudio/MSM Dropbox/Melyssa St. Michael/CoWork/Pathnostics/dev_web-old-website-scrape/`
+(204 pages with content.md + raw.html + screenshot.png each, plus sitemap.json).
 
 To avoid stepping on each other:
 - Read this file fully before making changes.
 - Push design work to **`qa-preview`** only — never `main`. After the user
-  QAs at the qa-preview Vercel URL and says "go", cherry-pick (don't merge)
-  to `main`.
+  QAs and says "go", cherry-pick (don't merge) to `main`.
 - Coordinate with the user before touching files outside this session's
-  scope (especially `vercel.json`, `coming-soon.html`, `whitepaper/`).
+  scope (especially `vercel.json`, `coming-soon.html`, `whitepaper/`,
+  files another session is editing).
 
 ## Quick orientation for a fresh session
 
