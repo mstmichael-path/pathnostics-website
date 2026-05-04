@@ -1,0 +1,188 @@
+/* ═══════════════════════════════════════════════════════
+   test-barretts-esophagus.css — Page-specific overrides
+   Colorway: NAVY DEEP  (#1B2A4A) paired with LIME (#b6cd2f)
+   Navy carries the gravitas of a precancerous condition;
+   lime is the warm accent so the page doesn't read drab.
+   ═══════════════════════════════════════════════════════ */
+
+.ft-hero {
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 0%, rgba(27, 42, 74, 0.18) 0%, transparent 70%),
+    linear-gradient(180deg, #f3f5fa 0%, #ffffff 70%);
+}
+
+.ft-hero__overline {
+  color: var(--color-navy-deep);
+  letter-spacing: var(--tracking-wider);
+}
+
+.ft-hero__title em,
+.ft-capabilities__title em,
+.ft-faq__title em {
+  color: var(--color-navy-deep);
+}
+
+/* Capability cards — featured tile leans into the navy/lime pairing */
+.ft-capability--featured {
+  background: linear-gradient(180deg, #ffffff 0%, rgba(27, 42, 74, 0.06) 100%);
+  border-color: rgba(27, 42, 74, 0.22);
+}
+
+.ft-capability--featured .ft-capability__num {
+  color: var(--color-navy-deep);
+}
+
+.ft-capability__advantage-label {
+  color: var(--color-navy-deep);
+}
+
+/* ── BIOMARKER PANEL (custom block) ─────────────────────
+   Used in the Clinical Utility section to lay out the
+   IHC + FISH biomarker definitions cleanly. */
+.bm-panel {
+  padding: var(--gap-3xl) 0;
+  background: linear-gradient(180deg, #ffffff 0%, rgba(27, 42, 74, 0.06) 100%);
+}
+
+.bm-panel__header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto var(--gap-2xl);
+}
+
+.bm-panel__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-purple);
+  margin: var(--gap-sm) 0 0;
+}
+
+.bm-panel__title em {
+  font-style: italic;
+  color: var(--color-navy-deep);
+}
+
+.bm-panel__lede {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  line-height: 1.5;
+  color: var(--on-surface-variant);
+  margin: var(--gap-md) 0 0;
+}
+
+.bm-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-lg);
+}
+
+@media (min-width: 768px)  { .bm-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .bm-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.bm-card {
+  padding: var(--gap-lg) var(--gap-xl);
+  background: #ffffff;
+  border: 1px solid rgba(27, 42, 74, 0.12);
+  border-radius: var(--radius-lg);
+  border-left: 4px solid var(--color-lime);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.bm-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -8px rgba(27, 42, 74, 0.20);
+}
+
+.bm-card__name {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-navy-deep);
+  margin: 0 0 var(--gap-sm);
+}
+
+.bm-card__name em { font-style: italic; }
+
+.bm-card__body {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--on-surface-variant);
+  margin: 0;
+}
+
+/* FISH four-probe call-out */
+.bm-fish {
+  margin-top: var(--gap-2xl);
+  padding: var(--gap-xl);
+  background: var(--color-navy-deep);
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  border-top: 4px solid var(--color-lime);
+}
+
+.bm-fish__title {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 var(--gap-md);
+  letter-spacing: 0.04em;
+}
+
+.bm-fish__title strong { color: var(--color-lime); }
+
+.bm-fish__lede {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0 0 var(--gap-md);
+}
+
+.bm-fish__lede em { font-style: italic; }
+
+.bm-fish__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+@media (min-width: 768px) {
+  .bm-fish__list { grid-template-columns: 1fr 1fr; }
+}
+
+.bm-fish__list li {
+  position: relative;
+  padding-left: 22px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.bm-fish__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-lime);
+}
+
+/* References — navy → deeper navy with a lime top accent */
+.references {
+  background: linear-gradient(180deg, var(--color-navy-deep) 0%, #0f1932 100%);
+}
+
+.references::before {
+  background: linear-gradient(90deg, var(--color-lime), rgba(182,205,47,0.3));
+}
