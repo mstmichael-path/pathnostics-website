@@ -18,6 +18,10 @@
   <link rel="stylesheet" href="/css/layout.css">
   <link rel="stylesheet" href="/css/nav.css">
   <link rel="stylesheet" href="/css/flagship-test.css">
+
+  <!-- GSAP — required by main.js for scroll-collapse + footer-reveal -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
 
@@ -303,7 +307,7 @@
           from receipt at lab.<sup class="ft-dagger">†</sup>
         </p>
         <div class="ft-hero__actions">
-          <a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative" class="btn-primary">Talk to a Representative</a>
+          <a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative" class="btn-primary">Talk to a Rep</a>
           <a href="#evidence" class="btn-secondary">View the Evidence</a>
         </div>
       </div>
@@ -457,8 +461,8 @@
           confident clinical decisions.
         </p>
         <div class="ft-report__actions">
-          <a href="https://pathnostics.com/wp-content/uploads/2025/11/Dec.-1-Guidance-UTI-Sample-Report_EH.pdf" target="_blank" rel="noopener" class="btn-primary">Download Sample Report (PDF)</a>
-          <a href="https://www.youtube.com/watch?v=mdTxFyIAggk" target="_blank" rel="noopener" class="btn-secondary">Watch the Walkthrough</a>
+          <a href="https://www.youtube.com/watch?v=mdTxFyIAggk" target="_blank" rel="noopener" class="btn-primary">Watch the Walkthrough</a>
+          <a href="https://pathnostics.com/wp-content/uploads/2025/11/Dec.-1-Guidance-UTI-Sample-Report_EH.pdf" target="_blank" rel="noopener" class="ft-report__download">Download sample report (PDF)</a>
         </div>
       </div>
       <div class="ft-report__visual">
@@ -665,7 +669,7 @@
   <!-- ════════════════════════════════════════════════════
        SECTION 7 — CLOSING CTA
        ════════════════════════════════════════════════════ -->
-  <section class="closing-cta">
+  <section class="section--green closing-cta">
     <div class="container">
       <h2 class="closing-cta__headline">
         Ready to put precision <em>at the point of decision?</em>
@@ -674,7 +678,7 @@
         Guidance® UTI helps clinicians move from trial-and-error toward better-informed first-pass therapy.
       </p>
       <div class="closing-cta__actions">
-        <a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative" class="btn-primary">Talk to a Representative</a>
+        <a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative" class="btn-primary">Talk to a Rep</a>
         <a href="/order-supplies/" class="btn-secondary">Order Test Kits</a>
       </div>
     </div>
