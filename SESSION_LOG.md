@@ -26,3 +26,40 @@ When a session completes its full scope, write a closing line:
 [2026-05-03 21:00] Orchestrator setup — wrote info-page anchor template,
                    `css/info-page.css`, Session Briefs A & B. Ready for parallel
                    sessions to spawn.
+
+[2026-05-03 21:46] Session B COMPLETE — pushed de5c589 to qa-preview.
+                   Built 3 listing index pages:
+                     /guidance-uti-publications/ — 25 publication cards
+                       (8 local mirror pages, 17 link to journals)
+                     /uti-knowledge-center/ — 3 featured + 31 organism
+                       + 20 antibiotic + 29 default-article cards
+                     /news/ — 9 announcements + 6 "in the news" + 12 events
+                   Built 99 detail pages: 7 publications, 9 news, 83 KC
+                   (3 featured + 31 organisms + 20 antibiotics + 29 articles).
+                   Built 2 anchor templates: templates/listing-page.html
+                   (= /guidance-uti-publications/) and
+                   templates/article-detail.html (clean anchor for the
+                   ~100 generated detail pages).
+                   New CSS: css/listing-page.css, css/article-detail.css.
+                   Build tooling in dev_web-old-website-scrape/
+                   (bucket_manifest.py + build_pages.py).
+
+                   Skipped 42 posts (word_count=0 in WP scrape — they're
+                   placeholder pages from the legacy site with no copy).
+                   Notable skipped slugs include: bacterial-interactions-video,
+                   easy-to-read-guidance-uti-report, comparison-of-guidance-
+                   uti-and-standard-urine-culture-for-adverse-outcomes-...,
+                   the-status-and-future-direction-of-advanced-urine-testing-
+                   multiplex-pcr, and many "Why X" / "How Y" stub pages.
+                   Full skip list is in dev_web-old-website-scrape/
+                   bucket_manifest.json under "skipped".
+
+                   IMAGES NOT MIGRATED: KC organism/antibiotic posts contain
+                   ~30+ unique pathnostics.com/wp-content/uploads/... image
+                   URLs (featured images, infographics). They render today
+                   from the live WP backend, but will 404 once DNS cuts over
+                   to Vercel. Migration is a follow-up task — total binary
+                   payload would be sizable. Listed in the orchestrator's
+                   work queue.
+
+                   Awaiting orchestrator review and cherry-pick to main.
