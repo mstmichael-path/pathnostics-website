@@ -399,6 +399,22 @@
   margin-top: var(--gap-md);
 }
 
+/* Study citation under the Download CTA — small, dim white, centered */
+.ft-evidence__citation {
+  margin: var(--gap-xl) auto 0;
+  max-width: 880px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+}
+
+.ft-evidence__citation em {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.65);
+}
+
 
 /* ── SAMPLE REPORT ───────────────────────────────────────
    Two-column: copy left, image right. Light surface. */
@@ -449,8 +465,11 @@
   gap: var(--gap-lg);
 }
 
-/* Inline text link beside primary button — smaller, underlined, no chrome */
+/* Download text link under the report image — small, centered, underlined */
 .ft-report__download {
+  display: block;
+  margin: var(--gap-md) auto 0;
+  text-align: center;
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 500;
