@@ -1251,3 +1251,14 @@ body.mobile-menu-open .nav-system {
 .nav-system.is-at-footer .global-nav__search-btn:hover {
   color: #ffffff;
 }
+
+/* In at-footer state, utility + local collapse so the panel's top:100%
+   ends up 21px above the visible nav-bottom. Push it down so the
+   gradient bar sits flush at the bottom of the visible nav. */
+.nav-system.is-at-footer .mega-panel:not(.mega-panel--tests) {
+  top: calc(100% + 21px);
+}
+
+.nav-system.is-at-footer .mega-panel--tests {
+  top: 90px;
+}
