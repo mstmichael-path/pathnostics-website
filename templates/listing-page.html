@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<!--
+  ════════════════════════════════════════════════════
+  LISTING-PAGE TEMPLATE — anchor page: /guidance-uti-publications/
+  ════════════════════════════════════════════════════
+
+  This file is BOTH a template AND the working publications listing.
+  Sessions duplicating it for other listings (uti-knowledge-center,
+  news) must:
+    1. Copy this file to /<slug>/index.html in the Dropbox folder
+    2. Update <title>, <meta description>, hero copy, and grid items
+    3. Update local-nav anchors to match this page's section IDs
+    4. Replace the .lp-grid contents with cards relevant to the new
+       listing (see css/listing-page.css for .lp-card and .lp-icon-card variants)
+    5. Sync to clone, commit on qa-preview, push
+
+  PATTERNS (defined in css/listing-page.css):
+    - .lp-card / .lp-card--pub  — primary article-style cards
+    - .lp-icon-grid + .lp-icon-card  — compact image-tile grid
+      (used for organism / antibiotic spotlights)
+    - .lp-news-list + .lp-news-row  — dateline + headline rows
+      (used for "In the News")
+    - .lp-events + .lp-event  — date / name / place rows for events
+
+  HARD RULES (also in CLAUDE.md):
+    - Don't touch /index.html, /coming-soon.html, /vercel.json
+    - Don't touch /tests/guidance-uti/ or another session's pages
+    - All asset paths absolute (/assets/..., /css/..., /js/...)
+    - Asset filenames ASCII only (Vercel CDN gotcha)
+    - Push to qa-preview only — never main
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guidance® UTI Publications — Pathnostics</title>
+  <meta name="description" content="Peer-reviewed evidence behind Guidance® UTI — the most researched advanced molecular test for challenging UTIs.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+  <!-- CSS — absolute paths so this works from any depth -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/nav.css">
+  <link rel="stylesheet" href="/css/info-page.css">
+
+  <link rel="stylesheet" href="/css/listing-page.css">
+
+  <!-- GSAP — REQUIRED. main.js errors at line 1 without these,
+       which breaks scroll-collapse + footer parallax. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+<!-- ════════════════════════════════════════════════════
+     NAV SYSTEM — verbatim from /index.html.
+     If the homepage nav changes, sync this section.
+     The local nav (Tier 3) anchors are PAGE-SPECIFIC.
+     ════════════════════════════════════════════════════ -->
+<div class="nav-system" id="nav-system" role="navigation" aria-label="Primary">
+
+  <div class="utility-bar" id="utility-bar">
+    <div class="utility-bar__left">
+      <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a>
+      <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div class="utility-bar__right">
+      <a href="tel:8004934490" class="utility-bar__phone" aria-label="Call 800.493.4490">800.493.4490</a>
+    </div>
+  </div>
+
+  <div class="global-nav" id="global-nav">
+    <div class="global-nav__inner">
+
+      <a href="/" class="global-nav__logo" aria-label="Pathnostics Home">
+        <img class="global-nav__logo-color" src="/assets/pathnostics-logo-color.png" alt="Pathnostics">
+        <img class="global-nav__logo-white" src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+
+      <div class="mobile-bar">
+        <a href="tel:8004934490" class="mobile-bar__phone" aria-label="Call 800.493.4490">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+        <button type="button" class="mobile-bar__toggle" id="mobile-toggle" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false">
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+        </button>
+      </div>
+
+      <ul class="global-menu">
+        <li class="global-menu__item" data-menu="tests">
+          <a href="/tests/" class="global-menu__link">Our Tests<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--tests" role="menu" aria-label="Our Tests">
+            <div class="mega-tests__hero">
+              <img src="/assets/guidance-uti-header-image.webp" alt="Guidance UTI test kit" class="mega-tests__hero-image">
+              <div class="mega-tests__hero-body">
+                <div class="mega-tests__hero-tag">Flagship Test</div>
+                <h3 class="mega-tests__hero-title">Guidance UTI<br>with <em>P-AST.</em></h3>
+                <p class="mega-tests__hero-desc">Pooled antibiotic susceptibility testing that evaluates how antibiotics perform against the infection as a whole — including in polymicrobial cases. Results in 24–36 hours.</p>
+              </div>
+              <a href="/tests/guidance-uti/" class="mega-tests__hero-cta">Explore Guidance UTI<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+            </div>
+            <div class="mega-tests__directory">
+              <div class="mega-tests__group">
+                <h5>All Tests</h5>
+                <ul>
+                  <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+                  <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+                  <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+                  <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+                  <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+                  <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="providers">
+          <a href="/providers/" class="global-menu__link">Providers<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Providers">
+            <ul>
+              <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+              <li><a href="/order-supplies/">Order Supplies</a></li>
+              <li><a href="/customer-care/">Customer Care</a></li>
+              <li><a href="/testimonials/">Testimonials</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="patients">
+          <a href="/patient-resources/" class="global-menu__link">Patient Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Patient Resources">
+            <ul>
+              <li><a href="/billing/">Billing</a></li>
+              <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+              <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item">
+          <a href="/payors/" class="global-menu__link">Payors</a>
+        </li>
+        <li class="global-menu__item" data-menu="clinical">
+          <a href="/clinical-resources/" class="global-menu__link">Clinical Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Clinical Resources">
+            <ul>
+              <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+              <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="about">
+          <a href="/about/" class="global-menu__link">About<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="About">
+            <ul>
+              <li><a href="/our-team/">Our Team</a></li>
+              <li><a href="/careers/">Careers</a></li>
+              <li><a href="/news/">News &amp; Events</a></li>
+              <li><a href="/innovation/">Innovation</a></li>
+              <li><a href="/p-ast/">P-AST&trade;</a></li>
+              <li><a href="/contact/">Contact Us</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+
+      <div class="global-nav__actions">
+        <button class="global-nav__search-btn" id="search-toggle" aria-label="Search" aria-expanded="false">
+          <svg viewBox="0 0 24 24" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <a href="#contact" class="global-nav__cta">Talk to a Rep</a>
+      </div>
+
+      <div class="search-dropdown" id="search-dropdown" aria-hidden="true">
+        <form method="get" action="/search">
+          <input type="search" name="q" placeholder="Search Pathnostics…" aria-label="Search query" autocomplete="off">
+          <button type="submit">Go</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tier 3 local nav — anchors to THIS page's sections -->
+  <div class="local-nav" id="local-nav">
+    <div class="local-nav__inner">
+      <a href="/" class="local-nav__logo" aria-label="Pathnostics Home">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+      <ul class="local-nav__items">
+        <li><a href="#studies" data-target="studies">Latest Studies</a></li>
+        <li><a href="#contact" data-target="contact">Talk to a Rep</a></li>
+      </ul>
+      <a href="#contact" class="local-nav__cta">Talk to a Rep</a>
+    </div>
+    <div class="local-nav__progress" id="local-nav-progress"></div>
+  </div>
+</div>
+
+<!-- Mobile drawer — verbatim from /index.html -->
+<div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
+<aside class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
+  <div class="mobile-drawer__inner">
+    <a href="#contact" class="mobile-drawer__cta">Talk to a Rep</a>
+    <nav class="mobile-drawer__nav" aria-label="Mobile primary">
+      <ul class="mobile-accordion">
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Our Tests<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/tests/guidance-uti/">Guidance<sup>&reg;</sup> UTI with P-AST</a></li>
+            <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+            <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+            <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+            <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+            <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+            <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Providers<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+            <li><a href="/order-supplies/">Order Supplies</a></li>
+            <li><a href="/customer-care/">Customer Care</a></li>
+            <li><a href="/testimonials/">Testimonials</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Patient Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/billing/">Billing</a></li>
+            <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+            <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item mobile-accordion__item--single">
+          <a href="/payors/" class="mobile-accordion__head mobile-accordion__head--link">Payors</a>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Clinical Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+            <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">About<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/our-team/">Our Team</a></li>
+            <li><a href="/careers/">Careers</a></li>
+            <li><a href="/news/">News &amp; Events</a></li>
+            <li><a href="/innovation/">Innovation</a></li>
+            <li><a href="/p-ast/">P-AST&trade;</a></li>
+            <li><a href="/contact/">Contact Us</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <ul class="mobile-drawer__utility">
+      <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+      <li><a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      <li><a href="tel:8004934490" class="mobile-drawer__phone">800.493.4490</a></li>
+    </ul>
+  </div>
+</aside>
+<main class="page-shell">
+
+  <!-- HERO ─────────────────────────────────────────────── -->
+  <section class="ip-hero ip-hero--listing" id="top">
+    <div class="container ip-hero__inner">
+      <div class="ip-hero__copy">
+        <div class="ip-hero__overline">Clinical Resources</div>
+        <h1 class="ip-hero__title">
+          Guidance<sup>&reg;</sup> UTI <em>Publications.</em>
+        </h1>
+        <p class="ip-hero__lede">
+          When it comes to your patients, evidence matters. Guidance<sup>&reg;</sup> UTI
+          is the <strong>most researched</strong> advanced molecular test for challenging UTIs.
+        </p>
+        <div class="ip-hero__actions">
+          <a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative" class="btn-primary">Talk to a Rep</a>
+          <a href="#studies" class="btn-secondary">Browse the Evidence</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARD GRID ─────────────────────────────────────────── -->
+  <section class="lp-grid-section" id="studies">
+    <div class="container">
+      <h2 class="lp-grid-section__heading">Peer-reviewed studies on Guidance<sup>&reg;</sup> UTI <em>and P-AST<sup>&trade;</sup>.</em></h2>
+      <div class="lp-grid">
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">1</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="/improving-patient-outcomes-while-reducing-empirical-treatment-with-multiplex-polymerase-chain-reaction-pooled-antibiotic-susceptibility-testing-assay-for-complicated-and-recurrent-urinary-tract-infect/">Improving Patient Outcomes While Reducing Empirical Treatment with Multiplex-Polymerase-Chain-Reaction/Pooled-Antibiotic-Susceptibility-Testing Assay for Complicated and Recurrent Urinary Tract Infections</a></h3>
+            <p class="lp-card__meta"><em>MDPI</em> · 26 September 2023</p>
+            <p class="lp-card__excerpt">Emery Haley, Natalie Luke, Howard Korman, David Baunoch, Dakun Wang, Xinhua Zhao and Mohit Mathur.</p>
+            <a href="/improving-patient-outcomes-while-reducing-empirical-treatment-with-multiplex-polymerase-chain-reaction-pooled-antibiotic-susceptibility-testing-assay-for-complicated-and-recurrent-urinary-tract-infect/" class="lp-card__cta">Read summary<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">2</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="/real-world-evidence-that-a-novel-diagnostic-combining-molecular-testing-with-pooled-antibiotic-susceptibility-testing-is-associated-with-reduced-infection-severity-and-lower-cost-compared-with-standar/">Real-World Evidence That a Novel Diagnostic Combining Molecular Testing With Pooled Antibiotic Susceptibility Testing is Associated With Reduced Infection Severity and Lower Cost Compared With Standard Urine Culture in Patients With Complicated or Persistently Recurrent Urinary Tract Infections</a></h3>
+            <p class="lp-card__meta"><em>JU Open Plus</em> · 23 May 2023</p>
+            <p class="lp-card__excerpt">Dicken Ko, Emily Lukacz, Iver Allen Juster, Timothy Niecko, Aparna Ashok, Jean Annah Vollstedt, David Baunoch, Mohit Mathur.</p>
+            <a href="/real-world-evidence-that-a-novel-diagnostic-combining-molecular-testing-with-pooled-antibiotic-susceptibility-testing-is-associated-with-reduced-infection-severity-and-lower-cost-compared-with-standar/" class="lp-card__cta">Read summary<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">3</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="/a-diagnostic-test-combining-molecular-testing-with-phenotypic-pooled-antibiotic-susceptibility-improved-the-clinical-outcomes-of-patients-with-non-e-coli-or-polymicrobial-complicated-urinary-tract-in/">Diagnostic Test Combining Molecular Testing with Phenotypic Pooled Antibiotic Susceptibility Improved the Clinical Outcomes of Patients with Non-E. coli or Polymicrobial Complicated Urinary Tract Infections</a></h3>
+            <p class="lp-card__meta"><em>Research and Reports in Urology</em> · 1 May 2023</p>
+            <p class="lp-card__excerpt">Howard J Korman, David Baunoch, Natalie Luke, Dakun Wang, Xihua Zhao, Michael Levin, David L Wenzler, Mohit Mathur.</p>
+            <a href="/a-diagnostic-test-combining-molecular-testing-with-phenotypic-pooled-antibiotic-susceptibility-improved-the-clinical-outcomes-of-patients-with-non-e-coli-or-polymicrobial-complicated-urinary-tract-in/" class="lp-card__cta">Read summary<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">4</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="/multiplex-polymerase-chain-reaction-pooled-antibiotic-susceptibility-testing-was-not-associated-with-increased-antibiotic-resistance-in-management-of-complicated-urinary-tract-infections/">Multiplex Polymerase Chain Reaction/Pooled Antibiotic Susceptibility Testing Was Not Associated with Increased Antibiotic Resistance in Management of Complicated Urinary Tract Infections</a></h3>
+            <p class="lp-card__meta"><em>Infection and Drug Resistance</em> · 9 May 2023</p>
+            <p class="lp-card__excerpt">Howard J Korman, Mohit Mathur, Natalie Luke, Dakun Wang, Xihua Zhao, Michael Levin, David L Wenzler, David Baunoch.</p>
+            <a href="/multiplex-polymerase-chain-reaction-pooled-antibiotic-susceptibility-testing-was-not-associated-with-increased-antibiotic-resistance-in-management-of-complicated-urinary-tract-infections/" class="lp-card__cta">Read summary<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">5</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="https://juniperpublishers.com/jojun/JOJUN.MS.ID.555707.php" target="_blank" rel="noopener">Utilization of M-PCR and P-AST for Diagnosis and Management of Urinary Tract Infections in Home-Based Primary Care</a></h3>
+            <p class="lp-card__meta"><em>JOJ Urology &amp; Nephrology</em> · 27 March 2020</p>
+            <p class="lp-card__excerpt">Annemarie Daly, David Baunoch, Kelly Rehling, Natalie Luke, Meghan Campbell, Patrick Cacdac, Miguel Penaranda, Michael Opel, Shuguang Huang, Xinhua Zhao and Kirk Wojno.</p>
+            <a href="https://juniperpublishers.com/jojun/JOJUN.MS.ID.555707.php" class="lp-card__cta lp-card__cta--external" target="_blank" rel="noopener">View on Journal Site</a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">6</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="/the-diagnosis-of-urinary-tract-infections-using-a-novel-at-home-testing-protocol-to-enhance-telemedicine-a-retrospective-analysis/">The Diagnosis of Urinary Tract Infections Using a Novel At-home Testing Protocol to Enhance Telemedicine: A Retrospective Analysis</a></h3>
+            <p class="lp-card__meta"><em>Ambulatory, Office-based, and Geriatric Urology</em> · 9 January 2023</p>
+            <p class="lp-card__excerpt">Andrew Korman, Siddharth Ramanathan, Nathan Shen, Zachary A. Gerndt, Natalie Luke, Dakun Wang, Hannah Zhao, Shuguang Huang, Rajan Dewar, Kirk Wojno, Larry Sirls, Savitha Balaraman, and Howard Korman.</p>
+            <a href="/the-diagnosis-of-urinary-tract-infections-using-a-novel-at-home-testing-protocol-to-enhance-telemedicine-a-retrospective-analysis/" class="lp-card__cta">Read summary<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">7</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="https://pubmed.ncbi.nlm.nih.gov/36416755/" target="_blank" rel="noopener">Bacterial Interactions as Detected by Pooled Antibiotic Susceptibility Testing (P-AST) in Polymicrobial Urine Specimens</a></h3>
+            <p class="lp-card__meta"><em>Journal of Surgical Urology</em> · 29 May 2020</p>
+            <p class="lp-card__excerpt">Annah Vollstedt,  David Baunoch,  Alan Wolfe,  Natalie Luke,  Kirk J Wojno,  Kevin Cline, et al.</p>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/36416755/" class="lp-card__cta lp-card__cta--external" target="_blank" rel="noopener">View on Journal Site</a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">8</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="https://pubmed.ncbi.nlm.nih.gov/34447256/" target="_blank" rel="noopener">Concordance Between Antibiotic Resistance Genes and Susceptibility in Symptomatic Urinary Tract Infections.</a></h3>
+            <p class="lp-card__meta"><em>Infection and Drug Resistance</em> · 19 August 2021</p>
+            <p class="lp-card__excerpt">David Baunoch, Natalie Luke, Dakun Wang, Annah Vollstedt, Xinhua Zhao, Dicken S C Ko, Shuguang Huang, Patrick Cacdac, and Larry T Sirls.</p>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/34447256/" class="lp-card__cta lp-card__cta--external" target="_blank" rel="noopener">View on Journal Site</a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">9</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="https://www.mdpi.com/2079-6382/13/12/1214" target="_blank" rel="noopener">Pooled Antibiotic Susceptibility Testing Performs Within CLSI Standards for Validation When Measured Against Broth Microdilution and Disk Diffusion Antibiotic Susceptibility Testing of Cultured Isolates</a></h3>
+            <p class="lp-card__meta"><em>Antibiotics</em> · 14 December 2024</p>
+            <p class="lp-card__excerpt">Emery Haley, Frank R. Cockerill, Rick L. Pesano, Richard A. Festa, Natalie Luke, Mohit Mathur, Xiaofei Chen, Jim Havrilla, and David Baunoch.</p>
+            <a href="https://www.mdpi.com/2079-6382/13/12/1214" class="lp-card__cta lp-card__cta--external" target="_blank" rel="noopener">View on Journal Site</a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">10</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="https://www.mdpi.com/2079-6382/14/2/143" target="_blank" rel="noopener">Pooled Antibiotic Susceptibility Testing for Polymicrobial UTI Performs Within CLSI Validation Standards</a></h3>
+            <p class="lp-card__meta"><em>Antibiotics</em> · 1 February 2025</p>
+            <p class="lp-card__excerpt">Richard A. Festa,  Frank R. Cockerill,  Rick L. Pesano,  Emery Haley,  Natalie Luke,  Mohit Mathur, et al.</p>
+            <a href="https://www.mdpi.com/2079-6382/14/2/143" class="lp-card__cta lp-card__cta--external" target="_blank" rel="noopener">View on Journal Site</a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">11</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="https://pubmed.ncbi.nlm.nih.gov/39600563/" target="_blank" rel="noopener">Noninferiority of Multiplex Polymerase Chain Reaction Compared to Standard Urine Culture for Urinary Tract Infection Diagnosis in Pediatric Patients at Hackensack Meridian Health Children’s Hospital Emergency Department</a></h3>
+            <p class="lp-card__meta"><em>Pediatric Health Med Ther</em> · 22 November 2024</p>
+            <p class="lp-card__excerpt">Sejal M Bhavsar, Nisha Polavarapu, Emery Haley, Natalie Luke, Mohit Mathur, Xiaofei Chen, Jim Havrilla, David Baunoch, and Kenneth Lieberman</p>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/39600563/" class="lp-card__cta lp-card__cta--external" target="_blank" rel="noopener">View on Journal Site</a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">12</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="https://pubmed.ncbi.nlm.nih.gov/38297221/" target="_blank" rel="noopener">Urine Biomarkers Individually and as a Consensus Model Show High Sensitivity and Specificity for Detecting UTIs</a></h3>
+            <p class="lp-card__meta"><em>BMC Infectious Diseases</em> · 31 January 2024</p>
+            <p class="lp-card__excerpt">Marzieh Akhlaghpour,  Emery Haley,  Laura Parnell,  Natalie Luke,  Mohit Mathur,  Richard A Festa, et al.</p>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/38297221/" class="lp-card__cta lp-card__cta--external" target="_blank" rel="noopener">View on Journal Site</a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">13</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="https://pubmed.ncbi.nlm.nih.gov/31715272/" target="_blank" rel="noopener">Multiplex PCR Based Urinary Tract Infection (UTI) Analysis Compared to Traditional Urine Culture in Identifying Significant Pathogens in Symptomatic Patients</a></h3>
+            <p class="lp-card__meta"></p>
+            <p class="lp-card__excerpt">Kirk J Wojno,  David Baunoch,  Natalie Luke,  Michael Opel,  Howard Korman,  Colleen Kelly, et al.</p>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/31715272/" class="lp-card__cta lp-card__cta--external" target="_blank" rel="noopener">View on Journal Site</a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">14</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="#" target="_blank" rel="noopener">Multisite Prospective Comparison of Multiplex Polymerase Chain Reaction Testing with Urine Culture for Diagnosis of Urinary Tract Infections in Symptomatic Patients</a></h3>
+            <p class="lp-card__meta"></p>
+            <p class="lp-card__excerpt">Annah Vollstedt,  David Baunoch,  Kirk J. Wojno,  Natalie Luke,  Kevin Cline,  Laurence Belkoff, et al.</p>
+            <a href="#" class="lp-card__cta lp-card__cta--external" target="_blank" rel="noopener">View on Journal Site</a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">15</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="https://academic.oup.com/lambio/advance-article/doi/10.1093/lambio/ovad085/7232507?login=false" target="_blank" rel="noopener">Quantitative multiplex polymerase chain reaction in copies ml–1 linearly correlates with standard urine culture in colonies ml−1 for urinary tract infection (UTI) pathogens</a></h3>
+            <p class="lp-card__meta"><em>Letters in Applied Microbiology</em> · 27 July 2023</p>
+            <p class="lp-card__excerpt">Richard A Festa, Mike Opel, Mohit Mathur, Natalie Luke, Laura K S Parnell, Dakun Wang, Xinhua Zhao, Jesus Magallon, Michael Percaccio, and David Baunoch.</p>
+            <a href="https://academic.oup.com/lambio/advance-article/doi/10.1093/lambio/ovad085/7232507?login=false" class="lp-card__cta lp-card__cta--external" target="_blank" rel="noopener">View on Journal Site</a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">16</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="https://www.mdpi.com/2075-4418/13/16/2688#:~:text=The%20association%20between%20%E2%89%A510%2C000%20cells%20and%20CFU%20per,more%20suitable%20than%20100%2C000%20CFU%2FmL%20for%20diagnosing%20UTIs." target="_blank" rel="noopener">Elevated UTI Biomarkers in Symptomatic Patients with Urine Microbial Densities of 10,000 CFU/mL Indicate a Lower Threshold for Diagnosing UTIs</a></h3>
+            <p class="lp-card__meta"><em>Diagnostics</em> · 16 August 2023</p>
+            <p class="lp-card__excerpt">Laura K. S. Parnell, Natalie Luke, Mohit Mathur, Richard A. Festa, Emery Haley, Jimin Wang, Yan Jiang, Lori Anderson and David Baunoch.</p>
+            <a href="https://www.mdpi.com/2075-4418/13/16/2688#:~:text=The%20association%20between%20%E2%89%A510%2C000%20cells%20and%20CFU%20per,more%20suitable%20than%20100%2C000%20CFU%2FmL%20for%20diagnosing%20UTIs." class="lp-card__cta lp-card__cta--external" target="_blank" rel="noopener">View on Journal Site</a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">17</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="https://www.sciencedirect.com/science/article/pii/S2666168323018074?via%3Dihub" target="_blank" rel="noopener">Comparison Shows that Multiplex Polymerase Chain Reaction Identifies Infection-associated Urinary Biomarker–positive Urinary Tract Infections That Are Missed by Standard Urine Culture</a></h3>
+            <p class="lp-card__meta"><em>European Urology Open Science</em> · December 2023</p>
+            <p class="lp-card__excerpt">Emery Haley, Natalie Luke, Mohit Mathur, Richard A. Festa, Jimin Wang, Yan Jiang, Lori Anderson, David Baunoch</p>
+            <a href="https://www.sciencedirect.com/science/article/pii/S2666168323018074?via%3Dihub" class="lp-card__cta lp-card__cta--external" target="_blank" rel="noopener">View on Journal Site</a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">18</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="/a-test-combining-multiplex-pcr-with-pooled-antibiotic-susceptibility-testing-has-high-correlation-with-expanded-urine-culture-for-detection-of-live-bacteria-in-urine-samples-of-suspected-uti-patients/">A test combining multiplex-PCR with pooled antibiotic susceptibility testing has high correlation with expanded urine culture for detection of live bacteria in urine samples of suspected UTI patients</a></h3>
+            <p class="lp-card__meta"><em>Diagnostic Microbiology and Infectious Disease</em> · 3 July 2023</p>
+            <p class="lp-card__excerpt">Richard A. Festa, Natalie Luke, Mohit Mathur, Laura Parnell, Dakun Wang, Xinhua Zhaob, Jesus Magallona, Marina Remedios-Chan, Jasmine Nguyen, Tim Cho, Annie Ngo, Max Murphy, and David Baunoch.</p>
+            <a href="/a-test-combining-multiplex-pcr-with-pooled-antibiotic-susceptibility-testing-has-high-correlation-with-expanded-urine-culture-for-detection-of-live-bacteria-in-urine-samples-of-suspected-uti-patients/" class="lp-card__cta">Read summary<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">19</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="https://www.dovepress.com/the-prevalence-and-association-of-different-uropathogens-detected-by-m-peer-reviewed-fulltext-article-RRU" target="_blank" rel="noopener">The Prevalence and Association of Different Uropathogens Detected by M-PCR with Infection-Associated Urine Biomarkers in Urinary Tract Infections</a></h3>
+            <p class="lp-card__meta"><em>Research and Reports in Urology</em> · 9 January 2024</p>
+            <p class="lp-card__excerpt">Emery Haley, Natalie Luke, Mohit Mathur, Richard A. Festa, Jimin Wang, Yan Jiang, Lori Anderson, David Baunoch</p>
+            <a href="https://www.dovepress.com/the-prevalence-and-association-of-different-uropathogens-detected-by-m-peer-reviewed-fulltext-article-RRU" class="lp-card__cta lp-card__cta--external" target="_blank" rel="noopener">View on Journal Site</a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">20</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="https://www.dovepress.com/emerging-and-fastidious-uropathogens-were-detected-by-m-pcr-with-simil-peer-reviewed-fulltext-article-IDR" target="_blank" rel="noopener">Emerging and Fastidious Uropathogens Were Detected by M-PCR with Similar Prevalence and Cell Density in Catheter and Midstream Voided Urine Indicating the Importance of These Microbes in Causing UTIs</a></h3>
+            <p class="lp-card__meta"><em>Infection and Drug Resistance</em> · 23 December 2023</p>
+            <p class="lp-card__excerpt">Dakun Wang, Emery Haley, Natalie Luke, Mohit Mathur, Richard A Festa, Xinhua Zhao, Lori A Anderson, Jennifer L Allison, Kristen L Stebbins, Manuel Jose Diaz, David Baunoch</p>
+            <a href="https://www.dovepress.com/emerging-and-fastidious-uropathogens-were-detected-by-m-pcr-with-simil-peer-reviewed-fulltext-article-IDR" class="lp-card__cta lp-card__cta--external" target="_blank" rel="noopener">View on Journal Site</a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">21</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="https://www.dovepress.com/microbial-threshold-guidelines-for-uti-diagnosis-a-scoping-systematic--peer-reviewed-fulltext-article-PLMI" target="_blank" rel="noopener">Microbial Threshold Guidelines for UTI Diagnosis: A Scoping Systematic Review</a></h3>
+            <p class="lp-card__meta"><em>Pathology and Laboratory Medicine International</em> · 6 August 2023</p>
+            <p class="lp-card__excerpt">Evann E Hilt, Laura KS Parnell, Dakun Wang, Ann E Stapleton, and Emily S Lukacz.</p>
+            <a href="https://www.dovepress.com/microbial-threshold-guidelines-for-uti-diagnosis-a-scoping-systematic--peer-reviewed-fulltext-article-PLMI" class="lp-card__cta lp-card__cta--external" target="_blank" rel="noopener">View on Journal Site</a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">22</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="/after-180-years-is-it-time-for-something-better-for-diagnosing-utis/">After 180 Years, Is it Time for Something Better for Diagnosing UTIs?</a></h3>
+            <p class="lp-card__meta"></p>
+            <p class="lp-card__excerpt">Natalie Luke and David Baunoch.</p>
+            <a href="/after-180-years-is-it-time-for-something-better-for-diagnosing-utis/" class="lp-card__cta">Read summary<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">23</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="https://www.frontiersin.org/journals/urology/articles/10.3389/fruro.2023.1212590/full" target="_blank" rel="noopener">Beyond the Usual Suspects: Emerging Uropathogens in The Microbiome Age</a></h3>
+            <p class="lp-card__meta"><em>Frontiers in Urology</em> · 26 July 2023</p>
+            <p class="lp-card__excerpt">Robert B. Moreland,  Brian I. Choi,  Wilson Geaman,  Caroline Gonzalez,  Baylie R. Hochstedler-Kramer,  Jerrin John, et al.</p>
+            <a href="https://www.frontiersin.org/journals/urology/articles/10.3389/fruro.2023.1212590/full" class="lp-card__cta lp-card__cta--external" target="_blank" rel="noopener">View on Journal Site</a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">24</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="https://www.frontiersin.org/journals/urology/articles/10.3389/fruro.2023.1206046/full" target="_blank" rel="noopener">Tarnished Gold—The “Standard” Urine Culture: Reassessing The Characteristics of a Criterion Standard for Detecting Urinary Microbes</a></h3>
+            <p class="lp-card__meta"><em>Frontiers in Urology</em> · 11 July 2023</p>
+            <p class="lp-card__excerpt">Linda Brubaker, Toby C. Chai, Harry Horsley, Rajvinder Khasriya, Robert B. Moreland, and Alan J. Wolfe.</p>
+            <a href="https://www.frontiersin.org/journals/urology/articles/10.3389/fruro.2023.1206046/full" class="lp-card__cta lp-card__cta--external" target="_blank" rel="noopener">View on Journal Site</a>
+          </div>
+        </article>
+        <article class="lp-card lp-card--pub">
+          <span class="lp-card__ordinal">25</span>
+          <div class="lp-card__body">
+            <span class="lp-card__overline">Peer-reviewed</span>
+            <h3 class="lp-card__title"><a href="https://pubmed.ncbi.nlm.nih.gov/39685910/" target="_blank" rel="noopener">Comparing Prescribing Behaviors and Clinician Experiences Between Multiplex PCR/Pooled Antibiotic Susceptibility Testing and Standard Urine Culture in Complicated UTI Cases</a></h3>
+            <p class="lp-card__meta"><em>J Clin Med</em> · 7 December 2024</p>
+            <p class="lp-card__excerpt">Emery Haley, Natalie Luke, Howard Korman, Ganesh Srinvas Rao, David Baunoch, Xiaofei Chen, Jim Havrilla and Mohit Mathur</p>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/39685910/" class="lp-card__cta lp-card__cta--external" target="_blank" rel="noopener">View on Journal Site</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA — required on every sub-page. -->
+  <section class="section--green closing-cta">
+    <div class="container">
+      <h2 class="closing-cta__headline">
+        Ready to see what better diagnostics <em>can do for your practice?</em>
+      </h2>
+      <p class="closing-cta__sub">
+        Talk to a Pathnostics representative about Guidance® UTI and our other tests.
+      </p>
+      <div class="closing-cta__actions">
+        <a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative" class="btn-primary">Talk to a Rep</a>
+        <a href="/tests/" class="btn-ghost-white">See Our Tests</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ════════════════════════════════════════════════════
+     FOOTER — verbatim from /index.html.
+     ════════════════════════════════════════════════════ -->
+<footer class="section--navy footer" id="contact">
+  <a href="#top" class="footer__back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </a>
+  <div class="container" style="padding-top: var(--section-padding-y); padding-bottom: var(--gap-xl);">
+    <p class="footer__big-tagline">
+      Better decisions. Better outcomes. Better lives<span class="footer__big-tagline-period">.</span>
+    </p>
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics" loading="lazy">
+        <div class="footer__social">
+          <a href="https://www.linkedin.com/company/pathnostics/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg></a>
+          <a href="https://twitter.com/Pathnostics" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+        <iframe name="footer-subscribe-iframe" class="footer__subscribe-iframe" aria-hidden="true" tabindex="-1"></iframe>
+        <form class="footer__subscribe" action="https://pathnostics.us4.list-manage.com/subscribe/post?u=a1401745b75d8b6b5e62ed930&amp;id=35ede7f928&amp;f_id=009c57e9f0" method="post" target="footer-subscribe-iframe" novalidate>
+          <label for="footer-subscribe-email" class="footer__subscribe-label">Stay Informed</label>
+          <div class="footer__subscribe-row">
+            <input id="footer-subscribe-email" type="email" name="EMAIL" placeholder="Email address" required class="footer__subscribe-input" autocomplete="email">
+            <button type="submit" class="footer__subscribe-btn">Subscribe</button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <p class="footer__heading">Our Solutions</p>
+        <div class="footer__links">
+          <a href="/tests/guidance-uti/">Guidance UTI with P-AST</a>
+          <a href="/#athome">Guidance @Home</a>
+          <a href="/providers/">For Providers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Resources</p>
+        <div class="footer__links">
+          <a href="/evidence.html">Published Evidence</a>
+          <a href="/clinical-resources/">Clinical Resources</a>
+          <a href="/patient-resources/">Patient Resources</a>
+          <a href="/news/">News &amp; Events</a>
+          <a href="/careers/">Careers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Get in Touch</p>
+        <p class="footer__contact-text">Ready to see how Guidance can support your practice?</p>
+        <a href="#contact" class="btn-primary footer__cta">Talk to a Rep</a>
+        <div class="footer__utility">
+          <a href="/customer-care/">Customer Care</a>
+          <a href="/billing/">Billing</a>
+          <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener noreferrer">Pay Your Bill</a>
+          <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener noreferrer">Provider Login</a>
+          <a href="/order-supplies/">Order Supplies</a>
+          <a href="/veterans/">For Veterans</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copyright">&copy; 2026 Pathnostics | All rights reserved</p>
+      <div class="footer__legal">
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/patient-privacy/">Patient Privacy</a>
+        <a href="https://secure.ethicspoint.com/domain/media/en/gui/44588/index.html" target="_blank" rel="noopener noreferrer">Confidential Reporting</a>
+        <a href="/privacy-policy/#Section9">About Ads</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

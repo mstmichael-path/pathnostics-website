@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoNS — Pathnostics</title>
+  <meta name="description" content="CoNS are biofilm-forming, gram-positive microorganisms that may be urease-positive. CoNS are occasionally nitrite-negative on urinalysis dipsticks. CoNS are commonly dismissed as contaminants in standard urine culture conditions. CoNS are a">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+  <!-- CSS — absolute paths so this works from any depth -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/nav.css">
+  <link rel="stylesheet" href="/css/info-page.css">
+
+  <link rel="stylesheet" href="/css/article-detail.css">
+
+  <!-- GSAP — REQUIRED. main.js errors at line 1 without these,
+       which breaks scroll-collapse + footer parallax. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+<!-- ════════════════════════════════════════════════════
+     NAV SYSTEM — verbatim from /index.html.
+     If the homepage nav changes, sync this section.
+     The local nav (Tier 3) anchors are PAGE-SPECIFIC.
+     ════════════════════════════════════════════════════ -->
+<div class="nav-system" id="nav-system" role="navigation" aria-label="Primary">
+
+  <div class="utility-bar" id="utility-bar">
+    <div class="utility-bar__left">
+      <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a>
+      <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div class="utility-bar__right">
+      <a href="tel:8004934490" class="utility-bar__phone" aria-label="Call 800.493.4490">800.493.4490</a>
+    </div>
+  </div>
+
+  <div class="global-nav" id="global-nav">
+    <div class="global-nav__inner">
+
+      <a href="/" class="global-nav__logo" aria-label="Pathnostics Home">
+        <img class="global-nav__logo-color" src="/assets/pathnostics-logo-color.png" alt="Pathnostics">
+        <img class="global-nav__logo-white" src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+
+      <div class="mobile-bar">
+        <a href="tel:8004934490" class="mobile-bar__phone" aria-label="Call 800.493.4490">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+        <button type="button" class="mobile-bar__toggle" id="mobile-toggle" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false">
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+        </button>
+      </div>
+
+      <ul class="global-menu">
+        <li class="global-menu__item" data-menu="tests">
+          <a href="/tests/" class="global-menu__link">Our Tests<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--tests" role="menu" aria-label="Our Tests">
+            <div class="mega-tests__hero">
+              <img src="/assets/guidance-uti-header-image.webp" alt="Guidance UTI test kit" class="mega-tests__hero-image">
+              <div class="mega-tests__hero-body">
+                <div class="mega-tests__hero-tag">Flagship Test</div>
+                <h3 class="mega-tests__hero-title">Guidance UTI<br>with <em>P-AST.</em></h3>
+                <p class="mega-tests__hero-desc">Pooled antibiotic susceptibility testing that evaluates how antibiotics perform against the infection as a whole — including in polymicrobial cases. Results in 24–36 hours.</p>
+              </div>
+              <a href="/tests/guidance-uti/" class="mega-tests__hero-cta">Explore Guidance UTI<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+            </div>
+            <div class="mega-tests__directory">
+              <div class="mega-tests__group">
+                <h5>All Tests</h5>
+                <ul>
+                  <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+                  <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+                  <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+                  <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+                  <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+                  <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="providers">
+          <a href="/providers/" class="global-menu__link">Providers<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Providers">
+            <ul>
+              <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+              <li><a href="/order-supplies/">Order Supplies</a></li>
+              <li><a href="/customer-care/">Customer Care</a></li>
+              <li><a href="/testimonials/">Testimonials</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="patients">
+          <a href="/patient-resources/" class="global-menu__link">Patient Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Patient Resources">
+            <ul>
+              <li><a href="/billing/">Billing</a></li>
+              <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+              <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item">
+          <a href="/payors/" class="global-menu__link">Payors</a>
+        </li>
+        <li class="global-menu__item" data-menu="clinical">
+          <a href="/clinical-resources/" class="global-menu__link">Clinical Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Clinical Resources">
+            <ul>
+              <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+              <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="about">
+          <a href="/about/" class="global-menu__link">About<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="About">
+            <ul>
+              <li><a href="/our-team/">Our Team</a></li>
+              <li><a href="/careers/">Careers</a></li>
+              <li><a href="/news/">News &amp; Events</a></li>
+              <li><a href="/innovation/">Innovation</a></li>
+              <li><a href="/p-ast/">P-AST&trade;</a></li>
+              <li><a href="/contact/">Contact Us</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+
+      <div class="global-nav__actions">
+        <button class="global-nav__search-btn" id="search-toggle" aria-label="Search" aria-expanded="false">
+          <svg viewBox="0 0 24 24" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <a href="#contact" class="global-nav__cta">Talk to a Rep</a>
+      </div>
+
+      <div class="search-dropdown" id="search-dropdown" aria-hidden="true">
+        <form method="get" action="/search">
+          <input type="search" name="q" placeholder="Search Pathnostics…" aria-label="Search query" autocomplete="off">
+          <button type="submit">Go</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tier 3 local nav — anchors to THIS page's sections -->
+  <div class="local-nav" id="local-nav">
+    <div class="local-nav__inner">
+      <a href="/" class="local-nav__logo" aria-label="Pathnostics Home">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+      <ul class="local-nav__items">
+        <li><a href="#top" data-target="top">UTI Knowledge Center</a></li>
+        <li><a href="#contact" data-target="contact">Talk to a Rep</a></li>
+      </ul>
+      <a href="#contact" class="local-nav__cta">Talk to a Rep</a>
+    </div>
+    <div class="local-nav__progress" id="local-nav-progress"></div>
+  </div>
+</div>
+
+<!-- Mobile drawer — verbatim from /index.html -->
+<div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
+<aside class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
+  <div class="mobile-drawer__inner">
+    <a href="#contact" class="mobile-drawer__cta">Talk to a Rep</a>
+    <nav class="mobile-drawer__nav" aria-label="Mobile primary">
+      <ul class="mobile-accordion">
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Our Tests<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/tests/guidance-uti/">Guidance<sup>&reg;</sup> UTI with P-AST</a></li>
+            <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+            <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+            <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+            <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+            <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+            <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Providers<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+            <li><a href="/order-supplies/">Order Supplies</a></li>
+            <li><a href="/customer-care/">Customer Care</a></li>
+            <li><a href="/testimonials/">Testimonials</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Patient Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/billing/">Billing</a></li>
+            <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+            <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item mobile-accordion__item--single">
+          <a href="/payors/" class="mobile-accordion__head mobile-accordion__head--link">Payors</a>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Clinical Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+            <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">About<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/our-team/">Our Team</a></li>
+            <li><a href="/careers/">Careers</a></li>
+            <li><a href="/news/">News &amp; Events</a></li>
+            <li><a href="/innovation/">Innovation</a></li>
+            <li><a href="/p-ast/">P-AST&trade;</a></li>
+            <li><a href="/contact/">Contact Us</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <ul class="mobile-drawer__utility">
+      <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+      <li><a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      <li><a href="tel:8004934490" class="mobile-drawer__phone">800.493.4490</a></li>
+    </ul>
+  </div>
+</aside>
+<main class="page-shell">
+
+  <section class="ad-hero" id="top">
+    <div class="container ad-hero__inner">
+      <a href="/uti-knowledge-center/" class="ad-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        UTI Knowledge Center
+      </a>
+      <div class="ad-hero__overline">Microorganism Spotlight</div>
+      <h1 class="ad-hero__title">CoNS</h1>
+      
+    </div>
+  </section>
+
+  <section class="ad-content">
+    <div class="container">
+      <div class="ad-content__body">
+<p><img alt="" src="/wp-content/uploads/2025/07/Coagulase-negative-Staphylococci-1024x576.png"></p>
+<p>Emery Haley, PhD, Scientific Writing Specialist</p>
+<h2>Coagulase-negative Staphylococci Group</h2>
+<h2>Clinical Summary</h2>
+<ul>
+<li>CoNS are biofilm-forming, gram-positive microorganisms that may be urease-positive.</li>
+<li>CoNS are occasionally nitrite-negative on urinalysis dipsticks.</li>
+<li>CoNS are commonly dismissed as contaminants in standard urine culture conditions.</li>
+<li>CoNS are associated with recurrent UTIs in post-pubertal women and with complicated and persistent UTIs in men and children.</li>
+<li>In symptomatic UTI patients, CoNS: </li>
+<li>Are not a contaminant (is found in catheter-collected urine specimens).</li>
+<li>Are viable (can grow out on culture).</li>
+<li>Are pathogenic (associated with elevated urine biomarkers of infection).</li>
+<li>Reported severe complications of CoNS UTI include bacteremia endocarditis, and urosepsis.</li>
+</ul>
+<h2>Bacterial Characteristics</h2>
+<h4><em>Gram-stain</em></h4>
+<p>Gram-positive (all)</p>
+<h4><em>Morphology</em></h4>
+<p>Coccus (all)</p>
+<h4><em>Growth Requirements</em></h4>
+<p>Non-fastidious (all grow well in standard urine culture conditions)<br>
+Facultative anaerobe</p>
+<h4><em>Nitrate Reduction</em></h4>
+<p>Yes (except <em>S. saprophyticus</em> is variable for this phenotype)</p>
+<h4><em>Urease</em></h4>
+<p>Positive (<em>S. epidermidis</em> and <em>S. saprophyticus</em>)<br>
+Negative (<em>S. haemolyticus</em> and <em>S. lugdunenesis</em>)</p>
+<h4><em>Biofilm Formation</em></h4>
+<p>Yes (all)</p>
+<h4><em>Pathogenicity</em></h4>
+<p>Colonizer or Pathobiont</p>
+<h2>Clinical Relevance in UTI</h2>
+<p>Coagulase-negative Staphylococci (CoNS) is a group of <em>Staphylococcus</em> species that are grouped according to the shared characteristic they are named for: lack of the virulence factor coagulase.​[1]​  They are traditionally described as gram-positive commensals of the human skin microbiome.​[2]​  In the Guidance® UTI assay, this group term specifically encompasses four species, <em>S. epidermidis</em>, <em>S. haemolyticus</em>, <em>S. lugdunenesis</em>, and <em>S. saprophyticus</em>.  </p>
+<p><em>S. epidermidis</em><em>S. epidermidis</em> is a urease-positive microorganism ​[3]​ associated with biofilm formation in catheter-associated UTI ​[4]​  and with calcifications in chronic bacterial prostatitis ​[5]​. <em>S. epidermidis</em> is also associated with UTI and pyelonephritis in young children, adolescent males, and children with urinary tract abnormalities ​[6–8]​. <em>S. epidermidis</em> was also reported in an adult female with recurrent UTI ​[9]​  and in two adult males with nephrolithiasis, pyelonephritis, and bacteremia secondary to UTI.​[10]​ Additionally, in a sequencing-based study, <em>S. epidermidis</em> was detected only in interstitial cystitis/bladder pain syndrome (IC/BPS) patient urine specimens but not in asymptomatic controls, suggesting that these patients’ lower urinary tract symptoms were due to unrecognized/untreated <em>S. epidermidis</em> UTIs.​[11]​  <em>S. epidermidis</em> UTI isolates are frequently multi-drug resistant.​[12]​ </p>
+<p><em>S. haemolyticus</em><br>
+<em>S. haemolyticus</em> is associated with UTI in pregnant women ​[13]​ and with UTI and pyelonephritis in young children, adolescent males, and children with urinary tract abnormalities ​[6]​ <em>S. haemolyticus</em> was also reported in an adult female with recurrent UTI,  ​[14]​ in an adult male with persistent UTI,​[15]​  and in an adult male with urosepsis, urinary blockage, and prostatic abscess secondary to UTI.​[16]​ <em>S. haemolyticus</em> UTI isolates are frequently multi-drug resistant.​[12,17,18]​ </p>
+<p><em>S. lugdunenesis</em><br>
+<em>S. lugdunenesis</em> is associated with UTI, and specifically with pyelonephritis, in adult and adolescent males, as well as children of any sex with underlying urinary tract abnormalities.​[6,19]​ <em>S. lugdunenesis</em> was also reported in an immune-compromised adult female ​[20]​ and in five adult females with lower urinary tract symptoms.​[14]​  Furthermore, <em>S. lugdunenesis</em> was identified by expanded quantitative urine culture (EQUC) in catheter-obtained urine samples from UTI patients but not asymptomatic controls.​[21,22]​ <em>S. lugdunenesis</em> UTI, especially pyelonephritis, can lead to bacteremia ​[23]​  and <em>S. lugdunenesis</em> bacteremia is associated with severe complications, including aggressive endocarditis ​[24,25]​  and pericarditis ​[26]​.</p>
+<p><em>S. saprophyticus</em><br>
+<em>S. saprophyticus</em> is a urease-positive,​[3]​ biofilm-forming ​[27,28]​  microorganism. <em>S. saprophyticus</em> is considered a common cause of acute uncomplicated cystitis ​[6]​ and recurrent UTI ​[29]​  in post-pubertal adolescent and young-adult females. <em>S. saprophyticus</em> was also reported to cause pyelonephritis, bacteremia, and urosepsis in a pregnant 17-year-old female ​[30]​  and an immune-compromised 64-year-old female ​[31]​. <em>S. saprophyticus</em> UTI isolates are frequently multi-drug resistant.​[27,28]​</p>
+<p>The Coagulase-negative Staphylococci Group<br>
+CoNS UTIs are likely significantly underdiagnosed for a couple of reasons. Firstly, some strains of the <em>S. saprophyticus</em> species lack nitrate reductase activity, so screening strategies involving urinalysis for nitrite positivity may be false-negative.​[3,32]​  Secondly, although these organisms grow readily in standard urine culture conditions, they are commonly dismissed as irrelevant gram-positive commensal organisms of the urogenital microbiome and labeled as a “contaminant”.​[33]​   </p>
+<p>However, in a study of older adult males and females with clinically suspected complicated UTI, CoNS was detected in both midstream voided and in-and-out-catheter collected specimens indicating that it was truly present in the bladder, not simply a contaminant picked up during voiding.​[34]​  Furthermore, elevated markers of immune system activation in the urinary tract have been measured from the same clinical urine specimens in which CoNS was detected, indicating that the presence of CoNS was associated with an immune response to urinary tract infection.​[35–37]​  ​ ​  </p>
+<p>Despite their reputation as contaminants, CoNS (<em>S. epidermidis, S. haemolyticus, S. lugdunenesis</em>, and <em>S. saprophyticus</em>) are all associated with complicated, persistent, and/or recurrent UTIs, as well as with severe complications such as bacteremia and endocarditis. Together, these findings indicate that CoNS should be seriously considered as a uropathogen and demonstrate the value of detecting these organisms, particularly in individuals with immune compromise or other risk factors for complicated, persistent, or recurrent UTI.</p>
+<h2>Treatment</h2>
+<p>Evidence of Efficacy (Checkmarks): Doxycycline, Linezolid, Nitrofurantoin, Sulfamethoxazole/Trimethoprim, Trimethoprim, and Vancomycin.</p>
+      </div>
+    <div class="ad-author-card">
+      <p class="ad-author-card__label">About the Author</p>
+      <div class="ad-author-card__bio"><p>Dr. Emery Haley is a scientific writing specialist with over ten years of experience in translational cell and molecular biology. As both a former laboratory scientist and an experienced science communicator, Dr. Haley is passionate about making complex research clear, approachable, and relevant. Their work has been published in over 10 papers and focuses on bridging the gap between the lab and real-world patient care to help drive better health outcomes.</p></div>
+    </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA — required on every sub-page. -->
+  <section class="section--green closing-cta">
+    <div class="container">
+      <h2 class="closing-cta__headline">
+        Ready to see what better diagnostics <em>can do for your practice?</em>
+      </h2>
+      <p class="closing-cta__sub">
+        Talk to a Pathnostics representative about Guidance® UTI and our other tests.
+      </p>
+      <div class="closing-cta__actions">
+        <a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative" class="btn-primary">Talk to a Rep</a>
+        <a href="/tests/" class="btn-ghost-white">See Our Tests</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="references" aria-labelledby="references-label">
+    <div class="container">
+      <div class="references__header">
+        <span class="references__label" id="references-label">References</span>
+      </div>
+      <ol class="references__list ad-references">
+        <li>Chowdhury, S.; Fong, S.S. Computational Modeling of the Human Microbiome. <em>Microorganisms</em> <strong>2020</strong>, <em>8</em>, 197, doi:10.3390/microorganisms8020197.</li>
+        <li>BacDive | The Bacterial Diversity Metadatabase Available online: <a href="https://bacdive.dsmz.de/">https://bacdive.dsmz.de/</a> (accessed on 11 February 2025).</li>
+        <li>Curtin, J.J.; Donlan, R.M. Using Bacteriophages To Reduce Formation of Catheter-Associated Biofilms by Staphylococcus Epidermidis. <em>Antimicrob. Agents Chemother.</em> <strong>2006</strong>, <em>50</em>, 1268–1275, doi:10.1128/aac.50.4.1268-1275.2006.</li>
+        <li>Mazzoli, S. Biofilms in Chronic Bacterial Prostatitis (NIH‐II) and in Prostatic Calcifications. <em>FEMS Immunol. Méd. Microbiol.</em> <strong>2010</strong>, <em>59</em>, 337–344, doi:10.1111/j.1574-695x.2010.00659.x.</li>
+        <li>Megged, O. Coagulase-Negative Staphylococci: A Rare Cause of Urinary Tract Infections in Children with Consequences on Clinical Practice. <em>Eur. J. Pediatr.</em> <strong>2022</strong>, <em>181</em>, 1099–1104, doi:10.1007/s00431-021-04308-4.</li>
+        <li>Steele, G.; Tan, W.; Saleeby, C.E.; Zanger, K. Staphylococcus Epidermidis as a Uropathogen in Children. <em>Urology</em> <strong>2023</strong>, <em>176</em>, 183–186, doi:10.1016/j.urology.2023.02.021.</li>
+        <li>Parsons, E.; Albert, C.; Forouhar, M.; Kunz, A.; Sainato, R. Recurrent Severe Staphylococcus Epidermidis Urinary Tract Infections in a 7-Year-Old Boy. <em>Clin. Pediatr.</em> <strong>2021</strong>, <em>60</em>, 346–349, doi:10.1177/00099228211021277.</li>
+        <li>Jablonska, S.; Wolfe, A.J.; Putonti, C. Draft Genome Sequence of Staphylococcus Epidermidis UMB7543, Isolated from a Female Patient with Recurrent Urinary Tract Infections. <em>Microbiol. Resour. Announc.</em> <strong>2022</strong>, <em>11</em>, e00962-22, doi:10.1128/mra.00962-22.</li>
+        <li>Yogo, A.; Yamamoto, S.; Sumiyoshi, S.; Iwamoto, N.; Aoki, K.; Motobayashi, H.; Tochitani, K.; Shimizu, T.; Murashima, T.; Nishikawa, N.; et al. Two Cases of Pyelonephritis with Bacteremia by Staphylococcus Epidermidis in Male Patients with Nephrolithiasis: Case Reports and a Literature Review. <em>J. Infect. Chemother.</em> <strong>2022</strong>, <em>28</em>, 1189–1192, doi:10.1016/j.jiac.2022.04.030.</li>
+        <li>Jacobs, K.M.; Price, T.K.; Thomas-White, K.; Halverson, T.; Davies, A.; Myers, D.L.; Wolfe, A.J. Cultivable Bacteria in Urine of Women With Interstitial Cystitis: (Not) What We Expected. <em>Female Pelvic Med. Reconstr. Surg.</em> <strong>2021</strong>, <em>27</em>, 322–327, doi:10.1097/spv.0000000000000854.</li>
+        <li>Phillip, S.; Mushi, M.F.; Decano, A.G.; Seni, J.; Mmbaga, B.T.; Kumburu, H.; Konje, E.T.; Mwanga, J.R.; Kidenya, B.R.; Msemwa, B.; et al. Molecular Characterizations of the Coagulase-Negative Staphylococci Species Causing Urinary Tract Infection in Tanzania: A Laboratory-Based Cross-Sectional Study. <em>Pathogens</em> <strong>2023</strong>, <em>12</em>, 180, doi:10.3390/pathogens12020180.   ​13. Aziz, L.M.; Iraq, D. of B., College of Applied Sciences, University of Fallujah,; Alhachami, F.R.; Iraq, D. of B., College of Education for Pure Science, Wasit University, Wasit,; Abdullah, M.A.; Iraq, D. of M., Ninevah College of Medicine, Ninevah University, Mosul,; Abed, A.S.; Iraq, J.I.H.U. of M. and P.S., Najaf,; Ali, M.H.; Iraq, D.-Q.H.D., Iraqi Ministry of Health, Nasiriya,; et al. Molecular Characterization and Antibiotic Resistance Profile of Staphylococcus Haemolyticus in Pregnant Women with Urinary Tract Infections. <em>Iran. J. Méd. Microbiol.</em> <strong>2023</strong>, <em>17</em>, 354–360, doi:10.30699/ijmm.17.3.354. ​14. Appleberry, H.; Anjum, H.; Cage, T.; Jarm, K.; Khan, H.; Proctor, L.; Saroca, J.; Wolfe, A.J.; Putonti, C.; Kula, A. Draft Genomes of One Staphylococcus Haemolyticus and Five Staphylococcus Lugdunensis Strains Isolated from Catheterized Urine Samples of Females. <em>Microbiol. Resour. Announc.</em> <strong>2024</strong>, <em>13</em>, e00497-24, doi:10.1128/mra.00497-24. ​15. Gunn, B.A.; Davis, C.E. Staphylococcus Haemolyticus Urinary Tract Infection in a Male Patient. <em>J. Clin. Microbiol.</em> <strong>1988</strong>, <em>26</em>, 1055–1057, doi:10.1128/jcm.26.5.1055-1057.1988. ​16. Bermudez, M.; Epstein, S.B.; Guevara, N.; Pedraza, L.; Dahdouh, M.; Awad, I. Prostatic Abscess Secondary to Staphylococcus Haemolyticus and Escherichia Coli: A Case Report. <em>Cureus</em> <strong>2023</strong>, <em>15</em>, e40406, doi:10.7759/cureus.40406. ​17. Aniba, R.; Dihmane, A.; Raqraq, H.; Ressmi, A.; Nayme, K.; Timinouni, M.; Barguigua, A. Molecular and Phenotypic Characterization of Biofilm Formation and Antimicrobial Resistance Patterns of Uropathogenic Staphylococcus Haemolyticus Isolates in Casablanca, Morocco. <em>Diagn. Microbiol. Infect. Dis.</em> <strong>2024</strong>, <em>110</em>, 116483, doi:10.1016/j.diagmicrobio.2024.116483. ​18. Bangladesh, D. of V. and A.S., Faculty of Agriculture, Rajshahi University, Rajshahi-6205,; MH, H.; ML, M.; S, S.; Australia, D. of P., Anatomy and Microbiology, School of Life Sciences, La Trobe University, Melbourne VIC 3086,; M, S.; Kingdom, S. doctor in A.M., Leighton Hospital, Middlewich Rd, United; MJA, S.; Australia, S. of E. and S. (ESC), and Queensland Micro-and Nanotechnology Centre (QMNC) Griffith University, Nathan Campus, 170 Kessels Road, QLD 4111, Molecular Characterization and Antibiogram Profiling of Multidrug Resistant Staphylococcus Haemolyticus Isolated from Patients with Urinary Tract Infection in Bangladesh. <em>J. Bacteriol. Mycol.</em> <strong>2021</strong>, <em>8</em>, doi:10.26420/jbacteriolmycol.2021.1166. ​19. Chiu, K.H.Y.; Lam, R.P.K.; Chan, E.; Lau, S.K.P.; Woo, P.C.Y. Emergence of Staphylococcus Lugdunensis as a Cause of Urinary Tract Infection: Results of the Routine Use of MALDI-TOF MS. <em>Microorganisms</em> <strong>2020</strong>, <em>8</em>, 381, doi:10.3390/microorganisms8030381. ​20. Bobde, R.; Berger, J.I.; Jalil, U.; Kalaydjian, G. Staphylococcus Lugdunensis Urinary Tract Infection With Associated Neutropenic Fever. <em>Cureus</em> <strong>2022</strong>, <em>14</em>, e21432, doi:10.7759/cureus.21432. ​21. Price, T.K.; Hilt, E.E.; Dune, T.J.; Mueller, E.R.; Wolfe, A.J.; Brubaker, L. Urine Trouble: Should We Think Differently about UTI? <em>Int Urogynecol J</em> <strong>2018</strong>, <em>29</em>, 205–210, doi:10.1007/s00192-017-3528-8. ​22. Price, T.K.; Dune, T.; Hilt, E.E.; Thomas-White, K.J.; Kliethermes, S.; Brincat, C.; Brubaker, L.; Wolfe, A.J.; Mueller, E.R.; Schreckenberger, P.C. The Clinical Urine Culture: Enhanced Techniques Improve Detection of Clinically Relevant Microorganisms. <em>Journal of Clinical Microbiology</em> <strong>2016</strong>, <em>54</em>, 1216–1222, doi:10.1128/jcm.00044-16. ​23. Hunter, N.; Kusnik, A.; Proia, L. A Frequently Overlooked Contaminant: A Case of Staphylococcus Lugdunensis Bacteremia. <em>J. Community Hosp. Intern. Med. Perspect.</em> <strong>2023</strong>, <em>13</em>, 107–108, doi:10.55729/2000-9666.1201. ​24. Aldman, M.H.; Rasmussen, M.; Olaison, L.; Påhlman, L.I. Endocarditis Due to Staphylococcus Lugdunensis—a Retrospective National Registry–Based Study. <em>Eur. J. Clin. Microbiol. Infect. Dis.</em> <strong>2021</strong>, <em>40</em>, 1103–1106, doi:10.1007/s10096-020-04134-w. ​25. Non, L.R.; Santos, C.A.Q. The Occurrence of Infective Endocarditis with Staphylococcus Lugdunensis Bacteremia: A Retrospective Cohort Study and Systematic Review. <em>J. Infect.</em> <strong>2017</strong>, <em>74</em>, 179–186, doi:10.1016/j.jinf.2016.10.003. ​26. Khalaf, S.A.; Mansour, A.; Perveze, I.; Fender, B.; Walker, D.R.; Dandachi, D. Staphylococcus Lugdunensis as Cause of Septic Pericarditis. <em>Mo. Med.</em> <strong>2021</strong>, <em>118</em>, 552–555. ​27. Rafiee, M.; Ghaemi, E.A. Detection of Virulence Genes among Staphylococcus Saprophyticus Isolated from Women with Urinary Tract Infections: First Report from Iran. <em>BMC Res. Notes</em> <strong>2023</strong>, <em>16</em>, 206, doi:10.1186/s13104-023-06481-1. ​28. Hashemzadeh, M.; Dezfuli, A.A.Z.; Nashibi, R.; Jahangirimehr, F.; Akbarian, Z.A. Study of Biofilm Formation, Structure and Antibiotic Resistance in Staphylococcus Saprophyticus Strains Causing Urinary Tract Infection in Women in Ahvaz, Iran. <em>N. Microbes N. Infect.</em> <strong>2021</strong>, <em>39</em>, 100831, doi:10.1016/j.nmni.2020.100831. ​29. Latham, R.H.; Running, K.; Stamm, W.E. Urinary Tract Infections in Young Adult Women Caused by Staphylococcus Saprophyticus. <em>JAMA</em> <strong>1983</strong>, <em>250</em>, 3063–3066, doi:10.1001/jama.1983.03340220031028. ​30. Olsen, R.C.; Abbott, B. Staphylococcus Saprophyticus , an Unusual Cause of Pyelonephritis and Sepsis in Pregnancy. <em>Ann. Intern. Med.: Clin. Cases</em> <strong>2024</strong>, <em>3</em>, doi:10.7326/aimcc.2023.0613. ​31. Yoshida, K.; Okawa, N.; Nobuaki, T.; Otsuka, Y.; Hosokawa, N. A Case of Staphylococcus Saprophyticus Bacteremia Caused by Obstructive Pyelonephritis. <em>J. Infect. Chemother.</em> <strong>2025</strong>, <em>31</em>, 102629, doi:10.1016/j.jiac.2025.102629. ​32. BioCyc Pathway/Genome Database Collection Available online: <a href="https://biocyc.org/">https://biocyc.org/</a> (accessed on 11 February 2025). ​33. Maskell, R. IMPORTANCE OF COAGULASE-NEGATIVE STAPHYLOCOCCI AS PATHOGENS IN THE URINARY TRACT. <em>Lancet</em> <strong>1974</strong>, <em>303</em>, 1155–1158, doi:10.1016/s0140-6736(74)90634-5. ​34. Wang, D.; Haley, E.; Luke, N.; Mathur, M.; Festa, R.; Zhao, X.; Anderson, L.A.; Allison, J.L.; Stebbins, K.L.; Diaz, M.J.; et al. Emerging and Fastidious Uropathogens Were Detected by M-PCR with Similar Prevalence and Cell Density in Catheter and Midstream Voided Urine Indicating the Importance of These Microbes in Causing UTIs. <em>Infect. Drug Resist.</em> <strong>2023</strong>, <em>Volume 16</em>, 7775–7795, doi:10.2147/idr.s429990. ​35. Haley, E.; Luke, N.; Mathur, M.; Festa, R.A.; Wang, J.; Jiang, Y.; Anderson, L.A.; Baunoch, D. The Prevalence and Association of Different Uropathogens Detected by M-PCR with Infection-Associated Urine Biomarkers in Urinary Tract Infections. <em>Res. Rep. Urol.</em> <strong>2024</strong>, <em>16</em>, 19–29, doi:10.2147/rru.s443361. ​36. Akhlaghpour, M.; Haley, E.; Parnell, L.; Luke, N.; Mathur, M.; Festa, R.A.; Percaccio, M.; Magallon, J.; Remedios-Chan, M.; Rosas, A.; et al. Urine Biomarkers Individually and as a Consensus Model Show High Sensitivity and      Specificity for Detecting UTIs. <em>BMC Infect Dis</em> <strong>2024</strong>, <em>24</em>, 153, doi:10.1186/s12879-024-09044-2. ​37. Parnell, L.K.D.; Luke, N.; Mathur, M.; Festa, R.A.; Haley, E.; Wang, J.; Jiang, Y.; Anderson, L.; Baunoch, D. Elevated UTI Biomarkers in Symptomatic Patients with Urine Microbial Densities of 10,000 CFU/ML Indicate a Lower Threshold for Diagnosing UTIs. <em>MDPI</em> <strong>2023</strong>, <em>13</em>, 1–15, doi:10.3390/diagnostics13162688.</li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<!-- ════════════════════════════════════════════════════
+     FOOTER — verbatim from /index.html.
+     ════════════════════════════════════════════════════ -->
+<footer class="section--navy footer" id="contact">
+  <a href="#top" class="footer__back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </a>
+  <div class="container" style="padding-top: var(--section-padding-y); padding-bottom: var(--gap-xl);">
+    <p class="footer__big-tagline">
+      Better decisions. Better outcomes. Better lives<span class="footer__big-tagline-period">.</span>
+    </p>
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics" loading="lazy">
+        <div class="footer__social">
+          <a href="https://www.linkedin.com/company/pathnostics/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg></a>
+          <a href="https://twitter.com/Pathnostics" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+        <iframe name="footer-subscribe-iframe" class="footer__subscribe-iframe" aria-hidden="true" tabindex="-1"></iframe>
+        <form class="footer__subscribe" action="https://pathnostics.us4.list-manage.com/subscribe/post?u=a1401745b75d8b6b5e62ed930&amp;id=35ede7f928&amp;f_id=009c57e9f0" method="post" target="footer-subscribe-iframe" novalidate>
+          <label for="footer-subscribe-email" class="footer__subscribe-label">Stay Informed</label>
+          <div class="footer__subscribe-row">
+            <input id="footer-subscribe-email" type="email" name="EMAIL" placeholder="Email address" required class="footer__subscribe-input" autocomplete="email">
+            <button type="submit" class="footer__subscribe-btn">Subscribe</button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <p class="footer__heading">Our Solutions</p>
+        <div class="footer__links">
+          <a href="/tests/guidance-uti/">Guidance UTI with P-AST</a>
+          <a href="/#athome">Guidance @Home</a>
+          <a href="/providers/">For Providers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Resources</p>
+        <div class="footer__links">
+          <a href="/evidence.html">Published Evidence</a>
+          <a href="/clinical-resources/">Clinical Resources</a>
+          <a href="/patient-resources/">Patient Resources</a>
+          <a href="/news/">News &amp; Events</a>
+          <a href="/careers/">Careers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Get in Touch</p>
+        <p class="footer__contact-text">Ready to see how Guidance can support your practice?</p>
+        <a href="#contact" class="btn-primary footer__cta">Talk to a Rep</a>
+        <div class="footer__utility">
+          <a href="/customer-care/">Customer Care</a>
+          <a href="/billing/">Billing</a>
+          <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener noreferrer">Pay Your Bill</a>
+          <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener noreferrer">Provider Login</a>
+          <a href="/order-supplies/">Order Supplies</a>
+          <a href="/veterans/">For Veterans</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copyright">&copy; 2026 Pathnostics | All rights reserved</p>
+      <div class="footer__legal">
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/patient-privacy/">Patient Privacy</a>
+        <a href="https://secure.ethicspoint.com/domain/media/en/gui/44588/index.html" target="_blank" rel="noopener noreferrer">Confidential Reporting</a>
+        <a href="/privacy-policy/#Section9">About Ads</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

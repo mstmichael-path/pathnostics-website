@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guidance® UTI Evidence Summary — Pathnostics</title>
+  <meta name="description" content="Guidance® UTI: Personalized Therapy Options from Sample to Result in Less than One Day Urinary Tract Infections (UTIs) can cause many potentially life-threatening complications, with approximately 25% of all adult sepsis cases resulting fro">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+  <!-- CSS — absolute paths so this works from any depth -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/nav.css">
+  <link rel="stylesheet" href="/css/info-page.css">
+
+  <link rel="stylesheet" href="/css/article-detail.css">
+
+  <!-- GSAP — REQUIRED. main.js errors at line 1 without these,
+       which breaks scroll-collapse + footer parallax. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+<!-- ════════════════════════════════════════════════════
+     NAV SYSTEM — verbatim from /index.html.
+     If the homepage nav changes, sync this section.
+     The local nav (Tier 3) anchors are PAGE-SPECIFIC.
+     ════════════════════════════════════════════════════ -->
+<div class="nav-system" id="nav-system" role="navigation" aria-label="Primary">
+
+  <div class="utility-bar" id="utility-bar">
+    <div class="utility-bar__left">
+      <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a>
+      <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div class="utility-bar__right">
+      <a href="tel:8004934490" class="utility-bar__phone" aria-label="Call 800.493.4490">800.493.4490</a>
+    </div>
+  </div>
+
+  <div class="global-nav" id="global-nav">
+    <div class="global-nav__inner">
+
+      <a href="/" class="global-nav__logo" aria-label="Pathnostics Home">
+        <img class="global-nav__logo-color" src="/assets/pathnostics-logo-color.png" alt="Pathnostics">
+        <img class="global-nav__logo-white" src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+
+      <div class="mobile-bar">
+        <a href="tel:8004934490" class="mobile-bar__phone" aria-label="Call 800.493.4490">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+        <button type="button" class="mobile-bar__toggle" id="mobile-toggle" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false">
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+        </button>
+      </div>
+
+      <ul class="global-menu">
+        <li class="global-menu__item" data-menu="tests">
+          <a href="/tests/" class="global-menu__link">Our Tests<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--tests" role="menu" aria-label="Our Tests">
+            <div class="mega-tests__hero">
+              <img src="/assets/guidance-uti-header-image.webp" alt="Guidance UTI test kit" class="mega-tests__hero-image">
+              <div class="mega-tests__hero-body">
+                <div class="mega-tests__hero-tag">Flagship Test</div>
+                <h3 class="mega-tests__hero-title">Guidance UTI<br>with <em>P-AST.</em></h3>
+                <p class="mega-tests__hero-desc">Pooled antibiotic susceptibility testing that evaluates how antibiotics perform against the infection as a whole — including in polymicrobial cases. Results in 24–36 hours.</p>
+              </div>
+              <a href="/tests/guidance-uti/" class="mega-tests__hero-cta">Explore Guidance UTI<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+            </div>
+            <div class="mega-tests__directory">
+              <div class="mega-tests__group">
+                <h5>All Tests</h5>
+                <ul>
+                  <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+                  <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+                  <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+                  <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+                  <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+                  <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="providers">
+          <a href="/providers/" class="global-menu__link">Providers<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Providers">
+            <ul>
+              <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+              <li><a href="/order-supplies/">Order Supplies</a></li>
+              <li><a href="/customer-care/">Customer Care</a></li>
+              <li><a href="/testimonials/">Testimonials</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="patients">
+          <a href="/patient-resources/" class="global-menu__link">Patient Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Patient Resources">
+            <ul>
+              <li><a href="/billing/">Billing</a></li>
+              <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+              <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item">
+          <a href="/payors/" class="global-menu__link">Payors</a>
+        </li>
+        <li class="global-menu__item" data-menu="clinical">
+          <a href="/clinical-resources/" class="global-menu__link">Clinical Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Clinical Resources">
+            <ul>
+              <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+              <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="about">
+          <a href="/about/" class="global-menu__link">About<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="About">
+            <ul>
+              <li><a href="/our-team/">Our Team</a></li>
+              <li><a href="/careers/">Careers</a></li>
+              <li><a href="/news/">News &amp; Events</a></li>
+              <li><a href="/innovation/">Innovation</a></li>
+              <li><a href="/p-ast/">P-AST&trade;</a></li>
+              <li><a href="/contact/">Contact Us</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+
+      <div class="global-nav__actions">
+        <button class="global-nav__search-btn" id="search-toggle" aria-label="Search" aria-expanded="false">
+          <svg viewBox="0 0 24 24" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <a href="#contact" class="global-nav__cta">Talk to a Rep</a>
+      </div>
+
+      <div class="search-dropdown" id="search-dropdown" aria-hidden="true">
+        <form method="get" action="/search">
+          <input type="search" name="q" placeholder="Search Pathnostics…" aria-label="Search query" autocomplete="off">
+          <button type="submit">Go</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tier 3 local nav — anchors to THIS page's sections -->
+  <div class="local-nav" id="local-nav">
+    <div class="local-nav__inner">
+      <a href="/" class="local-nav__logo" aria-label="Pathnostics Home">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+      <ul class="local-nav__items">
+        <li><a href="#top" data-target="top">UTI Knowledge Center</a></li>
+        <li><a href="#contact" data-target="contact">Talk to a Rep</a></li>
+      </ul>
+      <a href="#contact" class="local-nav__cta">Talk to a Rep</a>
+    </div>
+    <div class="local-nav__progress" id="local-nav-progress"></div>
+  </div>
+</div>
+
+<!-- Mobile drawer — verbatim from /index.html -->
+<div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
+<aside class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
+  <div class="mobile-drawer__inner">
+    <a href="#contact" class="mobile-drawer__cta">Talk to a Rep</a>
+    <nav class="mobile-drawer__nav" aria-label="Mobile primary">
+      <ul class="mobile-accordion">
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Our Tests<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/tests/guidance-uti/">Guidance<sup>&reg;</sup> UTI with P-AST</a></li>
+            <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+            <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+            <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+            <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+            <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+            <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Providers<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+            <li><a href="/order-supplies/">Order Supplies</a></li>
+            <li><a href="/customer-care/">Customer Care</a></li>
+            <li><a href="/testimonials/">Testimonials</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Patient Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/billing/">Billing</a></li>
+            <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+            <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item mobile-accordion__item--single">
+          <a href="/payors/" class="mobile-accordion__head mobile-accordion__head--link">Payors</a>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Clinical Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+            <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">About<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/our-team/">Our Team</a></li>
+            <li><a href="/careers/">Careers</a></li>
+            <li><a href="/news/">News &amp; Events</a></li>
+            <li><a href="/innovation/">Innovation</a></li>
+            <li><a href="/p-ast/">P-AST&trade;</a></li>
+            <li><a href="/contact/">Contact Us</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <ul class="mobile-drawer__utility">
+      <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+      <li><a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      <li><a href="tel:8004934490" class="mobile-drawer__phone">800.493.4490</a></li>
+    </ul>
+  </div>
+</aside>
+<main class="page-shell">
+
+  <section class="ad-hero" id="top">
+    <div class="container ad-hero__inner">
+      <a href="/uti-knowledge-center/" class="ad-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        UTI Knowledge Center
+      </a>
+      <div class="ad-hero__overline">Knowledge Center</div>
+      <h1 class="ad-hero__title">Guidance® UTI Evidence Summary</h1>
+      
+    </div>
+  </section>
+
+  <section class="ad-content">
+    <div class="container">
+      <div class="ad-content__body">
+<h1>Guidance® UTI: Personalized Therapy Options from Sample to Result in Less than One Day</h1>
+<p>Urinary Tract Infections (UTIs) can cause many potentially life-threatening complications, with approximately 25% of all adult sepsis cases resulting from urosepsis [1]. Both traditional culture and molecular diagnostic solutions that only identify organisms and resistance genes provide limited information when used alone. Guidance® UTI is a unique and proprietary solution which not only identifies uropathogens and resistance genes, but also provides information regarding susceptibility to antibiotic resistance. Guidance® UTI is an evidence-based, proprietary UTI test capable of delivering results that could guide personalized therapy options in less than one day from receipt in the lab [2-4].</p>
+<h2>Urinary Tract Infections (UTIs): Complications and Costs</h2>
+<p>Complicated UTIs (cUTIs) occur in individuals who have one or more risk factor(s) predisposing a patient to a higher likelihood of treatment failure and/or poor outcomes [5,6]. UTI complications can incur enormous medical expenses. In 2018, urosepsis was responsible for approximately 25% of all adult sepsis cases [1], translating to $10.4 billion in medical costs in the Medicare population [7].</p>
+<h2>Limitations of Standard Urine Culture (SUC) or PCR Alone</h2>
+<p>Historically, standard urine culture (SUC) has been the preferred testing method for UTIs, despite significant limitations [2], which could negatively impact patients with complicated and elevated-risk UTIs.  SUC favors the growth of <em>E.coli</em> over other pathogens and may miss fastidious organisms [3]. In polymicrobial communities, interactions among bacteria influence the growth and survival of each species. SUC often fails to identify more than two organisms in polymicrobial infections, resulting in ‘mixed flora’ or ‘contamination’ findings.  One study found that SUC missed 67% of uropathogens in patients with severe urinary tract symptoms, and 36% of the patients experienced persistent symptoms after receiving directed treatment based upon SUC results [2].</p>
+<p>Polymicrobial interactions can also impact susceptibility results. In traditional antimicrobial susceptibility testing (AST), each bacterium is grown in isolation against individual antibiotics, providing no opportunity to assess the effect of bacterial interactions on antibiotic effectiveness. Ignoring bacterial interactions may lead to treatment failure, which can have serious clinical consequences or could lead to inappropriate or delayed treatments. SUC and traditional AST can take 2-4 days from acquiring the sample to receiving a result. Such delay may lead to increased use of empiric therapy, poor antibiotic stewardship, and poor patient outcomes.</p>
+<p>Molecular diagnostic technologies such as multiplex PCR offer high sensitivity, specificity, and accuracy in identifying several bacterial targets in the same reaction [4]. Certain PCR panels should target organisms known as uropathogens and relevant with a given patient population. Since PCR amplifies genetic material, it can detect both live and nonviable organisms. Although promising, research studies have not yet shown an association between PCR results alone and improved outcomes.</p>
+<h2>Guidance® UTI Solutions</h2>
+<p>The Guidance® UTI Assay is intended for patients with a presumption of active UTI infection that requires the identification of a causative organism and antibiotic susceptibility results for appropriate management. These patients should be symptomatic and either at higher risk of UTI complications or seen in a urology or urogynecology setting. Guidance® UTI is a laboratory-developed test using multiplex PCR for the detection and quantification of 27 bacterial and yeast organisms. This test is also capable of detecting antibiotic resistance genes by targeting 32 genes among six classes of antibiotic resistance markers. Microbial susceptibility is simultaneously evaluated for 19 antibiotics, using a unique patented and proprietary technology called Pooled Antibiotic Susceptibility Testing (P-AST™). P-AST accounts for interactions in polymicrobial infections that may alter antibiotic resistance [8]. By combining the sensitivity of PCR pathogen identification, antibiotic resistance gene detection, and P-AST™, Guidance® UTI provides results that could guide personalized UTI therapy options in less than one day from receipt of specimen. Guidance® UTI allows more informed, rapid, and directed treatments that could improve patient outcomes.</p>
+<h2>Evidence of Guidance® UTI</h2>
+<p>Scientific evidence demonstrating the successful application of Guidance® UTI is summarized below.</p>
+<ul>
+<li>According to a recent study [9]:</li>
+<li>Guidance® UTI was associated with a 13.7% reduction in hospital/ emergency department (ED) utilization.</li>
+<li>ED utilization and hospital admission rates for UTI were higher in patients whose prior outpatient treatment was guided by results from SUC than patients for whose prior treatment was guided by results from Guidance UTI.</li>
+<li>For a group of 30,000 patients with UTIs, a 13.7% reduction in hospitalizations would result in 156 fewer admissions and more than $10 million in savings.</li>
+<li>A prospective study [4] with 2,511 enrolled patients from 37 urology offices across seven states shows that Guidance® UTI detected organisms and polymicrobial infections more accurately than SUC.</li>
+<li>A post hoc analysis of a total of 3,124 patients from two studies</li>
+<li>A post hoc analysis showed that there was only a 60% concordance between antibiotic resistance genes and phenotypic susceptibility. Genotypic resistance and phenotypic susceptibility results should be provided for appropriate management [10].</li>
+<li>A Medicare database study [11] demonstrated Guidance® UTI testing is associated with reductions in critical adverse outcomes, healthcare resource utilization, and cost for complicated UTI. Overall, the study found that Guidance® UTI led to a $463.46 savings per cUTI patient tested, and a total savings of $11.6M for every 25,000 cUTI cases.</li>
+</ul>
+<h2></h2>
+<h2>Conclusion</h2>
+<p>Guidance® UTI is a lab-developed test that combines the accuracy and sensitivity of PCR to identify uropathogens and antibiotic resistance genes with a pooled antibiotic susceptibility test.  In complicated Urinary Tract Infections (cUTIs), it has been associated with reduced inpatient admission, urgent care visits, and the rate of adverse outcomes such as sepsis [11].</p>
+<p>[1] Wagenlehner, FM. et al. Diagnosis and management for urosepsis. Int J Urol 20, 963–970 (2013).</p>
+<p>[2] Price, T. K. et al. The Clinical Urine Culture: Enhanced Techniques Improve Detection of Clinically Relevant Microorganisms. Journal of Clinical Microbiology 54, 1216–1222 (2016).</p>
+<p>[3] Price, Travis K., et al. “Urine trouble: should we think differently about UTI?.” International urogynecology journal 29.2 (2018): 205-210.</p>
+<p>[4] Vollstedt A, Baunoch D, Wojno KJ, Luke N, Cline K, et al. (2020) Multisite Prospective Comparison of Multiplex Polymerase Chain Reaction Testing with Urine Culture for Diagnosis of Urinary Tract Infections in Symptomatic Patients. J Sur urology: JSU-102.</p>
+<p>[5] L. S. Sabih A, “Complicated Urinary Tract Infections,” 27 May 2022. [Online]. Available: https://www.ncbi.nlm.nih.gov/books/NBK436013/.</p>
+<p>[6] Sabih, Ayan, and Stephen W. Leslie. “Complicated urinary tract infections.” StatPearls [internet]. StatPearls Publishing, 2022.</p>
+<p>[7] Buchman, T. G. et al. Sepsis Among Medicare Beneficiaries: 1. The Burdens of Sepsis, 2012–2018*. Crit Care Med 48, 276–288 (2020).</p>
+<p>[8]  Vollstedt A, Baunoch D, Wolfe A, et al. Bacterial interactions as detected by Pooled Antibiotic Susceptibility Testing (P-AST) in polymicrobial urine specimens. J Sur Urol. 2020:JSU–101. doi: 10.29011/JSU101.100001</p>
+<p>[9] Daly A. et al. Utilization of M-PCR and P-AST for Diagnosis and Management of Urinary Tract Infections in Home-Based Primary Care. JOJ Urology &amp; Nephrology, 2020; 7(2): 555707.</p>
+<p>[10]  Baunoch D, Luke N, Wang D, Vollstedt A, Zhao X, Ko DSC, Huang S, Cacdac P, Sirls LT. Concordance Between Antibiotic Resistance Genes and Susceptibility in Symptomatic Urinary Tract Infections. Infect Drug Resist. 2021 Aug 19;14:3275-3286.</p>
+<p>[11]  Aparna Ashok, Dicken Ko, Providence RI, Emily Lukacz, La Jolla, CA, Annah Vollstedt, Iowa City, IA, Iver Juster, San Rafael, CA, Timothy Niecko, Tierra Verde, FL, David Baunoch, Trabuco Canyon, CA, Mohit Mathur, Irvine, CA. Comparison of Guidance® UTI and standard urine culture for rates of sepsis, hospitalization and other adverse outcomes in complicated urinary tract infections [abstract]. Journal of Urology. AUA Annual Meeting Program Abstracts 2022. 1 May 2022. Volume 207 Issue Supplement 5 May 2022.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA — required on every sub-page. -->
+  <section class="section--green closing-cta">
+    <div class="container">
+      <h2 class="closing-cta__headline">
+        Ready to see what better diagnostics <em>can do for your practice?</em>
+      </h2>
+      <p class="closing-cta__sub">
+        Talk to a Pathnostics representative about Guidance® UTI and our other tests.
+      </p>
+      <div class="closing-cta__actions">
+        <a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative" class="btn-primary">Talk to a Rep</a>
+        <a href="/tests/" class="btn-ghost-white">See Our Tests</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ════════════════════════════════════════════════════
+     FOOTER — verbatim from /index.html.
+     ════════════════════════════════════════════════════ -->
+<footer class="section--navy footer" id="contact">
+  <a href="#top" class="footer__back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </a>
+  <div class="container" style="padding-top: var(--section-padding-y); padding-bottom: var(--gap-xl);">
+    <p class="footer__big-tagline">
+      Better decisions. Better outcomes. Better lives<span class="footer__big-tagline-period">.</span>
+    </p>
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics" loading="lazy">
+        <div class="footer__social">
+          <a href="https://www.linkedin.com/company/pathnostics/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg></a>
+          <a href="https://twitter.com/Pathnostics" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+        <iframe name="footer-subscribe-iframe" class="footer__subscribe-iframe" aria-hidden="true" tabindex="-1"></iframe>
+        <form class="footer__subscribe" action="https://pathnostics.us4.list-manage.com/subscribe/post?u=a1401745b75d8b6b5e62ed930&amp;id=35ede7f928&amp;f_id=009c57e9f0" method="post" target="footer-subscribe-iframe" novalidate>
+          <label for="footer-subscribe-email" class="footer__subscribe-label">Stay Informed</label>
+          <div class="footer__subscribe-row">
+            <input id="footer-subscribe-email" type="email" name="EMAIL" placeholder="Email address" required class="footer__subscribe-input" autocomplete="email">
+            <button type="submit" class="footer__subscribe-btn">Subscribe</button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <p class="footer__heading">Our Solutions</p>
+        <div class="footer__links">
+          <a href="/tests/guidance-uti/">Guidance UTI with P-AST</a>
+          <a href="/#athome">Guidance @Home</a>
+          <a href="/providers/">For Providers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Resources</p>
+        <div class="footer__links">
+          <a href="/evidence.html">Published Evidence</a>
+          <a href="/clinical-resources/">Clinical Resources</a>
+          <a href="/patient-resources/">Patient Resources</a>
+          <a href="/news/">News &amp; Events</a>
+          <a href="/careers/">Careers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Get in Touch</p>
+        <p class="footer__contact-text">Ready to see how Guidance can support your practice?</p>
+        <a href="#contact" class="btn-primary footer__cta">Talk to a Rep</a>
+        <div class="footer__utility">
+          <a href="/customer-care/">Customer Care</a>
+          <a href="/billing/">Billing</a>
+          <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener noreferrer">Pay Your Bill</a>
+          <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener noreferrer">Provider Login</a>
+          <a href="/order-supplies/">Order Supplies</a>
+          <a href="/veterans/">For Veterans</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copyright">&copy; 2026 Pathnostics | All rights reserved</p>
+      <div class="footer__legal">
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/patient-privacy/">Patient Privacy</a>
+        <a href="https://secure.ethicspoint.com/domain/media/en/gui/44588/index.html" target="_blank" rel="noopener noreferrer">Confidential Reporting</a>
+        <a href="/privacy-policy/#Section9">About Ads</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

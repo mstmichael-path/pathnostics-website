@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add-On Testing for Urinary-Associated Viruses — Pathnostics</title>
+  <meta name="description" content="Viral UTIs are most often diagnosed in immunocompromised individuals, especially solid organ and stem-cell transplant recipients, presenting with hemorrhagic cystitis. Since viruses are not cellular organisms, they cannot grow in standard u">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+  <!-- CSS — absolute paths so this works from any depth -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/nav.css">
+  <link rel="stylesheet" href="/css/info-page.css">
+
+  <link rel="stylesheet" href="/css/article-detail.css">
+
+  <!-- GSAP — REQUIRED. main.js errors at line 1 without these,
+       which breaks scroll-collapse + footer parallax. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+<!-- ════════════════════════════════════════════════════
+     NAV SYSTEM — verbatim from /index.html.
+     If the homepage nav changes, sync this section.
+     The local nav (Tier 3) anchors are PAGE-SPECIFIC.
+     ════════════════════════════════════════════════════ -->
+<div class="nav-system" id="nav-system" role="navigation" aria-label="Primary">
+
+  <div class="utility-bar" id="utility-bar">
+    <div class="utility-bar__left">
+      <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a>
+      <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div class="utility-bar__right">
+      <a href="tel:8004934490" class="utility-bar__phone" aria-label="Call 800.493.4490">800.493.4490</a>
+    </div>
+  </div>
+
+  <div class="global-nav" id="global-nav">
+    <div class="global-nav__inner">
+
+      <a href="/" class="global-nav__logo" aria-label="Pathnostics Home">
+        <img class="global-nav__logo-color" src="/assets/pathnostics-logo-color.png" alt="Pathnostics">
+        <img class="global-nav__logo-white" src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+
+      <div class="mobile-bar">
+        <a href="tel:8004934490" class="mobile-bar__phone" aria-label="Call 800.493.4490">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+        <button type="button" class="mobile-bar__toggle" id="mobile-toggle" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false">
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+        </button>
+      </div>
+
+      <ul class="global-menu">
+        <li class="global-menu__item" data-menu="tests">
+          <a href="/tests/" class="global-menu__link">Our Tests<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--tests" role="menu" aria-label="Our Tests">
+            <div class="mega-tests__hero">
+              <img src="/assets/guidance-uti-header-image.webp" alt="Guidance UTI test kit" class="mega-tests__hero-image">
+              <div class="mega-tests__hero-body">
+                <div class="mega-tests__hero-tag">Flagship Test</div>
+                <h3 class="mega-tests__hero-title">Guidance UTI<br>with <em>P-AST.</em></h3>
+                <p class="mega-tests__hero-desc">Pooled antibiotic susceptibility testing that evaluates how antibiotics perform against the infection as a whole — including in polymicrobial cases. Results in 24–36 hours.</p>
+              </div>
+              <a href="/tests/guidance-uti/" class="mega-tests__hero-cta">Explore Guidance UTI<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+            </div>
+            <div class="mega-tests__directory">
+              <div class="mega-tests__group">
+                <h5>All Tests</h5>
+                <ul>
+                  <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+                  <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+                  <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+                  <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+                  <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+                  <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="providers">
+          <a href="/providers/" class="global-menu__link">Providers<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Providers">
+            <ul>
+              <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+              <li><a href="/order-supplies/">Order Supplies</a></li>
+              <li><a href="/customer-care/">Customer Care</a></li>
+              <li><a href="/testimonials/">Testimonials</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="patients">
+          <a href="/patient-resources/" class="global-menu__link">Patient Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Patient Resources">
+            <ul>
+              <li><a href="/billing/">Billing</a></li>
+              <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+              <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item">
+          <a href="/payors/" class="global-menu__link">Payors</a>
+        </li>
+        <li class="global-menu__item" data-menu="clinical">
+          <a href="/clinical-resources/" class="global-menu__link">Clinical Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Clinical Resources">
+            <ul>
+              <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+              <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="about">
+          <a href="/about/" class="global-menu__link">About<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="About">
+            <ul>
+              <li><a href="/our-team/">Our Team</a></li>
+              <li><a href="/careers/">Careers</a></li>
+              <li><a href="/news/">News &amp; Events</a></li>
+              <li><a href="/innovation/">Innovation</a></li>
+              <li><a href="/p-ast/">P-AST&trade;</a></li>
+              <li><a href="/contact/">Contact Us</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+
+      <div class="global-nav__actions">
+        <button class="global-nav__search-btn" id="search-toggle" aria-label="Search" aria-expanded="false">
+          <svg viewBox="0 0 24 24" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <a href="#contact" class="global-nav__cta">Talk to a Rep</a>
+      </div>
+
+      <div class="search-dropdown" id="search-dropdown" aria-hidden="true">
+        <form method="get" action="/search">
+          <input type="search" name="q" placeholder="Search Pathnostics…" aria-label="Search query" autocomplete="off">
+          <button type="submit">Go</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tier 3 local nav — anchors to THIS page's sections -->
+  <div class="local-nav" id="local-nav">
+    <div class="local-nav__inner">
+      <a href="/" class="local-nav__logo" aria-label="Pathnostics Home">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+      <ul class="local-nav__items">
+        <li><a href="#top" data-target="top">UTI Knowledge Center</a></li>
+        <li><a href="#contact" data-target="contact">Talk to a Rep</a></li>
+      </ul>
+      <a href="#contact" class="local-nav__cta">Talk to a Rep</a>
+    </div>
+    <div class="local-nav__progress" id="local-nav-progress"></div>
+  </div>
+</div>
+
+<!-- Mobile drawer — verbatim from /index.html -->
+<div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
+<aside class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
+  <div class="mobile-drawer__inner">
+    <a href="#contact" class="mobile-drawer__cta">Talk to a Rep</a>
+    <nav class="mobile-drawer__nav" aria-label="Mobile primary">
+      <ul class="mobile-accordion">
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Our Tests<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/tests/guidance-uti/">Guidance<sup>&reg;</sup> UTI with P-AST</a></li>
+            <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+            <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+            <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+            <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+            <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+            <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Providers<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+            <li><a href="/order-supplies/">Order Supplies</a></li>
+            <li><a href="/customer-care/">Customer Care</a></li>
+            <li><a href="/testimonials/">Testimonials</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Patient Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/billing/">Billing</a></li>
+            <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+            <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item mobile-accordion__item--single">
+          <a href="/payors/" class="mobile-accordion__head mobile-accordion__head--link">Payors</a>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Clinical Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+            <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">About<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/our-team/">Our Team</a></li>
+            <li><a href="/careers/">Careers</a></li>
+            <li><a href="/news/">News &amp; Events</a></li>
+            <li><a href="/innovation/">Innovation</a></li>
+            <li><a href="/p-ast/">P-AST&trade;</a></li>
+            <li><a href="/contact/">Contact Us</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <ul class="mobile-drawer__utility">
+      <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+      <li><a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      <li><a href="tel:8004934490" class="mobile-drawer__phone">800.493.4490</a></li>
+    </ul>
+  </div>
+</aside>
+<main class="page-shell">
+
+  <section class="ad-hero" id="top">
+    <div class="container ad-hero__inner">
+      <a href="/uti-knowledge-center/" class="ad-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        UTI Knowledge Center
+      </a>
+      <div class="ad-hero__overline">Microorganism Spotlight</div>
+      <h1 class="ad-hero__title">Add-On Testing for Urinary-Associated Viruses</h1>
+      
+    </div>
+  </section>
+
+  <section class="ad-content">
+    <div class="container">
+      <div class="ad-content__body">
+<p>Emery Haley, PhD, Scientific Writing Specialist</p>
+<h2>Add-On Testing for Urinary-Associated Viruses</h2>
+<h2>Urinary Viruses Clinical Summary</h2>
+<ul>
+<li>Viral UTIs are most often diagnosed in immunocompromised individuals, especially solid organ and stem-cell transplant recipients, presenting with hemorrhagic cystitis.</li>
+<li>Since viruses are not cellular organisms, they cannot grow in standard urine culture. Therefore, the gold-standard for diagnosing viral UTIs is advanced molecular techniques including polymerase chain reaction (PCR).</li>
+<li>Viral bladder infections may increase patients’ susceptibility to bacterial UTIs.</li>
+<li>Viral UTIs have been associated with nephropathy, transplant rejection, and bladder cancer.</li>
+</ul>
+<h2>Clinical Relevance of Viruses in UTI</h2>
+<p>The human urinary tract of healthy asymptomatic individuals is home not only to bacteria and yeasts, but also to viruses.[1]  However, under specific circumstances, some viruses can cause symptomatic cystitis infection of the urinary tract.[2–5]</p>
+<p>Since viruses are not cellular organisms, they cannot grow in standard urine culture. Specialized viral cultures may be possible for certain viruses, but often require weeks, making them too slow for most clinical diagnostic applications.[3] Immunoglobulin (antibody) titers from patients’ serum are often used to tell if a patient has ever been exposed to a particular virus, and occasionally, to indicate active infections with the virus.[3] However, the gold-standard for diagnosing viral UTIs is advanced molecular techniques including polymerase chain reaction (PCR).[3,6]</p>
+<p>Viral UTIs are most often diagnosed in immunocompromised individuals, especially solid organ and stem-cell transplant recipients, presenting with hemorrhagic cystitis.[3,7–12]  Therefore, testing for viral uropathogens is recommended for this population.</p>
+<h2>BK Virus</h2>
+<p>BK virus is a common polyomavirus, with a seropositivity of around 70-97% in healthy adults.[3,13,14] However, BK virus is also a known opportunistic uropathogen.[15–17]  In fact, it is the most commonly identified cause of hemorrhagic cystitis in transplant recipients.[3,18] BK virus reactivation and shedding into the urine is also associated with post-transplant nephropathy [19] or ureteric stenosis [20,21], and with increased risk of bladder cancer.[3,22,23] Urine cytology for “decoy cells” can be indicative of BK virus UTI, but molecular diagnostics are the gold-standard.[3,24]</p>
+<h2>Treatment</h2>
+<p>Treatment of BK viral UTI is primarily supportive care and reduction of immunosuppressive treatment, when possible.[2]  Cidofovir, an antiviral may be used either intravenously or as an intravesicular instillation, to treat BK viruria, especially in patients with hemorrhagic cystitis.[3,25,26]</p>
+<h2>Human Herpes Virus 5 (HHV-5) [also called Cytomegalovirus (CMV)]</h2>
+<p>CMV is a common virus with a seropositivity of around 60% in healthy adults.[3] However, reactivation of dormant CMV infection had been associated with ureteritis, ureteral stenosis, cystitis, and hematuria/hemorrhagic cystitis in both immunocompetent and immunocompromised individuals.[3,27–32] CMV infection is the most common viral infection in kidney transplant recipients.[33,34]  CMV UTI is usually diagnosed by PCR testing.[3,35]</p>
+<h2>Treatment</h2>
+<p>Intravenous Ganciclovir is a common prophylactic against CMV after solid organ transplants.[3] Treatment of HHV UTI is primarily supportive care and reduction of immunosuppressive treatment, when possible. Intravenous Foscarnet is also used against active CMV infection.[3,36] Cidofovir, which is active against both BK virus and CMV is the most common choice for transplant recipients with hemorrhagic cystitis.[3,37] Cidofovir may be given intravenously or as an intravesicular instillation.[3,25,26]</p>
+<h2>Human Herpes Virus 6 (HHV-6)</h2>
+<p>HHV-6 has been shown to act as an opportunistic uropathogen causing hemorrhagic cystitis in transplant recipients.[38,39] HHV-6 UTI is typically diagnosed by advanced molecular tests, such as PCR.[40]</p>
+<h2>Treatment</h2>
+<p>Treatment of HHV UTI is primarily supportive care and reduction of immunosuppressive treatment, when possible.[41] Antiviral agents including ganicyclovir, foscarnet, and cidofovir are used to treat active HHV-6 infection.[41]</p>
+<h2>Human Herpes Viruses 1 &amp; 2 (HHV-1 &amp; HHV-2) [also called Herpes Simplex Virus 1 &amp; 2 (HSV-1 &amp; HSV-2)]</h2>
+<p>HSV is a common cause of genital ulcers in immunocompetent individuals.[3] However, it is also known to cause cystitis in individuals with comorbidities such as diabetes mellitus.[3,32,42] It is also recognized as a cause of hemorrhagic cystitis in immunocompromised individuals.[3,43,44] HSV bladder infection has been shown to increase the susceptibility of human bladder cells to uropathogenic bacterial infections <em>in vitro</em>.[45]</p>
+<h2>Treatment</h2>
+<p>Treatment of HSV UTI is primarily supportive care and reduction of immunosuppressive treatment, when possible. Acyclovir or Valacyclovir oral medication is the most common treatment for active HSV infection.[3,46]</p>
+<h2>JC Virus</h2>
+<p>JC virus is a common polyomavirus with a seropositivity of around 58% in healthy adults.[13,14] However, JC virus is also a known opportunistic uropathogen.[16,32,47–49] JC virus reactivation and shedding into the urine is also associated with post-transplant nephropathy.[19,47]</p>
+<h2>Treatment</h2>
+<p>Treatment of JC viral UTI is primarily supportive care and reduction of immunosuppressive treatment, when possible.[2]  Cidofovir, an antiviral may be used either intravenously or as an intravesicular instillation, to treat JC viruria, especially in patients with hemorrhagic cystitis.[3,25,26]</p>
+      </div>
+    <div class="ad-author-card">
+      <p class="ad-author-card__label">About the Author</p>
+      <div class="ad-author-card__bio"><p>Dr. Emery Haley is a scientific writing specialist with over ten years of experience in translational cell and molecular biology. As both a former laboratory scientist and an experienced science communicator, Dr. Haley is passionate about making complex research clear, approachable, and relevant. Their work has been published in over 10 papers and focuses on bridging the gap between the lab and real-world patient care to help drive better health outcomes.</p></div>
+    </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA — required on every sub-page. -->
+  <section class="section--green closing-cta">
+    <div class="container">
+      <h2 class="closing-cta__headline">
+        Ready to see what better diagnostics <em>can do for your practice?</em>
+      </h2>
+      <p class="closing-cta__sub">
+        Talk to a Pathnostics representative about Guidance® UTI and our other tests.
+      </p>
+      <div class="closing-cta__actions">
+        <a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative" class="btn-primary">Talk to a Rep</a>
+        <a href="/tests/" class="btn-ghost-white">See Our Tests</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="references" aria-labelledby="references-label">
+    <div class="container">
+      <div class="references__header">
+        <span class="references__label" id="references-label">References</span>
+      </div>
+      <ol class="references__list ad-references">
+        <li>Santiago-Rodriguez, T.M.; Ly, M.; Bonilla, N.; Pride, D.T. The Human Urine Virome in Association with Urinary Tract Infections. <em>Front. Microbiol.</em> <strong>2015</strong>, <em>6</em>, 14, doi:10.3389/fmicb.2015.00014.</li>
+        <li>Luciani, L.G.; Mattevi, D. Encyclopedia of Infection and Immunity. <em>Ref. Modul. Biomed. Sci.</em> <strong>2022</strong>, 32–43, doi:10.1016/b978-0-12-818731-9.00139-7.</li>
+        <li>Paduch, D.A. Viral Lower Urinary Tract Infections. <em>Current Urology Reports</em> <strong>2007</strong>, <em>8</em>, 324–335, doi:10.1007/s11934-007-0080-y.</li>
+        <li>Jhang, J.-F.; Hsu, Y.-H.; Peng, C.-W.; Jiang, Y.-H.; Ho, H.-C.; Kuo, H.-C. Epstein–Barr Virus Presence As A Potential Etiology of Persistent Bladder Inflammation in Human Interstitial Cystitis/Bladder Pain Syndrome. <em>The Journal of urology</em> <strong>2018</strong>, doi:10.1016/j.juro.2018.03.133.</li>
+        <li>Kuo, H.-C.; Peng, C.-W.; Jiang, Y.-H.; Jhang, J.-F. Urinary Viral Spectrum in Patients with Interstitial Cystitis/Bladder Pain Syndrome and the Clinical Efficacy of Valacyclovir Treatment. <em>Biomedicines</em> <strong>2024</strong>, <em>12</em>, 522, doi:10.3390/biomedicines12030522.</li>
+        <li>Park, S.; Kim, E.T.; Huh, J.-S. Virus in the Urine of Healthy People and Patients with Infectious Diseases. <em>Urogenit Tract Infect</em> <strong>2021</strong>, <em>16</em>, 44–48, doi:10.14777/uti.2021.16.2.44.</li>
+        <li>Yusuf, U.; Hale, G.A.; Carr, J.; Gu, Z.; Benaim, E.; Woodard, P.; Kasow, K.A.; Horwitz, E.M.; Leung, W.; Srivastava, D.K.; et al. Cidofovir for the Treatment of Adenoviral Infection in Pediatric Hematopoietic Stem Cell Transplant Patients. <em>Transplantation</em> <strong>2006</strong>, <em>81</em>, 1398–1404, doi:10.1097/01.tp.0000209195.95115.8e.</li>
+        <li>Singh, D.; Kiberd, B.; Gupta, R.; Alkhudair, W.; Lawen, J. Polyoma Virus-Induced Hemorrhagic Cystitis in Renal Transplantation Patient with Polyoma Virus Nephropathy. <em>Urology</em> <strong>2006</strong>, <em>67</em>, 423.e11-423.e12, doi:10.1016/j.urology.2005.08.042.</li>
+        <li>Giraud, G.; Bogdanovic, G.; Priftakis, P.; Remberger, M.; Svahn, B.-M.; Barkholt, L.; Ringden, O.; Winiarski, J.; Ljungman, P.; Dalianis, T. The Incidence of Hemorrhagic Cystitis and BK-Viruria in Allogeneic Hematopoietic Stem Cell Recipients According to Intensity of the Conditioning Regimen. <em>Haematologica</em> <strong>2006</strong>, <em>91</em>, 401–404.</li>
+        <li>Hale, G.A.; Rochester, R.J.; Heslop, H.E.; Krance, R.A.; Gingrich, J.R.; Benaim, E.; Horwitz, E.M.; Cunningham, J.M.; Tong, X.; Srivastava, D.K.; et al. Hemorrhagic Cystitis after Allogeneic Bone Marrow Transplantation in Children: Clinical Characteristics and Outcome. <em>Biol. Blood Marrow Transplant.</em> <strong>2003</strong>, <em>9</em>, 698–705, doi:10.1016/s1083-8791(03)00269-6.</li>
+        <li>Gorczynska, E.; Turkiewicz, D.; Rybka, K.; Toporski, J.; Kalwak, K.; Dyla, A.; Szczyra, Z.; Chybicka, A. Incidence, Clinical Outcome, and Management of Virus-Induced Hemorrhagic Cystitis in Children and Adolescents after Allogeneic Hematopoietic Cell Transplantation. <em>Biol. Blood Marrow Transplant.</em> <strong>2005</strong>, <em>11</em>, 797–804, doi:10.1016/j.bbmt.2005.06.007.</li>
+        <li>Dosin, G.; Aoun, F.; Rassy, E.E.; Assi, T.; Lewalle, P.; Blanc, J.; Velthoven, R. van; Bron, D. Viral-Induced Hemorrhagic Cystitis After Allogeneic Hematopoietic Stem Cell Transplant. <em>Clin. Lymphoma Myeloma Leuk.</em> <strong>2017</strong>, <em>17</em>, 438–442, doi:10.1016/j.clml.2017.05.013.</li>
+        <li>Egli, A.; Infanti, L.; Dumoulin, A.; Buser, A.; Samaridis, J.; Stebler, C.; Gosert, R.; Hirsch, H.H. Prevalence of Polyomavirus BK and JC Infection and Replication in 400 Healthy Blood Donors. <em>The Journal of Infectious Diseases</em> <strong>2009</strong>, <em>199</em>, 837–846, doi:10.1086/597126.</li>
+        <li>Pinto, M.; Dobson, S. BK and JC Virus: A Review. <em>Journal of Infection</em> <strong>2014</strong>, <em>68</em>, S2–S8, doi:10.1016/j.jinf.2013.09.009.</li>
+        <li>Shinohara, T.; Matsuda, M.; Cheng, S.H.; Marshall, J.; Fujita, M.; Nagashima, K. BK Virus Infection of the Human Urinary Tract. <em>J. Méd. Virol.</em> <strong>1993</strong>, <em>41</em>, 301–305, doi:10.1002/jmv.1890410408.</li>
+        <li>Cavallo, R.; Costa, C.; Bergallo, M.; Messina, M.; Mazzucco, G.; Segoloni, G.P. A Case of Ureteral Lesions in a Renal Transplant Recipient with a Co-Infection of BK Virus and JC Virus. <em>Nephrol. Dial. Transplant.</em> <strong>2007</strong>, <em>22</em>, 1275–1275, doi:10.1093/ndt/gfl725.</li>
+        <li>Boldorini, R.; Brustia, M.; Veggiani, C.; Barco, D.; Andorno, S.; Monga, G. Periodic Assessment of Urine and Serum by Cytology and Molecular Biology as a Diagnostic Tool for BK Virus Nephropathy in Renal Transplant Patients. <em>Acta Cytol.</em> <strong>2005</strong>, <em>49</em>, 235–243, doi:10.1159/000326143.</li>
+        <li>Mylonakis, E.; Goes, N.; Rubin, R.H.; Cosimi, A.B.; Colvin, R.B.; Fishman, J.A. BK VIRUS IN SOLID ORGAN TRANSPLANT RECIPIENTS: AN EMERGING SYNDROME. <em>Transplantation</em> <strong>2001</strong>, <em>72</em>, 1587–1592, doi:10.1097/00007890-200111270-00001.</li>
+        <li>Boukoum, H.; Nahdi, I.; Sahtout, W.; Skiri, H.; Segondy, M.; Aouni, M. BK and JC Virus Infections in Healthy Patients Compared to Kidney Transplant Recipients in Tunisia. <em>Microb. Pathog.</em> <strong>2016</strong>, <em>97</em>, 204–208, doi:10.1016/j.micpath.2016.06.015.</li>
+        <li>Rajpoot, D.K.; Gomez, A.; Tsang, W.; Shanberg, A. Ureteric and Urethral Stenosis: A Complication of BK Virus Infection in a Pediatric Renal Transplant Patient. <em>Pediatr. Transplant.</em> <strong>2007</strong>, <em>11</em>, 433–435, doi:10.1111/j.1399-3046.2006.00673.x.</li>
+        <li>Hwang, Y.-Y.; Sim, J.; Leung, A.Y.H.; Lie, A.K.W.; Kwong, Y.-L. BK Virus-Associated Bilateral Ureteric Stenosis after Haematopoietic SCT: Viral Kinetics and Successful Treatment. <em>Bone Marrow Transplant.</em> <strong>2013</strong>, <em>48</em>, 745–746, doi:10.1038/bmt.2012.215.</li>
+        <li>Boon, M.E.; Keep, J.P. van; Kok, L.P. Polyomavirus Infection versus High-Grade Bladder Carcinoma. The Importance of Cytologic and Comparative Morphometric Studies of Plastic-Embedded Voided Urine Sediments. <em>Acta Cytol.</em> <strong>1989</strong>, <em>33</em>, 887–893.</li>
+        <li>Geetha, D.; Tong, B.C.; Racusen, L.; Markowitz, J.S.; Westra, W.H. Bladder Carcinoma in a Transplant Recipient: Evidence to Implicate the BK Human Polyomavirus as a Causal Transforming Agent. <em>Transplantation</em> <strong>2002</strong>, <em>73</em>, 1933–1936, doi:10.1097/00007890-200206270-00015.</li>
+        <li>Fogazzi, G.B.; Cantú, M.; Saglimbeni, L. ‘Decoy Cells’ in the Urine Due to Polyomavirus BK Infection: Easily Seen by Phase‐contrast Microscopy. <em>Nephrol. Dial. Transplant.</em> <strong>2001</strong>, <em>16</em>, 1496–1498, doi:10.1093/ndt/16.7.1496.</li>
+        <li>Bridges, B.; Donegan, S.; of, B.-A. journal Cidofovir Bladder Instillation for the Treatment of BK Hemorrhagic Cystitis after Allogeneic Stem Cell Transplantation. <strong>2006</strong>, doi:10.1002/ajh.20567.</li>
+        <li>González‐Fraile, M.I.; Cañizo, C.; Caballero, D.; Hernández, R.; Vázquez, L.; López, C.; Izarra, A.; Arroyo, J.L.; Loma, A.D.L.; Otero, M.J.; et al. Cidofovir Treatment of Human Polyomavirus‐associated Acute Haemorrhagic Cystitis. <em>Transpl. Infect. Dis.</em> <strong>2001</strong>, <em>3</em>, 44–46, doi:10.1034/j.1399-3062.2001.003001044.x.</li>
+        <li>Spach, D.H.; Bauwens, J.E.; Myerson, D.; Mustafa, M.M.; Bowden, R.A. Cytomegalovirus-Induced Hemorrhagic Cystitis Following Bone Marrow Transplantation. <em>Clin. Infect. Dis.</em> <strong>1993</strong>, <em>16</em>, 142–144, doi:10.1093/clinids/16.1.142.</li>
+        <li>Basquiera, A.L.; Calafat, P.; Parodi, J.M.; Diller, A.B.D.; Zlocowski, J.C.; Caeiro, J.P. Cytomegalovirus-Induced Haemorrhagic Cystitis in a Patient with Neurogenic Bladder. <em>Scand. J. Infect. Dis.</em> <strong>2003</strong>, <em>35</em>, 904–905, doi:10.1080/00365540310016655.</li>
+        <li>Childs, R.; Sanchez, C.; Engler, H.; Preuss, J.; Rosenfeld, S.; Dunbar, C.; Rhee, F. van; Plante, M.; Phang, S.; Barrett, A. High Incidence of Adeno- and Polyomavirus-Induced Hemorrhagic Cystitis in Bone Marrow Allotransplantation for Hematological Malignancy Following T Cell Depletion and Cyclosporine. <em>Bone Marrow Transplant.</em> <strong>1998</strong>, <em>22</em>, 889–893, doi:10.1038/sj.bmt.1701440.</li>
+        <li>Mueller, B.U.; MacKay, K.; Cheshire, L.B.; Choyke, P.L.; Kitchen, B.; Widemann, B.; Pizzo, P.A. Cytomegalovirus Ureteritis as a Cause of Renal Failure in a Child Infected with the Human Immunodeficiency Virus. <em>Clin. Infect. Dis.</em> <strong>1995</strong>, <em>20</em>, 1040–1043, doi:10.1093/clinids/20.4.1040.</li>
+        <li>Tutuncuoglu, S.O.; Yanovich, S.; Ozdemirli, M. CMV-Induced Hemorrhagic Cystitis as a Complication of Peripheral Blood Stem Cell Transplantation: Case Report. <em>Bone Marrow Transplant.</em> <strong>2005</strong>, <em>36</em>, 265–266, doi:10.1038/sj.bmt.1705030.</li>
+        <li>Sutcliffe, S.; Rohrmann, S.; Giovannucci, E.; Nelson, K.E.; Marzo, A.M.D.; Isaacs, W.B.; Nelson, W.G.; Platz, E.A. Viral Infections and Lower Urinary Tract Symptoms in the Third National Health and Nutrition Examination Survey. <em>J. Urol.</em> <strong>2007</strong>, <em>178</em>, 2181–2185, doi:10.1016/j.juro.2007.06.041.</li>
+        <li>Kliem, V.; Fricke, L.; Wollbrink, T.; Burg, M.; Radermacher, J.; Rohde, F. Improvement in Long‐Term Renal Graft Survival Due to CMV Prophylaxis with Oral Ganciclovir: Results of a Randomized Clinical Trial. <em>Am. J. Transplant.</em> <strong>2008</strong>, <em>8</em>, 975–983, doi:10.1111/j.1600-6143.2007.02133.x.</li>
+        <li>Lowance, D.; Neumayer, H.-H.; Legendre, C.M.; Squifflet, J.-P.; Kovarik, J.; Brennan, P.J.; Norman, D.; Mendez, R.; Keating, M.R.; Coggon, G.L.; et al. Valacyclovir for the Prevention of Cytomegalovirus Disease after Renal Transplantation. <em>N. Engl. J. Med.</em> <strong>1999</strong>, <em>340</em>, 1462–1470, doi:10.1056/nejm199905133401903.</li>
+        <li>Mengoli, C.; Cusinato, R.; Biasolo, M.A.; Cesaro, S.; Parolin, C.; Palù, G. Assessment of CMV Load in Solid Organ Transplant Recipients by Pp65 Antigenemia and Real‐time Quantitative DNA PCR Assay: Correlation with Pp67 RNA Detection. <em>J. Méd. Virol.</em> <strong>2004</strong>, <em>74</em>, 78–84, doi:10.1002/jmv.20149.</li>
+        <li>Bielorai, B.; Shulman, L.; Rechavi, G.; Toren, A. CMV Reactivation Induced BK Virus-Associated Late Onset Hemorrhagic Cystitis after Peripheral Blood Stem Cell Transplantation. <em>Bone Marrow Transplant.</em> <strong>2001</strong>, <em>28</em>, 613–614, doi:10.1038/sj.bmt.1703187.</li>
+        <li>Held, T.; Bie, S.; transplantation, N.-A. marrow Case Report: Treatment of BK Virus-Associated Hemorrhagic Cystitis and Simultaneous CMV Reactivation with Cidofovir. <strong>2000</strong>, doi:10.1038/sj.bmt.1702487.</li>
+        <li>Kim, C.-C.; Min, C.-K.; Lee, D.-G.; Kim, D.-W.; Choi, J.-H.; Lee, J.-W.; Lee, S.; Park, S.-T.; Min, W.-S.; Shin, W.-S.; et al. Human Herpesvirus-6 as a Possible Cause of Encephalitis and Hemorrhagic Cystitis after Allogeneic Hematopoietic Stem Cell Transplantation. <em>Leukemia</em> <strong>2002</strong>, <em>16</em>, 958, doi:10.1038/sj.leu.2402403.</li>
+        <li>Ratnamohan, V.M.; Chapman, J.; Howse, H.; Bovington, K.; Robertson, P.; Byth, K.; Allen, R.; Cunningham, A.L. CYTOMEGALOVIRUS AND HUMAN HERPESVIRUS 6 BOTH CAUSE VIRAL DISEASE AFTER RENAL TRANSPLANTATION. <em>Transplantation</em> <strong>1998</strong>, <em>66</em>, 877–882, doi:10.1097/00007890-199810150-00011.</li>
+        <li>Ashshi, A.M.; Klapper, P.E.; Cooper, R.J. Detection of Human Cytomegalovirus, Human Herpesvirus Type 6 and Human Herpesvirus Type 7 in Urine Specimens by Multiplex PCR. <em>J. Infect.</em> <strong>2003</strong>, <em>47</em>, 59–64, doi:10.1016/s0163-4453(03)00057-4.</li>
+        <li>Agut, H.; Bonnafous, P.; Gautheret-Dejean, A. Laboratory and Clinical Aspects of Human Herpesvirus 6 Infections. <em>Clin. Microbiol. Rev.</em> <strong>2015</strong>, <em>28</em>, 313–335, doi:10.1128/cmr.00122-14.</li>
+        <li>Nguyen, M.; Borochovitz, D.; infectious …, T.G. Hemorrhagic Cystitis with Herpes Simplex Virus Type 2 in the Bladder Mucosa. <strong>1992</strong>.</li>
+        <li>McClanahan, C.; Grimes, M.M.; Callaghan, E.; Stewart, J. Hemorrhagic Cystitis Associated with Herpes Simplex Virus. <em>J. Urol.</em> <strong>1994</strong>, <em>151</em>, 152–153, doi:10.1016/s0022-5347(17)34899-1.</li>
+        <li>Dehertogh, D.A.; Brettman, L.R. Hemorrhagic Cystitis Due to Herpes Simplex Virus as a Marker of Disseminated Herpes Infection. <em>Am. J. Med.</em> <strong>1988</strong>, <em>84</em>, 632–635, doi:10.1016/0002-9343(88)90148-9.</li>
+        <li>Superti, F.; Longhi, C.; Biase, A.D.; Tinari, A.; Marchetti, M.; Pisani, S.; Gallinelli, C.; Chiarini, F.; Seganti, L. Herpes Simplex Virus Type 2 Modulates the Susceptibility of Human Bladder Cells to Uropathogenic Bacteria. <em>Méd. Microbiol. Immunol.</em> <strong>2001</strong>, <em>189</em>, 201–208, doi:10.1007/s004300100067.</li>
+        <li>Sacks, S.L.; Griffiths, P.D.; Corey, L.; Cohen, C.; Cunningham, A.; Dusheiko, G.M.; Self, S.; Spruance, S.; Stanberry, L.R.; Wald, A.; et al. HSV Shedding. <em>Antivir. Res.</em> <strong>2004</strong>, <em>63</em>, S19–S26, doi:10.1016/j.antiviral.2004.06.004.</li>
+        <li>Wiegley, N.; Walavalkar, V.; Aujla, H.; Chen, L.-X.; Huang, Y.; Lee, B.K.; Jen, K.-Y. Clinicopathologic Characteristics of JC Virus Nephropathy in Kidney Transplant Recipients. <em>Transplantation</em> <strong>2021</strong>, <em>105</em>, 1069–1076, doi:10.1097/tp.0000000000003363.</li>
+        <li>Maida, F.D.; Viola, L.; Lambertini, L.; Mari, A.; Mencarini, J.; Borchi, B.; Carini, M.; Zammarchi, L.; Minervini, A. A Rare Urinary JC Virus Reactivation after Long-Term Therapy with Rituximab. <em>Int. J. Infect. Dis.</em> <strong>2021</strong>, <em>103</em>, 447–449, doi:10.1016/j.ijid.2020.11.194.</li>
+        <li>Thomas, S.; Dunn, C.D.; Campbell, L.J.; Strand, D.W.; Vezina, C.M.; Bjorling, D.E.; Penniston, K.L.; Li, L.; Ricke, W.A.; Goldberg, T.L. A Multi-Omic Investigation of Male Lower Urinary Tract Symptoms: Potential Role for JC Virus. <em>Plos One</em> <strong>2021</strong>, <em>16</em>, e0246266, doi:10.1371/journal.pone.0246266.</li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<!-- ════════════════════════════════════════════════════
+     FOOTER — verbatim from /index.html.
+     ════════════════════════════════════════════════════ -->
+<footer class="section--navy footer" id="contact">
+  <a href="#top" class="footer__back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </a>
+  <div class="container" style="padding-top: var(--section-padding-y); padding-bottom: var(--gap-xl);">
+    <p class="footer__big-tagline">
+      Better decisions. Better outcomes. Better lives<span class="footer__big-tagline-period">.</span>
+    </p>
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics" loading="lazy">
+        <div class="footer__social">
+          <a href="https://www.linkedin.com/company/pathnostics/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg></a>
+          <a href="https://twitter.com/Pathnostics" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+        <iframe name="footer-subscribe-iframe" class="footer__subscribe-iframe" aria-hidden="true" tabindex="-1"></iframe>
+        <form class="footer__subscribe" action="https://pathnostics.us4.list-manage.com/subscribe/post?u=a1401745b75d8b6b5e62ed930&amp;id=35ede7f928&amp;f_id=009c57e9f0" method="post" target="footer-subscribe-iframe" novalidate>
+          <label for="footer-subscribe-email" class="footer__subscribe-label">Stay Informed</label>
+          <div class="footer__subscribe-row">
+            <input id="footer-subscribe-email" type="email" name="EMAIL" placeholder="Email address" required class="footer__subscribe-input" autocomplete="email">
+            <button type="submit" class="footer__subscribe-btn">Subscribe</button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <p class="footer__heading">Our Solutions</p>
+        <div class="footer__links">
+          <a href="/tests/guidance-uti/">Guidance UTI with P-AST</a>
+          <a href="/#athome">Guidance @Home</a>
+          <a href="/providers/">For Providers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Resources</p>
+        <div class="footer__links">
+          <a href="/evidence.html">Published Evidence</a>
+          <a href="/clinical-resources/">Clinical Resources</a>
+          <a href="/patient-resources/">Patient Resources</a>
+          <a href="/news/">News &amp; Events</a>
+          <a href="/careers/">Careers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Get in Touch</p>
+        <p class="footer__contact-text">Ready to see how Guidance can support your practice?</p>
+        <a href="#contact" class="btn-primary footer__cta">Talk to a Rep</a>
+        <div class="footer__utility">
+          <a href="/customer-care/">Customer Care</a>
+          <a href="/billing/">Billing</a>
+          <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener noreferrer">Pay Your Bill</a>
+          <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener noreferrer">Provider Login</a>
+          <a href="/order-supplies/">Order Supplies</a>
+          <a href="/veterans/">For Veterans</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copyright">&copy; 2026 Pathnostics | All rights reserved</p>
+      <div class="footer__legal">
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/patient-privacy/">Patient Privacy</a>
+        <a href="https://secure.ethicspoint.com/domain/media/en/gui/44588/index.html" target="_blank" rel="noopener noreferrer">Confidential Reporting</a>
+        <a href="/privacy-policy/#Section9">About Ads</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

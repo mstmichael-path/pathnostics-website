@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>&lt;em&gt;A. urinae&lt;/em&gt; — Pathnostics</title>
+  <meta name="description" content="Emery Haley, PhD, Scientific Writing Specialist Aerococcus urinae Clinical Summary A. urinae is a nitrite-negative, biofilm-forming, gram-positive microorganism. A. urinae is fastidious and cannot grow in standard urine culture conditions. ">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+  <!-- CSS — absolute paths so this works from any depth -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/nav.css">
+  <link rel="stylesheet" href="/css/info-page.css">
+
+  <link rel="stylesheet" href="/css/article-detail.css">
+
+  <!-- GSAP — REQUIRED. main.js errors at line 1 without these,
+       which breaks scroll-collapse + footer parallax. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+<!-- ════════════════════════════════════════════════════
+     NAV SYSTEM — verbatim from /index.html.
+     If the homepage nav changes, sync this section.
+     The local nav (Tier 3) anchors are PAGE-SPECIFIC.
+     ════════════════════════════════════════════════════ -->
+<div class="nav-system" id="nav-system" role="navigation" aria-label="Primary">
+
+  <div class="utility-bar" id="utility-bar">
+    <div class="utility-bar__left">
+      <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a>
+      <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div class="utility-bar__right">
+      <a href="tel:8004934490" class="utility-bar__phone" aria-label="Call 800.493.4490">800.493.4490</a>
+    </div>
+  </div>
+
+  <div class="global-nav" id="global-nav">
+    <div class="global-nav__inner">
+
+      <a href="/" class="global-nav__logo" aria-label="Pathnostics Home">
+        <img class="global-nav__logo-color" src="/assets/pathnostics-logo-color.png" alt="Pathnostics">
+        <img class="global-nav__logo-white" src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+
+      <div class="mobile-bar">
+        <a href="tel:8004934490" class="mobile-bar__phone" aria-label="Call 800.493.4490">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+        <button type="button" class="mobile-bar__toggle" id="mobile-toggle" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false">
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+        </button>
+      </div>
+
+      <ul class="global-menu">
+        <li class="global-menu__item" data-menu="tests">
+          <a href="/tests/" class="global-menu__link">Our Tests<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--tests" role="menu" aria-label="Our Tests">
+            <div class="mega-tests__hero">
+              <img src="/assets/guidance-uti-header-image.webp" alt="Guidance UTI test kit" class="mega-tests__hero-image">
+              <div class="mega-tests__hero-body">
+                <div class="mega-tests__hero-tag">Flagship Test</div>
+                <h3 class="mega-tests__hero-title">Guidance UTI<br>with <em>P-AST.</em></h3>
+                <p class="mega-tests__hero-desc">Pooled antibiotic susceptibility testing that evaluates how antibiotics perform against the infection as a whole — including in polymicrobial cases. Results in 24–36 hours.</p>
+              </div>
+              <a href="/tests/guidance-uti/" class="mega-tests__hero-cta">Explore Guidance UTI<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+            </div>
+            <div class="mega-tests__directory">
+              <div class="mega-tests__group">
+                <h5>All Tests</h5>
+                <ul>
+                  <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+                  <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+                  <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+                  <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+                  <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+                  <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="providers">
+          <a href="/providers/" class="global-menu__link">Providers<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Providers">
+            <ul>
+              <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+              <li><a href="/order-supplies/">Order Supplies</a></li>
+              <li><a href="/customer-care/">Customer Care</a></li>
+              <li><a href="/testimonials/">Testimonials</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="patients">
+          <a href="/patient-resources/" class="global-menu__link">Patient Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Patient Resources">
+            <ul>
+              <li><a href="/billing/">Billing</a></li>
+              <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+              <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item">
+          <a href="/payors/" class="global-menu__link">Payors</a>
+        </li>
+        <li class="global-menu__item" data-menu="clinical">
+          <a href="/clinical-resources/" class="global-menu__link">Clinical Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Clinical Resources">
+            <ul>
+              <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+              <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="about">
+          <a href="/about/" class="global-menu__link">About<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="About">
+            <ul>
+              <li><a href="/our-team/">Our Team</a></li>
+              <li><a href="/careers/">Careers</a></li>
+              <li><a href="/news/">News &amp; Events</a></li>
+              <li><a href="/innovation/">Innovation</a></li>
+              <li><a href="/p-ast/">P-AST&trade;</a></li>
+              <li><a href="/contact/">Contact Us</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+
+      <div class="global-nav__actions">
+        <button class="global-nav__search-btn" id="search-toggle" aria-label="Search" aria-expanded="false">
+          <svg viewBox="0 0 24 24" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <a href="#contact" class="global-nav__cta">Talk to a Rep</a>
+      </div>
+
+      <div class="search-dropdown" id="search-dropdown" aria-hidden="true">
+        <form method="get" action="/search">
+          <input type="search" name="q" placeholder="Search Pathnostics…" aria-label="Search query" autocomplete="off">
+          <button type="submit">Go</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tier 3 local nav — anchors to THIS page's sections -->
+  <div class="local-nav" id="local-nav">
+    <div class="local-nav__inner">
+      <a href="/" class="local-nav__logo" aria-label="Pathnostics Home">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+      <ul class="local-nav__items">
+        <li><a href="#top" data-target="top">UTI Knowledge Center</a></li>
+        <li><a href="#contact" data-target="contact">Talk to a Rep</a></li>
+      </ul>
+      <a href="#contact" class="local-nav__cta">Talk to a Rep</a>
+    </div>
+    <div class="local-nav__progress" id="local-nav-progress"></div>
+  </div>
+</div>
+
+<!-- Mobile drawer — verbatim from /index.html -->
+<div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
+<aside class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
+  <div class="mobile-drawer__inner">
+    <a href="#contact" class="mobile-drawer__cta">Talk to a Rep</a>
+    <nav class="mobile-drawer__nav" aria-label="Mobile primary">
+      <ul class="mobile-accordion">
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Our Tests<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/tests/guidance-uti/">Guidance<sup>&reg;</sup> UTI with P-AST</a></li>
+            <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+            <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+            <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+            <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+            <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+            <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Providers<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+            <li><a href="/order-supplies/">Order Supplies</a></li>
+            <li><a href="/customer-care/">Customer Care</a></li>
+            <li><a href="/testimonials/">Testimonials</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Patient Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/billing/">Billing</a></li>
+            <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+            <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item mobile-accordion__item--single">
+          <a href="/payors/" class="mobile-accordion__head mobile-accordion__head--link">Payors</a>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Clinical Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+            <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">About<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/our-team/">Our Team</a></li>
+            <li><a href="/careers/">Careers</a></li>
+            <li><a href="/news/">News &amp; Events</a></li>
+            <li><a href="/innovation/">Innovation</a></li>
+            <li><a href="/p-ast/">P-AST&trade;</a></li>
+            <li><a href="/contact/">Contact Us</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <ul class="mobile-drawer__utility">
+      <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+      <li><a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      <li><a href="tel:8004934490" class="mobile-drawer__phone">800.493.4490</a></li>
+    </ul>
+  </div>
+</aside>
+<main class="page-shell">
+
+  <section class="ad-hero" id="top">
+    <div class="container ad-hero__inner">
+      <a href="/uti-knowledge-center/" class="ad-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        UTI Knowledge Center
+      </a>
+      <div class="ad-hero__overline">Microorganism Spotlight</div>
+      <h1 class="ad-hero__title"><em>A. urinae</em></h1>
+      
+    </div>
+  </section>
+
+  <section class="ad-content">
+    <div class="container">
+      <div class="ad-content__body">
+<p><img alt="" src="/wp-content/uploads/2025/07/A.-urinae-1024x576.png"></p>
+<p>Emery Haley, PhD, Scientific Writing Specialist</p>
+<h2><em>Aerococcus urinae</em></h2>
+<h2>Clinical Summary</h2>
+<ul>
+<li><em>A. urinae</em> is a nitrite-negative, biofilm-forming, gram-positive microorganism.</li>
+<li><em>A. urinae</em> is fastidious and cannot grow in standard urine culture conditions.</li>
+<li><em>A. urinae</em> is associated with complicated UTIs in children, older adults, and individuals with urinary tract abnormalities or multimorbidity.</li>
+<li><em>A. urinae</em> preferentially infects kidney tissues.</li>
+<li>In symptomatic UTI patients, <em>A. urinae</em>:</li>
+<li>Is not a contaminant (is found in catheter-collected urine specimens).</li>
+<li>Is viable (can grow out in expanded culture conditions).</li>
+<li>Is pathogenic (associated with elevated urine biomarkers of infection).</li>
+<li>Reported severe complications of <em>A. urinae</em> UTI include pyelonephritis, bacteremia, spondylodiscitis, aortitis, endocarditis, and urosepsis.</li>
+</ul>
+<h2>Bacterial Characteristics</h2>
+<h4><em>Gram-stain</em></h4>
+<p>Gram-positive</p>
+<h4><em>Morphology</em></h4>
+<p>Coccus</p>
+<h4><em>Growth Requirements</em></h4>
+<p>Fastidious (prefers blood-agar)<br>
+Facultative anaerobe</p>
+<h4><em>Nitrate Reduction</em></h4>
+<p>No</p>
+<h4><em>Urease</em></h4>
+<p>Negative</p>
+<h4><em>Biofilm Formation</em></h4>
+<p>Yes</p>
+<h4><em>Pathogenicity</em></h4>
+<p>Colonizer or Pathobiont</p>
+<h2>Clinical Relevance in UTI</h2>
+<p><em>A. urinae</em> was first described in 1992 [1] and first sequenced in 2016 [2]. Genome sequencing of additional strain isolates revealed significant genetic diversity [3]and ultimately resulted in the recent splitting of these isolates into four species, including <em>A. urinae</em> and three novel species, <em>A. tenax</em>, <em>A. mictus</em>, and <em>A. loyolae [4,5]</em>. However, there is currently no known association between any of the genetically distinct species and particular clinical phenotypes.[6]</p>
+<p><em>A. urinae</em> is found in asymptomatic individuals as a resident of the human urogenital microbiome.[7] However, it has also been recognized for decades as a ‘rare’ pathogen isolated from human blood and urinary tract infections, predominantly in older adults,[8–15]children,[16–21]  and individuals with urinary tract abnormalities or multimorbidity [7,8,15,16,18,22–24]. <em>A. urinae</em> has also been reported to participate in the formation of polymicrobial biofilms on indwelling catheters.[23] </p>
+<p><em>A. urinae</em> UTIs are likely significantly underdiagnosed due to the numerous challenges in the identification of <em>A. urinae</em>. Firstly, <em>A. urinae</em> lacks nitrate reductase activity, so screening strategies involving urinalysis for nitrite positivity will be false-negative.[25,26] Secondly, growing <em>A. urinae</em> in culture requires particular nutritional requirements (blood agar medium), which is not always included in clinical laboratories performing standard culture techniques for UTI diagnosis.[27] Thirdly, even when this organism does grow in culture, as a gram-positive coccus, it is frequently confused with <em>Staphylococcus</em>, <em>Streptococcus,</em> or <em>Enterococcus</em> species and may be dismissed as an irrelevant gram-positive “contaminant” organism from the urogenital microbiome.[15,27,28]  Instead, <em>A. urinae</em> UTI is most often diagnosed by advanced proteomic techniques, such as Matrix-assisted laser desorption ionization-time of flight mass spectrometry (MALDI-TOF MS), or advanced molecular techniques, including polymerase chain reaction (PCR) and sequencing.[9,22,28–30] </p>
+<p>A study using expanded quantitative urine culture (EQUC), a technique growing a larger urine volume with additional nutritional media, different atmospheric conditions, and longer incubations, found that the organism was viable. [31]  In a study of older adult males and females with clinically suspected complicated UTI, <em>A. urinae</em> was detected in both midstream voided and in-and-out-catheter collected specimens indicating that it was truly present in the bladder, not simply a contaminant picked up during voiding.[30]  Furthermore, elevated markers of immune system activation in the urinary tract have been measured from the same clinical urine specimens in which <em>A. schaalii</em> was detected, indicating that the presence of <em>A. urinae</em> was associated with an immune response to urinary tract infection.[32–34]  ​ ​</p>
+<p>Critically, <em>A. urinae</em> demonstrates specific tropism for the kidney in mouse models of UTI.[6]  Therefore, ascending infection with progression from cystitis to pyelonephritis is a significant risk. <em>A. urinae</em> in the kidney can readily cross into the bloodstream, resulting in bacteremia [22]  that may progress to urosepsis [29].  <em>A. urinae</em> that reaches the bloodstream is also known to cause serious invasive infections including reports of spondylodiscitis,[35] aortitis,[36] endocarditis with aortic wall ulcer,[37]  endocarditis of the aortic valve,[38]  endocarditis with mycotic aneurysms,[39]  and endocarditis requiring mitral valve replacement [40]. Indeed, strain matching of <em>A. urinae</em> isolated from the urine and from invasive disseminated infection sites confirms that the urinary tract is frequently the point of origin for such infection.[22,29,35]</p>
+<p>Together, these findings demonstrate the value of detecting this organism and indicate that <em>A. urinae</em> should be seriously considered as a uropathogen when detected in any individual with UTI symptoms.</p>
+<h2>Treatment</h2>
+<p>Evidence of Efficacy (Checkmarks): Amoxicillin/Clavulanate, Ampicillin, Ampicillin/Sulbactam, Cefazolin, Ceftriaxone, Doxycycline, Fosfomycin, Gentamicin, Linezolid, Meropenem, Nitrofurantoin, Piperacillin/Tazobactam, and Vancomycin.</p>
+      </div>
+    <div class="ad-author-card">
+      <p class="ad-author-card__label">About the Author</p>
+      <div class="ad-author-card__bio"><p>Dr. Emery Haley is a scientific writing specialist with over ten years of experience in translational cell and molecular biology. As both a former laboratory scientist and an experienced science communicator, Dr. Haley is passionate about making complex research clear, approachable, and relevant. Their work has been published in over 10 papers and focuses on bridging the gap between the lab and real-world patient care to help drive better health outcomes.</p></div>
+    </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA — required on every sub-page. -->
+  <section class="section--green closing-cta">
+    <div class="container">
+      <h2 class="closing-cta__headline">
+        Ready to see what better diagnostics <em>can do for your practice?</em>
+      </h2>
+      <p class="closing-cta__sub">
+        Talk to a Pathnostics representative about Guidance® UTI and our other tests.
+      </p>
+      <div class="closing-cta__actions">
+        <a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative" class="btn-primary">Talk to a Rep</a>
+        <a href="/tests/" class="btn-ghost-white">See Our Tests</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="references" aria-labelledby="references-label">
+    <div class="container">
+      <div class="references__header">
+        <span class="references__label" id="references-label">References</span>
+      </div>
+      <ol class="references__list ad-references">
+        <li>Aguirre, M.; Collins, M.D. Phylogenetic Analysis of Some Aerococcus-like Organisms from Urinary Tract Infections: Description of Aerococcus Urinae Sp. Nov. <em>Microbiology+</em> <strong>1992</strong>, <em>138</em>, 401–405, doi:10.1099/00221287-138-2-401.</li>
+        <li>Carkaci, D.; Dargis, R.; Nielsen, X.C.; Skovgaard, O.; Fuursted, K.; Christensen, J.J. Complete Genome Sequences of Aerococcus Christensenii CCUG 28831T, Aerococcus Sanguinicola CCUG 43001T, Aerococcus Urinae CCUG 36881T, Aerococcus Urinaeequi CCUG 28094T, Aerococcus Urinaehominis CCUG 42038 BT, and Aerococcus Viridans CCUG 4311T. <em>Genome Announc.</em> <strong>2016</strong>, <em>4</em>, e00302-16, doi:10.1128/genomea.00302-16.</li>
+        <li>Carkaci, D.; Højholt, K.; Nielsen, X.C.; Dargis, R.; Rasmussen, S.; Skovgaard, O.; Fuursted, K.; Andersen, P.S.; Stegger, M.; Christensen, J.J. Genomic Characterization, Phylogenetic Analysis, and Identification of Virulence Factors in Aerococcus Sanguinicola and Aerococcus Urinae Strains Isolated from Infection Episodes. <em>Microb. Pathog.</em> <strong>2017</strong>, <em>112</em>, 327–340, doi:10.1016/j.micpath.2017.09.042.</li>
+        <li>Choi, B.I.; Noronha, M.F.; Kaindl, J.; Wolfe, A.J. Complete Genome Sequences of Aerococcus Loyolae ATCC TSD-300 T , Aerococcus Mictus ATCC TSD-301 T , and Aerococcus Tenax ATCC TSD-302 T. <em>Microbiol. Resour. Announc.</em> <strong>2024</strong>, e0015624, doi:10.1128/mra.00156-24.</li>
+        <li>Choi, B.I.; Ene, A.; Du, J.; Johnson, G.; Putonti, C.; Schouw, C.H.; Dargis, R.; Senneby, E.; Christensen, J.J.; Wolfe, A.J. Taxonomic Considerations on Aerococcus Urinae with Proposal of Subdivision into Aerococcus Urinae, Aerococcus Tenax Sp. Nov., Aerococcus Mictus Sp. Nov., and Aerococcus Loyolae Sp. Nov. <em>Int. J. Syst. Evol. Microbiol.</em> <strong>2023</strong>, <em>73</em>, doi:10.1099/ijsem.0.006066.</li>
+        <li>Gilbert, N.M.; Choi, B.; Du, J.; Collins, C.; Lewis, A.L.; Putonti, C.; Wolfe, A.J. A Mouse Model Displays Host and Bacterial Strain Differences in Aerococcus Urinae Urinary Tract Infection. <em>Biol. Open</em> <strong>2021</strong>, <em>10</em>, bio058931, doi:10.1242/bio.058931.</li>
+        <li>Sierra-Hoffman, M.; Watkins, K.; Jinadatha, C.; Fader, R.; Carpenter, J.L. Clinical Significance of Aerococcus Urinae: A Retrospective Review. <em>Diagn Micr Infec Dis</em> <strong>2005</strong>, <em>53</em>, 289–292, doi:10.1016/j.diagmicrobio.2005.06.021.</li>
+        <li>Balouch, B.; Munankami, S.; Acharya, A.; Shrestha, M.; Rijal, S.S. A Case Report of Aerococcus Urinae Urinary Tract Infection in an Elderly Male with Multimorbidity. <em>Cureus</em> <strong>2022</strong>, <em>14</em>, e26379, doi:10.7759/cureus.26379.</li>
+        <li>Zabel, M.; Longfellow, L. Aerococcus Urinae Urinary Tract Infection in a Hospitalised Patient: An Increasingly Common Infection. <em>BMJ Case Rep.</em> <strong>2023</strong>, <em>16</em>, e257496, doi:10.1136/bcr-2023-257496.</li>
+        <li>Yee, A.C.; Wong, T.T.J. Aero to the Heart: A Case of Aortic Valve Endocarditis Caused by Aerococcus Urinae in an Elderly Woman. <em>IDCases</em> <strong>2023</strong>, <em>32</em>, e01769, doi:10.1016/j.idcr.2023.e01769.</li>
+        <li>Maraki, S.; Mavromanolaki, V.E.; Stafylaki, D. Aerococcus Urinae Urinary Tract Infections: A Case Series. <em>Acta Microbiol. Immunol. Hung.</em> <strong>2024</strong>, <em>71</em>, 324–328, doi:10.1556/030.2024.02419.</li>
+        <li>Bradley, E.S.; Schell, B.; Ward, D.V.; Bucci, V.; Zeamer, A.; Haran, J.P. The Urinary Microbiome of Older Adults Residing in a Nursing Home Varies with Duration of Residence and Shows Increases in Potential Pathogens. <em>Journals Gerontology Ser</em> <strong>2021</strong>, doi:10.1093/gerona/glab345.</li>
+        <li>Lotte, L.; Durand, C.; Chevalier, A.; Gaudart, A.; Cheddadi, Y.; Ruimy, R.; Lotte, R. Acute Pyelonephritis with Bacteremia in an 89-Year-Old Woman Caused by Two Slow-Growing Bacteria: Aerococcus Urinae and Actinotignum Schaalii. <em>Microorganisms</em> <strong>2023</strong>, <em>11</em>, 2908, doi:10.3390/microorganisms11122908.</li>
+        <li>Kakodkar, P.; Scott, J.; Tariq, J.; Du, L.; Wu, F.; Mehta, N.; Hamula, C. Emerging Pathogens Aerococcus Urinae and Aerococcus Sanguinicola from a Canadian Tertiary Care Hospital. <em>Futur. Microbiol.</em> <strong>2024</strong>, <em>19</em>, 1321–1332, doi:10.1080/17460913.2024.2383503.</li>
+        <li>Higgins, A.; Garg, T. Aerococcus Urinae: An Emerging Cause of Urinary Tract Infection in Older Adults with Multimorbidity and Urologic Cancer. <em>Urology Case Reports</em> <strong>2017</strong>, <em>13</em>, 24–25, doi:10.1016/j.eucr.2017.03.022.</li>
+        <li>Rast, D.; Evers, K.S.; Egli, A.; Rudin, C.; Goischke, A.; Ritz, N. Aerococcus Urinae — Significance of Detection in the Paediatric Urinary Tract: A Case Series. <em>Eur. J. Pediatr.</em> <strong>2023</strong>, <em>182</em>, 749–756, doi:10.1007/s00431-022-04730-2.</li>
+        <li>Sato, E.; Iijima, H.; Shoji, K.; Ogimi, chikara; Ishiguro, A. 1696. Urinary Tract Infection Due to Aerococcus Urinae in Children. <em>Open Forum Infect. Dis.</em> <strong>2023</strong>, <em>10</em>, ofad500.1529, doi:10.1093/ofid/ofad500.1529.</li>
+        <li>Sato, E.; Iijima, H.; Shoji, K.; Ishiguro, A.; Ogimi, C. Characteristics of Urinary Tract Infections in Children with Positive Urine Culture for Aerococcus Urinae. <em>J. Infect. Chemother.</em> <strong>2024</strong>, <em>30</em>, 1186–1189, doi:10.1016/j.jiac.2024.06.010.</li>
+        <li>Dudani, R.; Qasem, A.; Udom, K. Aerococcus Urinae Infection Causing Malodorous Urine in a Child: A Case Report. <em>Cureus</em> <strong>2024</strong>, <em>16</em>, e55635, doi:10.7759/cureus.55635.</li>
+        <li>Santhanam, H.; Muthukumarasamy, N.; Baidoun, M.; Behrle, N.M.; Loker, J.L. Aerococcus Urinae Infective Endocarditis in a Pediatric Structurally Normal Heart. <em>Prog Pediatr Cardiol</em> <strong>2021</strong>, 101445, doi:10.1016/j.ppedcard.2021.101445.</li>
+        <li>Wilson, J.R.; Bartley, E.E.; Anthony, H.D.; Brent, B.E.; Sapienza, D.A.; Chapman, T.E.; Dayton, A.D.; Milleret, R.J.; Frey, R.A.; Meyer, R.M. What Is Fishy in Asymptomatic Patients?: Co-Occurrence of Aerococcus Urinae Infection in Pediatric Patient with Phimosis. <em>Acta Fac. Medicae Naissensis</em> <strong>2021</strong>, <em>38</em>, 399–402, doi:10.5937/afmnai38-32051.</li>
+        <li>Senneby, E.; Göransson, L.; Weiber, S.; Rasmussen, M. A Population-Based Study of Aerococcal Bacteraemia in the MALDI-TOF MS-Era. <em>Eur. J. Clin. Microbiol. Infect. Dis.</em> <strong>2016</strong>, <em>35</em>, 755–762, doi:10.1007/s10096-016-2594-z.</li>
+        <li>Yu, Y.; Tsitrin, T.; Bekele, S.; Thovarai, V.; Torralba, M.G.; Singh, H.; Wolcott, R.; Doerfert, S.N.; Sizova, M.V.; Epstein, S.S.; et al. Aerococcus Urinae and Globicatella Sanguinis Persist in Polymicrobial Urethral Catheter Biofilms Examined in Longitudinal Profiles at the Proteomic Level. <em>Biochem. Insights</em> <strong>2019</strong>, <em>12</em>, 1178626419875089, doi:10.1177/1178626419875089.</li>
+        <li>Shelton-Dodge, K.; Vetter, E.A.; Kohner, P.C.; Nyre, L.M.; Patel, R. Clinical Significance and Antimicrobial Susceptibilities of Aerococcus Sanguinicola and Aerococcus Urinae. <em>Diagn Micr Infec Dis</em> <strong>2011</strong>, <em>70</em>, 448–451, doi:10.1016/j.diagmicrobio.2010.09.001.</li>
+        <li>BacDive | The Bacterial Diversity Metadatabase Available online: <a href="https://bacdive.dsmz.de/">https://bacdive.dsmz.de/</a> (accessed on 11 February 2025).</li>
+        <li>BioCyc Pathway/Genome Database Collection Available online: <a href="https://biocyc.org/">https://biocyc.org/</a> (accessed on 11 February 2025).</li>
+        <li>Meletis, G.; Chatzidimitriou, D.; Tsingerlioti, F.; Chatzopoulou, F.; Tzimagiorgis, G. An Initially Unidentified Case of Urinary Tract Infection Due to Aerococcus Urinae. <em>New Microbiol</em> <strong>2017</strong>, <em>40</em>, 221–222.</li>
+        <li>Cattoir, V.; Kobal, A.; Legrand, P. Aerococcus Urinae and Aerococcus Sanguinicola, Two Frequently Misidentified Uropathogens. <em>Scand J Infect Dis</em> <strong>2010</strong>, <em>42</em>, 775–780, doi:10.3109/00365548.2010.485576.</li>
+        <li>Kim, J.; Hong, S.K.; Kim, M.; Yong, D.; Lee, K. MALDI-TOF-MS Fingerprinting Provides Evidence of Urosepsis Caused by Aerococcus Urinae. <em>Infect. Chemother.</em> <strong>2017</strong>, <em>49</em>, 227–229, doi:10.3947/ic.2017.49.3.227.</li>
+        <li>Wang, D.; Haley, E.; Luke, N.; Mathur, M.; Festa, R.; Zhao, X.; Anderson, L.A.; Allison, J.L.; Stebbins, K.L.; Diaz, M.J.; et al. Emerging and Fastidious Uropathogens Were Detected by M-PCR with Similar Prevalence and Cell Density in Catheter and Midstream Voided Urine Indicating the Importance of These Microbes in Causing UTIs. <em>Infect. Drug Resist.</em> <strong>2023</strong>, <em>Volume 16</em>, 7775–7795, doi:10.2147/idr.s429990.</li>
+        <li>Festa, R.A.; Luke, N.; Mathur, M.; Parnell, L.; Wang, D.; Zhao, X.; Magallon, J.; Remedios-Chan, M.; Nguyen, J.; Cho, T.; et al. A Test Combining Multiplex-PCR with Pooled Antibiotic Susceptibility Testing Has      High Correlation with Expanded Urine Culture for Detection of Live Bacteria in      Urine Samples of Suspected UTI Patients. <em>Diagn Microbiol Infect Dis</em> <strong>2023</strong>, <em>107</em>, 116015, doi:10.1016/j.diagmicrobio.2023.116015.</li>
+        <li>Haley, E.; Luke, N.; Mathur, M.; Festa, R.A.; Wang, J.; Jiang, Y.; Anderson, L.A.; Baunoch, D. The Prevalence and Association of Different Uropathogens Detected by M-PCR with Infection-Associated Urine Biomarkers in Urinary Tract Infections. <em>Res. Rep. Urol.</em> <strong>2024</strong>, <em>16</em>, 19–29, doi:10.2147/rru.s443361.</li>
+        <li>Akhlaghpour, M.; Haley, E.; Parnell, L.; Luke, N.; Mathur, M.; Festa, R.A.; Percaccio, M.; Magallon, J.; Remedios-Chan, M.; Rosas, A.; et al. Urine Biomarkers Individually and as a Consensus Model Show High Sensitivity and      Specificity for Detecting UTIs. <em>BMC Infect Dis</em> <strong>2024</strong>, <em>24</em>, 153, doi:10.1186/s12879-024-09044-2.</li>
+        <li>Parnell, L.K.D.; Luke, N.; Mathur, M.; Festa, R.A.; Haley, E.; Wang, J.; Jiang, Y.; Anderson, L.; Baunoch, D. Elevated UTI Biomarkers in Symptomatic Patients with Urine Microbial Densities of 10,000 CFU/ML Indicate a Lower Threshold for Diagnosing UTIs. <em>MDPI</em> <strong>2023</strong>, <em>13</em>, 1–15, doi:10.3390/diagnostics13162688.</li>
+        <li>Lyagoubi, A.; Souffi, C.; Baroiller, V.; Vallee, E. Aerococcus Urinae Spondylodiscitis: An Increasingly Described Localization. <em>EJIFCC</em> <strong>2020</strong>, <em>31</em>, 169–173.</li>
+        <li>Chhibber, A.V.; Muttaiyah, S.; Hill, A.A.; Roberts, S.A. Aerococcus Urinae Aortitis: A Case Report. <em>Open Forum Infect. Dis.</em> <strong>2019</strong>, <em>6</em>, ofz453, doi:10.1093/ofid/ofz453.</li>
+        <li>Ludhwani, D.; Li, J.; Huang, E.E.; Sikora, A.; Thomas, G. Aerococcus Urinae Aortic Valve Endocarditis with Kissing Aortic Wall Ulcer: A Case Report and Literature Review. <em>Am. J. Case Rep.</em> <strong>2020</strong>, <em>21</em>, e920974-1-e920974-6, doi:10.12659/ajcr.920974.</li>
+        <li>Qureshi, N.K.; Patel, E. Aerococcus Urinae as the Causative Agent in Infective Endocarditis of the Aortic Valve in a Pediatric Patient. <em>Pediatr. Infect. Dis. J.</em> <strong>2018</strong>, <em>37</em>, 1065–1066, doi:10.1097/inf.0000000000001944.</li>
+        <li>Sous, N.; Piwoz, J.A.; Baer, A.Z.; Bhavsar, S.M. Subacute Aerococcus Urinae Infective Endocarditis With Mycotic Aneurysms in a Pediatric Patient: Case Report and Literature Review. <em>J. Pediatr. Infect. Dis. Soc.</em> <strong>2019</strong>, <em>8</em>, 492–494, doi:10.1093/jpids/piz016.</li>
+        <li>Yabes, J.M.; Perdikis, S.; Graham, D.B.; Markelz, A. A Rare Case of Aerococcus Urinae Infective Endocarditis in an Atypically Young Male: Case Report and Review of the Literature. <em>BMC Infect. Dis.</em> <strong>2018</strong>, <em>18</em>, 522, doi:10.1186/s12879-018-3414-0.</li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<!-- ════════════════════════════════════════════════════
+     FOOTER — verbatim from /index.html.
+     ════════════════════════════════════════════════════ -->
+<footer class="section--navy footer" id="contact">
+  <a href="#top" class="footer__back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </a>
+  <div class="container" style="padding-top: var(--section-padding-y); padding-bottom: var(--gap-xl);">
+    <p class="footer__big-tagline">
+      Better decisions. Better outcomes. Better lives<span class="footer__big-tagline-period">.</span>
+    </p>
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics" loading="lazy">
+        <div class="footer__social">
+          <a href="https://www.linkedin.com/company/pathnostics/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg></a>
+          <a href="https://twitter.com/Pathnostics" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+        <iframe name="footer-subscribe-iframe" class="footer__subscribe-iframe" aria-hidden="true" tabindex="-1"></iframe>
+        <form class="footer__subscribe" action="https://pathnostics.us4.list-manage.com/subscribe/post?u=a1401745b75d8b6b5e62ed930&amp;id=35ede7f928&amp;f_id=009c57e9f0" method="post" target="footer-subscribe-iframe" novalidate>
+          <label for="footer-subscribe-email" class="footer__subscribe-label">Stay Informed</label>
+          <div class="footer__subscribe-row">
+            <input id="footer-subscribe-email" type="email" name="EMAIL" placeholder="Email address" required class="footer__subscribe-input" autocomplete="email">
+            <button type="submit" class="footer__subscribe-btn">Subscribe</button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <p class="footer__heading">Our Solutions</p>
+        <div class="footer__links">
+          <a href="/tests/guidance-uti/">Guidance UTI with P-AST</a>
+          <a href="/#athome">Guidance @Home</a>
+          <a href="/providers/">For Providers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Resources</p>
+        <div class="footer__links">
+          <a href="/evidence.html">Published Evidence</a>
+          <a href="/clinical-resources/">Clinical Resources</a>
+          <a href="/patient-resources/">Patient Resources</a>
+          <a href="/news/">News &amp; Events</a>
+          <a href="/careers/">Careers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Get in Touch</p>
+        <p class="footer__contact-text">Ready to see how Guidance can support your practice?</p>
+        <a href="#contact" class="btn-primary footer__cta">Talk to a Rep</a>
+        <div class="footer__utility">
+          <a href="/customer-care/">Customer Care</a>
+          <a href="/billing/">Billing</a>
+          <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener noreferrer">Pay Your Bill</a>
+          <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener noreferrer">Provider Login</a>
+          <a href="/order-supplies/">Order Supplies</a>
+          <a href="/veterans/">For Veterans</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copyright">&copy; 2026 Pathnostics | All rights reserved</p>
+      <div class="footer__legal">
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/patient-privacy/">Patient Privacy</a>
+        <a href="https://secure.ethicspoint.com/domain/media/en/gui/44588/index.html" target="_blank" rel="noopener noreferrer">Confidential Reporting</a>
+        <a href="/privacy-policy/#Section9">About Ads</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

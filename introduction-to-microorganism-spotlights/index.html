@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introduction to Microorganism Spotlights — Pathnostics</title>
+  <meta name="description" content="Introduction to Microorganism Spotlights">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+  <!-- CSS — absolute paths so this works from any depth -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/nav.css">
+  <link rel="stylesheet" href="/css/info-page.css">
+
+  <link rel="stylesheet" href="/css/article-detail.css">
+
+  <!-- GSAP — REQUIRED. main.js errors at line 1 without these,
+       which breaks scroll-collapse + footer parallax. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+<!-- ════════════════════════════════════════════════════
+     NAV SYSTEM — verbatim from /index.html.
+     If the homepage nav changes, sync this section.
+     The local nav (Tier 3) anchors are PAGE-SPECIFIC.
+     ════════════════════════════════════════════════════ -->
+<div class="nav-system" id="nav-system" role="navigation" aria-label="Primary">
+
+  <div class="utility-bar" id="utility-bar">
+    <div class="utility-bar__left">
+      <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a>
+      <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div class="utility-bar__right">
+      <a href="tel:8004934490" class="utility-bar__phone" aria-label="Call 800.493.4490">800.493.4490</a>
+    </div>
+  </div>
+
+  <div class="global-nav" id="global-nav">
+    <div class="global-nav__inner">
+
+      <a href="/" class="global-nav__logo" aria-label="Pathnostics Home">
+        <img class="global-nav__logo-color" src="/assets/pathnostics-logo-color.png" alt="Pathnostics">
+        <img class="global-nav__logo-white" src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+
+      <div class="mobile-bar">
+        <a href="tel:8004934490" class="mobile-bar__phone" aria-label="Call 800.493.4490">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+        <button type="button" class="mobile-bar__toggle" id="mobile-toggle" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false">
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+        </button>
+      </div>
+
+      <ul class="global-menu">
+        <li class="global-menu__item" data-menu="tests">
+          <a href="/tests/" class="global-menu__link">Our Tests<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--tests" role="menu" aria-label="Our Tests">
+            <div class="mega-tests__hero">
+              <img src="/assets/guidance-uti-header-image.webp" alt="Guidance UTI test kit" class="mega-tests__hero-image">
+              <div class="mega-tests__hero-body">
+                <div class="mega-tests__hero-tag">Flagship Test</div>
+                <h3 class="mega-tests__hero-title">Guidance UTI<br>with <em>P-AST.</em></h3>
+                <p class="mega-tests__hero-desc">Pooled antibiotic susceptibility testing that evaluates how antibiotics perform against the infection as a whole — including in polymicrobial cases. Results in 24–36 hours.</p>
+              </div>
+              <a href="/tests/guidance-uti/" class="mega-tests__hero-cta">Explore Guidance UTI<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+            </div>
+            <div class="mega-tests__directory">
+              <div class="mega-tests__group">
+                <h5>All Tests</h5>
+                <ul>
+                  <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+                  <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+                  <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+                  <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+                  <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+                  <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="providers">
+          <a href="/providers/" class="global-menu__link">Providers<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Providers">
+            <ul>
+              <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+              <li><a href="/order-supplies/">Order Supplies</a></li>
+              <li><a href="/customer-care/">Customer Care</a></li>
+              <li><a href="/testimonials/">Testimonials</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="patients">
+          <a href="/patient-resources/" class="global-menu__link">Patient Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Patient Resources">
+            <ul>
+              <li><a href="/billing/">Billing</a></li>
+              <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+              <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item">
+          <a href="/payors/" class="global-menu__link">Payors</a>
+        </li>
+        <li class="global-menu__item" data-menu="clinical">
+          <a href="/clinical-resources/" class="global-menu__link">Clinical Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Clinical Resources">
+            <ul>
+              <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+              <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="about">
+          <a href="/about/" class="global-menu__link">About<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="About">
+            <ul>
+              <li><a href="/our-team/">Our Team</a></li>
+              <li><a href="/careers/">Careers</a></li>
+              <li><a href="/news/">News &amp; Events</a></li>
+              <li><a href="/innovation/">Innovation</a></li>
+              <li><a href="/p-ast/">P-AST&trade;</a></li>
+              <li><a href="/contact/">Contact Us</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+
+      <div class="global-nav__actions">
+        <button class="global-nav__search-btn" id="search-toggle" aria-label="Search" aria-expanded="false">
+          <svg viewBox="0 0 24 24" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <a href="#contact" class="global-nav__cta">Talk to a Rep</a>
+      </div>
+
+      <div class="search-dropdown" id="search-dropdown" aria-hidden="true">
+        <form method="get" action="/search">
+          <input type="search" name="q" placeholder="Search Pathnostics…" aria-label="Search query" autocomplete="off">
+          <button type="submit">Go</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tier 3 local nav — anchors to THIS page's sections -->
+  <div class="local-nav" id="local-nav">
+    <div class="local-nav__inner">
+      <a href="/" class="local-nav__logo" aria-label="Pathnostics Home">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+      <ul class="local-nav__items">
+        <li><a href="#top" data-target="top">UTI Knowledge Center</a></li>
+        <li><a href="#contact" data-target="contact">Talk to a Rep</a></li>
+      </ul>
+      <a href="#contact" class="local-nav__cta">Talk to a Rep</a>
+    </div>
+    <div class="local-nav__progress" id="local-nav-progress"></div>
+  </div>
+</div>
+
+<!-- Mobile drawer — verbatim from /index.html -->
+<div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
+<aside class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
+  <div class="mobile-drawer__inner">
+    <a href="#contact" class="mobile-drawer__cta">Talk to a Rep</a>
+    <nav class="mobile-drawer__nav" aria-label="Mobile primary">
+      <ul class="mobile-accordion">
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Our Tests<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/tests/guidance-uti/">Guidance<sup>&reg;</sup> UTI with P-AST</a></li>
+            <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+            <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+            <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+            <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+            <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+            <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Providers<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+            <li><a href="/order-supplies/">Order Supplies</a></li>
+            <li><a href="/customer-care/">Customer Care</a></li>
+            <li><a href="/testimonials/">Testimonials</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Patient Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/billing/">Billing</a></li>
+            <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+            <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item mobile-accordion__item--single">
+          <a href="/payors/" class="mobile-accordion__head mobile-accordion__head--link">Payors</a>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Clinical Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+            <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">About<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/our-team/">Our Team</a></li>
+            <li><a href="/careers/">Careers</a></li>
+            <li><a href="/news/">News &amp; Events</a></li>
+            <li><a href="/innovation/">Innovation</a></li>
+            <li><a href="/p-ast/">P-AST&trade;</a></li>
+            <li><a href="/contact/">Contact Us</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <ul class="mobile-drawer__utility">
+      <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+      <li><a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      <li><a href="tel:8004934490" class="mobile-drawer__phone">800.493.4490</a></li>
+    </ul>
+  </div>
+</aside>
+<main class="page-shell">
+
+  <section class="ad-hero" id="top">
+    <div class="container ad-hero__inner">
+      <a href="/uti-knowledge-center/" class="ad-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        UTI Knowledge Center
+      </a>
+      <div class="ad-hero__overline">Knowledge Center · Featured</div>
+      <h1 class="ad-hero__title">Introduction to Microorganism Spotlights</h1>
+      
+    </div>
+  </section>
+
+  <section class="ad-content">
+    <div class="container">
+      <div class="ad-content__body">
+<p>Welcome to our UTI Knowledge Center! Here you will find links to individual posts for each bacteria, yeast, and organism in the Guidance® UTI assay. These spotlights aim to answer common questions about each organism. Each spotlight post has several sections describing key features of the microorganism. Continue reading below to learn about each section.</p>
+<h2>Gram-stain</h2>
+<p>Gram staining is a process of applying dyes to cultured bacteria. The dye tells microbiologists about the organism’s cell wall.[1]  Some antibiotics work by attacking the bacterial cell wall. Gram stain result can help with determining appropriate treatment.  For example, Vancomycin is only effective against “gram-positive” bacteria.</p>
+<p>Bacteria with a thick cell wall stain purple and are called “gram-positive”. Bacteria with a thin cell wall surrounded by a membrane stain pink. These are called “gram-negative”. A few special cases of bacteria that do not stain in a consistent way and are called “gram-variable”. Some bacteria lack a cell wall so the Gram stain result is “not applicable” for those bacteria.</p>
+<h2>Morphology</h2>
+<p>Morphology, or shape, helps visually identify bacteria.[2]  Common bacterial morphologies are: 1) “coccus” (round), 2) “bacillus” (rods), and 3) “spiral”. Some bacteria have an intermediate shape between round and rod-shaped, called “coccobacillus”. Bacteria that lack a cell wall may appear in a variety of shapes.</p>
+<p>For coccus-shaped bacteria (plural “cocci”), their arrangement is also helpful. For example, <em>Staphylococci</em> grow in an arrangement resembling a cluster of grapes. However, <em>Streptococci</em> grow in long chains.</p>
+<h2>Growth Requirements</h2>
+<p>Like all living things, different microorganisms have different needs for their growth. Microorganisms can be divided into two main categories based on those needs. Those that grow readily in a wide range of conditions are called “non-fastidious”. These organisms are the most studied and best-recognized clinically. That’s because they easily grow in standard clinical microbiological laboratory conditions.</p>
+<p>Others, called “fastidious” organisms, have very specific requirements. Fastidious organisms are not as well studied because they require specialized culture conditions. They may need nutritionally supplemented media or extended growth times. Some require an environment with little to no oxygen in the air. These “fastidious” organisms usually can’t grow in standard diagnostic clinical urine cultures.[3–12]</p>
+<p>Oxygen requirements for microorganisms can be divided into six general categories:[13,14]</p>
+<ol>
+<li>“Obligate aerobe” (only survives in environments rich in oxygen)</li>
+<li>“Facultative anaerobe” (preferentially uses oxygen for cellular respiration but is also capable of fermentation in the absence of oxygen)</li>
+<li>“Microaerophile” (performs only cellular respiration using oxygen, yet is harmed by the high oxygen concentration at ambient atmospheric conditions… a “Goldilocks” requirement)</li>
+<li>“Aerotolerant anaerobe” (performs only fermentation, which does not require oxygen, but is not harmed by high oxygen concentrations at ambient atmospheric conditions)</li>
+<li>“Capnophile” (requires more CO2 than is present at ambient atmospheric conditions to grow)</li>
+<li>“Obligate anaerobe” (only grows in environments free from oxygen)</li>
+</ol>
+<h2>Nitrate Reduction</h2>
+<p>The urine dipstick, a common point-of-care test for urinary tract infections (UTIs), checks for nitrites in the urine. Many organisms (marked “no” in this section*) aren’t capable of metabolizing nitrates in the urine to produce nitrites. A dipstick test for nitrites will result in a false-negative in these cases.[15]</p>
+<p>*This information was compiled according to the Biocyc Database of genomes [16] and the Bacterial Diversity Database of Analytical Profile Index (API) test results.[17]</p>
+<h2>Urease</h2>
+<p>Urease is an enzyme responsible for hydrolyzing urea into ammonia and carbonic acid. Bacterial urease activity is associated with complications[18] including:</p>
+<ul>
+<li>Urinary stone formation</li>
+<li>Urinary catheter encrustation or blocking</li>
+<li>Hyperammonemia</li>
+<li>Pyelonephritis</li>
+</ul>
+<p>Organisms marked “yes” in this section may be considered a risk for such complications.</p>
+<p>*This information was compiled according to the Biocyc Database of genomes [16] and the Bacterial Diversity Database of Analytical Profile Index (API) test results.[17]</p>
+<h2>Biofilm Formation</h2>
+<p>Biofilms frequently form on urinary catheters and other indwelling medical devices. They often involve multiple bacteria and/or yeasts. Organisms in these polymicrobial biofilms cooperate to increase growth and antimicrobial resistance.[19]</p>
+<h2>Pathogenicity</h2>
+<p>Clinically relevant, potentially disease-causing microorganisms present within human tissues can generally be classified into 3 pathogenicity categories [14]:</p>
+<ol>
+<li>“Pathogen” (causes disease when present in host tissue)</li>
+<li>“Colonizer” (resides in host tissues and may or may not cause disease)</li>
+<li>“Pathobiont” (resides in host tissues and generally benefits the host, but may cause disease under certain conditions)</li>
+</ol>
+<h2>Clinical Relevance in UTI</h2>
+<p>This section summarizes the role of the microorganism in urinary tract infections.  The evidence in this section comes from peer-reviewed publications.</p>
+<h2>Treatment</h2>
+<p><em>Evidence of Efficacy (Checkmarks):</em>This section lists which antibiotics from the Guidance® UTI test can be effective for treating the organism.  These recommendations appear as checkmarks on Guidance UTI result reports.</p>
+<p>Sources are 1) the Clinical and Laboratory Standards Institute (CLSI),[20] and 2) the United States Food and Drug Administration (FDA)[21]:</p>
+<ul>
+<li>M100: Performance Standards for Antimicrobial Susceptibility Testing,</li>
+<li>M43-A: Methods for Antimicrobial Susceptibility Testing for Human Mycoplasmas, 1st Edition (corrected 2015)</li>
+<li>M45: Methods for Antimicrobial Dilution and Disk Susceptibility Testing of Infrequently Isolated or Fastidious Bacteria, 3rd Edition (corrected 2017)</li>
+<li>M27M44S: Performance Standards for Antifungal Susceptibility Testing of Yeasts, 3rd Edition (2022)</li>
+</ul>
+<p>The CLSI and FDA guidance documents do not provide guidance for the treatment of <em>A. schaalii</em>,    <em>A. omnicolens</em>, or <em>G. vaginalis</em>. Instead, primary peer-reviewed literature references are provided.</p>
+      </div>
+    <div class="ad-author-card">
+      <p class="ad-author-card__label">About the Author</p>
+      <div class="ad-author-card__bio"><p>Dr. Emery Haley is a scientific writing specialist with over ten years of experience in translational cell and molecular biology. As both a former laboratory scientist and an experienced science communicator, Dr. Haley is passionate about making complex research clear, approachable, and relevant. Their work has been published in over 10 papers and focuses on bridging the gap between the lab and real-world patient care to help drive better health outcomes.</p></div>
+    </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA — required on every sub-page. -->
+  <section class="section--green closing-cta">
+    <div class="container">
+      <h2 class="closing-cta__headline">
+        Ready to see what better diagnostics <em>can do for your practice?</em>
+      </h2>
+      <p class="closing-cta__sub">
+        Talk to a Pathnostics representative about Guidance® UTI and our other tests.
+      </p>
+      <div class="closing-cta__actions">
+        <a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative" class="btn-primary">Talk to a Rep</a>
+        <a href="/tests/" class="btn-ghost-white">See Our Tests</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="references" aria-labelledby="references-label">
+    <div class="container">
+      <div class="references__header">
+        <span class="references__label" id="references-label">References</span>
+      </div>
+      <ol class="references__list ad-references">
+        <li>Beveridge, T. Use of the Gram Stain in Microbiology. <em>Biotech. Histochem.</em> <strong>2001</strong>, <em>76</em>, 111–118, doi:10.1080/bih.76.3.111.118.</li>
+        <li>Mohamad, N.A.; Jusoh, N.A.; Htike, Z.Z.; Win, S.L. Bacteria Identification From Microscopic Morphology: A Survey. <em>Int. J. Soft Comput., Artif. Intell. Appl.</em> <strong>2014</strong>, <em>3</em>, 1–12, doi:10.5121/ijscai.2014.3201.</li>
+        <li>FENOLLAR, F.; RAOULT, D. Molecular Genetic Methods for the Diagnosis of Fastidious Microorganisms. <em>APMIS</em> <strong>2004</strong>, <em>112</em>, 785–807, doi:10.1111/j.1600-0463.2004.apm11211-1206.x.</li>
+        <li>Wolfe, A.J.; Brubaker, L. “Sterile Urine” and the Presence of Bacteria. <em>European urology</em> <strong>2015</strong>, <em>68</em>, 173–174, doi:10.1016/j.eururo.2015.02.041.</li>
+        <li>Moreland, R.B.; Choi, B.I.; Geaman, W.; Gonzalez, C.; Hochstedler-Kramer, B.R.; John, J.; Kaindl, J.; Kesav, N.; Lamichhane, J.; Lucio, L.; et al. Beyond the Usual Suspects: Emerging Uropathogens in the Microbiome Age. <em>Frontiers in Urology</em> <strong>2023</strong>, <em>3</em>, doi:10.3389/fruro.2023.1212590.</li>
+        <li>Jacobs, K.M.; Price, T.K.; Thomas-White, K.; Halverson, T.; Davies, A.; Myers, D.L.; Wolfe, A.J. Cultivable Bacteria in Urine of Women With Interstitial Cystitis: (Not) What We Expected. <em>Female Pelvic Med. Reconstr. Surg.</em> <strong>2021</strong>, <em>27</em>, 322–327, doi:10.1097/spv.0000000000000854.</li>
+        <li>Wolfe, A.J.; Toh, E.; Shibata, N.; Rong, R.; Kenton, K.; FitzGerald, M.; Mueller, E.R.; Schreckenberger, P.; Dong, Q.; Nelson, D.E.; et al. Evidence of Uncultivated Bacteria in the Adult Female Bladder. <em>Journal of Clinical Microbiology</em> <strong>2012</strong>, <em>50</em>, 1376–1383, doi:10.1128/jcm.05852-11.</li>
+        <li>Brubaker, L.; Chai, T.C.; Horsley, H.; Khasriya, R.; Moreland, R.B.; Wolfe, A.J. Tarnished Gold—the “Standard” Urine Culture: Reassessing the Characteristics of a Criterion Standard for Detecting Urinary Microbes. <em>Front. Urol.</em> <strong>2023</strong>, <em>3</em>, 1206046, doi:10.3389/fruro.2023.1206046.</li>
+        <li>Thomas-White, K.; Brady, M.; Wolfe, A.J.; Mueller, E.R. The Bladder Is Not Sterile: History and Current Discoveries on the Urinary Microbiome. <em>Current Bladder Dysfunction Reports</em> <strong>2016</strong>, <em>11</em>, 18–24, doi:10.1007/s11884-016-0345-8.</li>
+        <li>Price, T.K.; Dune, T.; Hilt, E.E.; Thomas-White, K.J.; Kliethermes, S.; Brincat, C.; Brubaker, L.; Wolfe, A.J.; Mueller, E.R.; Schreckenberger, P.C. The Clinical Urine Culture: Enhanced Techniques Improve Detection of Clinically Relevant Microorganisms. <em>Journal of Clinical Microbiology</em> <strong>2016</strong>, <em>54</em>, 1216–1222, doi:10.1128/jcm.00044-16.</li>
+        <li>Price, T.K.; Hilt, E.E.; Dune, T.J.; Mueller, E.R.; Wolfe, A.J.; Brubaker, L. Urine Trouble: Should We Think Differently about UTI? <em>Int Urogynecol J</em> <strong>2018</strong>, <em>29</em>, 205–210, doi:10.1007/s00192-017-3528-8.</li>
+        <li>Hilt, E.E.; McKinley, K.; Pearce, M.M.; Rosenfeld, A.B.; Zilliox, M.J.; Mueller, E.R.; Brubaker, L.; Gai, X.; Wolfe, A.J.; Schreckenberger, P.C. Urine Is Not Sterile: Use of Enhanced Urine Culture Techniques To Detect Resident Bacterial Flora in the Adult Female Bladder. <em>Journal of Clinical Microbiology</em> <strong>2014</strong>, <em>52</em>, 871–876, doi:10.1128/jcm.02876-13.</li>
+        <li>Moreland, R.B.; Choi, B.I.; Geaman, W.; Gonzalez, C.; Hochstedler-Kramer, B.R.; John, J.; Kaindl, J.; Kesav, N.; Lamichhane, J.; Lucio, L.; et al. Beyond the Usual Suspects: Emerging Uropathogens in the Microbiome Age. <em>Frontiers in Urology</em> <strong>2023</strong>, <em>3</em>, doi:10.3389/fruro.2023.1212590.</li>
+        <li>Dey, P.; Chaudhuri, S.R. The Opportunistic Nature of Gut Commensal Microbiota. <em>Crit. Rev. Microbiol.</em> <strong>2023</strong>, <em>49</em>, 739–763, doi:10.1080/1040841x.2022.2133987.</li>
+        <li>Moreland, R.B.; Brubaker, L.; Tinawi, L.; Wolfe, A.J. Rapid and Accurate Testing for Urinary Tract Infection: New Clothes for the Emperor. <em>Clin. Microbiol. Rev.</em> <strong>2024</strong>, e0012924, doi:10.1128/cmr.00129-24.</li>
+        <li>BioCyc Pathway/Genome Database Collection Available online: <a href="https://biocyc.org/">https://biocyc.org/</a> (accessed on 11 February 2025).</li>
+        <li>BacDive | The Bacterial Diversity Metadatabase Available online: <a href="https://bacdive.dsmz.de/">https://bacdive.dsmz.de/</a> (accessed on 11 February 2025).</li>
+        <li>Konieczna, I.; Żarnowiec, P.; Kwinkowski, M.; Kolesińska, B.; Frączyk, J.; Kamiński, Z.; Kaca, W. Bacterial Urease and Its Role in Long-Lasting Human Diseases. <em>Curr. Protein Pept. Sci.</em> <strong>2012</strong>, <em>13</em>, 789–806, doi:10.2174/138920312804871094.</li>
+        <li>Pinto, H.; Simões, M.; Borges, A. Prevalence and Impact of Biofilms on Bloodstream and Urinary Tract Infections: A Systematic Review and Meta-Analysis. <em>Antibiotics</em> <strong>2021</strong>, <em>10</em>, 825, doi:10.3390/antibiotics10070825.</li>
+        <li>CLSI Standards Products Available online: <a href="https://clsi.org/standards/products/new-products/documents/">https://clsi.org/standards/products/new-products/documents/</a> (accessed on 6 February 2025).</li>
+        <li>Antibacterial Susceptibility Test Interpretive Criteria | FDA Available online: <a href="https://www.fda.gov/drugs/development-resources/antibacterial-susceptibility-test-interpretive-criteria">https://www.fda.gov/drugs/development-resources/antibacterial-susceptibility-test-interpretive-criteria</a> (accessed on 6 February 2025).</li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<!-- ════════════════════════════════════════════════════
+     FOOTER — verbatim from /index.html.
+     ════════════════════════════════════════════════════ -->
+<footer class="section--navy footer" id="contact">
+  <a href="#top" class="footer__back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </a>
+  <div class="container" style="padding-top: var(--section-padding-y); padding-bottom: var(--gap-xl);">
+    <p class="footer__big-tagline">
+      Better decisions. Better outcomes. Better lives<span class="footer__big-tagline-period">.</span>
+    </p>
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics" loading="lazy">
+        <div class="footer__social">
+          <a href="https://www.linkedin.com/company/pathnostics/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg></a>
+          <a href="https://twitter.com/Pathnostics" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+        <iframe name="footer-subscribe-iframe" class="footer__subscribe-iframe" aria-hidden="true" tabindex="-1"></iframe>
+        <form class="footer__subscribe" action="https://pathnostics.us4.list-manage.com/subscribe/post?u=a1401745b75d8b6b5e62ed930&amp;id=35ede7f928&amp;f_id=009c57e9f0" method="post" target="footer-subscribe-iframe" novalidate>
+          <label for="footer-subscribe-email" class="footer__subscribe-label">Stay Informed</label>
+          <div class="footer__subscribe-row">
+            <input id="footer-subscribe-email" type="email" name="EMAIL" placeholder="Email address" required class="footer__subscribe-input" autocomplete="email">
+            <button type="submit" class="footer__subscribe-btn">Subscribe</button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <p class="footer__heading">Our Solutions</p>
+        <div class="footer__links">
+          <a href="/tests/guidance-uti/">Guidance UTI with P-AST</a>
+          <a href="/#athome">Guidance @Home</a>
+          <a href="/providers/">For Providers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Resources</p>
+        <div class="footer__links">
+          <a href="/evidence.html">Published Evidence</a>
+          <a href="/clinical-resources/">Clinical Resources</a>
+          <a href="/patient-resources/">Patient Resources</a>
+          <a href="/news/">News &amp; Events</a>
+          <a href="/careers/">Careers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Get in Touch</p>
+        <p class="footer__contact-text">Ready to see how Guidance can support your practice?</p>
+        <a href="#contact" class="btn-primary footer__cta">Talk to a Rep</a>
+        <div class="footer__utility">
+          <a href="/customer-care/">Customer Care</a>
+          <a href="/billing/">Billing</a>
+          <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener noreferrer">Pay Your Bill</a>
+          <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener noreferrer">Provider Login</a>
+          <a href="/order-supplies/">Order Supplies</a>
+          <a href="/veterans/">For Veterans</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copyright">&copy; 2026 Pathnostics | All rights reserved</p>
+      <div class="footer__legal">
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/patient-privacy/">Patient Privacy</a>
+        <a href="https://secure.ethicspoint.com/domain/media/en/gui/44588/index.html" target="_blank" rel="noopener noreferrer">Confidential Reporting</a>
+        <a href="/privacy-policy/#Section9">About Ads</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

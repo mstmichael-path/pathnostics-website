@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antimicrobial Resistance and the Importance of Antibiotic Stewardship — Pathnostics</title>
+  <meta name="description" content="Margo Lee, Ph.D. The emergence of antimicrobial resistance (AMR) poses a global health crisis that affects our ability to treat many common infectious diseases. The rise of antibiotic-resistant pathogens has created challenges in treating p">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+  <!-- CSS — absolute paths so this works from any depth -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/nav.css">
+  <link rel="stylesheet" href="/css/info-page.css">
+
+  <link rel="stylesheet" href="/css/article-detail.css">
+
+  <!-- GSAP — REQUIRED. main.js errors at line 1 without these,
+       which breaks scroll-collapse + footer parallax. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+<!-- ════════════════════════════════════════════════════
+     NAV SYSTEM — verbatim from /index.html.
+     If the homepage nav changes, sync this section.
+     The local nav (Tier 3) anchors are PAGE-SPECIFIC.
+     ════════════════════════════════════════════════════ -->
+<div class="nav-system" id="nav-system" role="navigation" aria-label="Primary">
+
+  <div class="utility-bar" id="utility-bar">
+    <div class="utility-bar__left">
+      <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a>
+      <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div class="utility-bar__right">
+      <a href="tel:8004934490" class="utility-bar__phone" aria-label="Call 800.493.4490">800.493.4490</a>
+    </div>
+  </div>
+
+  <div class="global-nav" id="global-nav">
+    <div class="global-nav__inner">
+
+      <a href="/" class="global-nav__logo" aria-label="Pathnostics Home">
+        <img class="global-nav__logo-color" src="/assets/pathnostics-logo-color.png" alt="Pathnostics">
+        <img class="global-nav__logo-white" src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+
+      <div class="mobile-bar">
+        <a href="tel:8004934490" class="mobile-bar__phone" aria-label="Call 800.493.4490">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+        <button type="button" class="mobile-bar__toggle" id="mobile-toggle" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false">
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+        </button>
+      </div>
+
+      <ul class="global-menu">
+        <li class="global-menu__item" data-menu="tests">
+          <a href="/tests/" class="global-menu__link">Our Tests<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--tests" role="menu" aria-label="Our Tests">
+            <div class="mega-tests__hero">
+              <img src="/assets/guidance-uti-header-image.webp" alt="Guidance UTI test kit" class="mega-tests__hero-image">
+              <div class="mega-tests__hero-body">
+                <div class="mega-tests__hero-tag">Flagship Test</div>
+                <h3 class="mega-tests__hero-title">Guidance UTI<br>with <em>P-AST.</em></h3>
+                <p class="mega-tests__hero-desc">Pooled antibiotic susceptibility testing that evaluates how antibiotics perform against the infection as a whole — including in polymicrobial cases. Results in 24–36 hours.</p>
+              </div>
+              <a href="/tests/guidance-uti/" class="mega-tests__hero-cta">Explore Guidance UTI<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+            </div>
+            <div class="mega-tests__directory">
+              <div class="mega-tests__group">
+                <h5>All Tests</h5>
+                <ul>
+                  <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+                  <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+                  <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+                  <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+                  <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+                  <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="providers">
+          <a href="/providers/" class="global-menu__link">Providers<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Providers">
+            <ul>
+              <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+              <li><a href="/order-supplies/">Order Supplies</a></li>
+              <li><a href="/customer-care/">Customer Care</a></li>
+              <li><a href="/testimonials/">Testimonials</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="patients">
+          <a href="/patient-resources/" class="global-menu__link">Patient Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Patient Resources">
+            <ul>
+              <li><a href="/billing/">Billing</a></li>
+              <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+              <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item">
+          <a href="/payors/" class="global-menu__link">Payors</a>
+        </li>
+        <li class="global-menu__item" data-menu="clinical">
+          <a href="/clinical-resources/" class="global-menu__link">Clinical Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Clinical Resources">
+            <ul>
+              <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+              <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="about">
+          <a href="/about/" class="global-menu__link">About<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="About">
+            <ul>
+              <li><a href="/our-team/">Our Team</a></li>
+              <li><a href="/careers/">Careers</a></li>
+              <li><a href="/news/">News &amp; Events</a></li>
+              <li><a href="/innovation/">Innovation</a></li>
+              <li><a href="/p-ast/">P-AST&trade;</a></li>
+              <li><a href="/contact/">Contact Us</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+
+      <div class="global-nav__actions">
+        <button class="global-nav__search-btn" id="search-toggle" aria-label="Search" aria-expanded="false">
+          <svg viewBox="0 0 24 24" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <a href="#contact" class="global-nav__cta">Talk to a Rep</a>
+      </div>
+
+      <div class="search-dropdown" id="search-dropdown" aria-hidden="true">
+        <form method="get" action="/search">
+          <input type="search" name="q" placeholder="Search Pathnostics…" aria-label="Search query" autocomplete="off">
+          <button type="submit">Go</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tier 3 local nav — anchors to THIS page's sections -->
+  <div class="local-nav" id="local-nav">
+    <div class="local-nav__inner">
+      <a href="/" class="local-nav__logo" aria-label="Pathnostics Home">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+      <ul class="local-nav__items">
+        <li><a href="#top" data-target="top">UTI Knowledge Center</a></li>
+        <li><a href="#contact" data-target="contact">Talk to a Rep</a></li>
+      </ul>
+      <a href="#contact" class="local-nav__cta">Talk to a Rep</a>
+    </div>
+    <div class="local-nav__progress" id="local-nav-progress"></div>
+  </div>
+</div>
+
+<!-- Mobile drawer — verbatim from /index.html -->
+<div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
+<aside class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
+  <div class="mobile-drawer__inner">
+    <a href="#contact" class="mobile-drawer__cta">Talk to a Rep</a>
+    <nav class="mobile-drawer__nav" aria-label="Mobile primary">
+      <ul class="mobile-accordion">
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Our Tests<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/tests/guidance-uti/">Guidance<sup>&reg;</sup> UTI with P-AST</a></li>
+            <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+            <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+            <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+            <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+            <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+            <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Providers<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+            <li><a href="/order-supplies/">Order Supplies</a></li>
+            <li><a href="/customer-care/">Customer Care</a></li>
+            <li><a href="/testimonials/">Testimonials</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Patient Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/billing/">Billing</a></li>
+            <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+            <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item mobile-accordion__item--single">
+          <a href="/payors/" class="mobile-accordion__head mobile-accordion__head--link">Payors</a>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Clinical Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+            <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">About<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/our-team/">Our Team</a></li>
+            <li><a href="/careers/">Careers</a></li>
+            <li><a href="/news/">News &amp; Events</a></li>
+            <li><a href="/innovation/">Innovation</a></li>
+            <li><a href="/p-ast/">P-AST&trade;</a></li>
+            <li><a href="/contact/">Contact Us</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <ul class="mobile-drawer__utility">
+      <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+      <li><a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      <li><a href="tel:8004934490" class="mobile-drawer__phone">800.493.4490</a></li>
+    </ul>
+  </div>
+</aside>
+<main class="page-shell">
+
+  <section class="ad-hero" id="top">
+    <div class="container ad-hero__inner">
+      <a href="/uti-knowledge-center/" class="ad-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        UTI Knowledge Center
+      </a>
+      <div class="ad-hero__overline">Knowledge Center</div>
+      <h1 class="ad-hero__title">Antimicrobial Resistance and the Importance of Antibiotic Stewardship</h1>
+      
+    </div>
+  </section>
+
+  <section class="ad-content">
+    <div class="container">
+      <div class="ad-content__body">
+<p>Margo Lee, Ph.D.</p>
+<p>The emergence of antimicrobial resistance (AMR) poses a global health crisis that affects our ability to treat many common infectious diseases. The rise of antibiotic-resistant pathogens has created challenges in treating patients with urinary tract, respiratory and wound infections, gastrointestinal pathogens, sexually transmitted diseases, and sepsis. The cost of new antibiotic medications and hospitalizations are rapidly increasing in response. More than 2.8 million antibiotic-resistant infections occur each year in the United States, and more than 35,000 people die as a result.1 Additionally, the CDC estimates that people in the United States spend as much as $4.6 billion per year on healthcare costs and an additional $35 billion in lost productivity costs.2</p>
+<p>The development of antibiotic resistance occurs when microorganisms such as bacteria, fungi, and parasites grow and survive in the presence of commonly prescribed antibiotics. Frequently, bacteria develop antibiotic resistance through genetic mutations that produce a resistant strain.3 While the use of antibiotics eliminates the bacteria that are sensitive to the antimicrobial, it also selectively allows bacteria with resistance to survive the exposure to the antibiotic. Resistant strains can also quickly transfer their antibiotic resistance by sharing plasmid DNA through horizontal gene transfer to the surrounding sensitive bacteria.4</p>
+<p>The misuse and overuse of antibiotics in treating infectious diseases contributes directly to the prevalence of antibiotic resistance among bacteria. Pathogens are often misidentified in infections and paired with incorrect medication, or frequently incomplete patient compliance to antibiotic treatment plans results in accelerating resistance mechanisms that increase AMR among pathogens. Up to 50% of all antibiotics prescribed to people are unnecessary and quickly become ineffective for many common infections due to overprescribing or misidentifying the infectious bacteria.5</p>
+<p>Improving the use of antimicrobials in treating infectious diseases is one of the core actions the United States federal government has charged healthcare professionals to help control antimicrobial resistance. The White House in 2020, created a 5-year National Action Plan for Combatting Antibiotic Resistance. The One Health Plan broadly covers public health, veterinarian health, agriculture, food safety, and research and development in a collaborative approach to reducing antibiotic resistance. The five goals of this presidential plan are:</p>
+<ul>
+<li>Slow the emergence of resistant bacteria and prevent the spread of resistant infections</li>
+<li>Strengthen national One Health surveillance efforts to combat resistance</li>
+<li>Advance development and use of rapid and innovative diagnostic tests for the identification and characterization of resistant bacteria</li>
+<li>Accelerate basic and applied research and development for new antibiotics, antifungals, other therapeutics, and vaccines</li>
+<li>Improve international collaboration and capacities for antimicrobial-resistance prevention, surveillance, control, and drug research and development.</li>
+</ul>
+<p><img alt="" src="/wp-content/uploads/2022/11/shutterstock_1805281906-300x170.jpg">These goals strengthen the surveillance programs that identify resistant pathogens and promote the development of new clinical diagnostic tests to detect resistant species. Together, these programs will encourage the development of more antibiotic stewardship programs for patients and more accurate and precise use of antibiotics by providers.6</p>
+<p>To help detect resistant pathogens and assist in patient treatment, Pathnostics’ offers its unique Guidance® UTI laboratory test, which identifies numerous pathogens in a patient sample as well as the pooled phenotypic antibiotic susceptibility of pathogens in the sample against 19 antibiotics. Standard urine culture does not detect multiple pathogens in polymicrobial infections and takes 2-5 days for patient results. Guidance® UTI has a unique two-step test that first detects the presence of UTI relevant pathogens and any antibiotic resistance (ABR) genes using molecular PCR technology. Secondly, it also identifies pooled antibiotic susceptibility by testing the pool of pathogens contained in the patient’s sample in order to provide personalized therapy options for the patient.</p>
+<p>Susceptibility testing against isolates when using standard urine culture doesn’t account for bacterial interactions that can influence antibiotic susceptibility.7 Bacteria communicate with other pathogens in polymicrobial infections and can influence ABR gene expression by working together or competing against each other in a patient infection.8 Microbes in a polymicrobial UTI ecosystem frequently protect each other from antibiotics, with many isolates protecting the most sensitive bacteria within the community. Isolates may also compete for nutrients within the ecosystem and may produce a decrease in antibiotic susceptibility within the ecosystem.9,10 The antibiotic sensitivity of a polymicrobial UTI is the collective expression of all bacteria within the community and results from the dynamic interactions between its members for its growth and survival.11,12,13</p>
+<p>Unlike other UTI diagnostic laboratories, Pathnostics’ Guidance® UTI test features the patented14 Pooled Antibiotic Susceptibility (P-AST™) testing process that addresses this critical factor of expressed pooled antibiotic susceptibility, which is important for treating polymicrobial infections. Pathnostics’ unique precision diagnostic testing captures these bacterial interactions by comprehensively testing against the pool of organisms in a patient specimen in the presence of 19 antibiotics commonly used to treat UTI. An easy-to-read, detailed patient report helps providers tailor antibiotic treatment of all detected organisms, not selecting antibiotics against each isolate. Lessen empiric approaches, make informed, targeted treatment decisions sooner, and reduce inappropriate antimicrobial use by using Guidance® UTI for targeted patient therapies.</p>
+<p><a href="/contact/?type=Health%20Care%20Provider&amp;reason=Contacting%20a%20Sales%20Representative">talk to a representative about Guidance® UTI</a></p>
+<p>1 Centers for Disease Control and Prevention. <em>Antibiotic resistance threats in the United States, 2019.</em>Atlanta, GA: US Department of Health and Human Services, Centers for Disease Control and Prevention, 2019. Available at: <a href="https://www.cdc.gov/DrugResistance/Biggest-Threats.html">https://www.cdc.gov/DrugResistance/Biggest-Threats.html</a>.2 Antibiotic resistance threats in the United States; 2013. Available at: <a href="https://www.cdc.gov/drugresistance/pdf/ar-threats-2013-508.pdf">https://www.cdc.gov/drugresistance/pdf/ar-threats-2013-508.pdf</a>3 Hersh AL, King LM, Shapiro DJ, <em>et al</em>. Unnecessary Antibiotic Prescribing in US Ambulatory Care Settings, 2010-2015. <em>Clin Infect Dis.</em> 2021;72(1):133-137.4 White House. National action plan for combating antibiotic-resistant bacteria. March 2015. Available at: <a href="https://obamawhitehouse.archives.gov/sites/default/files/docs/national_action_plan_for_combating_antibotic-resistant_bacteria.pdf">https://obamawhitehouse.archives.gov/sites/default/files/docs/national_action_plan_for_combating_antibotic-resistant_bacteria.pdf</a>5 Presidential Advisory Council on Combating Antibiotic-Resistant Bacteria. Priorities for the national action plan on combating antibiotic-resistant bacteria: 2020–2025: a report with recommendations . July 2019. Available at: <a href="https://www.hhs.gov/sites/default/files/PACCARB%20NAP%20Report%20FINAL%20Approved%20by%20Council.pdf">https://www.hhs.gov/sites/default/files/PACCARB%20NAP%20Report%20FINAL%20Approved%20by%20Council.pdf</a>6 Nowak MA, Nelson RE, Breidenbach JL, et al Clinical and economic outcomes of a prospective antimicrobial stewardship program. Am J Health Syst Pharm. 2012;69(17):1500-1508.7 de Vos MGJ, Zagorski M, McNally A, Bollenbach T. Interaction networks, ecological stability, and collective antibiotic tolerance in polymicrobial infections. Proc Natl Acad Sci U S A. 2017 Oct 3;114(40):10666-10671. doi: 10.1073/pnas.1713372114. Epub 2017 Sep 18. PMID: 28923953; PMCID: PMC5635929.8 Baunoch D, Luke N, Wang D, Vollstedt A, Zhao X, Ko DSC, Huang S, Cacdac P, Sirls LT. Concordance Between Antibiotic Resistance Genes and Susceptibility in Symptomatic Urinary Tract Infections. Infect Drug Resist. 2021 Aug 19;14:3275-3286. doi: 10.2147/IDR.S323095. PMID: 34447256; PMCID: PMC8382965.9 Vollstedt A, Baunoch D, Wolfe A, Luke N, Wojno KJ, et al. (2020) Bacterial Interactions as Detected by Pooled Antibiotic Susceptibility 8 Testing (P-AST) in Polymicrobial Urine Specimens. J Sur urology: JSU-101. DOI: 10.29011/JSU-101.10000110 Gaston JR, Johnson AO, Bair KL, White AN, Armbruster CE. Polymicrobial interactions in the urinary tract: is the enemy of my enemy my friend? Infect Immun. 2021 Jan 11:IAI.00652-20. doi: 10.1128/IAI.00652-20. Epub ahead of print. PMID: 33431702.11 Gaston JR, Johnson AO, Bair KL, White AN, Armbruster CE. Polymicrobial interactions in the urinary tract: is the enemy of my enemy my friend? Infect Immun. 2021 Jan 11:IAI.00652-20. doi: 10.1128/IAI.00652-20. Epub ahead of print. PMID: 33431702.12 Murray JL, Connell JL, Stacy A, Turner KH, Whiteley M. Mechanisms of synergy in polymicrobial infections. J Microbiol. 2014 Mar;52(3):188-99. doi: 10.1007/s12275-014-4067-3. Epub 2014 Mar 1. PMID: 24585050; PMCID: PMC7090983.13 Short FL, Murdoch SL, Ryan RP. Polybacterial human disease: the ills of social networking. Trends Microbiol. 2014 Sep;22(9):508-16. doi: 10.1016/j.tim.2014.05.007. Epub 2014 Jun 14. PMID: 24938173; PMCID: PMC4158425.14 Gaston JR, Johnson AO, Bair KL, White AN, Armbruster CE. Polymicrobial interactions in the urinary tract: is the enemy of my enemy my friend? Infect Immun. 2021 Jan 11:IAI.00652-20. doi: 10.1128/IAI.00652-20. Epub ahead of print. PMID: 33431702.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA — required on every sub-page. -->
+  <section class="section--green closing-cta">
+    <div class="container">
+      <h2 class="closing-cta__headline">
+        Ready to see what better diagnostics <em>can do for your practice?</em>
+      </h2>
+      <p class="closing-cta__sub">
+        Talk to a Pathnostics representative about Guidance® UTI and our other tests.
+      </p>
+      <div class="closing-cta__actions">
+        <a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative" class="btn-primary">Talk to a Rep</a>
+        <a href="/tests/" class="btn-ghost-white">See Our Tests</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ════════════════════════════════════════════════════
+     FOOTER — verbatim from /index.html.
+     ════════════════════════════════════════════════════ -->
+<footer class="section--navy footer" id="contact">
+  <a href="#top" class="footer__back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </a>
+  <div class="container" style="padding-top: var(--section-padding-y); padding-bottom: var(--gap-xl);">
+    <p class="footer__big-tagline">
+      Better decisions. Better outcomes. Better lives<span class="footer__big-tagline-period">.</span>
+    </p>
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics" loading="lazy">
+        <div class="footer__social">
+          <a href="https://www.linkedin.com/company/pathnostics/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg></a>
+          <a href="https://twitter.com/Pathnostics" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+        <iframe name="footer-subscribe-iframe" class="footer__subscribe-iframe" aria-hidden="true" tabindex="-1"></iframe>
+        <form class="footer__subscribe" action="https://pathnostics.us4.list-manage.com/subscribe/post?u=a1401745b75d8b6b5e62ed930&amp;id=35ede7f928&amp;f_id=009c57e9f0" method="post" target="footer-subscribe-iframe" novalidate>
+          <label for="footer-subscribe-email" class="footer__subscribe-label">Stay Informed</label>
+          <div class="footer__subscribe-row">
+            <input id="footer-subscribe-email" type="email" name="EMAIL" placeholder="Email address" required class="footer__subscribe-input" autocomplete="email">
+            <button type="submit" class="footer__subscribe-btn">Subscribe</button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <p class="footer__heading">Our Solutions</p>
+        <div class="footer__links">
+          <a href="/tests/guidance-uti/">Guidance UTI with P-AST</a>
+          <a href="/#athome">Guidance @Home</a>
+          <a href="/providers/">For Providers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Resources</p>
+        <div class="footer__links">
+          <a href="/evidence.html">Published Evidence</a>
+          <a href="/clinical-resources/">Clinical Resources</a>
+          <a href="/patient-resources/">Patient Resources</a>
+          <a href="/news/">News &amp; Events</a>
+          <a href="/careers/">Careers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Get in Touch</p>
+        <p class="footer__contact-text">Ready to see how Guidance can support your practice?</p>
+        <a href="#contact" class="btn-primary footer__cta">Talk to a Rep</a>
+        <div class="footer__utility">
+          <a href="/customer-care/">Customer Care</a>
+          <a href="/billing/">Billing</a>
+          <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener noreferrer">Pay Your Bill</a>
+          <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener noreferrer">Provider Login</a>
+          <a href="/order-supplies/">Order Supplies</a>
+          <a href="/veterans/">For Veterans</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copyright">&copy; 2026 Pathnostics | All rights reserved</p>
+      <div class="footer__legal">
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/patient-privacy/">Patient Privacy</a>
+        <a href="https://secure.ethicspoint.com/domain/media/en/gui/44588/index.html" target="_blank" rel="noopener noreferrer">Confidential Reporting</a>
+        <a href="/privacy-policy/#Section9">About Ads</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

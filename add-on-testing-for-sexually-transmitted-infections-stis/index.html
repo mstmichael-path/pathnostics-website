@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add-On Testing for Sexually Transmitted Infections (STIs) — Pathnostics</title>
+  <meta name="description" content="Chlamydia trachomatis, Mycobacterium tuberculosis, Neisseria gonorrhoeae, and Trichomonas vaginalis are the organisms responsible for common sexually transmitted infections (STIs; chlamydia, genital tuberculosis, gonorrhea, and trichomonias">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+  <!-- CSS — absolute paths so this works from any depth -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/nav.css">
+  <link rel="stylesheet" href="/css/info-page.css">
+
+  <link rel="stylesheet" href="/css/article-detail.css">
+
+  <!-- GSAP — REQUIRED. main.js errors at line 1 without these,
+       which breaks scroll-collapse + footer parallax. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body>
+<!-- ════════════════════════════════════════════════════
+     NAV SYSTEM — verbatim from /index.html.
+     If the homepage nav changes, sync this section.
+     The local nav (Tier 3) anchors are PAGE-SPECIFIC.
+     ════════════════════════════════════════════════════ -->
+<div class="nav-system" id="nav-system" role="navigation" aria-label="Primary">
+
+  <div class="utility-bar" id="utility-bar">
+    <div class="utility-bar__left">
+      <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a>
+      <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div class="utility-bar__right">
+      <a href="tel:8004934490" class="utility-bar__phone" aria-label="Call 800.493.4490">800.493.4490</a>
+    </div>
+  </div>
+
+  <div class="global-nav" id="global-nav">
+    <div class="global-nav__inner">
+
+      <a href="/" class="global-nav__logo" aria-label="Pathnostics Home">
+        <img class="global-nav__logo-color" src="/assets/pathnostics-logo-color.png" alt="Pathnostics">
+        <img class="global-nav__logo-white" src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+
+      <div class="mobile-bar">
+        <a href="tel:8004934490" class="mobile-bar__phone" aria-label="Call 800.493.4490">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+        <button type="button" class="mobile-bar__toggle" id="mobile-toggle" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false">
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+          <span class="mobile-bar__toggle-bar"></span>
+        </button>
+      </div>
+
+      <ul class="global-menu">
+        <li class="global-menu__item" data-menu="tests">
+          <a href="/tests/" class="global-menu__link">Our Tests<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--tests" role="menu" aria-label="Our Tests">
+            <div class="mega-tests__hero">
+              <img src="/assets/guidance-uti-header-image.webp" alt="Guidance UTI test kit" class="mega-tests__hero-image">
+              <div class="mega-tests__hero-body">
+                <div class="mega-tests__hero-tag">Flagship Test</div>
+                <h3 class="mega-tests__hero-title">Guidance UTI<br>with <em>P-AST.</em></h3>
+                <p class="mega-tests__hero-desc">Pooled antibiotic susceptibility testing that evaluates how antibiotics perform against the infection as a whole — including in polymicrobial cases. Results in 24–36 hours.</p>
+              </div>
+              <a href="/tests/guidance-uti/" class="mega-tests__hero-cta">Explore Guidance UTI<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+            </div>
+            <div class="mega-tests__directory">
+              <div class="mega-tests__group">
+                <h5>All Tests</h5>
+                <ul>
+                  <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+                  <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+                  <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+                  <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+                  <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+                  <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="providers">
+          <a href="/providers/" class="global-menu__link">Providers<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Providers">
+            <ul>
+              <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+              <li><a href="/order-supplies/">Order Supplies</a></li>
+              <li><a href="/customer-care/">Customer Care</a></li>
+              <li><a href="/testimonials/">Testimonials</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="patients">
+          <a href="/patient-resources/" class="global-menu__link">Patient Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Patient Resources">
+            <ul>
+              <li><a href="/billing/">Billing</a></li>
+              <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+              <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item">
+          <a href="/payors/" class="global-menu__link">Payors</a>
+        </li>
+        <li class="global-menu__item" data-menu="clinical">
+          <a href="/clinical-resources/" class="global-menu__link">Clinical Resources<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="Clinical Resources">
+            <ul>
+              <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+              <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-menu__item" data-menu="about">
+          <a href="/about/" class="global-menu__link">About<svg class="global-menu__caret" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 3 5 8 8 3"/></svg></a>
+          <div class="mega-panel mega-panel--flyout" role="menu" aria-label="About">
+            <ul>
+              <li><a href="/our-team/">Our Team</a></li>
+              <li><a href="/careers/">Careers</a></li>
+              <li><a href="/news/">News &amp; Events</a></li>
+              <li><a href="/innovation/">Innovation</a></li>
+              <li><a href="/p-ast/">P-AST&trade;</a></li>
+              <li><a href="/contact/">Contact Us</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+
+      <div class="global-nav__actions">
+        <button class="global-nav__search-btn" id="search-toggle" aria-label="Search" aria-expanded="false">
+          <svg viewBox="0 0 24 24" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <a href="#contact" class="global-nav__cta">Talk to a Rep</a>
+      </div>
+
+      <div class="search-dropdown" id="search-dropdown" aria-hidden="true">
+        <form method="get" action="/search">
+          <input type="search" name="q" placeholder="Search Pathnostics…" aria-label="Search query" autocomplete="off">
+          <button type="submit">Go</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tier 3 local nav — anchors to THIS page's sections -->
+  <div class="local-nav" id="local-nav">
+    <div class="local-nav__inner">
+      <a href="/" class="local-nav__logo" aria-label="Pathnostics Home">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics">
+      </a>
+      <ul class="local-nav__items">
+        <li><a href="#top" data-target="top">UTI Knowledge Center</a></li>
+        <li><a href="#contact" data-target="contact">Talk to a Rep</a></li>
+      </ul>
+      <a href="#contact" class="local-nav__cta">Talk to a Rep</a>
+    </div>
+    <div class="local-nav__progress" id="local-nav-progress"></div>
+  </div>
+</div>
+
+<!-- Mobile drawer — verbatim from /index.html -->
+<div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
+<aside class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
+  <div class="mobile-drawer__inner">
+    <a href="#contact" class="mobile-drawer__cta">Talk to a Rep</a>
+    <nav class="mobile-drawer__nav" aria-label="Mobile primary">
+      <ul class="mobile-accordion">
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Our Tests<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/tests/guidance-uti/">Guidance<sup>&reg;</sup> UTI with P-AST</a></li>
+            <li><a href="/tests/guidance-prostatitis/">Guidance<sup>&reg;</sup> Prostatitis</a></li>
+            <li><a href="/tests/anatomic-pathology/">Anatomic Pathology</a></li>
+            <li><a href="/tests/barretts-esophagus/">Barrett&rsquo;s Esophagus</a></li>
+            <li><a href="/tests/gyn-cytology-hr/">Gyn Cytology High Risk Test</a></li>
+            <li><a href="/tests/bladder-fish-urovysion/">Bladder FISH / UroVysion</a></li>
+            <li><a href="/tests/womens-cytology-high-risk-hpv/">Cytology / High Risk HPV</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Providers<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative">Become a Client</a></li>
+            <li><a href="/order-supplies/">Order Supplies</a></li>
+            <li><a href="/customer-care/">Customer Care</a></li>
+            <li><a href="/testimonials/">Testimonials</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Patient Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/billing/">Billing</a></li>
+            <li><a href="/wp-content/uploads/2023/04/Guidance-UTI-Doctor-Discussion-Guide-Notes-1137-122022-V16.2-FNL.pdf" target="_blank" rel="noopener">Doctor Discussion Guide (PDF)</a></li>
+            <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item mobile-accordion__item--single">
+          <a href="/payors/" class="mobile-accordion__head mobile-accordion__head--link">Payors</a>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">Clinical Resources<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/guidance-uti-publications/">Guidance UTI Publications</a></li>
+            <li><a href="/uti-knowledge-center/">UTI Knowledge Center</a></li>
+          </ul>
+        </li>
+        <li class="mobile-accordion__item">
+          <button type="button" class="mobile-accordion__head" aria-expanded="false">About<svg class="mobile-accordion__caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 5 6 8 9 5"/></svg></button>
+          <ul class="mobile-accordion__panel">
+            <li><a href="/our-team/">Our Team</a></li>
+            <li><a href="/careers/">Careers</a></li>
+            <li><a href="/news/">News &amp; Events</a></li>
+            <li><a href="/innovation/">Innovation</a></li>
+            <li><a href="/p-ast/">P-AST&trade;</a></li>
+            <li><a href="/contact/">Contact Us</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <ul class="mobile-drawer__utility">
+      <li><a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener">Pay Your Bill</a></li>
+      <li><a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener">Provider Login</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      <li><a href="tel:8004934490" class="mobile-drawer__phone">800.493.4490</a></li>
+    </ul>
+  </div>
+</aside>
+<main class="page-shell">
+
+  <section class="ad-hero" id="top">
+    <div class="container ad-hero__inner">
+      <a href="/uti-knowledge-center/" class="ad-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        UTI Knowledge Center
+      </a>
+      <div class="ad-hero__overline">Microorganism Spotlight</div>
+      <h1 class="ad-hero__title">Add-On Testing for Sexually Transmitted Infections (STIs)</h1>
+      
+    </div>
+  </section>
+
+  <section class="ad-content">
+    <div class="container">
+      <div class="ad-content__body">
+<p>Emery Haley, PhD, Scientific Writing Specialist</p>
+<h2>Add-On Testing for Sexually Transmitted Infections (STIs)</h2>
+<h2>Clinical Relevance in UTI</h2>
+<p><em>Chlamydia trachomatis</em>, <em>Mycobacterium tuberculosis</em>, <em>Neisseria gonorrhoeae,</em> and <em>Trichomonas vaginalis</em> are the organisms responsible for common sexually transmitted infections (STIs; chlamydia, genital tuberculosis, gonorrhea, and trichomoniasis, respectively). Urogenital infections with these organisms can cause clinical signs and lower urinary tract symptoms that overlap significantly with common signs and symptoms of urinary tract infections (UTIs), such as dysuria, urinary frequency/urgency, pyuria, and hematuria.[1]  STIs can also co-occur with classical UTIs.</p>
+<p>None of these organisms can grow in the standard urine culture conditions commonly used for UTI diagnosis. Instead, they are diagnosed by specialized cultures or advanced molecular tests, such as PCR. To ensure correct diagnosis and appropriate treatment, molecular testing for these STI pathogens alongside uropathogens is recommended in individuals with lower urinary tract and/or urogenital symptoms who are sexually active or have other risk factors for contracting STIs.[2,3] Due to risks of pregnancy complications and neonatal infection, testing for these STIs is also recommended in symptomatic pregnant individuals.</p>
+<h2>Bacterial Species</h2>
+<h2><em>Chlamydia trachomatis</em></h2>
+<h2>Clinical Summary</h2>
+<ul>
+<li><em>C. trachomatis</em> is recognized as a biofilm-forming, nitrite-negative, gram-negative, sexually transmitted urogenital pathogen.</li>
+<li><em>C. trachomatis</em> is associated with both genital infection and complicated or recurrent UTI.</li>
+<li>Detection of <em>C. trachomatis</em> in a urine specimen is nationally notifiable to the CDC.</li>
+<li>Reported serious complications of <em>C. trachomatis</em> urogenital infections include both male and female infertility and pelvic inflammatory disease in females. Pregnancy complications such as ectopic pregnancy, chorioamnionitis, low birth weights, and neonatal infections are also a significant concern.</li>
+</ul>
+<h2>Bacterial Characteristics</h2>
+<h4><em>Gram-stain</em></h4>
+<p>Gram-negative</p>
+<h4><em>Morphology</em></h4>
+<p>Spherical obligate intracellular parasitic bacterium</p>
+<h4><em>Growth Requirements</em></h4>
+<p>Fastidious<br>
+Obligate anaerobe</p>
+<h4><em>Nitrate Reduction</em></h4>
+<p>No</p>
+<h4><em>Urease</em></h4>
+<p>Negative</p>
+<h4><em>Biofilm Formation</em></h4>
+<p>Yes</p>
+<h4><em>Pathogenicity</em></h4>
+<p>Pathogen</p>
+<h2>Clinical Relevance in UTI</h2>
+<p><em>C. trachomatis</em> is most commonly recognized as the microorganism causative of the sexually transmitted infection (STI), chlamydia. According to the United States Centers for Disease Control and Prevention (CDC), almost 60% of chlamydia cases are diagnosed in adolescents and young adults between the ages of 15 and 24 years, with a higher prevalence in females than in males.[4,5] Since many chlamydia infections are asymptomatic, these numbers primarily reflect access to and utilization of STI screening services. Detection of <em>C. trachomatis</em> in a urine specimen is nationally notifiable to the CDC.[6]</p>
+<p><em>C. trachomatis</em> infection can also cause clinical signs and lower urinary tract symptoms that overlap with common signs and symptoms of UTI, such as dysuria and pyuria.[7,8] While UTI is commonly diagnosed by urine culture, <em>C. trachomatis</em> does not grow in standard culture conditions, and chlamydia diagnosis is instead performed via nucleic acid amplification testing, such as PCR.[9] Additionally, <em>C. trachomatis</em> lacks nitrate reductase activity, so screening strategies involving urinalysis for nitrite positivity will be false-negative.[10,11]</p>
+<p>Further complicating diagnosis, UTI and chlamydia STI can co-occur,[12]  and <em>C. trachomatis</em> itself has been identified as the cause of some culture-negative recurrent UTIs.[13]  Importantly, despite similarities in the initial clinical presentation, UTI and chlamydia have different long-term complication risks and frequently require different treatment strategies. Therefore, molecular-based diagnostics, such as PCR, covering both UTI pathogens and STI pathogens are recommended, particularly in sexually active adolescents and young adults, or adults with high STI exposure risk.[12,14]  Due to risks of pregnancy complications and neonatal infection, testing for these STIs is also recommended in symptomatic pregnant individuals.</p>
+<p>In males, past <em>C. trachomatis</em> infection has been associated with infertility.[15]  Reported complications of <em>C. trachomatis</em> infection in females include pelvic inflammatory disease, chorioamnionitis in pregnancy, ectopic pregnancy, and tubal factor infertility.[16]  Complications in neonates who are infected via vertical transmission of <em>C. trachomatis</em> during birth include low birth weight, afebrile pneumonia, and conjunctivitis, potentially resulting in blindness.[9,17]</p>
+<h2>Treatment</h2>
+<p>According to the CDC,[9] recommended treatments for <em>C. trachomatis</em> infection include:</p>
+<ol>
+<li>The first-line choice in non-pregnant individuals is Doxycycline 100mg orally (PO) twice daily for seven days
+   - Alternatively, a single 1g oral (PO) dose of Azithromycin
+   - Alternatively, Levofloxacin 500mg orally (PO) once daily for seven days</li>
+<li>The first-line choice in pregnant individuals is a single 1g oral (PO) dose of Azithromycin
+   - Alternatively, Amoxicillin 500mg orally (PO) three times daily for seven days</li>
+</ol>
+<h2><em>Neisseria gonorrhoeae</em></h2>
+<h2>Clinical Summary</h2>
+<ul>
+<li><em>N. gonorrhoeae</em> is recognized as a biofilm-forming, nitrite-negative, gram-negative, sexually transmitted urogenital pathogen.</li>
+<li><em>N. gonorrhoeae</em> is associated with urethritis and may present with signs and symptoms clinically indistinguishable from complicated, persistent, and/or recurrent UTI.</li>
+<li>Detection of N. <em>gonorrhoeae</em> in a urine specimen is nationally notifiable to the CDC.</li>
+<li>Reported serious complications of <em>N.</em> <em>gonorrhoeae</em> urogenital infections include both male and female infertility and pelvic inflammatory disease in females. Pregnancy complications such as ectopic pregnancy, preterm birth, low birth weights, and neonatal infections are also a significant concern. Rarely, disseminated infection (bacteremia) can occur, with potentially lethal complications including infective/reactive arthritis, endocarditis, and meningitis.</li>
+</ul>
+<h2>Bacterial Characteristics</h2>
+<h4><em>Gram-stain</em></h4>
+<p>Gram-negative</p>
+<h4><em>Morphology</em></h4>
+<p>Coccus</p>
+<h4><em>Growth Requirements</em></h4>
+<p>Fastidious (slow growing, requires supplemental nutrients, including glucose and glutamine)<br>
+Facultative anaerobe</p>
+<h4><em>Nitrate Reduction</em></h4>
+<p>No</p>
+<h4><em>Urease</em></h4>
+<p>Negative</p>
+<h4><em>Biofilm Formation</em></h4>
+<p>Yes</p>
+<h4><em>Pathogenicity</em></h4>
+<p>Pathogen</p>
+<h2>Clinical Relevance in UTI</h2>
+<p><em>N.</em> <em>gonorrhoeae</em> is most commonly recognized as the microorganism causative of the sexually transmitted infection (STI), gonorrhea. According to the United States Centers for Disease Control and Prevention (CDC), most gonorrhea cases are diagnosed in adolescents and young adults between the ages of 15 and 35 years, with a higher prevalence in males than in females.[30] Since many chlamydia infections are asymptomatic, these numbers primarily reflect access to and utilization of STI screening services.</p>
+<p>Although not considered one of the six highest priority “ESKAPE” pathogens, The World Health Organization (WHO) has included this organism in the 2024 Bacterial Priority Pathogens List (BPPL).[18] Detection of <em>N. gonorrhoeae</em> in a urine specimen is nationally notifiable to the CDC.[31]</p>
+<p><em>N. gonorrhoeae</em> infection can also cause clinical signs and lower urinary tract symptoms that overlap with common signs and symptoms of UTI, such as dysuria, urinary frequency/urgency, and pyuria.[32,33] Further complicating diagnosis, UTI and gonorrhea STI can co-occur. Importantly, despite similarities in the initial clinical presentation, UTI and gonorrhea have different long-term complication risks and frequently require different treatment strategies.</p>
+<p>While UTI is commonly diagnosed by urine culture, <em>N. gonorrhoeae</em> does not grow in standard culture conditions, and gonorrhea diagnosis is instead performed via nucleic acid amplification testing, such as PCR.[31] Additionally, <em>N. gonorrhoeae</em> lacks nitrate reductase activity, so screening strategies involving urinalysis for nitrite positivity will be false-negative.[10,11]  Molecular-based diagnostics, such as PCR, covering both UTI pathogens and STI pathogens are recommended, particularly in sexually active adolescents and young adults, or adults with high STI exposure risk. Due to risks of pregnancy complications and neonatal infection, testing for these STIs is also recommended in symptomatic pregnant individuals.</p>
+<p>In males, <em>N. gonorrhoeae</em> infection has been associated with infertility.[33,34]  Reported complications of <em>N. gonorrhoeae</em> infection in females include pelvic inflammatory disease, ectopic pregnancy, and tubal factor infertility.[33,34]   Complications such as preterm birth, low birth weight, and conjunctivitis, potentially resulting in blindness, can occur in neonates who are infected via vertical transmission of <em>N. gonorrhoeae</em> during birth.[35]  Untreated <em>N. gonorrhoeae</em> can progress to disseminated infection (bacteremia) with potentially lethal complications including infective/reactive arthritis, endocarditis, and meningitis[36–38]</p>
+<h2>Treatment</h2>
+<p>According to the CDC,[39]  recommended treatments for <em>N. gonorrhoeae</em> infection include:</p>
+<ul>
+<li>The first-line choice is a single 500mg intramuscular injection (IM) dose of Ceftriaxone</li>
+<li>Alternatively, a single 800mg oral (PO) dose of Cefixime</li>
+</ul>
+<h2>Protozoan Parasite <em>Trichomonas vaginalis</em></h2>
+<h2>Clinical Summary</h2>
+<ul>
+<li><em>T. vaginalis</em> is recognized as a sexually transmitted single-celled protozoan parasitic urogenital pathogen.</li>
+<li><em>T. vaginalis</em> is associated with urethritis and recurrent UTI.</li>
+<li><em>T. vaginalis</em> urogenital infection increased risks for contracting HSV-2 or HIV and for developing cervical cancer. Complications of trichomoniasis during pregnancy include low birth weight, preterm rupture of membranes, preterm birth, and transmission of infection to the newborn.</li>
+</ul>
+<h2>Microorganism Characteristics</h2>
+<h4><em>Morphology</em></h4>
+<p>A single-celled extracellular protozoan parasite</p>
+<h4><em>Biofilm Formation</em></h4>
+<p>Yes</p>
+<h4><em>Pathogenicity</em></h4>
+<p>Pathogen</p>
+<h2>Clinical Relevance in UTI</h2>
+<p><em>T. vaginalis</em> is most commonly recognized as the microorganism causative of the sexually transmitted infection (STI), trichomoniasis, also called “trich”. According to the United States Centers for Disease Control and Prevention (CDC), trichomoniasis is the most prevalent non-viral STI globally and affects an estimated 2.6 million people in the US.[40] Epidemiologic studies indicated a higher prevalence in females than in males, but unlike with other STIs, there was not a significant difference in prevalence by age.[40] Since many trichomoniasis infections are asymptomatic, these findings primarily reflect access to and utilization of STI screening services.</p>
+<p><em>T. vaginalis</em> infection can also cause clinical signs and lower urinary tract symptoms that overlap with common signs and symptoms of UTI, such as dysuria and pyuria.[41,42] Further complicating diagnosis, <em>T. vaginalis</em> infection has been associated with recurrent UTI and trichomoniasis STI can co-occur with UTI.[43] Importantly, despite similarities in the initial clinical presentation, UTI and trichomoniasis have different long-term complication risks and frequently require different treatment strategies.</p>
+<p>While UTI is commonly diagnosed by urine culture, <em>T. vaginalis</em> does not grow in standard culture conditions, and trichomoniasis diagnosis is instead performed via point-of-care tests or nucleic acid amplification testing, such as PCR.[41]  Additionally, unlike common bacterial uropathogens, parasites including <em>T. vaginalis</em> do not display nitrate reductase activity, so screening strategies involving urinalysis for nitrite positivity will be false-negative.[10,11]  Molecular-based diagnostics, such as PCR, covering both UTI pathogens and STI pathogens are recommended, particularly in sexually active adolescents and young adults, or adults with high STI exposure risk. Due to risks of pregnancy complications and neonatal infection, testing for these STIs is also recommended in symptomatic pregnant individuals.</p>
+<p>Complications of <em>T. vaginalis</em> urogenital infection include increased risks of contracting human immunodeficiency virus (HIV) infection, contracting herpes simplex virus type 2 (HSV-2) infection, or developing cervical cancer.[40,41] Complications of trichomoniasis during pregnancy include low birth weight, preterm rupture of membranes, preterm birth, and transmission of infection to the newborn.[40,41]</p>
+<h2>Treatment</h2>
+<p>According to the CDC,[40]  recommended treatments for <em>T. vaginalis</em> infection include:</p>
+<ul>
+<li>The first-line choice is Metronidazole, with dosage depending on sex</li>
+<li>For males, a single 2g oral (PO) dose is recommended</li>
+<li>For females, a regimen of 500mg oral (PO) doses twice a day for seven days is recommended</li>
+<li>Alternatively, a single 2g oral (PO) dose of Tinidazole may be used in both males and females</li>
+</ul>
+<h2><em>Mycobacterium tuberculosis</em></h2>
+<h2>Clinical Summary</h2>
+<ul>
+<li><em>M. tuberculosis</em> is recognized as a biofilm-forming, urease-positive, gram-variable, sexually transmitted urogenital pathogen.</li>
+<li>Urogenital <em>M.</em> <em>tuberculosis</em> is associated with complicated, persistent, and/or recurrent UTI.</li>
+<li>Reported serious complications of <em>M.</em> <em>tuberculosis</em> urogenital infections include both male and female infertility, reduced bladder capacity/constricted bladder, urinary obstruction, ureteric strictures, stenosis, pyelonephritis, hydronephrosis, renal scarring, and renal failure.</li>
+</ul>
+<h2>Bacterial Characteristics</h2>
+<h4><em>Gram-stain</em></h4>
+<p>Gram-variable (a waxy outer coating of mycolic acid prevents it from reliably staining gram-positive)</p>
+<h4><em>Morphology</em></h4>
+<p>Bacillus; obligate intracellular parasitic bacterium</p>
+<h4><em>Growth Requirements</em></h4>
+<p>Fastidious (extremely slow growing, requires a specialty culture medium such as Lowenstein-Jensen or Middlebrook 7H9/7H11)<br>
+Obligate aerobe</p>
+<h4><em>Nitrate Reduction</em></h4>
+<p>Yes</p>
+<h4><em>Urease</em></h4>
+<p>Positive</p>
+<h4><em>Biofilm Formation</em></h4>
+<p>Yes</p>
+<h4><em>Pathogenicity</em></h4>
+<p>Pathogen</p>
+<h2>Clinical Relevance in UTI</h2>
+<p><em>M. tuberculosis</em> is most commonly recognized as the microorganism causative of tuberculosis (TB). Although not considered one of the six highest priority “ESKAPE” pathogens, The World Health Organization (WHO) has included this organism in the 2024 Bacterial Priority Pathogens List (BPPL).[18] According to the United States Centers for Disease Control and Prevention (CDC), up to 13 million people in the United States have latent (inactive, untransmissible, and asymptomatic) tuberculosis infections.[19] Both initial active tuberculosis disease and reactivation of latent tuberculosis infection can manifest with symptoms in either the lungs (pulmonary TB) or in other organs (extra-pulmonary). A common extra-pulmonary manifestation of TB is urogenital TB.</p>
+<p>Urogenital <em>M. tuberculosis</em> infection is often difficult to diagnose, with diagnostic delays attributed to the nonspecific nature of the symptoms.[20] Persistent and/or recurrent lower urinary tract symptoms, such as dysuria and voiding irregularities, are common, but may be mistaken clinically for UTI, resulting in ineffective treatment.[21]  Culture-negative or so-called “sterile” pyuria and hematuria can also be a sign of urogenital TB.[22,23] <em>M. tuberculosis</em> does not grow in standard urine culture conditions, so urogenital TB is instead diagnosed via specialized culture or nucleic acid amplification testing, such as PCR.[24]</p>
+<p><em>M. tuberculosis</em> may cause menstrual irregularities and both male and female infertility.[25,26] Severe complications of uncontrolled urogenital <em>M. tuberculosis</em> infection include reduced bladder capacity/constricted bladder, urinary obstruction, ureteric strictures, stenosis, pyelonephritis, hydronephrosis, renal scarring, and renal failure.[27,28]Testing for urogenital <em>M. tuberculosis</em> infection is recommended in symptomatic individuals with previously diagnosed latent TB or recent travel/risk of exposure to TB.</p>
+<h2>Treatment</h2>
+<p>In the United States, both active tuberculosis disease and latent <em>M. tuberculosis</em> infection are treated with individualized treatment regimens, based on susceptibility testing of clinical isolates, and typically involving multidrug cocktails taken for several months.[29]</p>
+      </div>
+    <div class="ad-author-card">
+      <p class="ad-author-card__label">About the Author</p>
+      <div class="ad-author-card__bio"><p>Dr. Emery Haley is a scientific writing specialist with over ten years of experience in translational cell and molecular biology. As both a former laboratory scientist and an experienced science communicator, Dr. Haley is passionate about making complex research clear, approachable, and relevant. Their work has been published in over 10 papers and focuses on bridging the gap between the lab and real-world patient care to help drive better health outcomes.</p></div>
+    </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA — required on every sub-page. -->
+  <section class="section--green closing-cta">
+    <div class="container">
+      <h2 class="closing-cta__headline">
+        Ready to see what better diagnostics <em>can do for your practice?</em>
+      </h2>
+      <p class="closing-cta__sub">
+        Talk to a Pathnostics representative about Guidance® UTI and our other tests.
+      </p>
+      <div class="closing-cta__actions">
+        <a href="/contact/?type=Health%20Care%20Provider&reason=Contacting%20a%20Sales%20Representative" class="btn-primary">Talk to a Rep</a>
+        <a href="/tests/" class="btn-ghost-white">See Our Tests</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="references" aria-labelledby="references-label">
+    <div class="container">
+      <div class="references__header">
+        <span class="references__label" id="references-label">References</span>
+      </div>
+      <ol class="references__list ad-references">
+        <li>Shapiro, T.; Dalton, M.; Hammock, J.; Lavery, R.; Matjucha, J.; Salo, D.F. The Prevalence of Urinary Tract Infections and Sexually Transmitted Disease in Women with Symptoms of a Simple Urinary Tract Infection Stratified by Low Colony Count Criteria. <em>Academic Emergency Medicine</em> <strong>2005</strong>, <em>12</em>, 38–44, doi:10.1111/j.1553-2712.2005.tb01476.x.</li>
+        <li>Tomas, M.E.; Getman, D.; Donskey, C.J.; Hecker, M.T. Overdiagnosis of Urinary Tract Infection and Underdiagnosis of Sexually Transmitted Infection in Adult Women Presenting to an Emergency Department. <em>J. Clin. Microbiol.</em> <strong>2015</strong>, <em>53</em>, 2686–2692, doi:10.1128/jcm.00670-15.</li>
+        <li>Behzadi, P.; Behzadi, E.; Pawlak-Adamska, E.A. Urinary Tract Infections (UTIs) or Genital Tract Infections (GTIs)? It’s the Diagnostics That Count. <em>GMS Hyg. Infect. Control</em> <em>14</em>, Doc14, doi:10.3205/dgkh000320.</li>
+        <li>Chlamydia — Reported Cases and Rates of Reported Cases by Age Group and Sex, United States | STI Statistics | CDC Available online: <a href="https://www.cdc.gov/sti-statistics/data-vis/table-ct-agesex.html">https://www.cdc.gov/sti-statistics/data-vis/table-ct-agesex.html</a> (accessed on 19 March 2025).</li>
+        <li>National Overview of STIs in 2023 | STI Statistics | CDC Available online: <a href="https://www.cdc.gov/sti-statistics/annual/summary.html">https://www.cdc.gov/sti-statistics/annual/summary.html</a> (accessed on 19 March 2025).</li>
+        <li>Chlamydia Trachomatis Infection 2022 Case Definition | CDC Available online: <a href="https://ndc.services.cdc.gov/case-definitions/chlamydia-trachomatis-infection-2022/">https://ndc.services.cdc.gov/case-definitions/chlamydia-trachomatis-infection-2022/</a> (accessed on 19 March 2025).</li>
+        <li>Huppert, J.S.; Biro, F.; Lan, D.; Mortensen, J.E.; Reed, J.; Slap, G.B. Urinary Symptoms in Adolescent Females: STI or UTI? <em>Journal of Adolescent Health</em> <strong>2007</strong>, <em>40</em>, 418–424, doi:10.1016/j.jadohealth.2006.12.010.</li>
+        <li>Msemwa, B.; Mushi, M.F.; Kidenya, B.; Okamo, B.; Keenan, K.; Sabiiti, W.; Miyaye, D.N.; Konje, E.T.; Silago, V.; Mirambo, M.M.; et al. Urogenital Pathogens in Urine Samples of Clinically Diagnosed Urinary Tract Infected Patients in Tanzania: A Laboratory Based Cross-Sectional Study. <em>IJID Reg.</em> <strong>2023</strong>, <em>7</em>, 170–175, doi:10.1016/j.ijregi.2022.12.007.</li>
+        <li>Chlamydial Infections – STI Treatment Guidelines Available online: <a href="https://www.cdc.gov/std/treatment-guidelines/chlamydia.htm">https://www.cdc.gov/std/treatment-guidelines/chlamydia.htm</a> (accessed on 19 March 2025).</li>
+        <li>BacDive | The Bacterial Diversity Metadatabase Available online: <a href="https://bacdive.dsmz.de/">https://bacdive.dsmz.de/</a> (accessed on 11 February 2025).</li>
+        <li>BioCyc Pathway/Genome Database Collection Available online: <a href="https://biocyc.org/">https://biocyc.org/</a> (accessed on 11 February 2025).</li>
+        <li>Huppert, J.S.; Biro, F.M.; Mehrabi, J.; Slap, G.B. Urinary Tract Infection and Chlamydia Infection in Adolescent Females. <em>J. Pediatr. Adolesc. Gynecol.</em> <strong>2003</strong>, <em>16</em>, 133–137, doi:10.1016/s1083-3188(03)00048-2.</li>
+        <li>Wanic-Kossowska, M.; Kozioł, L.; Bajew, L.; Czekalski, S. Acute and Chronic Urinary Tract Infections Caused by Chlamydia Trachomatis. <em>Int. Urol. Nephrol.</em> <strong>2001</strong>, <em>32</em>, 437–438, doi:10.1023/a:1017595116702.</li>
+        <li>Wilbanks, M.D.; Galbraith, J.W.; Geisler, W.M. Dysuria in the Emergency Department: Missed Diagnosis of Chlamydia Trachomatis. <em>West. J. Emerg. Med.: Integrating Emerg. Care Popul. Heal.</em> <strong>2014</strong>, <em>15</em>, 227–230, doi:10.5811/westjem.2013.12.18989.</li>
+        <li>Gonzales, G.F.; Muñoz, G.; Sánchez, R.; Henkel, R.; Gallegos‐Avila, G.; Díaz‐Gutierrez, O.; Vigil, P.; Vásquez, F.; Kortebani, G.; Mazzolli, A.; et al. Update on the Impact of Chlamydia Trachomatis Infection on Male Fertility. <em>Andrologia</em> <strong>2004</strong>, <em>36</em>, 1–23, doi:10.1046/j.0303-4569.2003.00594.x.</li>
+        <li>Alexiou, Z.W.; Hoenderboom, B.M.; Hoebe, C.J.P.A.; Dukers-Muijrers, N.H.T.M.; Götz, H.M.; Sande, M.A.B. van der; Vries, H.J.C. de; Hartog, J.E. den; Morré, S.A.; Benthem, B.H.B. van Reproductive Tract Complication Risks Following Chlamydia Trachomatis Infections: A Long-Term Prospective Cohort Study from 2008 to 2022. <em>Lancet Reg. Heal. – Eur.</em> <strong>2024</strong>, <em>45</em>, 101027, doi:10.1016/j.lanepe.2024.101027.</li>
+        <li>Donders, G.G.G.; Moerman, P.; Wet, G.H.D.; Hooft, P.; Goubau, P. The Association between Chlamydia Cervicitis, Chorioamnionitis and Neonatal Complications. <em>Arch. Gynecol. Obstet.</em> <strong>1991</strong>, <em>249</em>, 79–85, doi:10.1007/bf02390366.</li>
+        <li>2024 WHO Bacterial Priority Pathogens List (WHO BPPL) Available online: <a href="https://iris.who.int/bitstream/handle/10665/376776/9789240093461-eng.pdf?sequence=1">https://iris.who.int/bitstream/handle/10665/376776/9789240093461-eng.pdf?sequence=1</a> (accessed on 18 March 2025).</li>
+        <li>Clinical Overview of Tuberculosis | Tuberculosis (TB) | CDC Available online: <a href="https://www.cdc.gov/tb/hcp/clinical-overview/index.html">https://www.cdc.gov/tb/hcp/clinical-overview/index.html</a> (accessed on 19 March 2025).</li>
+        <li>Seabra, C.; Silva, A.F.; Duro, R.; Paupério, A.; Fagundes, V. The Challenge of Urogenital Tuberculosis Diagnosis in Elderly Patients. <em>Braz. J. Case Rep.</em> <strong>2025</strong>, <em>5</em>, bjcr54, doi:10.52600/2763-583x.bjcr.2025.5.1.bjcr54.</li>
+        <li>Portugal, D. of U., São João Hospital Center, Porto,; Dias, N.; Portugal, D. of S. and P.P.U.F. of M., Porto,; Pina-Vaz, T.; Abreu-Mendes, P.; Azeredo-Costa, T.; Portugal, D. of C.P., São João Hospital Center, Porto,; Rodrigues-Pereira, P.; Portugal, D. of P., São João Hospital Center, Porto,; Silva, C.; et al. Review of 175 Cases of Tuberculosis Infections Affecting the Urogenital System. <em>Turk. J. Urol.</em> <em>48</em>, 440–445, doi:10.5152/tud.2022.22148.</li>
+        <li>Pimenta, G.; Roxo, M.I.; Birne, R.; Carvalho, T.J. Urogenital Tuberculosis in a Patient with Persistent Sterile Pyuria. <em>BMJ Case Rep.</em> <strong>2025</strong>, <em>18</em>, e264594, doi:10.1136/bcr-2024-264594.</li>
+        <li>Figueiredo, A.A.; Truzzi, J.C.; Barreto, A.A.; Siqueira, E.C.; Lucon, M.; Broglio, M.; Anzolch, K.M.J.; Cunha, A.P. de L.; Mestrinho, B.V.; Koifman, L.; et al. Urogenital Tuberculosis: A Narrative Review and Recommendations for Diagnosis and Treatment. <em>Int. Braz. J. Urol.</em><em>: Off. J. Braz. Soc. Urol.</em> <strong>2025</strong>, <em>51</em>, e20240590, doi:10.1590/s1677-5538.ibju.2024.0590.</li>
+        <li>Tuberculosis (TB) (Mycobacterium Tuberculosis) 2009 Case Definition | CDC Available online: <a href="https://ndc.services.cdc.gov/case-definitions/tuberculosis-2009/">https://ndc.services.cdc.gov/case-definitions/tuberculosis-2009/</a> (accessed on 19 March 2025).</li>
+        <li>Alzaidi, J.R.; Kareem, A.A. The Impact of Urogenital Tract Infectious Bacteria on Male Fertility. <em>Méd. J. Babylon</em> <strong>2024</strong>, <em>21</em>, 476–480, doi:10.4103/mjbl.mjbl_75_24.</li>
+        <li>Gai, X.; Chi, H.; Li, R.; Sun, Y. Tuberculosis in Infertility and in Vitro Fertilization-Embryo Transfer. <em>Chin. Méd. J.</em> <strong>2024</strong>, <em>137</em>, 2404–2411, doi:10.1097/cm9.0000000000003255.</li>
+        <li>Muneer, A.; Macrae, B.; Krishnamoorthy, S.; Zumla, A. Urogenital Tuberculosis — Epidemiology, Pathogenesis and Clinical Features. <em>Nat. Rev. Urol.</em> <strong>2019</strong>, <em>16</em>, 573–598, doi:10.1038/s41585-019-0228-9.</li>
+        <li>Özkent, M.S.; Balasar, M.; Sönmez, M.G.; Kilinç, M.T.; Oltulu, P.; Erol, E.; Göger, Y.E. A Rare Case of Kidney Loss: Urogenital Tuberculosis. <em>Porto Biomed. J.</em> <strong>2023</strong>, <em>8</em>, e201, doi:10.1097/j.pbj.0000000000000201.</li>
+        <li>Treating Tuberculosis | Tuberculosis (TB) | CDC Available online: <a href="https://www.cdc.gov/tb/treatment/index.html">https://www.cdc.gov/tb/treatment/index.html</a> (accessed on 19 March 2025).</li>
+        <li>Table 23. Gonorrhea — Reported Cases and Rates of Reported Cases by Age Group and Sex, United States | STI Statistics | CDC Available online: <a href="https://www.cdc.gov/sti-statistics/data-vis/table-gc-agesex.html">https://www.cdc.gov/sti-statistics/data-vis/table-gc-agesex.html</a> (accessed on 19 March 2025).</li>
+        <li>Gonorrhea (Neisseria Gonorrhoeae Infection) 2023 Case Definition | CDC Available online: <a href="https://ndc.services.cdc.gov/case-definitions/gonorrhea-neisseria-gonorrhoeae-2023/">https://ndc.services.cdc.gov/case-definitions/gonorrhea-neisseria-gonorrhoeae-2023/</a> (accessed on 19 March 2025).</li>
+        <li>Ning, N.; Weng, R.; Zhang, C.; Wen, L.; Wang, H.; Ye, J.; Li, J.; Chen, X.; Cai, Y. Cluster Analysis for Symptomatic Management of Neisseria Gonorrhoea and Chlamydia Trachomatis in Sexually Transmitted Infections Related Clinics in China. <em>Front. Public Heal.</em> <strong>2022</strong>, <em>10</em>, 1005481, doi:10.3389/fpubh.2022.1005481.</li>
+        <li>About Gonorrhea | Gonorrhea | CDC Available online: <a href="https://www.cdc.gov/gonorrhea/about/index.html">https://www.cdc.gov/gonorrhea/about/index.html</a> (accessed on 19 March 2025).</li>
+        <li>Chemaitelly, H.; Majed, A.; Abu-Hijleh, F.; Blondeel, K.; Matsaseng, T.C.; Kiarie, J.; Toskin, I.; Abu-Raddad, L.J. Global Epidemiology of Neisseria Gonorrhoeae in Infertile Populations: Systematic Review, Meta-Analysis and Metaregression. <em>Sex. Transm. Infect.</em> <strong>2021</strong>, <em>97</em>, 157–169, doi:10.1136/sextrans-2020-054515.</li>
+        <li>Vallely, L.M.; Egli-Gany, D.; Wand, H.; Pomat, W.S.; Homer, C.S.E.; Guy, R.; Silver, B.; Rumbold, A.R.; Kaldor, J.M.; Vallely, A.J.; et al. Adverse Pregnancy and Neonatal Outcomes Associated with Neisseria Gonorrhoeae: Systematic Review and Meta-Analysis. <em>Sex. Transm. Infect.</em> <strong>2021</strong>, <em>97</em>, 104–111, doi:10.1136/sextrans-2020-054653.</li>
+        <li>Rice, P.A. Gonococcal Arthritis (Disseminated Gonococcal Infection). <em>Infect. Dis. Clin. North Am.</em> <strong>2005</strong>, <em>19</em>, 853–861, doi:10.1016/j.idc.2005.07.003.</li>
+        <li>Mahapure, K.; Singh, A. A Review of Recent Advances in Our Understanding of Neisseria Gonorrhoeae. <em>Cureus</em> <strong>2023</strong>, <em>15</em>, e43464, doi:10.7759/cureus.43464.</li>
+        <li>Mathew, R.; Chahin, M.; Isache, C. Neisseria Gonorrhoeae: An Unexpected Cause of Polyarthritis and Meningitis. <em>J. Investig. Med. High Impact Case Rep.</em> <strong>2021</strong>, <em>9</em>, 23247096211012190, doi:10.1177/23247096211012194.</li>
+        <li>Clinical Treatment of Gonorrhea | Gonorrhea | CDC Available online: <a href="https://www.cdc.gov/gonorrhea/hcp/clinical-care/index.html">https://www.cdc.gov/gonorrhea/hcp/clinical-care/index.html</a> (accessed on 19 March 2025).</li>
+        <li>Trichomoniasis – STI Treatment Guidelines Available online: <a href="https://www.cdc.gov/std/treatment-guidelines/trichomoniasis.htm">https://www.cdc.gov/std/treatment-guidelines/trichomoniasis.htm</a> (accessed on 19 March 2025).</li>
+        <li>Kissinger, P.J.; Gaydos, C.A.; Seña, A.C.; McClelland, R.S.; Soper, D.; Secor, W.E.; Legendre, D.; Workowski, K.A.; Muzny, C.A. Diagnosis and Management of Trichomonas Vaginalis: Summary of Evidence Reviewed for the 2021 Centers for Disease Control and Prevention Sexually Transmitted Infections Treatment Guidelines. <em>Clin. Infect. Dis.</em> <strong>2022</strong>, <em>74</em>, S152–S161, doi:10.1093/cid/ciac030.</li>
+        <li>About Trichomoniasis | Trichomoniasis | CDC Available online: <a href="https://www.cdc.gov/trichomoniasis/about/index.html#cdc_disease_basics_testing_screening-testing-and-diagnosis">https://www.cdc.gov/trichomoniasis/about/index.html#cdc_disease_basics_testing_screening-testing-and-diagnosis</a> (accessed on 19 March 2025).</li>
+        <li>Chang, P.-C.; Hsu, Y.-C.; Hsieh, M.-L.; Huang, S.-T.; Huang, H.-C.; Chen, Y. A Pilot Study on Trichomonas Vaginalis in Women with Recurrent Urinary Tract Infections. <em>Biomed. J.</em> <strong>2016</strong>, <em>39</em>, 289–294, doi:10.1016/j.bj.2015.11.005.</li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<!-- ════════════════════════════════════════════════════
+     FOOTER — verbatim from /index.html.
+     ════════════════════════════════════════════════════ -->
+<footer class="section--navy footer" id="contact">
+  <a href="#top" class="footer__back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </a>
+  <div class="container" style="padding-top: var(--section-padding-y); padding-bottom: var(--gap-xl);">
+    <p class="footer__big-tagline">
+      Better decisions. Better outcomes. Better lives<span class="footer__big-tagline-period">.</span>
+    </p>
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="/assets/Path_Logo_White.png" alt="Pathnostics" loading="lazy">
+        <div class="footer__social">
+          <a href="https://www.linkedin.com/company/pathnostics/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg></a>
+          <a href="https://twitter.com/Pathnostics" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+        <iframe name="footer-subscribe-iframe" class="footer__subscribe-iframe" aria-hidden="true" tabindex="-1"></iframe>
+        <form class="footer__subscribe" action="https://pathnostics.us4.list-manage.com/subscribe/post?u=a1401745b75d8b6b5e62ed930&amp;id=35ede7f928&amp;f_id=009c57e9f0" method="post" target="footer-subscribe-iframe" novalidate>
+          <label for="footer-subscribe-email" class="footer__subscribe-label">Stay Informed</label>
+          <div class="footer__subscribe-row">
+            <input id="footer-subscribe-email" type="email" name="EMAIL" placeholder="Email address" required class="footer__subscribe-input" autocomplete="email">
+            <button type="submit" class="footer__subscribe-btn">Subscribe</button>
+          </div>
+        </form>
+      </div>
+      <div>
+        <p class="footer__heading">Our Solutions</p>
+        <div class="footer__links">
+          <a href="/tests/guidance-uti/">Guidance UTI with P-AST</a>
+          <a href="/#athome">Guidance @Home</a>
+          <a href="/providers/">For Providers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Resources</p>
+        <div class="footer__links">
+          <a href="/evidence.html">Published Evidence</a>
+          <a href="/clinical-resources/">Clinical Resources</a>
+          <a href="/patient-resources/">Patient Resources</a>
+          <a href="/news/">News &amp; Events</a>
+          <a href="/careers/">Careers</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer__heading">Get in Touch</p>
+        <p class="footer__contact-text">Ready to see how Guidance can support your practice?</p>
+        <a href="#contact" class="btn-primary footer__cta">Talk to a Rep</a>
+        <div class="footer__utility">
+          <a href="/customer-care/">Customer Care</a>
+          <a href="/billing/">Billing</a>
+          <a href="https://www.dxlink.com/patientportal/signin.html?cn=pathnostics" target="_blank" rel="noopener noreferrer">Pay Your Bill</a>
+          <a href="https://lis.xifin.net/Security/LoginDirector.aspx?Theme=Pathnostics" target="_blank" rel="noopener noreferrer">Provider Login</a>
+          <a href="/order-supplies/">Order Supplies</a>
+          <a href="/veterans/">For Veterans</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copyright">&copy; 2026 Pathnostics | All rights reserved</p>
+      <div class="footer__legal">
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/patient-privacy/">Patient Privacy</a>
+        <a href="https://secure.ethicspoint.com/domain/media/en/gui/44588/index.html" target="_blank" rel="noopener noreferrer">Confidential Reporting</a>
+        <a href="/privacy-policy/#Section9">About Ads</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
