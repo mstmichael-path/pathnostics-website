@@ -1,0 +1,69 @@
+/* ═══════════════════════════════════════════════════════
+   test-bladder-fish-urovysion.css — Page-specific overrides
+   Colorway: LIME  (#b6cd2f) paired with GREEN-DARK (#00694d)
+   Lime is the accent identity. Like sky, lime is too pale
+   for emphasis text on white — pair with green-dark for
+   italic emphasis and rule-line color.
+   ═══════════════════════════════════════════════════════ */
+
+.ft-hero {
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 0%, rgba(182, 205, 47, 0.30) 0%, transparent 70%),
+    linear-gradient(180deg, #fafff0 0%, #ffffff 70%);
+}
+
+.ft-hero__overline {
+  color: #6f8118;
+  letter-spacing: var(--tracking-wider);
+}
+
+/* Italic emphasis uses the deep companion green so it stays legible
+   on white. Lime is the backdrop / accent only. */
+.ft-hero__title em,
+.ft-capabilities__title em,
+.ft-faq__title em,
+.ft-report__title em {
+  color: var(--color-green-dark);
+}
+
+.ft-capability__advantage-label {
+  color: #6f8118;
+}
+
+.ft-capability--featured {
+  background: linear-gradient(180deg, #ffffff 0%, rgba(182, 205, 47, 0.14) 100%);
+  border-color: rgba(182, 205, 47, 0.55);
+}
+
+.ft-capability--featured .ft-capability__num {
+  color: var(--color-green-dark);
+}
+
+.ft-capabilities__rapid {
+  background: rgba(182, 205, 47, 0.14);
+  border-color: rgba(182, 205, 47, 0.45);
+}
+
+.ft-capabilities__rapid svg { color: var(--color-green-dark); }
+
+/* @home / accent strip */
+.ft-athome {
+  background: linear-gradient(180deg, #ffffff 0%, rgba(182, 205, 47, 0.18) 100%);
+}
+
+.ft-faq__a h5 { color: #6f8118; }
+
+/* Sample-report download link */
+.ft-report__download:hover {
+  color: var(--color-green-dark);
+  text-decoration-color: var(--color-green-dark);
+}
+
+/* References — lime pairs with green-dark for legibility */
+.references {
+  background: linear-gradient(180deg, #94a624 0%, var(--color-green-dark) 100%);
+}
+
+.references::before {
+  background: linear-gradient(90deg, var(--color-lime), rgba(182,205,47,0.3));
+}
